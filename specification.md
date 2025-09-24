@@ -21,7 +21,7 @@ Status Text: will be provided between numbered versions. Data written with these
 Status Text: (an "editor's draft") will not necessarily be supported.
 </pre>
 
-OME-Zarr specification {#ome-zarr}
+# OME-Zarr specification {#ome-zarr}
 ----------------------------------
 
 The conventions and specifications defined in this document are designed to
@@ -69,7 +69,7 @@ The following layout describes the expected Zarr hierarchy for images with
 multiple levels of resolutions and optionally associated labels.
 Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [[#multiscale-md]] for details.
 
-<pre>
+```
 ├── 123.zarr                  # One OME-Zarr image (id=123).
 │   ...
 │
@@ -107,7 +107,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
                 ├── 0         # Each multiscale level is stored as a separate Zarr array, as above, but only integer values
                 └── ...       # are supported.
                 
-</pre>
+```
 
 
 
