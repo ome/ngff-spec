@@ -1,0 +1,15 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+
+chapters:
+- file: specification
+- file: docs/examples
+  sections:
+  - glob: docs/examples/*
+    exclude: docs/examples/examples.md
+- file: docs/schemas
+  sections:
+  - glob: docs/schemas/*
