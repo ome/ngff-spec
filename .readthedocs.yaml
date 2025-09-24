@@ -1,0 +1,30 @@
+version: 2
+
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.11"
+  jobs:
+    pre_build:
+      # Generate the Sphinx configuration for this Jupyter Book so it builds.
+      - "jupyter-book config sphinx docs/"
+      - "python ./docs/pre_build.py"
+
+python:
+  install:
+    - method: pip
+      path: .
+      extra_requirements:
+      - sphinx
+      - sphinx-book-theme
+      - sphinx-proof
+      - sphinx-inline-tabs
+      - sphinx-examples
+      - json-schema-for-humans
+      - myst-parser
+      - json_with_comments
+
+sphinx:
+  configuration: docs/conf.py
+  builder: html
+  fail_on_warning: true
