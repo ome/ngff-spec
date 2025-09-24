@@ -8,8 +8,8 @@ logo: https://www.openmicroscopy.org/img/logos/ome-logomark.svg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
-execute:
-  execute_notebooks: off
+# execute:
+#   execute_notebooks: off
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -32,6 +32,13 @@ html:
   use_issues_button: true
   use_repository_button: true
 
+myst:
+  enable_extensions:
+    - colon_fence
+    - deflist
+    - dollarmath
+    - linkify
+    - substitution
 
 sphinx:
   extra_extensions:
