@@ -1,3 +1,5 @@
+# OME-Zarr specification
+
 <pre class='metadata'>
 Title: OME-Zarr specification
 Shortname: ome-zarr
