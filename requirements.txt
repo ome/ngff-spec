@@ -1,0 +1,6 @@
+jupyter-book
+json-schema-for-humans
+jason-with-comments
+sphinx-inline-tabs
+sphinx-proof
+sphinx-examples
