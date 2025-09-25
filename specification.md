@@ -16,8 +16,6 @@ This document contains next-generation file format (NGFF) specifications for sto
 
 The current released version of this specification is 0.5. Migration scripts will be provided between numbered versions. Data written with these latest changes (an "editor's draft") will not necessarily be supported.
 
-# OME-Zarr specification {#ome-zarr}
-----------------------------------
 
 The conventions and specifications defined in this document are designed to
 enable next-generation file formats to represent the same bioimaging data
@@ -42,8 +40,8 @@ implementations that are later submitted as a formal specification. (See [[#bf2r
 Some of the JSON examples in this document include comments. However, these are only for
 clarity purposes and comments MUST NOT be included in JSON objects.
 
-Storage format {#storage-format}
-================================
+Storage format
+==============
 
 OME-Zarr is implemented using the Zarr format as defined by the
 [version 3 of the Zarr specification](https://zarr-specs.readthedocs.io/en/latest/v3/core/v3.0.html).
@@ -57,12 +55,12 @@ is represented here as it would appear locally but could equally
 be stored on a web server to be accessed via HTTP or in object storage
 like S3 or GCS.
 
-Images {#image-layout}
-----------------------
+Images
+------
 
 The following layout describes the expected Zarr hierarchy for images with
 multiple levels of resolutions and optionally associated labels.
-Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [[#multiscale-md]] for details.
+Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [multiscales metadata](multiscale-md) for details.
 
 ```
 ├── 123.zarr                  # One OME-Zarr image (id=123).
@@ -106,19 +104,19 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
 
 
 
-High-content screening {#hcs-layout}
-------------------------------------
+High-content screening
+----------------------
 
 The following specification defines the hierarchy for a high-content screening
 dataset. Three groups MUST be defined above the images:
 
 -   the group above the images defines the well and MUST implement the
-    [well specification](#well-md). All images contained in a well are fields
+    [well specification](well-md). All images contained in a well are fields
     of view of the same well
 -   the group above the well defines a row of wells
 -   the group above the well row defines an entire plate i.e. a two-dimensional
     collection of wells organized in rows and columns. It MUST implement the
-    [plate specification](#plate-md)
+    [plate specification](plate-md)
 
 A well row group SHOULD NOT be present if there are no images in the well row.
 A well group SHOULD NOT be present if there are no images in the well.
@@ -171,11 +169,13 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 }
 ```
 
-"axes" metadata {#axes-md}
+"axes" metadata
 --------------------------
 
+{#axes-md}
+
 "axes" describes the dimensions of a coordinate systems and adds an interpretation to the data along that dimension. A named collection
-of axes forms a coordinate system ([[#coord-sys-md]]) (see below).
+of axes forms a [coordinate system](coord-sys-md).
 It is a list of dictionaries, where each dictionary describes a dimension (axis) and:
 - MUST contain the field "name" that gives the name for this dimension. The values MUST be unique across all "name" fields.
 - SHOULD contain the field "type". It SHOULD be one of the strings "array", "space", "time", "channel", "coordinate", or
@@ -185,7 +185,7 @@ It is a list of dictionaries, where each dictionary describes a dimension (axis)
     - Units for "time" axes: 'attosecond', 'centisecond', 'day', 'decisecond', 'exasecond', 'femtosecond', 'gigasecond', 'hectosecond', 'hour', 'kilosecond', 'megasecond', 'microsecond', 'millisecond', 'minute', 'nanosecond', 'petasecond', 'picosecond', 'second', 'terasecond', 'yoctosecond', 'yottasecond', 'zeptosecond', 'zettasecond'
 - MAY contain the field "longName". The value MUST be a string, and can provide a longer name or description of an axis and its properties.
 
-The "axes" are used as part of [[#multiscale-md]]. The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
+The "axes" are used as part of [multiscales metadata](multiscales-md). The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 The "dimension_names" attribute MUST be included in the `zarr.json` of the Zarr array of a multiscale level and MUST match the names in the "axes" metadata.
 
@@ -238,8 +238,10 @@ to the discrete axis `"c"`.  Indexing an image at the point `(1, 0.2, 0.3, 0.4)`
 </div>
 
 
-"coordinateSystems" metadata {#coord-sys-md}
+"coordinateSystems" metadata
 --------------------------
+
+{#coord-sys-md}
 
 A "coordinate system" is a collection of "axes" / dimensions with a name. Every coordinate system:
 - MUST contain the field "name". The value MUST be a non-empty string that is unique among `coordinateSystem`s.
@@ -280,7 +282,7 @@ collected at different angles, a measurement by instrument 1 at the point with c
 measurement at the same point in instrument 2 (i.e., it may not be the same physical location in the sample). To analyze both
 images together, they must be in the same coordinate system.
 
-The set of coordinate transformations ([[#trafo-md]]) encodes relationships between coordinate systems, specifically, how to
+The set of [coordinate transformations](trafo-md) encodes relationships between coordinate systems, specifically, how to
 convert points and images to different coordinate systems.  Implementations can apply the coordinate transform to images or
 points in coordinate system "sampleA_instrument2" to bring them into the "sampleA_instrument1" coordinate system. In this case,
 the ROI should be transformed to the "sampleA_image1" coordinate system, then used for quantification with the instrument 1
@@ -477,8 +479,10 @@ Conforming readers:
 - MAY ignore other groups or arrays under the root of the hierarchy.
 
 
-"coordinateTransformations" metadata {#trafo-md}
+"coordinateTransformations" metadata
 ------------------------------------------------
+
+{#trafo-md}
 
 "coordinateTransformations" describe the mapping between two coordinate systems (defined by "axes").
 For example, to map an array's discrete coordinate system to its corresponding physical coordinates.
@@ -547,7 +551,7 @@ Conforming readers:
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
 
-Coordinate transformations from array to physical coordinates MUST be stored in multiscales ([[#multiscale-md]]). 
+Coordinate transformations from array to physical coordinates MUST be stored in [multiscales](multiscale-md). 
 Transformations between different images MUST be stored in the attributes of a parent zarr group. For transformations that store
 data or parameters in a zarr array, those zarr arrays SHOULD be stored in a zarr group `"coordinateTransformations"`.
 
@@ -1335,8 +1339,9 @@ highlight: json
 </div>
 
 
-"multiscales" metadata {#multiscale-md}
----------------------------------------
+"multiscales" metadata
+----------------------
+(multiscale-md)=
 
 Metadata about an image can be found under the "multiscales" key in the group-level OME-Zarr Metadata. 
 Here, image refers to 2 to 5 dimensional data representing image or volumetric data with optional time or channel axes. 
@@ -1344,7 +1349,7 @@ It is stored in a multiple resolution representation.
 
 "multiscales" contains a list of dictionaries where each entry describes a multiscale image.
 
-Each "multiscales" dictionary MUST contain the field "coordinateSystems", see [[#coord-sys-md]], with the following constraints.
+Each "multiscales" dictionary MUST contain the field "coordinateSystems", see [coordinateSystems metadata](coord-sys-md), with the following constraints.
 The length of "axes" must be between 2 and 5 and MUST be equal to the dimensionality of the zarr arrays storing the image data (see "datasets:path").
 The "axes" MUST contain 2 or 3 entries of "type:space" and MAY contain one additional entry of "type:time" and MAY contain one additional entry of "type:channel" or a null / custom type.
 The order of the entries MUST correspond to the order of dimensions of the zarr arrays. In addition, the entries MUST be ordered by "type" where the "time" axis must come first (if present), followed by the  "channel" or custom axis (if present) and the axes of type "space".
@@ -1356,7 +1361,7 @@ to the current zarr group. The "path"s MUST be ordered from largest (i.e. highes
 
 Each "datasets" dictionary MUST have the same number of dimensions and MUST NOT have more than 5 dimensions. The number of dimensions and order MUST correspond to number and order of "axes".
 Each dictionary in "datasets" MUST contain the field "coordinateTransformations", which contains a list of transformations that map the data coordinates to the physical coordinates (as specified by "axes") for this resolution level.
-The transformations are defined according to [[#trafo-md]]. 
+The transformations are defined according to [coordinateTransformations metadata](trafo-md). 
 
 They MUST contain exactly one `scale` transformation that specifies the pixel size in physical units or time duration. If scaling information is not available or applicable for one of the axes, the value MUST express the scaling factor between the current resolution and the first resolution for the given axis, defaulting to 1.0 if there is no downsampling along the axis.
 It MAY contain exactly one `translation` that specifies the offset from the origin in physical units. If `translation` is given it MUST be listed after `scale` to ensure that it is given in physical coordinates.
@@ -1510,7 +1515,7 @@ The `plate` dictionary MAY contain an `acquisitions` key whose value MUST be a l
 JSON objects defining the acquisitions for a given plate to which wells can refer to. Each
 acquisition object MUST contain an `id` key whose value MUST be an unique integer identifier
 greater than or equal to 0 within the context of the plate to which fields of view can refer
-to (see #well-md).
+to (see [well metadata](well-md)).
 Each acquisition object SHOULD contain a `name` key whose value MUST be a string identifying
 the name of the acquisition. Each acquisition object SHOULD contain a `maximumfieldcount`
 key whose value MUST be a positive integer indicating the maximum number of fields of view for the
@@ -1572,8 +1577,10 @@ path: examples/plate_strict/plate_2wells.json
 highlight: json
 </pre>
 
-"well" metadata {#well-md}
---------------------------
+"well" metadata
+---------------
+
+{#well-md}
 
 For high-content screening datasets, the metadata about all fields of views
 under a given well can be found under the "well" key in the attributes of the
@@ -1585,7 +1592,7 @@ specifying all fields of views for a given well. Each image object MUST contain 
 MUST contain only alphanumeric characters, MUST be case-sensitive, and MUST NOT be a duplicate
 of any other `path` in the `images` list. If multiple acquisitions were performed in the plate,
 it MUST contain an `acquisition` key whose value MUST be an integer identifying the acquisition
-which MUST match one of the acquisition JSON objects defined in the plate metadata (see #plate-md).
+which MUST match one of the acquisition JSON objects defined in the [plate metadata](plate-md).
 
 The `well` dictionary SHOULD contain a `version` key whose value MUST be a string specifying the
 version of the well specification.
