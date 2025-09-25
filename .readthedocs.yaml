@@ -12,17 +12,10 @@ build:
 
 python:
   install:
+    - requirements: docs/requirements.txt
     - method: pip
       path: .
-      extra_requirements:
-      - sphinx
-      - sphinx-book-theme
-      - sphinx-proof
-      - sphinx-inline-tabs
-      - sphinx-examples
-      - json-schema-for-humans
-      - myst-parser
-      - json_with_comments
+
 
 sphinx:
   configuration: docs/conf.py
