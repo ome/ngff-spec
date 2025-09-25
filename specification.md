@@ -1,27 +1,20 @@
-# OME-Zarr specification
+# {{ title }}
 
-<pre class='metadata'>
-Title: OME-Zarr specification
-Shortname: ome-zarr
-Level: 1
-Status: w3c/CG-FINAL
-TR: https://ngff.openmicroscopy.org/0.5/
-URL: https://ngff.openmicroscopy.org/0.6-dev/
-Repository: https://github.com/ome/ngff
-Issue Tracking: Forums https://forum.image.sc/tag/ome-ngff
-Logo: http://www.openmicroscopy.org/img/logos/ome-logomark.svg
-Local Boilerplate: header yes, copyright yes
-Boilerplate: style-darkmode off
-Markup Shorthands: markdown yes
-Editor: Josh Moore, German BioImaging e.V., https://gerbi-gmb.de/, https://orcid.org/0000-0003-4028-811X
-Text Macro: NGFFVERSION 0.5
-Abstract: This document contains next-generation file format (NGFF)
-Abstract: specifications for storing bioimaging data in the cloud.
-Abstract: All specifications are submitted to the https://image.sc community for review.
-Status Text: The current released version of this specification is 0.5. Migration scripts
-Status Text: will be provided between numbered versions. Data written with these latest changes
-Status Text: (an "editor's draft") will not necessarily be supported.
-</pre>
+**Shortname:** {{ shortname }}<br>
+**Level:** {{ level }}<br>
+**Status:** {{ status }}<br>
+
+**Feedback:** {{ issue_tracking }}<br>
+
+**Editor:** {{ editor_name }}, ({{ editor_affiliation }}), {{ editor_orcid }}
+
+## Abstract
+
+This document contains next-generation file format (NGFF) specifications for storing bioimaging data in the cloud. All specifications are submitted to the https://image.sc community for review.
+
+## Status of This Document
+
+The current released version of this specification is 0.5. Migration scripts will be provided between numbered versions. Data written with these latest changes (an "editor's draft") will not necessarily be supported.
 
 # OME-Zarr specification {#ome-zarr}
 ----------------------------------

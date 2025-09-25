@@ -31,6 +31,16 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  extra_footer: |
+      <div>
+        Copyright © 2020-<span id="current-year"></span>
+        <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>®</sup>
+        (<a href="https://dundee.ac.uk/"><abbr title="University of Dundee">U. Dundee</abbr></a>).
+        OME trademark rules apply.
+      </div>
+      <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+      </script>
 
 myst:
   enable_extensions:
@@ -39,6 +49,7 @@ myst:
     - dollarmath
     - linkify
     - substitution
+
 
 sphinx:
   extra_extensions:
@@ -49,7 +60,20 @@ sphinx:
     - sphinx_inline_tabs
     - sphinx_proof
     - sphinx_examples
-
   config:
+    html_show_copyright: false
     add_module_names: True
     autosummary_generate: True
+  
+    myst_substitutions:
+      title: "OME-Zarr specification"
+      shortname: "ome-zarr"
+      level: "1"
+      status: "CG-FINAL"
+      tr_url: "https://ngff.openmicroscopy.org/0.5/"
+      url: "https://ngff.openmicroscopy.org/0.6-dev/"
+      issue_tracking: "[Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)"
+      logo: "http://www.openmicroscopy.org/img/logos/ome-logomark.svg"
+      editor_name: "[Josh Moore](https://gerbi-gmb.de/)"
+      editor_affiliation: "German BioImaging e.V."
+      editor_orcid: "[https://orcid.org/0000-0003-4028-811X](https://orcid.org/0000-0003-4028-811X)"
