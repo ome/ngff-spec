@@ -28,15 +28,15 @@ Status Text: (an "editor's draft") will not necessarily be supported.
 Coordinates and Axes {#coords-axes}
 =====================
 
-OME-NGFF datasets are arrays that hold values. The arrays may be indexed by discrete (integer)
-coordinates in order to obtain a corresponding value. If values are desired at continuous (real-valued)
-coordinates, then interpolation is required.
+OME-NGFF datasets are arrays that hold values.
+The arrays may be indexed by discrete (integer) coordinates in order to obtain a corresponding value.
+If values are desired at continuous (real-valued) coordinates, then interpolation is required.
 
 Interpolation {#interp}
 ---------------------
 
-Interpolation is the process of producing values at continuous coordinates from data sampled at discrete
-coordinates. "Nearest-neighbor" and "N-Linear" are the two most commonly used interpolation methods.
+Interpolation is the process of producing values at continuous coordinates from data sampled at discrete coordinates.
+"Nearest-neighbor" and "N-Linear" are the two most commonly used interpolation methods.
 
 
 Pixel coordinates {#pix-coords}
@@ -67,8 +67,9 @@ This document describes background and motivation that is outside the NGFF speci
 Direction {#direction}
 ---------------------
 
-Specified coordinate transforms are in the "forward" direction. They represent functions
-from *points* in the input space to *points* in the output space. For example, the transformation `"ij2xy"`
+Specified coordinate transforms are in the "forward" direction.
+They represent functions from *points* in the input space to *points* in the output space.
+For example, the transformation `"ij2xy"`
 
 
 ```json
@@ -96,9 +97,9 @@ Recommendations {#recommendations}
 "Native" physical space 
 ---------------------
 
-Datasets SHOULD define a transformation from array space to their "native physical space."
-This transformation SHOULD describe physical pixel spacing and origin only, and therefore SHOULD consist of
-`scale` and/or `translation` types only.
+Datasets SHOULD define a transformation from array space to their "native physical space.".
+This transformation SHOULD describe physical pixel spacing and origin only,
+and therefore SHOULD consist of `scale` and/or `translation` types only.
 
 Subsequent reorientation / registration transformations SHOULD use this native space as their `input_space`,
 i.e., transformations should be defined in physical coordinates.
