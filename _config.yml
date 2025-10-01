@@ -3,7 +3,7 @@
 # Comprehensive example: https://github.com/executablebooks/jupyter-book/blob/master/docs/_config.yml
 
 title: Next-generation file format specification
-author: Josh Moore
+author: NGFF-community
 logo: https://www.openmicroscopy.org/img/logos/ome-logomark.svg
 
 # Force re-execution of notebooks on each build.
