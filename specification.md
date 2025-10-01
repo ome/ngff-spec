@@ -34,7 +34,7 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 intention of removing it in the future. Implementations may be expected (MUST) or
 encouraged (SHOULD) to support the reading of the data, but writing will usually
 be optional (MAY). Examples of transitional metadata include custom additions by
-implementations that are later submitted as a formal specification. (See [[#bf2raw]])
+implementations that are later submitted as a formal specification. (See [bioformats2raw](bf2raw))
 </p>
 
 Some of the JSON examples in this document include comments. However, these are only for
@@ -400,8 +400,9 @@ half-open interval `[-0.5, 0.5) x [-0.5, 0.5)` (i.e., -0.5 is included, +0.5 is 
 
 
 
-"bioformats2raw.layout" (transitional) {#bf2raw}
-------------------------------------------------
+"bioformats2raw.layout" (transitional)
+--------------------------------------
+(bf2raw)=
 
 [=Transitional=] "bioformats2raw.layout" metadata identifies a group which implicitly describes a series of images.
 The need for the collection stems from the common "multi-image file" scenario in microscopy. Parsers like Bio-Formats
@@ -435,7 +436,7 @@ highlight: json
 </pre>
 
 If the top-level group represents a plate, the `bioformats2raw.layout` metadata will be present but
-the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow [[#plate-md]]. It is not
+the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow (see [plate metadata](plate-md)). It is not
 possible to mix collections of images with plates at present.
 
 <pre class=include-code>
@@ -1396,8 +1397,9 @@ if not datasets:
     datasets = [x["path"] for x in multiscales[0]["datasets"]]
 ```
 
-"omero" metadata (transitional) {#omero-md}
--------------------------------------------
+"omero" metadata (transitional)
+-------------------------------
+(omero-md)=
 
 [=Transitional=] information specific to the channels of an image and how to render it
 can be found under the "omero" key in the group-level metadata:
@@ -1437,8 +1439,9 @@ Each dictionary in "channels" MUST contain the field "window", which is a dictio
 The field "window" MUST contain the fields "min" and "max", which are the minimum and maximum values of the window, respectively.
 It MUST also contain the fields "start" and "end", which are the start and end values of the window, respectively.
 
-"labels" metadata {#labels-md}
-------------------------------
+"labels" metadata
+-----------------
+(labels-md)=
 
 In OME-Zarr, Zarr arrays representing pixel-annotation data are stored in a group called "labels". Some applications--notably image segmentation--produce 
 a new image that is in the same coordinate system as a corresponding multiscale image (usually having the same dimensions and coordinate transformations). 
@@ -1505,8 +1508,9 @@ highlight: json
 In this case, the pixels consisting of a 0 in the Zarr array will be displayed as 50% blue and 50% opacity. Pixels with a 1 in the Zarr array, 
 which correspond to cellular space, will be displayed as 50% green and 50% opacity. 
 
-"plate" metadata {#plate-md}
-----------------------------
+"plate" metadata
+----------------
+(plate-md)=
 
 For high-content screening datasets, the plate layout can be found under the
 custom attributes of the plate group under the `plate` key in the group-level metadata.
