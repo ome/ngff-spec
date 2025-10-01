@@ -77,3 +77,4 @@ sphinx:
       editor_name: "[Josh Moore](https://gerbi-gmb.de/)"
       editor_affiliation: "German BioImaging e.V."
       editor_orcid: "[https://orcid.org/0000-0003-4028-811X](https://orcid.org/0000-0003-4028-811X)"
+      version: "0.6.dev1"

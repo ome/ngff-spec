@@ -1,5 +1,6 @@
 # {{ title }}
 
+**Version**: {{version}} <br>
 **Shortname:** {{ shortname }}<br>
 **Level:** {{ level }}<br>
 **Status:** {{ status }}<br>
