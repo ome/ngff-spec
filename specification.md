@@ -61,7 +61,7 @@ Images
 
 The following layout describes the expected Zarr hierarchy for images with
 multiple levels of resolutions and optionally associated labels.
-Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [multiscales metadata](multiscale-md) for details.
+Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [multiscales metadata](multiscales-md) for details.
 
 ```
 ├── 123.zarr                  # One OME-Zarr image (id=123).
@@ -145,8 +145,9 @@ A well group SHOULD NOT be present if there are no images in the well.
     └── ...                   # Other rows
 </pre>
 
-OME-Zarr Metadata {#metadata}
-=============================
+OME-Zarr Metadata
+=================
+(metadata)=
 
 The "OME-Zarr Metadata" contains metadata keys as specified below 
 for discovering certain types of data, especially images.
@@ -172,8 +173,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 
 "axes" metadata
 --------------------------
-
-{#axes-md}
+(axes-md)=
 
 "axes" describes the dimensions of a coordinate systems and adds an interpretation to the data along that dimension. A named collection
 of axes forms a [coordinate system](coord-sys-md).
@@ -241,8 +241,7 @@ to the discrete axis `"c"`.  Indexing an image at the point `(1, 0.2, 0.3, 0.4)`
 
 "coordinateSystems" metadata
 --------------------------
-
-{#coord-sys-md}
+(coord-sys-md)=
 
 A "coordinate system" is a collection of "axes" / dimensions with a name. Every coordinate system:
 - MUST contain the field "name". The value MUST be a non-empty string that is unique among `coordinateSystem`s.
@@ -483,8 +482,7 @@ Conforming readers:
 
 "coordinateTransformations" metadata
 ------------------------------------------------
-
-{#trafo-md}
+(trafo-md)=
 
 "coordinateTransformations" describe the mapping between two coordinate systems (defined by "axes").
 For example, to map an array's discrete coordinate system to its corresponding physical coordinates.
@@ -553,7 +551,7 @@ Conforming readers:
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
 
-Coordinate transformations from array to physical coordinates MUST be stored in [multiscales](multiscale-md). 
+Coordinate transformations from array to physical coordinates MUST be stored in [multiscales](multiscales-md). 
 Transformations between different images MUST be stored in the attributes of a parent zarr group. For transformations that store
 data or parameters in a zarr array, those zarr arrays SHOULD be stored in a zarr group `"coordinateTransformations"`.
 
@@ -675,14 +673,15 @@ transformation type, for example:
 ```
 
 Implementations SHOULD be able to compute and apply the inverse of some coordinate transformations when they
-are computable in closed-form (as the [Transformation types](#transformation-types) section below indicates). If an
+are computable in closed-form (as the [Transformation types](transformation-types) section below indicates). If an
 operation is requested that requires the inverse of a transformation that can not be inverted in closed-form,
 implementations MAY estimate an inverse, or MAY output a warning that the requested operation is unsupported.
 
 
 #### Matrix transformations
+(matrix-transformations)=
 
-Two transformation types ([affine](#affine) and [rotation](#rotation)) are parametrized by matrices. Matrices are applied to
+Two transformation types ([affine](affine) and [rotation](rotation)) are parametrized by matrices. Matrices are applied to
 column vectors that represent points in the input coordinate system. The first (last) axis in a coordinate system is the top
 (bottom) entry in the column vector. Matrices are stored as two-dimensional arrays, either as json or in a zarr array. When
 stored as a 2D zarr array, the first dimension indexes rows and the second dimension indexes columns (e.g., an array of
@@ -718,6 +717,7 @@ results in the point [2,-1,3] because it is computed with the matrix-vector mult
 
 
 ### Transformation types
+(transformation-types)=
 
 Input and output dimensionality may be determined by the value of the "input" and "output" fields, respectively. If the value
 of "input" is an array, it's length gives the input dimension, otherwise the length of "axes" for the coordinate
@@ -864,8 +864,9 @@ y = 2 * j
 </div>
 
 #### <a name="affine">affine</a>
+(affine)=
 
-`affine`s are [matrix transformations](#matrix-transformations) from N-dimensional inputs to M-dimensional outputs are
+`affine`s are [matrix transformations](matrix-transformations) from N-dimensional inputs to M-dimensional outputs are
 represented as the upper `(M)x(N+1)` sub-matrix of a `(M+1)x(N+1)` matrix in [homogeneous
 coordinates](https://en.wikipedia.org/wiki/Homogeneous_coordinates) (see examples). This transformation type may be (but is not
 necessarily) invertible when `N` equals `M`. The matrix MUST be stored as a 2D array either as json or as a zarr array.
@@ -939,8 +940,9 @@ necessarily) invertible when `N` equals `M`. The matrix MUST be stored as a 2D a
 
 
 #### <a name="rotation">rotation</a>
+(rotation)=
 
-`rotation`s are [matrix transformations](#matrix-transformations) that are special cases of affine transformations. When possible, a rotation
+`rotation`s are [matrix transformations](matrix-transformations) that are special cases of affine transformations. When possible, a rotation
 transformation SHOULD be preferred to its equivalent affine. Input and output dimensionality (N) MUST be identical. Rotations
 are stored as `NxN` matrices, see below, and MUST have determinant equal to one, with orthonormal rows and columns. The matrix
 MUST be stored as a 2D array either as json or in a zarr array. `rotation` transformations are invertible.
@@ -1343,7 +1345,7 @@ highlight: json
 
 "multiscales" metadata
 ----------------------
-(multiscale-md)=
+(multiscales-md)=
 
 Metadata about an image can be found under the "multiscales" key in the group-level OME-Zarr Metadata. 
 Here, image refers to 2 to 5 dimensional data representing image or volumetric data with optional time or channel axes. 
@@ -1584,8 +1586,7 @@ highlight: json
 
 "well" metadata
 ---------------
-
-{#well-md}
+(well-md)=
 
 For high-content screening datasets, the metadata about all fields of views
 under a given well can be found under the "well" key in the attributes of the
@@ -1620,21 +1621,23 @@ path: examples/well_strict/well_2fields.json
 highlight: json
 </pre>
 
-Specification naming style {#naming-style}
-==========================================
+Specification naming style
+==========================
+(naming-style)=
 
 Multi-word keys in this specification should use the `camelCase` style.
 NB: some parts of the specification don't obey this convention as they
 were added before this was adopted, but they should be updated in due course.
 
-Implementations {#implementations}
-==================================
+Implementations
+===============
+(implementations)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
 
-
-Version History {#history}
-==========================
+Version History
+===============
+(history)=
 
 <table>
   <thead>
