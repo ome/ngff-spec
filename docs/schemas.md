@@ -1,3 +1,4 @@
-# JSON schemas
 
-Here is some information on the json schemas
+# JSON Schemas
+
+Below you find schemas for the NGFF specification in both Markdown and HTML format.
