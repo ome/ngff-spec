@@ -8,9 +8,9 @@ chapters:
 - file: docs/examples
   sections:
   - glob: docs/examples/*
-    exclude: docs/examples/examples.md
 - file: docs/schemas
   sections:
   - glob: docs/schemas/*
+
 - file: citing
 - file: version_history
