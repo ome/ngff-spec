@@ -12,5 +12,6 @@ chapters:
   sections:
   - glob: docs/schemas/*
 
+- file: contribute
 - file: citing
 - file: version_history
