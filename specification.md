@@ -12,7 +12,7 @@
 ## Abstract
 
 ```{warning}
-This is **not** the released version of the ngff-specficication. It is an explorative,  work-in-progress document.
+This is **not** the released version of the ngff-specification. It is an explorative, work-in-progress document.
 
 ```
 
