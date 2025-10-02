@@ -11,6 +11,11 @@
 
 ## Abstract
 
+```{warning}
+This is **not** the released version of the ngff-specficication. It is an explorative,  work-in-progress document.
+
+```
+
 This document contains next-generation file format (NGFF) specifications for storing bioimaging data in the cloud. All specifications are submitted to the https://image.sc community for review.
 
 ## Status of This Document
