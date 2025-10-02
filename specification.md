@@ -154,7 +154,7 @@ The version of the OME-Zarr Metadata is denoted as a string in the `version` att
 
 The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 
-```json
+<pre>
 {
   ...
   "attributes": {
@@ -164,7 +164,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
     }
   }
 }
-```
+</pre>
 
 ## "axes" metadata
 (axes-md)=
@@ -184,7 +184,7 @@ The "axes" are used as part of [multiscales metadata](multiscales-md). The lengt
 
 The "dimension_names" attribute MUST be included in the `zarr.json` of the Zarr array of a multiscale level and MUST match the names in the "axes" metadata.
 
-<div class=example>
+````{admonition} Example
 
 Examples of valid axes:
 
@@ -199,7 +199,7 @@ Examples of valid axes:
     {"name": "freq", "type": "frequency", "unit": "megahertz"}
 ]
 ```
-</div>
+````
 
 Arrays are inherently discrete (see Array coordinate systems, below) but are often used to store discrete samples of a
 continuous variable. The continuous values "in between" discrete samples can be retrieved using an *interpolation* method. If an
@@ -212,11 +212,11 @@ Note: The most common methods for interpolation are "nearest neighbor", "linear"
 to any method that obtains values at real valued coordinates using discrete samples as an "interpolator". As such, label images
 may be interpolated using "nearest neighbor" to obtain labels at points along the continuum.
 
-<div class=example>
+````{admonition} Example
 
 For the coordinate system:
 
-```json
+```
 {
     "name" : "index and interpolation",
     "axes" : [
@@ -230,7 +230,8 @@ For the coordinate system:
 
 Indexing an image at the point `(0.1, 0.2, 0.3, 0.4)` is not valid, because the value of the first coordinate (`0.1`) refers
 to the discrete axis `"c"`.  Indexing an image at the point `(1, 0.2, 0.3, 0.4)` is valid.
-</div>
+
+````
 
 
 ## "coordinateSystems" metadata
@@ -240,7 +241,9 @@ A "coordinate system" is a collection of "axes" / dimensions with a name. Every 
 - MUST contain the field "name". The value MUST be a non-empty string that is unique among `coordinateSystem`s.
 - MUST contain the field "axes", whose value is an array of valid "axes".
 
-<div class=example>
+````{admonition} Example
+
+Example of valid `coordinateSystems` metadata:
 
 ```json
 {
@@ -252,7 +255,7 @@ A "coordinate system" is a collection of "axes" / dimensions with a name. Every 
     ]
 }
 ```
-</div>
+````
 
 The order of the `"axes"` list matters and defines the index of each array dimension and coordinates for points in that
 coordinate system. For the above example, the `"x"` dimension is the last dimension. The "dimensionality" of a coordinate system
@@ -265,7 +268,7 @@ point refer to different physical entities and therefore should not be analyzed 
 regions of interest, etc., SHOULD ensure that they are in the same coordinate system (same name, with identical axes) or can be
 transformed to the same coordinate system before doing analysis. See the example below.
 
-<div class=example>
+````{admonition} Example
 
 Two instruments simultaneously image the same sample from two different angles, and the 3D data from both instruments are
 calibrated to "micrometer" units. Two samples are collected ("sampleA" and "sampleB"). An analysis of sample A requires
@@ -310,7 +313,7 @@ image.
 ]
 ```
 
-</div>
+````
 
 
 ### Array coordinate systems
@@ -323,7 +326,8 @@ choice explicitly will be important for interoperability. This is possible by us
 Every array has a default coordinate system whose parameters need not be explicitly defined. Its name is the path to the array
 in the container, its axes have `"type":"array"`, are unitless, and have default "name"s. The ith axis has `"name":"dim_i"`
 (these are the same default names used by [xarray](https://docs.xarray.dev/en/stable/user-guide/terminology.html)).
-<div class=example>
+
+````{admonition} Example
 For example, a 3D array at path `0` defines the coordinate system:
 
 ```json
@@ -338,7 +342,8 @@ For example, a 3D array at path `0` defines the coordinate system:
 ```
 
 though this object should not and need not explicitly appear in metadata. 
-</div>
+
+````
 
 
 The dimensionality of each array coordinate system equals the dimensionality of its corresponding zarr array.  The axis with
@@ -347,11 +352,11 @@ attribute in the zarr array attributes, and whose data depends on the byte order
 chunks. As described in the [zarr array metadata](https://zarr-specs.readthedocs.io/en/latest/v3/core/v3.0.html#array-metadata),
 the last dimension of an array in "C" order are stored contiguously on disk or in-memory when directly loaded. 
 
-<div class=example>
+````{admonition} Example
 For example, if `0/zarr.json` contains:
 
 
-```json
+```
 {
     "zarr_format": 3,
     "node_type": "array",
@@ -361,23 +366,22 @@ For example, if `0/zarr.json` contains:
 ```
 
 Then `dim_0` has length 4, `dim_1` has length 3, and `dim_2` has length 5.
-</div>
+````
 
 The name and axes names MAY be customized by including a `arrayCoordinateSystem` field in
 the user-defined attributes of the array whose value is a coordinate system object. The length of
 `axes` MUST be equal to the dimensionality. The value of `"type"` for each object in the 
 axes array MUST equal `"array"`.
 
-<div class=example>
+````{admonition} Example
 
-<pre class=include-code>
-path: examples/coordSystems/arrayCoordSys.json
-highlight: json
-</pre>
+
+```{literalinclude} examples/coordSystems/arrayCoordSys.json
+```
 
 Note that dimension `i` is contiguous in memory.
 
-</div>
+````
 
 
 ### Coordinate convention
@@ -392,9 +396,7 @@ system `(0.0, 0.0)` (when the transformation is the identity). The continuous re
 half-open interval `[-0.5, 0.5) x [-0.5, 0.5)` (i.e., -0.5 is included, +0.5 is excluded). See chapter 4 and figure 4.1 of the ITK Software Guide [[itk]].
 
 
-
-"bioformats2raw.layout" (transitional)
---------------------------------------
+## bioformats2raw.layout
 (bf2raw)=
 
 [=Transitional=] "bioformats2raw.layout" metadata identifies a group which implicitly describes a series of images.
@@ -405,11 +407,12 @@ In order to capture that information within an OME-Zarr dataset, `bioformats2raw
 The bioformats2raw layout has been added to v0.4 as a transitional specification to specify filesets that already exist
 in the wild. An upcoming NGFF specification will replace this layout with explicit metadata.
 
-<h4 id="bf2raw-layout" class="no-toc">Layout</h4>
+### Layout
+(bf2raw-layout)=
 
 Typical Zarr layout produced by running `bioformats2raw` on a fileset that contains more than one image (series > 1):
 
-<pre>
+```
 series.ome.zarr               # One converted fileset from bioformats2raw
     ├── zarr.json             # Contains "bioformats2raw.layout" metadata
     ├── OME                   # Special group for containing OME metadata
@@ -418,33 +421,32 @@ series.ome.zarr               # One converted fileset from bioformats2raw
     ├── 0                     # First image in the collection
     ├── 1                     # Second image in the collection
     └── ...
-</pre>
+```
 
-<h4 id="bf2raw-attributes" class="no-toc">Attributes</h4>
+### bf2raw-attributes
+(bf2raw-attributes)=
 
 The OME-Zarr Metadata in the top-level `zarr.json` file must contain the `bioformats2raw.layout` key:
-<pre class=include-code>
-path: examples/bf2raw/image.json
-highlight: json
-</pre>
+
+```{literalinclude} examples/bf2raw/image.json 
+:language: json
+```
 
 If the top-level group represents a plate, the `bioformats2raw.layout` metadata will be present but
 the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow (see [plate metadata](plate-md)). It is not
 possible to mix collections of images with plates at present.
 
-<pre class=include-code>
-path: examples/bf2raw/plate.json
-highlight: json
-</pre>
+```{literalinclude} examples/bf2raw/plate.json
+```
 
 The OME-Zarr Metadata in the `zarr.json` file within the OME group may contain the "series" key:
 
-<pre class=include-code>
-path: examples/ome/series-2.json
-highlight: json
-</pre>
+```{literalinclude} examples/ome/series-2.json
+:language: json
+```
 
-<h4 id="bf2raw-details" class="no-toc">Details</h4>
+### Details
+(bf2raw-details)=
 
 Conforming groups:
 
@@ -547,7 +549,7 @@ Coordinate transformations from array to physical coordinates MUST be stored in 
 Transformations between different images MUST be stored in the attributes of a parent zarr group. For transformations that store
 data or parameters in a zarr array, those zarr arrays SHOULD be stored in a zarr group `"coordinateTransformations"`.
 
-<pre>
+```
 store.zarr                      # Root folder of the zarr store
 │
 ├── zarr.json                   # coordinate transformations describing the relationship between two image coordinate systems
@@ -570,7 +572,7 @@ store.zarr                      # Root folder of the zarr store
         └── image               # a zarr array
             └── zarr.json       # physical coordinate system and transformations here
                                 # the array attributes
-</pre>
+```
 
 ### Additional details
 
@@ -586,7 +588,7 @@ Transformations in the `transformations` list of a `byDimensions` transformation
 of strings corresponding to axis names of the parent transformation's input and output coordinate systems (see below for
 details).
 
-<div class=example>
+````{admonition} Example
 
 The sequence transformation's input corresponds to an array coordinate system at path "my/array".
 
@@ -635,7 +637,7 @@ The sequence transformation's input corresponds to an array coordinate system at
 ]
 ```
 
-</div>
+````
 
 Coordinate transformations are functions of *points* in the input space to *points* in the output space. We call this the "forward" direction.
 Points are ordered lists of coordinates, where a coordinate is the location/value of that point along its corresponding axis.
@@ -680,12 +682,19 @@ stored as a 2D zarr array, the first dimension indexes rows and the second dimen
 `"shape":[3,4]` has 3 rows and 4 columns). When stored as a 2D json array, the inner array contains rows (e.g. `[[1,2,3],
 [4,5,6]]` has 2 rows and 3 columns).
 
-<div class=example>
+````{admonition} Example
 
 For matrix transformations, points in the coordinate system:
 
-```
-{ "name" : "in", "axes" : [{"name" : "z"}, {"name" : "y"}, {"name":"x"}] },
+```json
+{
+  "name" : "in",
+  "axes" : [
+    {"name" : "z"},
+    {"name" : "y"},
+    {"name":"x"}
+  ]
+},
 ```
 
 are represented as column vectors:
@@ -705,8 +714,7 @@ results in the point [2,-1,3] because it is computed with the matrix-vector mult
 [ 0  0 -1] [3]   [-3]
 ```
 
-</div>
-
+````
 
 ### Transformation types
 (transformation-types)=
@@ -725,12 +733,11 @@ otherwise it is given by the length of "axes" for the coordinate system with the
 the ith axis of the output coordinate system is set to the position of the ith axis of the input coordinate
 system. `identity` transformations are invertible.
 
-<div class=example>
+````{admonition} Example
 
-<pre class=include-code>
-path: examples/transformations/identity.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/identity.json
+:language: json
+```
 
 defines the function:
 
@@ -739,7 +746,7 @@ x = i
 y = j
 ```
 
-</div>
+````
 
 
 #### mapAxis
@@ -752,12 +759,11 @@ system, the `mapAxis` MUST have a corresponding field. For every value of the ob
 coordinate system with that name. Note that the order of the keys could be reversed.
 
 
-<div class=example>
+````{admonition} Example
 
-<pre class=include-code>
-path: examples/transformations/mapAxis1.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/mapAxis1.json
+:language: json
+```
 
 The "equivalent to identity" transformation defines the function:
 
@@ -773,14 +779,13 @@ x = j
 y = i
 ```
 
-</div>
+````
 
-<div class=example>
+````{admonition} Example
 
-<pre class=include-code>
-path: examples/transformations/mapAxis2.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/mapAxis2.json
+:language: json
+```
 
 The "projection_down" transformation defines the function:
 
@@ -795,7 +800,7 @@ x = a
 y = b
 z = b
 ```
-</div>
+````
 
 #### translation
 (translation)=
@@ -813,12 +818,11 @@ invertible.
   <dd> 	The scale parameters stored as a JSON list of numbers. The list MUST have length `N`.</dd>
 </dl>
 
-<div class=example>
+````{admonition} Example
 
-<pre class=include-code>
-path: examples/transformations/translation.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/translation.json
+:language: json
+```
 
 defines the function:
 
@@ -826,7 +830,7 @@ defines the function:
 x = i + 9 
 y = j - 1.42
 ```
-</div>
+````
 
 #### scale
 (scale)=
@@ -844,12 +848,11 @@ transformations are invertible.
   <dd> 	The scale parameters stored as a JSON list of numbers. The list MUST have length `N`.</dd>
 </dl>
 
-<div class=example>
+````{admonition} Example
 
-<pre class=include-code>
-path: examples/transformations/scale.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/scale.json
+:language: json
+```
 
 defines the function:
 
@@ -857,8 +860,7 @@ defines the function:
 x = 3.12 * i
 y = 2 * j
 ```
-</div>
-
+````
 #### affine
 (affine)=
 
@@ -875,64 +877,62 @@ necessarily) invertible when `N` equals `M`. The matrix MUST be stored as a 2D a
   <dd> 	The affine parameters stored in JSON. The matrix MUST be stored as 2D nested array where the outer array MUST be length
   `M` and the inner arrays MUST be length `N+1`.</dd> </dl>
 
-<div class=example>
-    A 2D-2D example:
+````{admonition} Example
+A 2D-2D example:
 
-    <pre class=include-code>
-    path: examples/transformations/affine2d2d.json
-    highlight: json
-    </pre>
+```{literalinclude} examples/transformations/affine2d2d.json
+:language: json
+```
 
-    defines the function:
+defines the function:
 
-    ```
-    x = 1*i + 2*j + 3
-    y = 4*i + 5*j + 6
-    ```
+```
+x = 1*i + 2*j + 3
+y = 4*i + 5*j + 6
+```
 
-    it is equivalent to this matrix-vector multiplication in homogeneous coordinates:
+it is equivalent to this matrix-vector multiplication in homogeneous coordinates:
 
-    ```
-    [ 1 2 3 ][ i ]   [ x ]
-    [ 4 5 6 ][ j ] = [ y ]
-    [ 0 0 1 ][ 1 ]   [ 1 ]
-    ```
+```
+[ 1 2 3 ][ i ]   [ x ]
+[ 4 5 6 ][ j ] = [ y ]
+[ 0 0 1 ][ 1 ]   [ 1 ]
+```
 
-    where the last row `[0 0 1]` is omitted in the JSON representation.
+where the last row `[0 0 1]` is omitted in the JSON representation.
 
-</div>
+````
 
-<div class=example>
-    An example with two dimensional inputs and three dimensional outputs.
+````{admonition} Example
+An example with two dimensional inputs and three dimensional outputs.
 
-    Note that the order of the axes can in general be determined by the application or user.
-    These axes relate to the memory or on-disk order insofar as the last dimension is contiguous
-    when the zarr array is c-order (the default for zarr version 2, and the only option for zarr version 3).
+Note that the order of the axes can in general be determined by the application or user.
+These axes relate to the memory or on-disk order insofar as the last dimension is contiguous
+when the zarr array is c-order (the default for zarr version 2, and the only option for zarr version 3).
 
-    <pre class=include-code>
-    path: examples/transformations/affine2d3d.json
-    highlight: json
-    </pre>
+```{literalinclude} examples/transformations/affine2d3d.json
+:language: json
+```
 
-    defines the function:
+defines the function:
 
-    ```
-    x = 1*i + 2*j + 3
-    y = 4*i + 5*j + 6
-    z = 7*i + 8*j + 9
-    ```
+```
+x = 1*i + 2*j + 3
+y = 4*i + 5*j + 6
+z = 7*i + 8*j + 9
+```
 
-    it is equivalent to this matrix-vector multiplication in homogeneous coordinates:
+it is equivalent to this matrix-vector multiplication in homogeneous coordinates:
 
-    ```
-    [ 1 2 3 ][ i ]   [ x ]
-    [ 4 5 6 ][ j ] = [ y ]
-    [ 7 8 9 ][ 1 ]   [ z ]
-    [ 0 0 1 ]        [ 1 ]
-    ```
+```
+[ 1 2 3 ][ i ]   [ x ]
+[ 4 5 6 ][ j ] = [ y ]
+[ 7 8 9 ][ 1 ]   [ z ]
+[ 0 0 1 ]        [ 1 ]
+```
 
-    where the last row `[0 0 1]` is omitted in the JSON representation.
-</div>
+where the last row `[0 0 1]` is omitted in the JSON representation.
+````
 
 
 #### rotation
@@ -951,21 +951,20 @@ MUST be stored as a 2D array either as json or in a zarr array. `rotation` trans
   <dd> 	The  parameters stored in JSON. The matrix MUST be stored as a 2D nested array where the outer array MUST be length `N`
   and the inner arrays MUST be length `N`.</dd> </dl>
 
-<div class=example>
-    A 2D example
+````{admonition} Example
+A 2D example
 
-    <pre class=include-code>
-    path: examples/transformations/rotation.json
-    highlight: json
-    </pre>
+```{literalinclude} examples/transformations/rotation.json
+:language: json
+```
 
-    defines the function:
+defines the function:
 
-    ```
-    x = 0*i - 1*j
-    y = 1*i + 0*j
-    ```
-</div>
+```
+x = 0*i - 1*j
+y = 1*i + 0*j
+  ```
+````
 
 
 #### inverseOf
@@ -976,23 +975,21 @@ transforming points from output to input coordinate systems is possible using th
 Transforming points from the input to the output coordinate systems requires the inverse of the contained
 transformation (if it exists).
 
-<div class=note>
-    Software libraries that perform image registration often return the transformation from fixed image
-    coordinates to moving image coordinates, because this "inverse" transformation is most often required
-    when rendering the transformed moving image. Results such as this may be enclosed in an `inverseOf`
-    transformation. This enables the "outer" coordinate transformation to specify the moving image coordinates
-    as `input` and fixed image coordinates as `output`, a choice that many users and developers find intuitive.
-</div>
+```{note}
+Software libraries that perform image registration often return the transformation from fixed image
+coordinates to moving image coordinates, because this "inverse" transformation is most often required
+when rendering the transformed moving image. Results such as this may be enclosed in an `inverseOf`
+transformation. This enables the "outer" coordinate transformation to specify the moving image coordinates
+as `input` and fixed image coordinates as `output`, a choice that many users and developers find intuitive.
+```
 
 
-<div class=example>
+````{admonition} Example
 
-    <pre class=include-code>
-    path: examples/transformations/inverseOf.json
-    highlight: json
-    </pre>
-
-</div>
+```{literalinclude} examples/transformations/inverseOf.json
+:language: json
+```
+````
 
 #### sequence
 (sequence)=
@@ -1003,7 +1000,7 @@ to a point in the input coordinate system, apply the first transformation in the
 transformation to the result. Repeat until every transformation has been applied. The output of the last transformation is the
 result of the sequence.
 
-<div class=note>
+````{note}
 
 Considering transformations as functions of points, if the list contains transformations `[f0, f1, f2]` in that order, applying
 this sequence to point `x` is equivalent to:
@@ -1014,7 +1011,7 @@ f2(f1(f0(x)))
 
 `f0` is applied first, `f1` is applied second, and `f2` is applied last.
 
-</div>
+````
 
 The transformations included in the `transformations` array may omit their `input` and `output` fields under the conditions
 outlined below:
@@ -1036,14 +1033,13 @@ outlined below:
   <dd>A non-empty array of transformations.</dd>
 </dl>
 
-<div class=example>
+````{admonition} Example
 
 This sequence:
 
-<pre class=include-code>
-path: examples/transformations/sequence.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/sequence.json
+:language: json
+```
 
 describes the function
 
@@ -1053,7 +1049,7 @@ y = (j + 0.9) * 3
 ```
 
 and is invertible.
-</div>
+````
 
 
 #### coordinates and displacements
@@ -1078,7 +1074,7 @@ metadata for the array ("field coordinate system").
 The `i`th value of the array along the `coordinate` or `displacement` axis refers to the coordinate or displacement
 of the `i`th output axis. See the example below.
 
-<div class=example>
+````{admonition} Example
 
 In this example, the array located at `"displacementField"` MUST have three dimensions. One dimension MUST
 correspond to an axis with `type : displacement` (in this example, the last dimension), the other two dimensions MUST be axes
@@ -1119,8 +1115,7 @@ x_displacement = displacementField[y][x][1]
 
 I.e. the y-displacement is first, because the y-axis is the first element of the input and output coordinate systems.
 
-</div>
-
+````
 
 `coordinates` and `displacements` transformations are not invertible in general, but implementations MAY approximate their
 inverses. Metadata for these coordinate transforms have the following field: 
@@ -1262,53 +1257,47 @@ on subsets of dimensions.
 </dl>
 
 
-<div class=example>
+````{admonition} Example
 
 A valid `byDimension` transformation:
 
-<pre class=include-code>
-path: examples/transformations/byDimension1.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/byDimension1.json
+:language: json
+```
+````
 
-</div>
-
-<div class=example>
+````{admonition} Example
 
 Another valid `byDimension` transformation:
 
-<pre class=include-code>
-path: examples/transformations/byDimension2.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/byDimension2.json
+:language: json
+```
+````
 
-</div>
-
-<div class=example>
+````{admonition} Example
 
 This is an **invalid** `byDimension` transform:
 
-<pre class=include-code>
-path: examples/transformations/byDimensionInvalid1.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/byDimensionInvalid1.json
+:language: json
+```
 
 It is invalid for two reasons. First because input `0` used by the scale transformation is not an axis of the `byDimension` transformation's `input`. Second, the `x` axis of the `output` does not appear in the `output` of any child transformation.
 
-</div>
+````
 
-<div class=example>
+````{admonition} Example
 
 Another **invalid** `byDimension` transform:
 
-<pre class=include-code>
-path: examples/transformations/byDimensionInvalid2.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/byDimensionInvalid2.json
+:language: json
+```
 
 This transformation is invalid because the output axis `x` appears in more than one transformation in the `transformations` list.
 
-</div>
+````
 
 
 #### bijection
@@ -1327,21 +1316,19 @@ Practically, non-invertible transformations have finite extents, so bijection tr
 to be correct / consistent for points that fall within those extents. It may not be correct for any point of
 appropriate dimensionality.
 
-<div class=example>
+````{admonition} Example
 
-<pre class=include-code>
-path: examples/transformations/bijection.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/bijection.json
+:language: json
+```
 
 the input and output of the `forward` and `inverse` transformations are understood to be:
 
-<pre class=include-code>
-path: examples/transformations/bijection_verbose.json
-highlight: json
-</pre>
+```{literalinclude} examples/transformations/bijection_verbose.json
+:language: json
+```
 
-</div>
+````
 
 
 ## "multiscales" metadata
@@ -1380,11 +1367,11 @@ Each "multiscales" dictionary SHOULD contain the field "name".
 Each "multiscales" dictionary SHOULD contain the field "type", which gives the type of downscaling method used to generate the multiscale image pyramid.
 It SHOULD contain the field "metadata", which contains a dictionary with additional information about the downscaling method.
 
-<pre class=include-code>
-path: examples/multiscales_strict/multiscales_example.json
-highlight: json
-</pre>
-
+````{admonition} Example
+```{literalinclude} examples/multiscales_strict/multiscales_example.json
+:language: json
+```
+````
 
 If only one multiscale is provided, use it. Otherwise, the user can choose by
 name, using the first multiscale as a fallback:
@@ -1456,11 +1443,12 @@ The "labels" group is not itself an image; it contains images. The pixels of the
 but these MUST NOT contain metadata. Names of the images in the "labels" group are arbitrary.
 
 The OME-Zarr Metadata in the `zarr.json` file associated with the "labels" group MUST contain a JSON object with the key `labels`, whose value is a JSON array of paths to the 
-labeled multiscale image(s). All label images SHOULD be listed within this metadata file. For example:
+labeled multiscale image(s). All label images SHOULD be listed within this metadata file. 
 
+````{admonition} Example
+For example:
 ```json
 {
-  ...
   "attributes": {
     "ome": {
       "version": "0.5",
@@ -1471,6 +1459,7 @@ labeled multiscale image(s). All label images SHOULD be listed within this metad
   }
 }
 ```
+````
 
 The `zarr.json` file for the label image MUST implement the multiscales specification. Within the `multiscales` object, the JSON array 
 associated with the `datasets` key MUST have the same number of entries (scale levels) as the original unlabeled image. 
@@ -1499,15 +1488,15 @@ The value of the `source` key MUST be a JSON object containing information about
 This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.  
 The default value is `../../` since most labeled images are stored in a "labels" group that is nested within the original image group. 
 
+
+````{admonition} Example
 Here is an example of a simple `image-label` object for a label image in which 0s and 1s represent intercellular and cellular space, respectively:
+```{literalinclude} examples/label_strict/colors_properties.json
+:language: json
+```
+In this case, the pixels consisting of a 0 in the Zarr array will be displayed as 50% blue and 50% opacity. Pixels with a 1 in the Zarr array, which correspond to cellular space, will be displayed as 50% green and 50% opacity. 
+````
 
-<pre class=include-code>
-path: examples/label_strict/colors_properties.json
-highlight: json
-</pre>
-
-In this case, the pixels consisting of a 0 in the Zarr array will be displayed as 50% blue and 50% opacity. Pixels with a 1 in the Zarr array, 
-which correspond to cellular space, will be displayed as 50% green and 50% opacity. 
 
 ## "plate" metadata
 (plate-md)=
@@ -1565,21 +1554,21 @@ the index into the `rows` list and a `columnIndex` key whose value MUST be an in
 the index into the `columns` list. `rowIndex` and `columnIndex` MUST be 0-based. The
 `rowIndex`, `columnIndex`, and `path` MUST all refer to the same row/column pair.
 
+````{admonition} Example
 For example the following JSON object defines a plate with two acquisitions and
 6 wells (2 rows and 3 columns), containing up to 2 fields of view per acquisition.
 
-<pre class=include-code>
-path: examples/plate_strict/plate_6wells.json
-highlight: json
-</pre>
+```{literalinclude} examples/plate_strict/plate_6wells.json
+:language: json
+```
 
 The following JSON object defines a sparse plate with one acquisition and
 2 wells in a 96 well plate, containing one field of view per acquisition.
 
-<pre class=include-code>
-path: examples/plate_strict/plate_2wells.json
-highlight: json
-</pre>
+```{literalinclude} examples/plate_strict/plate_2wells.json
+:language: json
+```
+````
 
 ## "well" metadata
 (well-md)=
@@ -1599,23 +1588,23 @@ which MUST match one of the acquisition JSON objects defined in the [plate metad
 The `well` dictionary SHOULD contain a `version` key whose value MUST be a string specifying the
 version of the well specification.
 
+````{admonition} Example
 For example the following JSON object defines a well with four fields of
 view. The first two fields of view were part of the first acquisition while
 the last two fields of view were part of the second acquisition.
 
-<pre class=include-code>
-path: examples/well_strict/well_4fields.json
-highlight: json
-</pre>
+```{literalinclude} examples/well_strict/well_4fields.json
+:language: json
+```
 
 The following JSON object defines a well with two fields of view in a plate with
 four acquisitions. The first field is part of the first acquisition, and the second
 field is part of the last acquisition.
 
-<pre class=include-code>
-path: examples/well_strict/well_2fields.json
-highlight: json
-</pre>
+```{literalinclude} examples/well_strict/well_2fields.json
+:language: json
+```
+````
 
 # Specification naming style
 (naming-style)=
