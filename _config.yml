@@ -42,6 +42,9 @@ html:
         document.getElementById('current-year').textContent = new Date().getFullYear();
       </script>
 
+parse:
+  myst_heading_anchors: 3
+
 myst:
   enable_extensions:
     - colon_fence
