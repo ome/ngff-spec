@@ -23,8 +23,7 @@ enable next-generation file formats to represent the same bioimaging data
 that can be represented in \[OME-TIFF](http://www.openmicroscopy.org/ome-files/)
 and beyond.
 
-Document conventions
---------------------
+## Document conventions
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”,
 “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be interpreted as described in
@@ -41,8 +40,7 @@ implementations that are later submitted as a formal specification. (See [biofor
 Some of the JSON examples in this document include comments. However, these are only for
 clarity purposes and comments MUST NOT be included in JSON objects.
 
-Storage format
-==============
+# Storage format
 
 OME-Zarr is implemented using the Zarr format as defined by the
 [version 3 of the Zarr specification](https://zarr-specs.readthedocs.io/en/latest/v3/core/v3.0.html).
@@ -56,8 +54,7 @@ is represented here as it would appear locally but could equally
 be stored on a web server to be accessed via HTTP or in object storage
 like S3 or GCS.
 
-Images
-------
+## Images
 
 The following layout describes the expected Zarr hierarchy for images with
 multiple levels of resolutions and optionally associated labels.
@@ -105,8 +102,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
 
 
 
-High-content screening
-----------------------
+## High-content screening
 
 The following specification defines the hierarchy for a high-content screening
 dataset. Three groups MUST be defined above the images:
@@ -145,8 +141,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     └── ...                   # Other rows
 </pre>
 
-OME-Zarr Metadata
-=================
+# OME-Zarr Metadata
 (metadata)=
 
 The "OME-Zarr Metadata" contains metadata keys as specified below 
@@ -171,8 +166,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 }
 ```
 
-"axes" metadata
---------------------------
+## "axes" metadata
 (axes-md)=
 
 "axes" describes the dimensions of a coordinate systems and adds an interpretation to the data along that dimension. A named collection
@@ -239,8 +233,7 @@ to the discrete axis `"c"`.  Indexing an image at the point `(1, 0.2, 0.3, 0.4)`
 </div>
 
 
-"coordinateSystems" metadata
---------------------------
+## "coordinateSystems" metadata
 (coord-sys-md)=
 
 A "coordinate system" is a collection of "axes" / dimensions with a name. Every coordinate system:
@@ -480,8 +473,7 @@ Conforming readers:
 - MAY ignore other groups or arrays under the root of the hierarchy.
 
 
-"coordinateTransformations" metadata
-------------------------------------------------
+## "coordinateTransformations" metadata
 (trafo-md)=
 
 "coordinateTransformations" describe the mapping between two coordinate systems (defined by "axes").
@@ -726,7 +718,8 @@ length gives the input dimension, otherwise it is given by the length of "axes" 
 the name of the "input".  If the value of "output" is an array, its length gives the output dimension,
 otherwise it is given by the length of "axes" for the coordinate system with the name of the "output".
 
-#### <a name="identity">identity</a>
+#### identity
+(identity)=
 
 `identity` transformations map input coordinates to output coordinates without modification. The position of
 the ith axis of the output coordinate system is set to the position of the ith axis of the input coordinate
@@ -749,7 +742,8 @@ y = j
 </div>
 
 
-#### <a name="mapAxis">mapAxis</a>
+#### mapAxis
+(mapAxis)=
 
 `mapAxis` transformations describe axis permutations as a mapping of axis names. Transformations MUST include a `mapAxis` field
 whose value is an object, all of whose values are strings. If the object contains `"x":"i"`, then the transform sets the value 
@@ -803,7 +797,8 @@ z = b
 ```
 </div>
 
-#### <a name="translation">translation</a>
+#### translation
+(translation)=
 
 `translation` transformations are special cases of affine transformations. When possible, a 
 translation transformation should be preferred to its equivalent affine. Input and output dimensionality MUST be
@@ -834,6 +829,7 @@ y = j - 1.42
 </div>
 
 #### scale
+(scale)=
 
 `scale` transformations are special cases of affine transformations. When possible, a scale transformation
 SHOULD be preferred to its equivalent affine. Input and output dimensionality MUST be identical and MUST equal
@@ -863,7 +859,7 @@ y = 2 * j
 ```
 </div>
 
-#### <a name="affine">affine</a>
+#### affine
 (affine)=
 
 `affine`s are [matrix transformations](matrix-transformations) from N-dimensional inputs to M-dimensional outputs are
@@ -939,7 +935,7 @@ necessarily) invertible when `N` equals `M`. The matrix MUST be stored as a 2D a
 </div>
 
 
-#### <a name="rotation">rotation</a>
+#### rotation
 (rotation)=
 
 `rotation`s are [matrix transformations](matrix-transformations) that are special cases of affine transformations. When possible, a rotation
@@ -972,7 +968,8 @@ MUST be stored as a 2D array either as json or in a zarr array. `rotation` trans
 </div>
 
 
-#### <a name="inverseOf">inverseOf</a>
+#### inverseOf
+(inverseOf)=
 
 An `inverseOf` transformation contains another transformation (often non-linear), and indicates that
 transforming points from output to input coordinate systems is possible using the contained transformation.
@@ -997,7 +994,8 @@ transformation (if it exists).
 
 </div>
 
-#### <a name="sequence">sequence</a>
+#### sequence
+(sequence)=
 
 A `sequence` transformation consists of an ordered array of coordinate transformations, and is invertible if every coordinate
 transform in the array is invertible (though could be invertible in other cases as well). To apply a sequence transformation
@@ -1058,7 +1056,8 @@ and is invertible.
 </div>
 
 
-#### <a name=coordinates-displacements>coordinates and displacements</a>
+#### coordinates and displacements
+(coordinates-displacements)=
 
 `coordinates` and `displacements` transformations store coordinates or displacements in an array and interpret them as a vector
 field that defines a transformation. The arrays must have a dimension corresponding to every axis of the input coordinate
@@ -1247,7 +1246,8 @@ The transformation specifies linear interpolation, which in this case yields
 input point, hence the output is `1.0 + (-0.5) = 0.5`.
 
 
-#### <a name=byDimension>byDimension</a>
+#### byDimension
+(byDimension)=
 
 `byDimension` transformations build a high dimensional transformation using lower dimensional transformations
 on subsets of dimensions.
@@ -1311,7 +1311,8 @@ This transformation is invalid because the output axis `x` appears in more than 
 </div>
 
 
-#### <a name="bijection">bijection</a>
+#### bijection
+(bijection)=
 
 A bijection transformation is an invertible transformation in which both the `forward` and `inverse` transformations
 are explicitly defined. Each direction SHOULD be a transformation type that is not closed-form invertible.
@@ -1343,8 +1344,7 @@ highlight: json
 </div>
 
 
-"multiscales" metadata
-----------------------
+## "multiscales" metadata
 (multiscales-md)=
 
 Metadata about an image can be found under the "multiscales" key in the group-level OME-Zarr Metadata. 
@@ -1400,8 +1400,7 @@ if not datasets:
     datasets = [x["path"] for x in multiscales[0]["datasets"]]
 ```
 
-"omero" metadata (transitional)
--------------------------------
+## "omero" metadata (transitional)
 (omero-md)=
 
 [=Transitional=] information specific to the channels of an image and how to render it
@@ -1442,8 +1441,7 @@ Each dictionary in "channels" MUST contain the field "window", which is a dictio
 The field "window" MUST contain the fields "min" and "max", which are the minimum and maximum values of the window, respectively.
 It MUST also contain the fields "start" and "end", which are the start and end values of the window, respectively.
 
-"labels" metadata
------------------
+## "labels" metadata
 (labels-md)=
 
 In OME-Zarr, Zarr arrays representing pixel-annotation data are stored in a group called "labels". Some applications--notably image segmentation--produce 
@@ -1511,8 +1509,7 @@ highlight: json
 In this case, the pixels consisting of a 0 in the Zarr array will be displayed as 50% blue and 50% opacity. Pixels with a 1 in the Zarr array, 
 which correspond to cellular space, will be displayed as 50% green and 50% opacity. 
 
-"plate" metadata
-----------------
+## "plate" metadata
 (plate-md)=
 
 For high-content screening datasets, the plate layout can be found under the
@@ -1584,8 +1581,7 @@ path: examples/plate_strict/plate_2wells.json
 highlight: json
 </pre>
 
-"well" metadata
----------------
+## "well" metadata
 (well-md)=
 
 For high-content screening datasets, the metadata about all fields of views
@@ -1621,19 +1617,15 @@ path: examples/well_strict/well_2fields.json
 highlight: json
 </pre>
 
-Specification naming style
-==========================
+# Specification naming style
 (naming-style)=
 
 Multi-word keys in this specification should use the `camelCase` style.
 NB: some parts of the specification don't obey this convention as they
 were added before this was adopted, but they should be updated in due course.
 
-Implementations
-===============
+# Implementations
 (implementations)=
-
-See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
 
 Version History
 ===============
