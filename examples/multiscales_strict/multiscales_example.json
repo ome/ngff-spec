@@ -29,7 +29,7 @@
                   "type": "scale",
                   "scale": [0.1, 1.0, 0.5, 0.5, 0.5],
                   "input": "0",
-                  "output": "example"
+                  "output": "physical"
                 }
               ]
             },
@@ -42,7 +42,7 @@
                   "type": "scale",
                   "scale": [0.1, 1.0, 1.0, 1.0, 1.0],
                   "input": "1",
-                  "output": "example"
+                  "output": "physical"
                 }
               ]
             },
@@ -55,7 +55,7 @@
                   "type": "scale",
                   "scale": [0.1, 1.0, 2.0, 2.0, 2.0],
                   "input": "2",
-                  "output": "example"
+                  "output": "physical"
                 }
             ]
             }
