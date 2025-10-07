@@ -724,12 +724,9 @@ results in the point [2,-1,3] because it is computed with the matrix-vector mult
 ### Transformation types
 (transformation-types)=
 
-Input and output dimensionality may be determined by the value of the "input" and "output" fields, respectively. If the value
-of "input" is an array, it's length gives the input dimension, otherwise the length of "axes" for the coordinate
-system with the name of the "input" value gives the input dimension.  If the value of "input" is an array, it's
-length gives the input dimension, otherwise it is given by the length of "axes" for the coordinate system with
-the name of the "input".  If the value of "output" is an array, its length gives the output dimension,
-otherwise it is given by the length of "axes" for the coordinate system with the name of the "output".
+Input and output dimensionality may be determined by the value of the "input" and "output" fields, respectively.
+If the value of “input” is an array, it’s length gives the input dimension, otherwise it is given by the length of “axes” for the coordinate system with the name of the “input”.
+If the value of "output" is an array, its length gives the output dimension, otherwise it is given by the length of "axes" for the coordinate system with the name of the "output".
 
 #### identity
 (identity)=
