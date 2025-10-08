@@ -12,7 +12,7 @@ Build and inspect changes to the documentation before submitting a PR. To do so,
 to install the necessary dependecies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r docs/requirements.txt
 ```
 
 This document uses [jupyter-book](https://jupyterbook.org) to generate the pages and [MyST](https://mystmd.org)
