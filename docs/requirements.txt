@@ -7,3 +7,4 @@ json-schema-for-humans
 myst-parser
 json_with_comments
 jupyter-book
+jsonschema_markdown
