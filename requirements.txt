@@ -5,6 +5,6 @@ sphinx-inline-tabs
 sphinx-examples
 json-schema-for-humans
 myst-parser
-json_with_comments
+json-with-comments
 jupyter-book
 jsonschema_markdown

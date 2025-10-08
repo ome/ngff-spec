@@ -5,13 +5,12 @@ format: jb-book
 root: specification
 
 chapters:
-- file: docs/examples
+- file: autodocs/examples
   sections:
-  - glob: docs/examples/*
-- file: docs/schemas/index
+  - glob: autodocs/examples/*
+- file: autodocs/schemas
   sections:
-  - glob: docs/schemas/markdown/*
-
+  - glob: autodocs/schemas/markdown/*
 - file: contribute
 - file: citing
 - file: version_history

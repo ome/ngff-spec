@@ -12,7 +12,7 @@ Build and inspect changes to the documentation before submitting a PR. To do so,
 to install the necessary dependecies:
 
 ```bash
-pip install -r docs/requirements.txt
+pip install -r requirements.txt
 ```
 
 This document uses [jupyter-book](https://jupyterbook.org) to generate the pages and [MyST](https://mystmd.org)
@@ -20,11 +20,11 @@ markdown for formatting. After installing these via the dependencies, navigate i
 and build the book using the following command:
 
 ```bash
-python docs/pre_build.py
-jupyter-book build . --path-output docs
+python ngff_spec/pre_build.py
+jupyter-book build ngff_spec
 ```
 
-You'll find the built webpages under `docs/_build/html`.
+You'll find the built webpages under `_build/html`.
 
 ### Formating hints
 
