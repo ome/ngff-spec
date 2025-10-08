@@ -8,9 +8,9 @@ chapters:
 - file: docs/examples
   sections:
   - glob: docs/examples/*
-- file: docs/schemas
+- file: docs/schemas/index
   sections:
-  - glob: docs/schemas/*
+  - glob: docs/schemas/markdown/*
 
 - file: contribute
 - file: citing
