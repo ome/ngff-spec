@@ -1,0 +1,10 @@
+sphinx
+sphinx-book-theme
+sphinx-proof
+sphinx-inline-tabs
+sphinx-examples
+json-schema-for-humans
+myst-parser
+json_with_comments
+jupyter-book
+jsonschema_markdown
