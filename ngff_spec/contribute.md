@@ -28,6 +28,11 @@ jupyter-book build .
 
 You'll find the built webpages under `_build/html`.
 
+### Text format
+
+Contributions should conform to [Semantic Line Breaks (SemBr)](https://sembr.org/),
+to improve change tracking.
+
 ### Formating hints
 
 The specification uses MyST extensively for a number of formatting options
