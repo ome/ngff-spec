@@ -217,7 +217,7 @@ As such, label images may be interpolated using "nearest neighbor" to obtain lab
 
 For the coordinate system:
 
-```
+```json
 {
     "name" : "index and interpolation",
     "axes" : [
@@ -316,8 +316,8 @@ then used for quantification with the instrument 1 image.
 ],
 "coordinateTransformations": [
     {
-        "type": "affine":
-        "path": "../sampleA_instrument2-to-instrument1"
+        "type": "affine",
+        "path": "../sampleA_instrument2-to-instrument1",
         "input": "sampleA_instrument2",
         "output": "sampleA_instrument1"
     }
@@ -368,7 +368,7 @@ the last dimension of an array in "C" order are stored contiguously on disk or i
 For example, if `0/zarr.json` contains:
 
 
-```
+```json
 {
     "zarr_format": 3,
     "node_type": "array",
@@ -678,7 +678,9 @@ Inverse transformations used for image rendering may be specified using the `inv
     "transformation" : {
         "type": "displacements",
         "path": "path/to/displacements",
-    }
+    },
+    "input": "input_image",
+    "output": "output_image"
 }
 ```
 
