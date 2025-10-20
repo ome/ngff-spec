@@ -1,0 +1,32 @@
+version: 1
+project:
+  title: Next-generation file format specification
+  authors:
+    - name: NGFF-community
+  github: ome/ngff-spec
+  bibliography:
+    - references.bib
+  exports:
+    - format: pdf
+      template: plain_latex_book
+      output: exports/book.pdf
+  toc:
+    - file: specification.md
+    - file: examples.md
+      children:
+        - pattern: _generated/examples/*
+    - file: schemas.md
+      children:
+        - pattern: _generated/schemas/markdown/*
+    - file: contribute.md
+    - file: citing.md
+    - file: version_history.md
+site:
+  options:
+    logo: https://www.openmicroscopy.org/img/logos/ome-logomark.svg
+    folders: true
+    hide_myst_branding: true
+  parts:
+    footer: footer.md
+
+  template: book-theme

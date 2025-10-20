@@ -1,0 +1,33 @@
+[project]
+name = "ngff-spec"
+dynamic = ["version"]
+description = "Next-generation file format specification"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+
+dependencies = [
+    "sphinx",
+    "sphinx-book-theme",
+    "sphinx-proof",
+    "sphinx-inline-tabs",
+    "sphinx-examples",
+    "json-schema-for-humans",
+    "myst-parser",
+    "json_with_comments",
+    "jupyter-book==2.0.0b3",
+    "jsonschema_markdown"
+]
+
+[project.optional-dependencies]
+testing = [
+    "tox",
+    "pytest",  # https://docs.pytest.org/en/latest/contents.html
+]
+
+[tool.setuptools_scm]
+write_to = "ngff_spec/_version.py"
+fallback_version = "0.0.1+nogit"
+
+[build-system]
+requires = ["setuptools >= 77.0.3", "setuptools-scm"]
+build-backend = "setuptools.build_meta"

@@ -13,7 +13,7 @@ Build and inspect changes to the documentation before submitting a PR.
 To do so, you first need to install the necessary dependecies:
 
 ```bash
-pip install -r requirements.txt
+pip install .
 ```
 
 This document uses [jupyter-book](https://jupyterbook.org) to generate the pages
@@ -22,8 +22,8 @@ After installing these via the dependencies,
 navigate into the repository on your machine and build the book using the following command:
 
 ```bash
-python pre_build.py
-jupyter-book build .
+python ngff_spec/pre_build.py
+jupyter book build ngff_spec
 ```
 
 You'll find the built webpages under `_build/html`.
@@ -48,7 +48,7 @@ It is recommended to use the following syntax in this document for consitency:
 
 ```
 anchor: (your-reference-name)=
-reference: [This is a reference](your-reference-name)
+reference: [This is a reference](#your-reference-name)
 ```
 
 #### Admonitions
@@ -85,6 +85,8 @@ use this syntax:
 Some informative text about your example
 ```{literalinclude} path/to/example.json
 :language: json
+:linenos:
+:tab-width: 2
 ```
 ````
 `````

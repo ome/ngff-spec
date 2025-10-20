@@ -1,13 +1,12 @@
-# {{ title }}
+---
+title: Next-generation file format specification
+short_title: OME-Zarr
+---
 
-**Version**: {{version}} <br>
-**Shortname:** {{ shortname }}<br>
-**Level:** {{ level }}<br>
-**Status:** {{ status }}<br>
 
-**Feedback:** {{ issue_tracking }}<br>
+**Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
-**Editor:** {{ editor_name }}, ({{ editor_affiliation }}), {{ editor_orcid }}
+**Editor:** Josh Moore, ([German BioImaging e.V.](https://gerbi-gmb.de)), [https://orcid.org/0000-0003-4028-811X](https://orcid.org/0000-0003-4028-811X)
 
 ## Abstract
 
@@ -59,7 +58,7 @@ but could equally be stored on a web server to be accessed via HTTP or in object
 ## Images
 
 The following layout describes the expected Zarr hierarchy for images with multiple levels of resolutions and optionally associated labels.
-Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [multiscales metadata](multiscales-md) for details.
+Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [multiscales metadata](#multiscales-md) for details.
 
 ```text
 ├── 123.zarr                  # One OME-Zarr image (id=123).
@@ -105,11 +104,11 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
 The following specification defines the hierarchy for a high-content screening
 dataset. Three groups MUST be defined above the images:
 
-- the group above the images defines the well and MUST implement the [well specification](well-md).
+- the group above the images defines the well and MUST implement the [well specification](#well-md).
     All images contained in a well are fields of view of the same well
 - the group above the well defines a row of wells
 - the group above the well row defines an entire plate i.e. a two-dimensional collection of wells organized in rows and columns.
-    It MUST implement the [plate specification](plate-md)
+    It MUST implement the [plate specification](#plate-md)
 
 A well row group SHOULD NOT be present if there are no images in the well row.
 A well group SHOULD NOT be present if there are no images in the well.
@@ -163,7 +162,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 (axes-md)=
 
 "axes" describes the dimensions of a coordinate systems and adds an interpretation to the data along that dimension.
-A named collection of axes forms a [coordinate system](coord-sys-md).
+A named collection of axes forms a [coordinate system](#coord-sys-md).
 It is a list of dictionaries, where each dictionary describes a dimension (axis) and:
 
 - MUST contain the field "name" that gives the name for this dimension.
@@ -180,7 +179,7 @@ It is a list of dictionaries, where each dictionary describes a dimension (axis)
 - MAY contain the field "longName".
   The value MUST be a string, and can provide a longer name or description of an axis and its properties.
 
-The "axes" are used as part of [multiscales metadata](multiscales-md).
+The "axes" are used as part of [multiscales metadata](#multiscales-md).
 The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 The "dimension_names" attribute MUST be included in the `zarr.json` of the Zarr array of a multiscale level and MUST match the names in the "axes" metadata.
@@ -290,7 +289,7 @@ a measurement by instrument 1 at the point with coordinates (x,y,z) may not corr
 (i.e., it may not be the same physical location in the sample).
 To analyze both images together, they must be in the same coordinate system.
 
-The set of [coordinate transformations](trafo-md) encodes relationships between coordinate systems, specifically, how to
+The set of [coordinate transformations](#trafo-md) encodes relationships between coordinate systems, specifically, how to
 convert points and images to different coordinate systems.
 Implementations can apply the coordinate transform to images or points in coordinate system "sampleA_instrument2" to bring them into the "sampleA_instrument1" coordinate system.
 In this case, the ROI should be transformed to the "sampleA_image1" coordinate system,
@@ -448,7 +447,7 @@ The OME-Zarr Metadata in the top-level `zarr.json` file must contain the `biofor
 ```
 
 If the top-level group represents a plate, the `bioformats2raw.layout` metadata will be present
-but the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow (see [plate metadata](plate-md)).
+but the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow (see [plate metadata](#plate-md)).
 It is not possible to mix collections of images with plates at present.
 
 ```{literalinclude} examples/bf2raw/plate.json
@@ -561,7 +560,7 @@ Conforming readers:
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
 
-Coordinate transformations from array to physical coordinates MUST be stored in [multiscales](multiscales-md).
+Coordinate transformations from array to physical coordinates MUST be stored in [multiscales](#multiscales-md).
 Transformations between different images MUST be stored in the attributes of a parent zarr group.
 For transformations that store data or parameters in a zarr array, those zarr arrays SHOULD be stored in a zarr group `"coordinateTransformations"`.
 
@@ -684,15 +683,14 @@ Inverse transformations used for image rendering may be specified using the `inv
 ```
 
 Implementations SHOULD be able to compute and apply the inverse of some coordinate transformations when they are computable in closed-form
-(as the [Transformation types](transformation-types) section below indicates).
+(as the [Transformation types](#trafo-types-md) section below indicates).
 If an operation is requested that requires the inverse of a transformation that can not be inverted in closed-form,
 implementations MAY estimate an inverse, or MAY output a warning that the requested operation is unsupported.
 
 #### Matrix transformations
+(matrix-trafo-md)=
 
-(matrix-transformations)=
-
-Two transformation types ([affine](affine) and [rotation](rotation)) are parametrized by matrices.
+Two transformation types ([affine](#affine-md) and [rotation](#rotation-md)) are parametrized by matrices.
 Matrices are applied to column vectors that represent points in the input coordinate system.
 The first (last) axis in a coordinate system is the top (bottom) entry in the column vector.
 Matrices are stored as two-dimensional arrays, either as json or in a zarr array.
@@ -736,8 +734,7 @@ because it is computed with the matrix-vector multiplication:
 ````
 
 ### Transformation types
-
-(transformation-types)=
+(trafo-types-md)=
 
 Input and output dimensionality may be determined by the value of the "input" and "output" fields, respectively.
 If the value of "input" is an array, its shape gives the input dimension,
@@ -746,8 +743,7 @@ If the value of "output" is an array, its shape gives the output dimension,
 otherwise it is given by the length of "axes" for the coordinate system with the name of the "output".
 
 #### identity
-
-(identity)=
+(identity-md)=
 
 `identity` transformations map input coordinates to output coordinates without modification.
 The position of the ith axis of the output coordinate system is set to the position of the ith axis of the input coordinate system.
@@ -769,8 +765,7 @@ y = j
 ````
 
 #### mapAxis
-
-(mapAxis)=
+(mapAxis-md)=
 
 `mapAxis` transformations describe axis permutations as a mapping of axis names.
 Transformations MUST include a `mapAxis` field whose value is an object, all of whose values are strings.
@@ -823,8 +818,7 @@ z = b
 ````
 
 #### translation
-
-(translation)=
+(translation-md)=
 
 `translation` transformations are special cases of affine transformations.
 When possible, a translation transformation should be preferred to its equivalent affine.
@@ -854,8 +848,7 @@ y = j - 1.42
 ````
 
 #### scale
-
-(scale)=
+(scale-md)=
 
 `scale` transformations are special cases of affine transformations.
 When possible, a scale transformation SHOULD be preferred to its equivalent affine.
@@ -885,10 +878,9 @@ y = 2 * j
 ````
 
 #### affine
+(affine-md)=
 
-(affine)=
-
-`affine`s are [matrix transformations](matrix-transformations) from N-dimensional inputs to M-dimensional outputs
+`affine`s are [matrix transformations](#matrix) from N-dimensional inputs to M-dimensional outputs
 are represented as the upper `(M)x(N+1)` sub-matrix of a `(M+1)x(N+1)` matrix in
 [homogeneous coordinates](https://en.wikipedia.org/wiki/Homogeneous_coordinates) (see examples).
 This transformation type may be (but is not necessarily) invertible when `N` equals `M`.
@@ -960,10 +952,9 @@ where the last row `[0 0 1]` is omitted in the JSON representation.
 ````
 
 #### rotation
+(rotation-md)=
 
-(rotation)=
-
-`rotation`s are [matrix transformations](matrix-transformations) that are special cases of affine transformations.
+`rotation`s are [matrix transformations](#matrix-trafo-md) that are special cases of affine transformations.
 When possible, a rotation transformation SHOULD be preferred to its equivalent affine.
 Input and output dimensionality (N) MUST be identical.
 Rotations are stored as `NxN` matrices, see below, and MUST have determinant equal to one, with orthonormal rows and columns.
@@ -994,8 +985,7 @@ y = 1*i + 0*j
 ````
 
 #### inverseOf
-
-(inverseOf)=
+(inverseOf-md)=
 
 An `inverseOf` transformation contains another transformation (often non-linear),
 and indicates that transforming points from output to input coordinate systems is possible using the contained transformation.
@@ -1017,8 +1007,7 @@ a choice that many users and developers find intuitive.
 ````
 
 #### sequence
-
-(sequence)=
+(sequence-md)=
 
 A `sequence` transformation consists of an ordered array of coordinate transformations,
 and is invertible if every coordinate transform in the array is invertible
@@ -1081,8 +1070,7 @@ and is invertible.
 ````
 
 #### coordinates and displacements
-
-(coordinates-displacements)=
+(coordinates-displacements-md)=
 
 `coordinates` and `displacements` transformations store coordinates or displacements in an array
 and interpret them as a vector field that defines a transformation.
@@ -1277,7 +1265,7 @@ That value gives us the displacement of the input point,
 hence the output is `1.0 + (-0.5) = 0.5`.
 
 #### byDimension
-(byDimension)=
+(byDimension-md)=
 
 `byDimension` transformations build a high dimensional transformation using lower dimensional transformations on subsets of dimensions.
 
@@ -1337,7 +1325,7 @@ This transformation is invalid because the output axis `x` appears in more than 
 
 
 #### bijection
-(bijection)=
+(bijection-md)=
 
 A bijection transformation is an invertible transformation
 in which both the `forward` and `inverse` transformations are explicitly defined.
@@ -1378,7 +1366,7 @@ It is stored in a multiple resolution representation.
 
 "multiscales" contains a list of dictionaries where each entry describes a multiscale image.
 
-Each "multiscales" dictionary MUST contain the field "coordinateSystems", see [coordinateSystems metadata](coord-sys-md), with the following constraints.
+Each "multiscales" dictionary MUST contain the field "coordinateSystems", see [coordinateSystems metadata](#), with the following constraints.
 The length of "axes" must be between 2 and 5 and MUST be equal to the dimensionality of the zarr arrays storing the image data (see "datasets:path").
 The "axes" MUST contain 2 or 3 entries of "type:space" and MAY contain one additional entry of "type:time" and MAY contain one additional entry of "type:channel" or a null / custom type.
 The order of the entries MUST correspond to the order of dimensions of the zarr arrays.
@@ -1396,7 +1384,7 @@ The number of dimensions and order MUST correspond to number and order of "axes"
 Each dictionary in "datasets" MUST contain the field "coordinateTransformations",
 which contains a list of transformations that map the data coordinates to the physical coordinates
 (as specified by "axes") for this resolution level.
-The transformations are defined according to [coordinateTransformations metadata](trafo-md).
+The transformations are defined according to [coordinateTransformations metadata](#trafo-md).
 
 They MUST contain exactly one `scale` transformation that specifies the pixel size in physical units or time duration.
 If scaling information is not available or applicable for one of the axes,
@@ -1575,7 +1563,7 @@ The `plate` dictionary MAY contain an `acquisitions` key
 whose value MUST be a list of JSON objects defining the acquisitions for a given plate to which wells can refer to.
 Each acquisition object MUST contain an `id` key
 whose value MUST be an unique integer identifier greater than or equal to 0 within the context of the plate
-to which fields of view can refer to (see [well metadata](well-md)).
+to which fields of view can refer to (see [well metadata](#well-md)).
 Each acquisition object SHOULD contain a `name` key whose value MUST be a string
 identifying the name of the acquisition.
 Each acquisition object SHOULD contain a `maximumfieldcount` key
@@ -1663,7 +1651,7 @@ whose value MUST be a string specifying the path to the field of view.
 The `path` MUST contain only alphanumeric characters, MUST be case-sensitive, and MUST NOT be a duplicate of any other `path` in the `images` list.
 If multiple acquisitions were performed in the plate,
 it MUST contain an `acquisition` key whose value MUST be an integer identifying the acquisition
-which MUST match one of the acquisition JSON objects defined in the [plate metadata](plate-md).
+which MUST match one of the acquisition JSON objects defined in the [plate metadata](#plate-md).
 
 The `well` dictionary SHOULD contain a `version` key
 whose value MUST be a string specifying the version of the well specification.
