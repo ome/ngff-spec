@@ -15,8 +15,8 @@ dependencies = [
     "myst-parser",
     "json_with_comments",
     "jupyter-book==2.0.0b3",
-    "jsonschema_markdown"
-    "mystmd>=1.6.3",
+    "jsonschema_markdown",
+    "mystmd==1.6.3",
 ]
 
 [project.optional-dependencies]
