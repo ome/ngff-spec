@@ -235,20 +235,23 @@ Indexing an image at the point `(1, 0.2, 0.3, 0.4)` is valid.
 
 ````
 
-## "coordinateSystems" metadata
-
-(coord-sys-md)=
+### "coordinateSystems" metadata
 
 A "coordinate system" is a collection of "axes" / dimensions with a name.
 Every coordinate system:
-
 - MUST contain the field "name".
-  The value MUST be a non-empty string that is unique among `coordinateSystem`s.
-- MUST contain the field "axes", whose value is an array of valid "axes".
+  The value MUST be a non-empty string that is unique among all entries under `coordinateSystems`.
+- MUST contain the field "axes", whose value is an array of valid "axes" (see below).
+
+The order of the `"axes"` list matters
+and defines the index of each array dimension and coordinates for points in that coordinate system.
+For the above example, the `"x"` dimension is the last dimension.
+The "dimensionality" of a coordinate system is indicated by the length of its "axes" array.
+The "volume_micrometers" example coordinate system above is three dimensional (3D).
 
 ````{admonition} Example
 
-Example of valid `coordinateSystems` metadata:
+Coordinate Systems metadata example
 
 ```json
 {
@@ -262,69 +265,16 @@ Example of valid `coordinateSystems` metadata:
 ```
 ````
 
-The order of the `"axes"` list matters and defines the index of each array dimension and coordinates for points in that coordinate system.
-For the above example, the `"x"` dimension is the last dimension.
-The "dimensionality" of a coordinate system is indicated by the length of its "axes" array.
-The "volume_micrometers" example coordinate system above is three dimensional (3D).
-
-The axes of a coordinate system (see below) give information about the types, units, and other properties of the coordinate system's dimensions.
+The axes of a coordinate system (see below) give information
+about the types, units, and other properties of the coordinate system's dimensions.
 Axis `name`s may contain semantically meaningful information, but can be arbitrary.
-As a result, two coordinate systems that have identical axes in the same order may not be "the same"
-in the sense that measurements at the same point refer to different physical entities and therefore should not be analyzed jointly.
+As a result, two coordinate systems that have identical axes in the same order 
+ay not be "the same" in the sense that measurements at the same point
+refer to different physical entities and therefore should not be analyzed jointly.
 Tasks that require images, annotations, regions of interest, etc.,
 SHOULD ensure that they are in the same coordinate system (same name, with identical axes)
 or can be transformed to the same coordinate system before doing analysis.
 See the example below.
-
-````{admonition} Example
-
-Two instruments simultaneously image the same sample from two different angles,
-and the 3D data from both instruments are calibrated to "micrometer" units.
-Two samples are collected ("sampleA" and "sampleB").
-An analysis of sample A requires measurements from both instruments' images at certain points in space.
-Suppose a region of interest (ROI) is determined from the image obtained from instrument 2,
-but quantification from that region is needed for instrument 1.
-Since measurements were collected at different angles,
-a measurement by instrument 1 at the point with coordinates (x,y,z) may not correspond to the measurement at the same point in instrument 2
-(i.e., it may not be the same physical location in the sample).
-To analyze both images together, they must be in the same coordinate system.
-
-The set of [coordinate transformations](#trafo-md) encodes relationships between coordinate systems, specifically, how to
-convert points and images to different coordinate systems.
-Implementations can apply the coordinate transform to images or points in coordinate system "sampleA_instrument2" to bring them into the "sampleA_instrument1" coordinate system.
-In this case, the ROI should be transformed to the "sampleA_image1" coordinate system,
-then used for quantification with the instrument 1 image.
-
-```json
-"coordinateSystems" : [
-    {
-        "name" : "sampleA-instrument1",
-        "axes" : [
-            {"name": "z", "type": "space", "unit": "micrometer"},
-            {"name": "y", "type": "space", "unit": "micrometer"},
-            {"name": "x", "type": "space", "unit": "micrometer"}
-        ]
-    },
-    {
-        "name" : "sampleA-instrument2",
-        "axes" : [
-            {"name": "z", "type": "space", "unit": "micrometer"},
-            {"name": "y", "type": "space", "unit": "micrometer"},
-            {"name": "x", "type": "space", "unit": "micrometer"}
-        ]
-    }
-],
-"coordinateTransformations": [
-    {
-        "type": "affine",
-        "path": "../sampleA_instrument2-to-instrument1",
-        "input": "sampleA_instrument2",
-        "output": "sampleA_instrument1"
-    }
-]
-```
-
-````
 
 ### Array coordinate systems
 
