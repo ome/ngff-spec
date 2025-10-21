@@ -158,83 +158,6 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 }
 ```
 
-## "axes" metadata
-(axes-md)=
-
-"axes" describes the dimensions of a coordinate systems and adds an interpretation to the data along that dimension.
-A named collection of axes forms a [coordinate system](#coord-sys-md).
-It is a list of dictionaries, where each dictionary describes a dimension (axis) and:
-
-- MUST contain the field "name" that gives the name for this dimension.
-  The values MUST be unique across all "name" fields.
-- SHOULD contain the field "type".
-  It SHOULD be one of the strings "array", "space", "time", "channel", "coordinate", or "displacement"
-  but MAY take other string values for custom axis types that are not part of this specification yet.
-- SHOULD contain the field "unit" to specify the physical unit of this dimension.
-  The value SHOULD be one of the following strings, which are valid units according to UDUNITS-2.
-  - Units for "space" axes:
-      'angstrom', 'attometer', 'centimeter', 'decimeter', 'exameter', 'femtometer', 'foot', 'gigameter', 'hectometer', 'inch', 'kilometer', 'megameter', 'meter', 'micrometer', 'mile', 'millimeter', 'nanometer', 'parsec', 'petameter', 'picometer', 'terameter', 'yard', 'yoctometer', 'yottameter', 'zeptometer', 'zettameter'
-  - Units for "time" axes:
-      'attosecond', 'centisecond', 'day', 'decisecond', 'exasecond', 'femtosecond', 'gigasecond', 'hectosecond', 'hour', 'kilosecond', 'megasecond', 'microsecond', 'millisecond', 'minute', 'nanosecond', 'petasecond', 'picosecond', 'second', 'terasecond', 'yoctosecond', 'yottasecond', 'zeptosecond', 'zettasecond'
-- MAY contain the field "longName".
-  The value MUST be a string, and can provide a longer name or description of an axis and its properties.
-
-The "axes" are used as part of [multiscales metadata](#multiscales-md).
-The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
-
-The "dimension_names" attribute MUST be included in the `zarr.json` of the Zarr array of a multiscale level and MUST match the names in the "axes" metadata.
-
-````{admonition} Example
-
-Examples of valid axes:
-
-```json
-[
-    {"name": "x", "type": "space", "unit": "micrometer"},
-    {"name": "t", "type": "time", "unit": "second", "longName": "Unix Epoch time"},
-    {"name": "c", "type": "channel", "discrete": true},
-    {"name": "i0", "type": "array"},
-    {"name": "c", "type": "coordinate", "discrete" : true },
-    {"name": "v", "type": "displacement", "discrete": true },
-    {"name": "freq", "type": "frequency", "unit": "megahertz"}
-]
-```
-````
-
-Arrays are inherently discrete (see Array coordinate systems, below) but are often used to store discrete samples of a continuous variable.
-The continuous values "in between" discrete samples can be retrieved using an *interpolation* method.
-If an axis is continuous (`"discrete" : false`), it indicates that interpolation is well-defined.
-Axes representing `space` and `time` are usually continuous.
-Similarly, joint interpolation across axes is well-defined only for axes of the same `type`.
-In contrast, discrete axes (`"discrete" : true`) may be indexed only by integers.
-Axes of representing a `channel`, `coordinate`, or `displacement` are usually discrete.
-
-Note: The most common methods for interpolation are "nearest neighbor", "linear", "cubic", and "windowed sinc".
-Here, we refer to any method that obtains values at real valued coordinates using discrete samples as an "interpolator".
-As such, label images may be interpolated using "nearest neighbor" to obtain labels at points along the continuum.
-
-````{admonition} Example
-
-For the coordinate system:
-
-```json
-{
-    "name" : "index and interpolation",
-    "axes" : [
-        {"name": "t", "type": "time"},
-        {"name": "c", "type": "channel", "discrete": true},
-        {"name": "y", "type": "space"},
-        {"name": "x", "type": "space"}
-    ]
-}
-```
-
-Indexing an image at the point `(0.1, 0.2, 0.3, 0.4)` is not valid,
-because the value of the first coordinate (`0.1`) refers to the discrete axis `"c"`.
-Indexing an image at the point `(1, 0.2, 0.3, 0.4)` is valid.
-
-````
-
 ### "coordinateSystems" metadata
 
 A "coordinate system" is a collection of "axes" / dimensions with a name.
@@ -275,6 +198,47 @@ Tasks that require images, annotations, regions of interest, etc.,
 SHOULD ensure that they are in the same coordinate system (same name, with identical axes)
 or can be transformed to the same coordinate system before doing analysis.
 See the example below.
+
+#### "axes" metadata
+
+"axes" describes the dimensions of a coordinate systems
+and adds an interpretation to the samples along that dimension.
+
+It is a list of dictionaries,
+where each dictionary describes a dimension (axis) and:
+- MUST contain the field "name" that gives the name for this dimension.
+  The values MUST be unique across all "name" fields.
+- SHOULD contain the field "type".
+  It SHOULD be one of the strings "array", "space", "time", "channel", "coordinate", or "displacement"
+  but MAY take other string values for custom axis types that are not part of this specification yet.
+- MAY contain the field "discrete".
+  The value MUST be a boolean,
+  and is `true` if the axis represents a discrete dimension.
+- SHOULD contain the field "unit" to specify the physical unit of this dimension.
+  The value SHOULD be one of the following strings,
+  which are valid units according to UDUNITS-2.
+    - Units for "space" axes: 'angstrom', 'attometer', 'centimeter', 'decimeter', 'exameter', 'femtometer', 'foot', 'gigameter', 'hectometer', 'inch', 'kilometer', 'megameter', 'meter', 'micrometer', 'mile', 'millimeter', 'nanometer', 'parsec', 'petameter', 'picometer', 'terameter', 'yard', 'yoctometer', 'yottameter', 'zeptometer', 'zettameter'
+    - Units for "time" axes: 'attosecond', 'centisecond', 'day', 'decisecond', 'exasecond', 'femtosecond', 'gigasecond', 'hectosecond', 'hour', 'kilosecond', 'megasecond', 'microsecond', 'millisecond', 'minute', 'nanosecond', 'petasecond', 'picosecond', 'second', 'terasecond', 'yoctosecond', 'yottasecond', 'zeptosecond', 'zettasecond'
+- MAY contain the field "longName".
+  The value MUST be a string,
+  and can provide a longer name or description of an axis and its properties.
+
+If part of metadata, the length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
+
+Arrays are inherently discrete (see Array coordinate systems, below)
+but are often used to store discrete samples of a continuous variable.
+The continuous values "in between" discrete samples can be retrieved using an *interpolation* method.
+If an axis is continuous (`"discrete" : false`), it indicates that interpolation is well-defined.
+Axes representing `space` and `time` are usually continuous.
+Similarly, joint interpolation across axes is well-defined only for axes of the same `type`.
+In contrast, discrete axes (`"discrete" : true`) may be indexed only by integers.
+Axes of representing a `channel`, `coordinate`, or `displacement` are usually discrete.
+
+```{note}
+The most common methods for interpolation are "nearest neighbor", "linear", "cubic", and "windowed sinc".
+Here, we refer to any method that obtains values at real-valued coordinates using discrete samples as an "interpolator".
+As such, label images may be interpolated using "nearest neighbor" to obtain labels at points along the continuum.
+```
 
 ### Array coordinate systems
 
