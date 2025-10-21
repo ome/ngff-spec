@@ -392,6 +392,7 @@ Conforming readers:
 - MAY ignore other groups or arrays under the root of the hierarchy.
 
 ## "coordinateTransformations" metadata
+(coord-trafo-md)=
 
 "coordinateTransformations" describe the mapping between two coordinate systems (defined by "axes").
 For example, to map an array's discrete coordinate system to its corresponding physical coordinates.
@@ -1019,40 +1020,37 @@ The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequen
 * If the output coordinate system has `M` axes,
   the length of the array along the `coordinate`/`displacement` dimension MUST be of length `M`.
 
-The `i`th value of the array along the `coordinate` or `displacement` axis refers to the coordinate or displacement
-of the `i`th output axis. See the example below.
+The i-th value of the array along the `coordinate` or `displacement` axis refers
+to the coordinate or displacement of the i-th output axis.
+See the example below.
 
 `coordinates` and `displacements` transformations are not invertible in general,
 but implementations MAY approximate their inverses.
 Metadata for these coordinate transforms have the following fields: 
 
-<dl>
-  <dt><strong>path</strong></dt>
-  <dd>  The location of the coordinate array in this (or another) container.</dd>
-  <dt><strong>interpolation</strong></dt>
-  <dd>  The <code>interpolation</code> attributes MAY be provided.
-        It's value indicates the interpolation to use
-        if transforming points not on the array's discrete grid.
-        Values could be:
-        <ul>
-            <li><code>linear</code> (default)</li>
-            <li><code>nearest</code></li>
-            <li><code>cubic</code></li>
-        </ul></dd>
-</dl>
+<strong>path</strong>
+: The location of the coordinate array in this (or another) container.
 
+<strong>interpolation</strong>
+: The `interpolation` attributes MAY be provided.
+      It's value indicates the interpolation to use
+      if transforming points not on the array's discrete grid.
+      Values could be:
+      - `linear` (default)
+      - `nearest`
+      - `cubic`
 
 For both `coordinates` and `displacements`,
-the array data at referred to by `path` MUST define coordinate system
-and coordinate transform metadata:
+the array data at referred to by `path` MUST define [`coordinateSystems`](#coordinate-systems-md) and
+[`coordinateTransformations`](coord-trafo-md) metadata:
 
-* Every axis name in the `coordinateTransform`'s `input`
+* Every axis name in the `coordinateTransformations`' `input`
   MUST appear in the coordinate system.
 * The array dimension corresponding to the `coordinate` or `displacement` axis
-  MUST have length equal to the number of dimensions of the `coordinateTransform` `output`
-* If the input coordinate system `N` axes,
+  MUST have length equal to the number of dimensions of the `coordinateTransformation`'s `output`
+* If the input coordinate system has `N` axes,
   then the array data at `path` MUST have `(N + 1)` dimensions.
-* SHOULD have a `name` identical to the `name` of the corresponding `coordinateTransform`.
+* SHOULD have a `name` identical to the `name` of the corresponding `coordinateTransformation`.
 
 For `coordinates`:
 
@@ -1083,21 +1081,21 @@ Example metadata for the array data at path `coordinates` above:
 
 ```json
 {
-    "coordinateSystems" : [
-        {
-            "name" : "a coordinate field transform",
-            "axes" : [
-                { "name": "i", "type": "space", "discrete": true },
-                { "name": "c", "type": "coordinate", "discrete": true }
-            ]
-        } 
-    ],
-    "coordinateTransformations" : [
-        {
-            "type" : "identity",
-            "output" : "a coordinate field transform"
-        }
-    ]
+  "coordinateSystems" : [
+    {
+      "name" : "a coordinate field transform",
+      "axes" : [
+        { "name": "i", "type": "space", "discrete": true },
+        { "name": "c", "type": "coordinate", "discrete": true }
+      ]
+    } 
+  ],
+  "coordinateTransformations" : [
+    {
+      "type" : "identity",
+      "output" : "a coordinate field transform"
+    }
+  ]
 }
 ```
 
@@ -1115,12 +1113,12 @@ x =
 A 1D example displacement field:
 ```json
 {
-    "name" : "a displacement field transform",
-    "type": "displacements",
-    "path" : "displacements",
-    "input" : "i",
-    "output" : "x",
-    "interpolation" : "linear"
+  "name" : "a displacement field transform",
+  "type": "displacements",
+  "path" : "displacements",
+  "input" : "i",
+  "output" : "x",
+  "interpolation" : "linear"
 }
 ```
 
@@ -1129,22 +1127,22 @@ Example metadata for the array data at path `displacements` above:
 
 ```json
 {
-    "coordinateSystems" : [
-        {
-            "name" : "a displacement field transform",
-            "axes" : [
-                { "name": "x", "type": "space", "unit" : "nanometer" },
-                { "name": "d", "type": "displacement", "discrete": true }
-            ]
-        } 
-    ],
-    "coordinateTransformations" : [
-        {
-            "type" : "scale",
-            "scale" : [2, 1],
-            "output" : "a displacement field transform"
-        }
-    ]
+  "coordinateSystems" : [
+    {
+      "name" : "a displacement field transform",
+      "axes" : [
+        { "name": "x", "type": "space", "unit" : "nanometer" },
+        { "name": "d", "type": "displacement", "discrete": true }
+      ]
+    } 
+  ],
+  "coordinateTransformations" : [
+    {
+      "type" : "scale",
+      "scale" : [2, 1],
+      "output" : "a displacement field transform"
+    }
+  ]
 }
 ```
 
@@ -1166,16 +1164,16 @@ the other two dimensions MUST be axes that are identical to the axes of the `"in
 
 ```json
 "coordinateSystems" : [
-    { "name" : "in", "axes" : [{"name" : "y"}, {"name":"x"}] },
-    { "name" : "out", "axes" : [{"name" : "y"}, {"name":"x"}] }
+  { "name" : "in", "axes" : [{"name" : "y"}, {"name":"x"}] },
+  { "name" : "out", "axes" : [{"name" : "y"}, {"name":"x"}] }
 ],
 "coordinateTransformations" : [
-    {
-        "type": "displacements",
-        "input" : "in",
-        "output" : "out",
-        "path" : "displacementField"
-    }
+  {
+    "type": "displacements",
+    "input" : "in",
+    "output" : "out",
+    "path" : "displacementField"
+  }
 ]
 ```
 
@@ -1183,10 +1181,10 @@ The metadata at location `"displacementField"` should have a coordinate system s
 
 ```json
 "coordinateSystems" : [
-    { "name" : "in", "axes" : [
-        {"name":"y"}, {"name":"x"},
-        {"name":"d", "type":"displacement", "discrete":true} ]
-    }
+  { "name" : "in", "axes" : [
+    {"name":"y"}, {"name":"x"},
+    {"name":"d", "type":"displacement", "discrete":true} ]
+  }
 ]
 ```
 
