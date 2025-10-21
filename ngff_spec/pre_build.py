@@ -141,5 +141,21 @@ Find below links to auto_generated markdown pages or interactive HTML pages for 
     with open(os.path.join("schemas.md"), 'w') as index_file:
         index_file.write(index_markdown)
 
+def build_footer():
+    """Build footer file."""
+    from datetime import datetime
+    year = datetime.now().year
+    footer_content = f"""
+<div>
+    Copyright © 2020-{year}
+    <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>®</sup>
+    (<a href="https://dundee.ac.uk/"><abbr title="University of Dundee">U. Dundee</abbr></a>).
+    OME trademark rules apply.
+</div>
+"""
+    with open('footer.md', 'w') as footer_file:
+        footer_file.write(footer_content)
+
 build_json_examples()
 build_json_schemas()
+build_footer()
