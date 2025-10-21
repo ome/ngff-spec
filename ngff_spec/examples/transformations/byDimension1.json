@@ -12,14 +12,14 @@
         {
           "type": "translation",
           "translation": [-1.0],
-          "input": ["i"],
-          "output": ["x"]
+          "input_axes": ["i"],
+          "output_axes": ["x"]
         },
         {
           "type": "scale",
           "scale": [2.0],
-          "input": ["j"],
-          "output": ["y"]
+          "input_axes": ["j"],
+          "output_axes": ["y"]
         }
       ]
     }

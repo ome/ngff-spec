@@ -9,8 +9,18 @@
       "input": "in",
       "output": "out",
       "transformations": [
-        { "type": "translation", "translation": [-1.0], "input": ["i"], "output": ["z"]},
-        { "type": "scale", "scale": [2.0], "input": ["0"], "output": ["y"]}
+        {
+          "type": "translation",
+          "translation": [-1.0],
+          "input_axes": ["i"],
+          "output_axes": ["z"]
+        },
+        {
+          "type": "scale",
+          "scale": [2.0],
+          "input_axes": ["0"],
+          "output_axes": ["y"]
+        }
       ]
     }
   ]
