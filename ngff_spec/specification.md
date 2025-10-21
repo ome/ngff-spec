@@ -537,71 +537,29 @@ The image under `root/sampleA_instrument2` would have this as the first listed c
 ### Additional details
 
 Most coordinate transformations MUST specify their input and output coordinate systems
-using `input` and `output` with a string value corresponding to the name of a coordinate system.
-The coordinate system's name may be the path to an array, and therefore may not appear in the list of coordinate systems.
+using `input` and `output` with a string value
+that MUST correspond to the name of a coordinate system or the path to a multiscales group.
+Exceptions are if the coordinate transformation appears in the `transformations` list of a `sequence`
+or is the `transformation` of an `inverseOf` transformation.
+In these two cases input and output could, in some cases, be omitted (see below for details).
 
-Exceptions are if the the coordinate transformation appears in the `transformations` list of a `sequence` or is the `transformation` of an `inverseOf` transformation.
-In these two cases input and output SHOULD be omitted
+If used in a parent-level zarr-group, the `input` field MUST be a path to the input image. 
+The authoritative coordinate system for the input image is the first `coordinateSystem` defined therein.
+The `output` field can be a `path` to an output image or the name of a `coordinateSystem` defined in the parent-level zarr group.
+If the names of `input` or `output` can be both a `path` or the name of a `coordinateSystem`, `path` MUST take precedent.
+If unused, the `input` and `output` fields MAY be null.
+
+For usage in multiscales, see [multiscales section](#multiscales-metadata) for details.
+
+Transformations in the `transformations` list of a `byDimensions` transformation
+MUST provide `input` and `output` as arrays of strings
+corresponding to axis names of the parent transformation's input and output coordinate systems
 (see below for details).
-
-Transformations in the `transformations` list of a `byDimensions` transformation MUST provide `input` and `output`
-as arrays of strings corresponding to axis names of the parent transformation's input and output coordinate systems
-(see below for details).
-
-````{admonition} Example
-
-The sequence transformation's input corresponds to an array coordinate system at path "my/array".
-
-```json
-"coordinateSystems" : [
-    { "name" : "in", "axes" : [{"name" : "j"}, {"name":"i"}] },
-    { "name" : "outScale", "axes" : [{"name" : "y"}, {"name":"x"}] },
-    { "name" : "outSeq", "axes" : [{"name" : "y"}, {"name":"x"}] },
-    { "name" : "outInv", "axes" : [{"name" : "y"}, {"name":"x"}] },
-    { "name" : "outByDim", "axes" : [{"name" : "y"}, {"name":"x"}] }
-],
-"coordinateTransformations" : [
-    {
-        "type": "scale",
-        "input" : "in",
-        "output" : "outScale",
-        "scale" : [ 0.5, 1.2 ]
-    },
-    {
-        "type" : "sequence",
-        "input" : "my/array",
-        "output" : "outSeq",
-        "transformations" : [
-            { "type": "scale", "scale" : [ 0.5, 0.6 ] },
-            { "type": "translation", "translation" : [ 2, 5 ] }
-        ]
-    },
-    {
-        "type": "inverseOf",
-        "input" : "in",
-        "output" : "outInv",
-        "transformation" : {
-            "type": "displacements",
-            "path": "path/to/displacements"
-        }
-    },
-    {
-        "type": "byDimension",
-        "input" : "in",
-        "output" : "outDim",
-        "transformations" : [
-            { "type" : "translation", "translation" : [1], "input" : ["i"], "output" : ["x"]},
-            { "type" : "scale", "scale" : [2.0], "input" : ["j"], "output" : ["y"]}
-        ]
-    }
-]
-```
-
-````
 
 Coordinate transformations are functions of *points* in the input space to *points* in the output space.
 We call this the "forward" direction.
-Points are ordered lists of coordinates, where a coordinate is the location/value of that point along its corresponding axis.
+Points are ordered lists of coordinates,
+where a coordinate is the location/value of that point along its corresponding axis.
 The indexes of axis dimensions correspond to indexes into transformation parameter arrays.
 For example, the scale transformation above defines the function:
 
@@ -613,38 +571,42 @@ y = 1.2 * j
 i.e., the mapping from the first input axis to the first output axis is determined by the first scale parameter.
 
 When rendering transformed images and interpolating,
-implementations may need the "inverse" transformation - from the output to the input coordinate system.
-Inverse transformations will not be explicitly specified when they can be computed in closed form from the forward transformation.
-Inverse transformations used for image rendering may be specified using the `inverseOf` transformation type, for example:
+implementations may need the "inverse" transformation - 
+from the output to the input coordinate system.
+Inverse transformations will not be explicitly specified
+when they can be computed in closed form from the forward transformation.
+Inverse transformations used for image rendering may be specified using
+the `inverseOf` transformation type, for example:
 
 ```json
 {
     "type": "inverseOf",
     "transformation" : {
         "type": "displacements",
-        "path": "path/to/displacements",
+        "path": "/path/to/displacements",
     },
     "input": "input_image",
-    "output": "output_image"
+    "output": "output_image",
 }
 ```
 
-Implementations SHOULD be able to compute and apply the inverse of some coordinate transformations when they are computable in closed-form
-(as the [Transformation types](#trafo-types-md) section below indicates).
-If an operation is requested that requires the inverse of a transformation that can not be inverted in closed-form,
-implementations MAY estimate an inverse, or MAY output a warning that the requested operation is unsupported.
+Implementations SHOULD be able to compute and apply
+the inverse of some coordinate transformations when they are computable
+in closed-form (as the [Transformation types](#transformation-types) section below indicates).
+If an operation is requested that requires
+the inverse of a transformation that can not be inverted in closed-form,
+implementations MAY estimate an inverse,
+or MAY output a warning that the requested operation is unsupported.
 
 #### Matrix transformations
-(matrix-trafo-md)=
 
-Two transformation types ([affine](#affine-md) and [rotation](#rotation-md)) are parametrized by matrices.
+Two transformation types ([affine](#affine) and [rotation](#rotation)) are parametrized by matrices.
 Matrices are applied to column vectors that represent points in the input coordinate system.
-The first (last) axis in a coordinate system is the top (bottom) entry in the column vector.
+The first and last axes in a coordinate system correspond to the top and bottom entries in the column vector, respectively.
 Matrices are stored as two-dimensional arrays, either as json or in a zarr array.
 When stored as a 2D zarr array, the first dimension indexes rows and the second dimension indexes columns
 (e.g., an array of `"shape":[3,4]` has 3 rows and 4 columns).
-When stored as a 2D json array, the inner array contains rows
-(e.g. `[[1,2,3], [4,5,6]]` has 2 rows and 3 columns).
+When stored as a 2D json array, the inner array contains rows (e.g. `[[1,2,3], [4,5,6]]` has 2 rows and 3 columns).
 
 ````{admonition} Example
 
