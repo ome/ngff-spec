@@ -159,6 +159,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 ```
 
 ### "coordinateSystems" metadata
+(coordinate-systems-md)=
 
 A "coordinate system" is a collection of "axes" / dimensions with a name.
 Every coordinate system:
@@ -270,12 +271,12 @@ The `dimension_names` must be unique and non-null.
 
 For example, if `0/zarr.json` contains:
 
-```json
+```jsonc
 {
     "zarr_format": 3,
     "node_type": "array",
     "shape": [4, 3, 5],
-    ...
+    //...
 }
 ```
 Then `dim_0` has length 4, `dim_1` has length 3, and `dim_2` has length 5.
@@ -337,8 +338,7 @@ series.ome.zarr               # One converted fileset from bioformats2raw
 ```
 
 ### bf2raw-attributes
-
-(bf2raw-attributes)=
+(bf2raw-attributes-md)=
 
 The OME-Zarr Metadata in the top-level `zarr.json` file must contain the `bioformats2raw.layout` key:
 
@@ -351,6 +351,7 @@ but the "plate" key MUST also be present, takes precedence and parsing of such d
 It is not possible to mix collections of images with plates at present.
 
 ```{literalinclude} examples/bf2raw/plate.json
+:language: json
 ```
 
 The OME-Zarr Metadata in the `zarr.json` file within the OME group may contain the "series" key:
@@ -434,10 +435,10 @@ Conforming readers:
 Coordinate transformations can be stored in multiple places to reflect different usecases.
      
 - Multiscale transformations represent a special case of transformations
-  and are explained [below](#multiscales-metadata).
+  and are explained [below](#multiscales-md).
 - Additional transformations for single images MUST be stored under a field `coordinateTransformations`
   in the multiscales dictionaries.
-  This `coordinateTransformations` field MUST contain a list of valid [transformations](#transformation-types).
+  This `coordinateTransformations` field MUST contain a list of valid [transformations](#trafo-types-md).
 - Transformations between two or more images MUST be stored in the attributes of a parent zarr group.
   For transformations that store data or parameters in a zarr array,
   those zarr arrays SHOULD be stored in a zarr group `coordinateTransformations`.
@@ -549,7 +550,7 @@ The `output` field can be a `path` to an output image or the name of a `coordina
 If the names of `input` or `output` can be both a `path` or the name of a `coordinateSystem`, `path` MUST take precedent.
 If unused, the `input` and `output` fields MAY be null.
 
-For usage in multiscales, see [multiscales section](#multiscales-metadata) for details.
+For usage in multiscales, see [multiscales section](#multiscales-md) for details.
 
 Transformations in the `transformations` list of a `byDimensions` transformation
 MUST provide `input` and `output` as arrays of strings
@@ -592,15 +593,16 @@ the `inverseOf` transformation type, for example:
 
 Implementations SHOULD be able to compute and apply
 the inverse of some coordinate transformations when they are computable
-in closed-form (as the [Transformation types](#transformation-types) section below indicates).
+in closed-form (as the [Transformation types](#trafo-types-md) section below indicates).
 If an operation is requested that requires
 the inverse of a transformation that can not be inverted in closed-form,
 implementations MAY estimate an inverse,
 or MAY output a warning that the requested operation is unsupported.
 
 #### Matrix transformations
+(matrix-trafo-md)=
 
-Two transformation types ([affine](#affine) and [rotation](#rotation)) are parametrized by matrices.
+Two transformation types ([affine](#affine-md) and [rotation](#rotation-md)) are parametrized by matrices.
 Matrices are applied to column vectors that represent points in the input coordinate system.
 The first and last axes in a coordinate system correspond to the top and bottom entries in the column vector, respectively.
 Matrices are stored as two-dimensional arrays, either as json or in a zarr array.
@@ -659,7 +661,7 @@ The position of the i-th axis of the output coordinate system
 is set to the position of the ith axis of the input coordinate system.
 `identity` transformations are invertible.
 
-The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence) transformation.
+The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence-md) transformation.
 
 ````{admonition} Example
 
@@ -688,7 +690,7 @@ Each integer in the array MUST be a valid zero-based index into the input coordi
 Each index MUST appear exactly once in the array.
 The value at position `i` in the array indicates which input axis becomes the `i`-th output axis.
 
-The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence) transformation.
+The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence-md) transformation.
 
 ````{admonition} Example
 
@@ -742,7 +744,7 @@ Input and output dimensionality MUST be identical
 and MUST equal the the length of the "translation" array (N).
 `translation` transformations are invertible.
 
-The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence) transformation.
+The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence-md) transformation.
 
 <strong>path</strong>
 : The path to a zarr-array containing the translation parameters.
@@ -776,7 +778,7 @@ and MUST equal the the length of the "scale" array (N).
 Values in the `scale` array SHOULD be non-zero;
 in that case, `scale` transformations are invertible.
 
-The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence) transformation.
+The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence-md) transformation.
 
 <strong>path</strong>
 : The path to a zarr-array containing the scale parameters.
@@ -803,14 +805,14 @@ y = 2 * j
 #### affine
 (affine-md)=
 
-`affine`s are [matrix transformations](#matrix-transformations) from N-dimensional inputs to M-dimensional outputs.
+`affine`s are [matrix transformations](#matrix-trafo-md) from N-dimensional inputs to M-dimensional outputs.
 They are represented as the upper `(M)x(N+1)` sub-matrix of a `(M+1)x(N+1)` matrix in [homogeneous
 coordinates](https://en.wikipedia.org/wiki/Homogeneous_coordinates) (see examples).
 This transformation type may be (but is not necessarily) invertible
 when `N` equals `M`.
 The matrix MUST be stored as a 2D array either as json or as a zarr array.
 
-The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence) transformation.
+The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence-md) transformation.
 
 <strong>path</strong>
 :  The path to a zarr-array containing the affine parameters.
@@ -881,7 +883,7 @@ where the last row `[0 0 1]` is omitted in the JSON representation.
 #### rotation
 (rotation-md)=
 
-`rotation`s are [matrix transformations](#matrix-transformations) that are special cases of affine transformations.
+`rotation`s are [matrix transformations](#matrix-trafo-md) that are special cases of affine transformations.
 When possible, a rotation transformation SHOULD be preferred to its equivalent affine.
 Input and output dimensionality (N) MUST be identical.
 Rotations are stored as `NxN` matrices, see below,
@@ -889,7 +891,7 @@ and MUST have determinant equal to one, with orthonormal rows and columns.
 The matrix MUST be stored as a 2D array either as json or in a zarr array.
 `rotation` transformations are invertible.
 
-The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence) transformation.
+The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence-md) transformation.
 
 <strong>path</strong>
 : The path to an array containing the affine parameters.
@@ -1010,7 +1012,7 @@ These transformation types refer to an array at location specified by the `"path
 The input and output coordinate systems for these transformations ("input / output coordinate systems")
 constrain the array size and the coordinate system metadata for the array ("field coordinate system").
 
-The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence) transformation.
+The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence-md) transformation.
 
 * If the input coordinate system has `N` axes,
   the array at location path MUST have `N+1` dimensions
@@ -1319,7 +1321,7 @@ It is stored in a multiple resolution representation.
 
 Each `multiscales` dictionary MUST contain the field "coordinateSystems",
 whose value is an array containing valid coordinate system metadata
-(see [coordinate systems](#coordinatesystems-metadata)).
+(see [coordinate systems](#coordinate-systems-md)).
 The last entry of this array is the "default" coordinate system
 and MUST contain transformations from array to physical coordinates.
 It should be used for viewing and processing unless a use case dictates otherwise.
@@ -1351,12 +1353,12 @@ Each dictionary in `datasets` MUST contain the field `coordinateTransformations`
 whose value is a list of dictionaries that define a transformation
 that maps Zarr array coordinates for this resolution level to the "default" coordinate system
 (the last entry of the `coordinateSystems` array).
-The transformation is defined according to [transformations metadata](#transformation-types).
+The transformation is defined according to [transformations metadata](#trafo-types-md).
 The transformation MUST take as input points in the array coordinate system
 corresponding to the Zarr array at location `path`.
 The value of "input" SHOULD equal the value of `path`,
 but implementations should always treat the value of `input` as if it were equal to the value of `path`.
-The value of the transformation’s `output` MUST be the name of the default [coordinate system](#coordinatesystems-metadata).
+The value of the transformation’s `output` MUST be the name of the default [coordinate system](#coordinate-systems-md).
 
 This transformation MUST be one of the following:
 
@@ -1663,6 +1665,6 @@ NB: some parts of the specification don't obey this convention as they were adde
 but they should be updated in due course.
 
 # Implementations
-(implementations)=
+(implementations-md)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
