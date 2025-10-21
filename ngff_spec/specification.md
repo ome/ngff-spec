@@ -258,15 +258,8 @@ The i-th axis has `"name":"dim_i"` (these are the same default names used by [xa
 The `dimension_names` must be unique and non-null.
 
 ````{admonition} Example
-```json
-{
-    "name": "0",
-    "axes": [
-        {"name": "dim_0", "type": "array"},
-        {"name": "dim_1", "type": "array"},
-        {"name": "dim_2", "type": "array"}
-    ]
-}
+```{literalinclude} examples/coordinate_systems/arrayCoordSys.json
+:language: json
 ```
 
 For example, if `0/zarr.json` contains:
@@ -470,7 +463,8 @@ store.zarr                      # Root folder of the zarr store
             └── zarr.json      # physical coordinate system and transformations here
 </pre>
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 Two instruments simultaneously image the same sample from two different angles,
 and the 3D data from both instruments are calibrated to "micrometer" units.
 Two samples are collected ("sampleA" and "sampleB").
@@ -534,7 +528,7 @@ The image under `root/sampleA_instrument2` would have this as the first listed c
     }
 ],
 ```
-````
+::::
 
 ### Additional details
 
@@ -606,7 +600,8 @@ When stored as a 2D zarr array, the first dimension indexes rows and the second 
 (e.g., an array of `"shape":[3,4]` has 3 rows and 4 columns).
 When stored as a 2D json array, the inner array contains rows (e.g. `[[1,2,3], [4,5,6]]` has 2 rows and 3 columns).
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 
 For matrix transformations, points in the coordinate system:
 
@@ -638,7 +633,7 @@ because it is computed with the matrix-vector multiplication:
 [ 0  0 -1] [3]   [-3]
 ```
 
-````
+::::
 
 ### Transformation types
 (trafo-types-md)=
@@ -659,7 +654,8 @@ is set to the position of the ith axis of the input coordinate system.
 
 The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence-md) transformation.
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 
 ```{literalinclude} examples/transformations/identity.json
 :language: json
@@ -672,7 +668,7 @@ x = i
 y = j
 ```
 
-````
+::::
 
 #### mapAxis
 (mapAxis-md)=
@@ -688,7 +684,8 @@ The value at position `i` in the array indicates which input axis becomes the `i
 
 The `input` and `output` fields MAY be omitted if part of a [`sequence`](#sequence-md) transformation.
 
-````{admonition} Example
+::::{admonition} Example 1
+:class: dropdown
 
 ```{literalinclude} examples/transformations/mapAxis1.json
 :language: json
@@ -708,9 +705,10 @@ x = j
 y = i
 ```
 
-````
+::::
 
-````{admonition} Example
+::::{admonition} Example 2
+:class: dropdown
 
 ```{literalinclude} examples/transformations/mapAxis2.json
 :language: json
@@ -729,7 +727,7 @@ x = a
 y = b
 z = b
 ```
-````
+::::
 
 #### translation
 (translation-md)=
@@ -750,7 +748,8 @@ The array at this path MUST be 1D, and its length MUST be `N`.
 : The translation parameters stored as a JSON list of numbers.
 The list MUST have length `N`.
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 
 ```{literalinclude} examples/transformations/translation.json
 :language: json
@@ -762,7 +761,7 @@ defines the function:
 x = i + 9 
 y = j - 1.42
 ```
-````
+::::
 
 #### scale
 (scale-md)=
@@ -784,7 +783,8 @@ The array at this path MUST be 1D, and its length MUST be `N`.
 : The scale parameters are stored as a JSON list of numbers.
 The list MUST have length `N`.
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 
 ```{literalinclude} examples/transformations/scale.json
 :language: json
@@ -796,7 +796,7 @@ defines the function:
 x = 3.12 * i
 y = 2 * j
 ```
-````
+::::
 
 #### affine
 (affine-md)=
@@ -819,7 +819,8 @@ The array at this path MUST be 2D whose shape MUST be `(M)x(N+1)`.
 The matrix MUST be stored as 2D nested array
 where the outer array MUST be length `M` and the inner arrays MUST be length `N+1`.
 
-````{admonition} Example
+::::{admonition} Example 1
+:class: dropdown
 A 2D-2D example:
 
 ```{literalinclude} examples/transformations/affine2d2d.json
@@ -843,9 +844,10 @@ it is equivalent to this matrix-vector multiplication in homogeneous coordinates
 
 where the last row `[0 0 1]` is omitted in the JSON representation.
 
-````
+::::
 
-````{admonition} Example
+::::{admonition} Example 2
+:class: dropdown
 An example with two dimensional inputs and three dimensional outputs.
 
 Note that the order of the axes can in general be determined by the application or user.
@@ -874,7 +876,7 @@ it is equivalent to this matrix-vector multiplication in homogeneous coordinates
 ```
 
 where the last row `[0 0 1]` is omitted in the JSON representation.
-````
+::::
 
 #### rotation
 (rotation-md)=
@@ -898,7 +900,8 @@ The array at this path MUST be 2D whose shape MUST be `N x N`.
 The matrix MUST be stored as a 2D nested array where the outer array MUST be length `N`
 and the inner arrays MUST be length `N`.
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 A 2D example
 
 ```{literalinclude} examples/transformations/rotation.json
@@ -910,8 +913,8 @@ defines the function:
 ```
 x = 0*i - 1*j
 y = 1*i + 0*j
-  ```
-````
+```
+::::
 
 #### inverseOf
 (inverseOf-md)=
@@ -935,12 +938,13 @@ At the same time, registration libraries can interpret the wrapped, inverted tra
 as the correct corresponding transformation from fixed (output) to moving (input) coordinates.
 ```
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 
 ```{literalinclude} examples/transformations/inverseOf.json
 :language: json
 ```
-````
+::::
 
 #### sequence
 (sequence-md)=
@@ -974,7 +978,8 @@ f2(f1(f0(x)))
 <strong>transformations</strong>
 : A non-empty array of transformations.
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 
 This sequence:
 
@@ -990,7 +995,7 @@ y = (j + 0.9) * 3
 ```
 
 and is invertible.
-````
+::::
 
 #### coordinates and displacements
 (coordinates-displacements-md)=
@@ -1063,7 +1068,8 @@ For `displacements`:
 * the shape of the array along the "displacement" axis must be exactly `N`
 * `input` and `output` MUST have an equal number of dimensions.
 
-````{admonition} Example
+::::{admonition} Example 1
+:class: dropdown
 For example, in 1D:
 ```json
 {
@@ -1107,9 +1113,10 @@ x =
     else if ( i >= 0.5 and i < 1.5 )     9
     else if ( i >= 1.5 )                 0
 ```
-````
+::::
 
-````{admonition} Example
+::::{admonition} Example 2
+:class: dropdown
 A 1D example displacement field:
 ```json
 {
@@ -1154,9 +1161,10 @@ The transformation specifies linear interpolation,
 which in this case yields `(0.5 * -1) + (0.5 * 0) = -0.5`.
 That value gives us the displacement of the input point,
 hence the output is `1.0 + (-0.5) = 0.5`.
-````
+::::
 
-````{admonition} Example
+::::{admonition} Example 3
+:class: dropdown
 
 In this example, the array located at `"displacementField"` MUST have three dimensions.
 One dimension MUST correspond to an axis with `type : displacement` (in this example, the last dimension),
@@ -1197,7 +1205,7 @@ x_displacement = displacementField[y][x][1]
 
 I.e. the y-displacement is first, because the y-axis is the first element of the input and output coordinate systems.
 
-````
+::::
 
 #### byDimension
 (byDimension-md)=
@@ -1220,25 +1228,28 @@ The `input` and `output` fields MUST always be included for this transformations
 </dl>
 
 
-````{admonition} Example
+::::{admonition} Example 1
+:class: dropdown
 
 A valid `byDimension` transformation:
 
 ```{literalinclude} examples/transformations/byDimension1.json
 :language: json
 ```
-````
+::::
 
-````{admonition} Example
+::::{admonition} Example 2
+:class: dropdown
 
 Another valid `byDimension` transformation:
 
 ```{literalinclude} examples/transformations/byDimension2.json
 :language: json
 ```
-````
+::::
 
-````{admonition} Example
+::::{admonition} Example 3
+:class: dropdown
 
 This is an **invalid** `byDimension` transform:
 
@@ -1250,9 +1261,10 @@ It is invalid for two reasons.
 First because input `0` used by the scale transformation is not an axis of the `byDimension` transformation's `input`.
 Second, the `x` axis of the `output` does not appear in the `output` of any child transformation.
 
-````
+::::
 
-````{admonition} Example
+::::{admonition} Example 4
+:class: dropdown
 
 Another **invalid** `byDimension` transform:
 
@@ -1261,9 +1273,7 @@ Another **invalid** `byDimension` transform:
 ```
 
 This transformation is invalid because the output axis `x` appears in more than one transformation in the `transformations` list.
-
-````
-
+::::
 
 #### bijection
 (bijection-md)=
@@ -1287,7 +1297,8 @@ Practically, non-invertible transformations have finite extents,
 so bijection transforms should only be expected to be correct / consistent for points that fall within those extents.
 It may not be correct for any point of appropriate dimensionality.
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 
 ```{literalinclude} examples/transformations/bijection.json
 :language: json
@@ -1298,9 +1309,7 @@ the input and output of the `forward` and `inverse` transformations are understo
 ```{literalinclude} examples/transformations/bijection_verbose.json
 :language: json
 ```
-
-````
-
+::::
 
 ## "multiscales" metadata
 (multiscales-md)=
@@ -1381,12 +1390,13 @@ It SHOULD contain the field "metadata",
 which contains a dictionary with additional information about the downscaling method.
 
 
-````{admonition} Example
+::::{admonition} Example
+:class: dropdown
 A complete example of json-file for a 5D (TCZYX) multiscales with 3 resolution levels could look like this:
 ```{literalinclude} examples/multiscales_strict/multiscales_example.json
 :language: json
 ```
-````
+::::
 
 If only one multiscale is provided, use it.
 Otherwise, the user can choose by name,
