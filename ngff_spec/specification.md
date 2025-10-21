@@ -392,79 +392,60 @@ Conforming readers:
 
 ## "coordinateTransformations" metadata
 
-(trafo-md)=
-
 "coordinateTransformations" describe the mapping between two coordinate systems (defined by "axes").
 For example, to map an array's discrete coordinate system to its corresponding physical coordinates.
 Coordinate transforms are in the "forward" direction.
-They represent functions from *points* in the input space to *points* in the output space.
+They represent functions from *points* in the input space to *points* in the output space. 
 
-- MUST contain the field "type".
+- MUST contain the field "type" (string).
 - MUST contain any other fields required by the given "type" (see table below).
-- MUST contain the field "output", unless part of a `sequence` or `inverseOf` (see details).
-- MUST contain the field "input", unless part of a `sequence` or `inverseOf` (see details).
-- MAY contain the field "name". Its value MUST be unique across all "name" fields for coordinate transformations.
+- MUST contain the field "output" (string),
+  unless part of a `sequence` or `inverseOf` (see details).
+- MUST contain the field "input" (string),
+  unless part of a `sequence` or `inverseOf` (see details).
+- MAY contain the field "name" (string).
+  Its value MUST be unique across all "name" fields for coordinate transformations.
 - Parameter values MUST be compatible with input and output space dimensionality (see details).
 
-<table>
-  <tr><th>`identity`
-    <td>
-    <td>The identity transformation is the default transformation and is typically not explicitly defined.
-  <tr><th>`mapAxis`
-    <td>`"mapAxis":Dict[String:String]`
-    <td> A `maxAxis` transformation specifies an axis permutation as a map between axis names.
-  <tr><th>`translation`
-    <td> one of: <br>`"translation":List[number]`, <br>`"path":str`
-    <td>translation vector, stored either as a list of numbers (`"translation"`) or as binary data at a location
-    in this container (`path`).
-  <tr><th>`scale`
-    <td> one of: <br>`"scale":List[number]`, <br>`"path":str`
-    <td>scale vector, stored either as a list of numbers (`scale`) or as binary data at a location in this
-    container (`path`).
-  <tr><th>`affine`
-    <td> one of: <br>`"affine":List[List[number]]`, <br>`"path":str`
-    <td>affine transformation matrix stored as a flat array stored either with json uing the affine field
-    or as binary data at a location in this container (path). If both are present, the binary values at path should be used.
-  <tr><th>`rotation`
-    <td> one of: <br>`"rotation":List[number]`, <br>`"path":str`
-    <td>rotation transformation matrix stored as an array stored either
-        with json or as binary data at a location in this container (path).
-        If both are present, the binary parameters at path are used.
-  <tr><th>`sequence`
-    <td> `"transformations":List[Transformation]`
-    <td>A sequence of transformations, Applying the sequence applies the composition of all transforms in the list, in order.
-  <tr><th>`displacements`
-    <td>`"path":str`<br>`"interpolation":str`
-    <td>Displacement field transformation located at (path).
-  <tr><th>`coordinates`
-    <td>`"path":str`<br>`"interpolation":str`
-    <td>Coordinate field transformation located at (path).
-  <tr><th>`inverseOf`
-    <td>`"transform":Transform`
-    <td>The inverse of a transformation. Useful if a transform is not closed-form invertible. See Forward and inverse for details and examples.
-  <tr><th>`bijection`
-    <td>`"forward":Transform`<br>`"inverse":Transform`
-    <td>Explicitly define an invertible transformation by providing a forward transformation and its inverse.
-  <tr><th>`byDimension`
-    <td>`"transformations":List[Transformation]`
-    <td>Define a high dimensional transformation using lower dimensional transformations on subsets of
-    dimensions.
- <thead>
-   <tr><th>type<th>fields<th>description
-</table>
+The following transformations are supported:
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| `identity` | | The identity transformation is the default transformation and is typically not explicitly defined. |
+| `mapAxis` | `"mapAxis":List[number]` | A `mapAxis` transformation specifies an axis permutation as a transpose array of integer indices that refer to the ordering of the axes in the respective coordinate system. |
+| `translation` | one of:<br>`"translation":List[number]`,<br>`"path":str` | translation vector, stored either as a list of numbers (`"translation"`) or as binary data at a location in this container (`path`). |
+| `scale` | one of:<br>`"scale":List[number]`,<br>`"path":str` | scale vector, stored either as a list of numbers (`scale`) or as binary data at a location in this container (`path`). |
+| `affine` | one of:<br>`"affine": List[List[number]]`,<br>`"path":str` | affine transformation matrix stored as a flat array stored either with json using the affine field or as binary data at a location in this container (path). If both are present, the binary values at path should be used. |
+| `rotation` | one of:<br>`"rotation":List[List[number]]`,<br>`"path":str` | rotation transformation matrix stored as an array stored either with json or as binary data at a location in this container (path). If both are present, the binary parameters at path are used. |
+| `sequence` | `"transformations":List[Transformation]` | A sequence of transformations, Applying the sequence applies the composition of all transforms in the list, in order. |
+| `displacements` | `"path":str`<br>`"interpolation":str` | Displacement field transformation located at (path). |
+| `coordinates` | `"path":str`<br>`"interpolation":str` | Coordinate field transformation located at (path). |
+| `inverseOf` | `"transformation":Transformation` | The inverse of a transformation. Useful if a transform is not closed-form invertible. See Forward and inverse for details and examples. |
+| `bijection` | `"forward":Transformation`<br>`"inverse":Transformation` | Explicitly define an invertible transformation by providing a forward transformation and its inverse. |
+| `byDimension` | `"transformations":List[Transformation]`, <br> `"input_axes": List[str]`, <br> `"output_axes": List[str]` | Define a high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 Conforming readers:
-
 - MUST parse `identity`, `scale`, `translation` transformations;
-- SHOULD parse `mapAxis`, `affine` transformations;
+- SHOULD parse `mapAxis`, `affine`, `rotation` transformations;
+- SHOULD display an informative warning if encountering transformations that cannot be parsed;
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
 
-Coordinate transformations from array to physical coordinates MUST be stored in [multiscales](#multiscales-md).
-Transformations between different images MUST be stored in the attributes of a parent zarr group.
-For transformations that store data or parameters in a zarr array, those zarr arrays SHOULD be stored in a zarr group `"coordinateTransformations"`.
+Coordinate transformations can be stored in multiple places to reflect different usecases.
+     
+- Multiscale transformations represent a special case of transformations
+  and are explained [below](#multiscales-metadata).
+- Additional transformations for single images MUST be stored under a field `coordinateTransformations`
+  in the multiscales dictionaries.
+  This `coordinateTransformations` field MUST contain a list of valid [transformations](#transformation-types).
+- Transformations between two or more images MUST be stored in the attributes of a parent zarr group.
+  For transformations that store data or parameters in a zarr array,
+  those zarr arrays SHOULD be stored in a zarr group `coordinateTransformations`.
 
-```text
+Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations
+(i.e., sequence[translation, rotation] instead of affine transformation with translation/rotation) component. 
+
+<pre>
 store.zarr                      # Root folder of the zarr store
 │
 ├── zarr.json                   # coordinate transformations describing the relationship between two image coordinate systems
@@ -476,18 +457,82 @@ store.zarr                      # Root folder of the zarr store
 │       └── zarr.json
 │
 ├── volume
-│   ├── zarr.json               # group level attributes (multiscales)
+│   ├── zarr.json              # group level attributes (multiscales)
 │   └── 0                       # a group containing the 0th scale
 │       └── image               # a zarr array
-│           └── zarr.json       # physical coordinate system and transformations here
-│                               # the array attributes
+│           └── zarr.json      # physical coordinate system and transformations here
 └── crop
-    ├── .zattrs                 # group level attributes (multiscales)
+    ├── zarr.json              # group level attributes (multiscales)
     └── 0                       # a group containing the 0th scale
         └── image               # a zarr array
-            └── zarr.json       # physical coordinate system and transformations here
-                                # the array attributes
+            └── zarr.json      # physical coordinate system and transformations here
+</pre>
+
+````{admonition} Example
+Two instruments simultaneously image the same sample from two different angles,
+and the 3D data from both instruments are calibrated to "micrometer" units.
+Two samples are collected ("sampleA" and "sampleB").
+An analysis of sample A requires measurements from both instruments' images at certain points in space.
+Suppose a region of interest (ROI) is determined from the image obtained from instrument 2,
+but quantification from that region is needed for instrument 1.
+Since measurements were collected at different angles,
+a measurement by instrument 1 at the point with coordinates (x,y,z)
+may not correspond to the measurement at the same point in instrument 2
+(i.e., it may not be the same physical location in the sample).
+To analyze both images together, they must be in the same coordinate system.
+
+The set of coordinate transformations encodes relationships between coordinate systems,
+specifically, how to convert points and images to different coordinate systems.
+Implementations can apply the coordinate transform to images or points
+in coordinate system "sampleA_instrument2" to bring them into the "sampleA_instrument1" coordinate system.
+In this case, the ROI should be transformed to the "sampleA_image1" coordinate system,
+then used for quantification with the instrument 1 image.
+
+The `coordinateTransformations` in the parent-level metadata would contain the following data.
+The transformation parameters are stored in a separate zarr-group
+under `coordinateTransformations/sampleA_instrument2-to-instrument1` as shown above.
+
+```json
+"coordinateTransformations": [
+    {
+        "type": "affine",
+        "path": "coordinateTransformations/sampleA_instrument2-to-instrument1",
+        "input": "sampleA_instrument2",
+        "output": "sampleA_instrument1"
+    }
+]
 ```
+
+And the image under `root/sampleA_instrument1` would have the following as the first coordinate system:
+
+```json
+"coordinateSystems": [
+    {
+        "name": "sampleA-instrument1",
+        "axes": [
+            {"name": "z", "type": "space", "unit": "micrometer"},
+            {"name": "y", "type": "space", "unit": "micrometer"},
+            {"name": "x", "type": "space", "unit": "micrometer"}
+        ]
+    },
+]
+```
+
+The image under `root/sampleA_instrument2` would have this as the first listed coordinate system:
+
+```json
+[
+    {
+        "name": "sampleA-instrument2",
+        "axes": [
+            {"name": "z", "type": "space", "unit": "micrometer"},
+            {"name": "y", "type": "space", "unit": "micrometer"},
+            {"name": "x", "type": "space", "unit": "micrometer"}
+        ]
+    }
+],
+```
+````
 
 ### Additional details
 
