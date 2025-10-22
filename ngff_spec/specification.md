@@ -1368,7 +1368,7 @@ It is stored in a multiple resolution representation.
 
 "multiscales" contains a list of dictionaries where each entry describes a multiscale image.
 
-Each "multiscales" dictionary MUST contain the field "coordinateSystems", see [coordinateSystems metadata](#), with the following constraints.
+Each "multiscales" dictionary MUST contain the field "coordinateSystems", see [coordinateSystems metadata](#coord-sys-md), with the following constraints.
 The length of "axes" must be between 2 and 5 and MUST be equal to the dimensionality of the zarr arrays storing the image data (see "datasets:path").
 The "axes" MUST contain 2 or 3 entries of "type:space" and MAY contain one additional entry of "type:time" and MAY contain one additional entry of "type:channel" or a null / custom type.
 The order of the entries MUST correspond to the order of dimensions of the zarr arrays.
