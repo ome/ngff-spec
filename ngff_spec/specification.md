@@ -783,7 +783,7 @@ The array at this path MUST be 1D, and its length MUST be `N`.
 : The scale parameters are stored as a JSON list of numbers.
 The list MUST have length `N`.
 
-::::{admonition} Example
+::::{admonition} Example 1
 :class: dropdown
 
 ```{literalinclude} examples/transformations/scale.json
@@ -795,6 +795,17 @@ defines the function:
 ```
 x = 3.12 * i
 y = 2 * j
+```
+::::
+
+::::{admonition} Example 2
+:class: dropdown
+
+If the data contains discrete axes (e.g., channels),
+these axes are typically not transformed, but must be represented in the scale parameters.
+
+```{literalinclude} examples/transformations/scale_with_discrete.json
+:language: json
 ```
 ::::
 
@@ -877,6 +888,16 @@ it is equivalent to this matrix-vector multiplication in homogeneous coordinates
 
 where the last row `[0 0 1]` is omitted in the JSON representation.
 ::::
+
+::::{admonition} Example 3
+:class: dropdown
+
+If the image data contains discrete axes (e.g., channels),
+these axes are typically not transformed, but must be represented in the transformation matrix.
+
+```{literalinclude} examples/transformations/affine2d2d_with_channel.json
+:language: json
+```
 
 #### rotation
 (rotation-md)=
