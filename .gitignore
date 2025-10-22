@@ -8,8 +8,7 @@ _bikeshed
 .*plist
 
 # do not sync auto-generated md files
-docs/examples/
-docs/schemas/
+ngff_spec/_generated
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

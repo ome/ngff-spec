@@ -2,16 +2,16 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: specification
+root: ngff_spec/specification
 
 chapters:
-- file: docs/examples
+- file: ngff_spec/examples
   sections:
-  - glob: docs/examples/*
-- file: docs/schemas/index
+  - glob: ngff_spec/_generated/examples/*
+- file: ngff_spec/schemas
   sections:
-  - glob: docs/schemas/markdown/*
+  - glob: ngff_spec/_generated/schemas/markdown/*
 
-- file: contribute
-- file: citing
-- file: version_history
+- file: ngff_spec/contribute
+- file: ngff_spec/citing
+- file: ngff_spec/version_history

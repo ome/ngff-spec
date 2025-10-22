@@ -8,3 +8,4 @@ myst-parser
 json_with_comments
 jupyter-book
 jsonschema_markdown
+pytest
