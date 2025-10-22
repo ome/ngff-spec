@@ -48,7 +48,7 @@
                   "type": "string"
                 },
                 "coordinateTransformations": {
-                  "$ref": "coordinate_transformation.schema"
+                  "$ref": "coordinate_transformations.schema"
                 }
               },
               "required": [
@@ -67,7 +67,7 @@
             "$ref": "coordinate_systems.schema"
           },
           "coordinateTransformations": {
-            "$ref": "coordinate_transformation.schema"
+            "$ref": "coordinate_transformations.schema"
           }
         },
         "required": [
