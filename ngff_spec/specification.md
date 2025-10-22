@@ -552,14 +552,22 @@ We call this the "forward" direction.
 Points are ordered lists of coordinates,
 where a coordinate is the location/value of that point along its corresponding axis.
 The indexes of axis dimensions correspond to indexes into transformation parameter arrays.
-For example, the scale transformation above defines the function:
 
-```
-x = 0.5 * i
-y = 1.2 * j
+::::{admonition} Example
+:class: dropdown
+For example, the [scale transformation](#scale-md) metadata below
+
+```{literalinclude} examples/transformations/scale.json
+:language: json
 ```
 
+defines the function:
+```
+x = 3.12 * i
+y = 2 * j
+```
 i.e., the mapping from the first input axis to the first output axis is determined by the first scale parameter.
+::::
 
 When rendering transformed images and interpolating,
 implementations may need the "inverse" transformation - 

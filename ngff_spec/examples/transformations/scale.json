@@ -6,7 +6,7 @@
   "coordinateTransformations": [ 
     {
       "type": "scale",
-      "scale": [3.12, 2],
+      "scale": [2, 3.12],
       "input": "in",
       "output": "out"
     }
