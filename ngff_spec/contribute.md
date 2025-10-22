@@ -10,7 +10,7 @@ Major changes should follow the RFC process as it was laid out in [RFC1](https:/
 ## Building the documentation
 
 Build and inspect changes to the documentation before submitting a PR.
-To do so, you first need to install the necessary dependecies:
+To do so, you first need to install the necessary dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -33,10 +33,10 @@ You'll find the built webpages under `_build/html`.
 Contributions should conform to [Semantic Line Breaks (SemBr)](https://sembr.org/),
 to improve change tracking.
 
-### Formating hints
+### Formatting hints
 
 The specification uses MyST extensively for a number of formatting options
-to make the text readible and improve structure.
+to make the text readable and improve structure.
 
 #### Referencing
 
@@ -44,7 +44,7 @@ MyST allows a number of ways to reference and cross-reference inside this text
 and across several of the pages in this repo.
 For an overview of supported referencing syntax,
 see the [MyST doc pages](https://mystmd.org/guide/cross-references).
-It is recommended to use the following syntax in this document for consitency:
+It is recommended to use the following syntax in this document for consistency:
 
 ```
 anchor: (your-reference-name)=
