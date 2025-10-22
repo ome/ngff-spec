@@ -387,7 +387,7 @@ Conforming readers:
 ## "coordinateTransformations" metadata
 (coord-trafo-md)=
 
-"coordinateTransformations" describe the mapping between two coordinate systems (defined by "axes").
+"coordinateTransformations" describe the mapping between two coordinate systems (defined by [`coordinateSystems`](#coordinate-systems-md)).
 For example, to map an array's discrete coordinate system to its corresponding physical coordinates.
 Coordinate transforms are in the "forward" direction.
 They represent functions from *points* in the input space to *points* in the output space. 
