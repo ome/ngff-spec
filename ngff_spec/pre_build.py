@@ -55,7 +55,6 @@ This document contains JSON examples for {example} metadata layouts.
 ```{{literalinclude}} {os.path.abspath(json_file)}
 :linenos:
 :language: json
-
 ```
 """
         # create 
@@ -77,7 +76,7 @@ def build_json_schemas():
     index_markdown = """# JSON Schemas
 
 This section contains JSON schemas for various metadata layouts.
-Find below links to auto_generated markdown pages or interactive HTML pages for each schema.
+Find below links to auto-generated markdown pages or interactive HTML pages for each schema.
 
 | Schema | Markdown | HTML |
 |--------|----------|------|
@@ -106,7 +105,7 @@ Find below links to auto_generated markdown pages or interactive HTML pages for 
                 config=config_md
             )
 
-            # insert mySt crossreference at top of markdown files
+            # insert mySt cross-reference at top of markdown files
             with open(output_path_md, 'r') as md_file:
                 md_content = md_file.read()
             crossref = f"schemas:{Path(schema_file).stem}"
