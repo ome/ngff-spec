@@ -882,7 +882,7 @@ y = 2 * j
 #### affine
 (affine-md)=
 
-`affine`s are [matrix transformations](#matrix) from N-dimensional inputs to M-dimensional outputs
+`affine`s are [matrix transformations](#matrix-trafo-md) from N-dimensional inputs to M-dimensional outputs
 are represented as the upper `(M)x(N+1)` sub-matrix of a `(M+1)x(N+1)` matrix in
 [homogeneous coordinates](https://en.wikipedia.org/wiki/Homogeneous_coordinates) (see examples).
 This transformation type may be (but is not necessarily) invertible when `N` equals `M`.
