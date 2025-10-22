@@ -260,10 +260,7 @@
         {
           "properties": {
             "rotation": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
+              "$ref": "#/$defs/mtxFlatOrNested"
             },
             "required": [
               "rotation"
