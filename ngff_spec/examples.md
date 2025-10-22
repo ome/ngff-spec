@@ -9,8 +9,8 @@ This section contains JSON examples for various metadata layouts.
 - [image](#examples:bf2raw:image)
 - [plate](#examples:bf2raw:plate)
 
-## coordSystems
-- [arrayCoordSys](#examples:coordSystems:arrayCoordSys)
+## coordinate_systems
+- [arrayCoordSys](#examples:coordinate_systems:arrayCoordSys)
 
 ## label_strict
 - [colors_properties](#examples:label_strict:colors_properties)
