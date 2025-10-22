@@ -78,7 +78,7 @@ def build_json_schemas():
     index_markdown = """# JSON Schemas
 
 This section contains JSON schemas for various metadata layouts.
-Find below links to auto_generated markdown pages or interactive HTML pages for each schema.
+Find below links to auto-generated markdown pages or interactive HTML pages for each schema.
 
 | Schema | Markdown | HTML |
 |--------|----------|------|
