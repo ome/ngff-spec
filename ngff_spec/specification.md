@@ -841,15 +841,15 @@ A 2D-2D example:
 defines the function:
 
 ```
-x = 1*i + 2*j + 3
-y = 4*i + 5*j + 6
+y = 1*j + 2*i + 3
+x = 4*j + 5*i + 6
 ```
 
 it is equivalent to this matrix-vector multiplication in homogeneous coordinates:
 
 ```
-[ 1 2 3 ][ i ]   [ x ]
-[ 4 5 6 ][ j ] = [ y ]
+[ 1 2 3 ][ j ]   [ y ]
+[ 4 5 6 ][ i ] = [ x ]
 [ 0 0 1 ][ 1 ]   [ 1 ]
 ```
 
@@ -860,6 +860,7 @@ where the last row `[0 0 1]` is omitted in the JSON representation.
 ::::{admonition} Example 2
 :class: dropdown
 An example with two dimensional inputs and three dimensional outputs.
+The affine transformation adds a translation by 1 along the new z-axis.
 
 Note that the order of the axes can in general be determined by the application or user.
 These axes relate to the memory or on-disk order insofar as the last dimension is contiguous
@@ -872,17 +873,18 @@ when the zarr array is c-order (the default for zarr version 2, and the only opt
 defines the function:
 
 ```
-x = 1*i + 2*j + 3
-y = 4*i + 5*j + 6
-z = 7*i + 8*j + 9
+z = 0*i + 0*j + 1
+y = 3*i + 4*j + 2
+x = 6*i + 7*j + 5
+
 ```
 
 it is equivalent to this matrix-vector multiplication in homogeneous coordinates:
 
 ```
-[ 1 2 3 ][ i ]   [ x ]
-[ 4 5 6 ][ j ] = [ y ]
-[ 7 8 9 ][ 1 ]   [ z ]
+[ 1 0 0 ][ 1 ]   [ z ]
+[ 2 3 4 ][ i ] = [ y ]
+[ 5 6 7 ][ j ]   [ x ]
 [ 0 0 1 ]        [ 1 ]
 ```
 
