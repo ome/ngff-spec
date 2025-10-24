@@ -148,8 +148,7 @@ def build_footer():
     footer_content = f"""
 <div>
     Copyright © 2020-{year}
-    <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>®</sup>
-    (<a href="https://dundee.ac.uk/"><abbr title="University of Dundee">U. Dundee</abbr></a>).
+    <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>®</sup>.
     OME trademark rules apply.
 </div>
 """
