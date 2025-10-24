@@ -54,9 +54,7 @@ This document contains JSON examples for {example} metadata layouts.
 
 ```{{literalinclude}} {os.path.abspath(json_file)}
 :linenos:
-:tab-width: 2
 :language: json
-
 ```
 """
         # create 

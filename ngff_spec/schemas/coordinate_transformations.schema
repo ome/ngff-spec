@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/latest/schemas/coordinate_transformation.schema",
+  "$id": "https://ngff.openmicroscopy.org/latest/schemas/coordinate_transformations.schema",
   "title": "NGFF Coordinate Systems and Transforms",
   "description": "Coordinate Systems and transforms for OME-NGFF",
   "type": "array",
@@ -209,20 +209,6 @@
         }
       ]
     },
-    "mtxFlatOrNested" : {
-      "type": "array",
-      "oneOf": [
-        {
-          "items": { "type": "number" }
-        },
-        {
-          "items": {
-              "type": "array",
-              "items" : { "type" : "number" }
-          }
-        }
-      ]
-    },
     "affine": {
       "type": "object",
       "properties": {
@@ -237,7 +223,13 @@
         {
           "properties": {
             "affine": {
-              "$ref": "#/$defs/mtxFlatOrNested"
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
             },
             "required": [
               "affine"
@@ -262,7 +254,10 @@
             "rotation": {
               "type": "array",
               "items": {
-                "type": "number"
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
               }
             },
             "required": [
