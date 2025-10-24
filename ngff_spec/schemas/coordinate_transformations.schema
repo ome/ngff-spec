@@ -209,20 +209,6 @@
         }
       ]
     },
-    "mtxFlatOrNested" : {
-      "type": "array",
-      "oneOf": [
-        {
-          "items": { "type": "number" }
-        },
-        {
-          "items": {
-              "type": "array",
-              "items" : { "type" : "number" }
-          }
-        }
-      ]
-    },
     "affine": {
       "type": "object",
       "properties": {
@@ -237,7 +223,13 @@
         {
           "properties": {
             "affine": {
-              "$ref": "#/$defs/mtxFlatOrNested"
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
             },
             "required": [
               "affine"
@@ -260,7 +252,13 @@
         {
           "properties": {
             "rotation": {
-              "$ref": "#/$defs/mtxFlatOrNested"
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
             },
             "required": [
               "rotation"
