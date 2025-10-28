@@ -6,36 +6,37 @@
       "version": "0.5",
       "multiscales": [
         {
-          "axes": [
+          "coordinateSystems": [
             {
-              "name": "y",
-              "type": "space",
-              "unit": "micrometer"
-            },
-            {
-              "name": "x",
-              "type": "space",
-              "unit": "micrometer"
-            }
-          ],
-          "datasets": [
-            {
-              "path": "0",
-              "coordinateTransformations": [
+              "name": "intrinsic",
+              "axes": [
                 {
-                  "scale": [1, 1],
-                  "type": "scale"
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
                 }
               ]
             }
           ],
-          "coordinateTransformations": [
+          "datasets": [
             {
-              "scale": [10, 10],
-              "type": "scale"
+              "path": "s0",
+              "coordinateTransformations": [
+                {
+                  "scale": [1, 1],
+                  "type": "scale",
+                  "input": "s0",
+                  "output": "intrinsic"
+                }
+              ]
             }
           ],
-          "name": "image_with_coordinateTransformations",
+          "name": "image_with_multiscaleTransformations",
           "type": "foo",
           "metadata": {
             "key": "value"
