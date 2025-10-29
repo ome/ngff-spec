@@ -408,10 +408,10 @@ The following transformations are supported:
 |------|--------|-------------|
 | `identity` | | The identity transformation is the default transformation and is typically not explicitly defined. |
 | `mapAxis` | `"mapAxis":List[number]` | A `mapAxis` transformation specifies an axis permutation as a transpose array of integer indices that refer to the ordering of the axes in the respective coordinate system. |
-| `translation` | one of:<br>`"translation":List[number]`,<br>`"path":str` | translation vector, stored either as a list of numbers (`"translation"`) or as binary data at a location in this container (`path`). |
-| `scale` | one of:<br>`"scale":List[number]`,<br>`"path":str` | scale vector, stored either as a list of numbers (`scale`) or as binary data at a location in this container (`path`). |
-| `affine` | one of:<br>`"affine": List[List[number]]`,<br>`"path":str` | affine transformation matrix stored as a 2D array, either directly in JSON using the affine field or as binary data at a location in this container (path). If both are present, the binary values at path should be used. |
-| `rotation` | one of:<br>`"rotation":List[List[number]]`,<br>`"path":str` | rotation transformation matrix stored as a 2D array stored either with json or as binary data at a location in this container (path). If both are present, the binary parameters at path are used. |
+| `translation` | one of:<br>`"translation":List[number]`,<br>`"path":str` | translation vector, stored either as a list of numbers (`"translation"`) or as a zarr array at a location in this container (`path`). |
+| `scale` | one of:<br>`"scale":List[number]`,<br>`"path":str` | scale vector, stored either as a list of numbers (`scale`) or as a zarr array at a location in this container (`path`). |
+| `affine` | one of:<br>`"affine": List[List[number]]`,<br>`"path":str` | affine transformation matrix stored as a 2D array, either directly in JSON using the affine field or as a zarr array at a location in this container (path). If both are present, the zarr array at path should be used. |
+| `rotation` | one of:<br>`"rotation":List[List[number]]`,<br>`"path":str` | rotation transformation matrix stored as a 2D array stored either with json or as a zarr array at a location in this container (path). If both are present, the zarr array parameters at path are used. |
 | `sequence` | `"transformations":List[Transformation]` | A sequence of transformations, Applying the sequence applies the composition of all transforms in the list, in order. |
 | `displacements` | `"path":str`<br>`"interpolation":str` | Displacement field transformation located at (path). |
 | `coordinates` | `"path":str`<br>`"interpolation":str` | Coordinate field transformation located at (path). |
