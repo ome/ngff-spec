@@ -1,14 +1,14 @@
 {
   "description": "Tests for the well JSON schema",
   "schema": {
-    "id": "schemas/well.schema"
+    "id": "ngff_spec/schemas/well.schema"
   },
   "tests": [
     {
       "formerly": "well/minimal_no_acquisition",
       "data": {
         "ome": {
-          "version": "0.5",
+          "version": "0.6dev2",
           "well": {
             "images": [
               {
@@ -24,7 +24,7 @@
       "formerly": "well/minimal_acquisitions",
       "data": {
         "ome": {
-          "version": "0.5",
+          "version": "0.6dev2",
           "well": {
             "images": [
               {

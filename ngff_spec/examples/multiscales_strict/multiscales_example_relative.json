@@ -1,21 +1,21 @@
 {
   "multiscales": [
     {
-      "version": "0.5-dev",
+      "version": "0.6dev2",
       "name": "example",
       "coordinateSystems" : [
         {
-          "name" : "exampleCoordinateSystem",
-          "axes": [
-            {"name": "t", "type": "time", "unit": "millisecond"},
-            {"name": "c", "type": "channel"},
-            {"name": "z", "type": "space", "unit": "micrometer"},
-            {"name": "y", "type": "space", "unit": "micrometer"},
-            {"name": "x", "type": "space", "unit": "micrometer"}
-          ]
+          "name" : "world",
+          "axes": {
+            "t": {"type": "time", "unit": "millisecond"},
+            "c": {"type": "channel"},
+            "z": {"type": "space", "unit": "micrometer"},
+            "y": {"type": "space", "unit": "micrometer"},
+            "x": {"type": "space", "unit": "micrometer"}
+          }
         },
         {
-          "name" : "array_0",
+          "name" : "intrinsic",
           "axes": [
             {"name": "t", "type": "time", "unit": "millisecond"},
             {"name": "c", "type": "channel"},
@@ -27,12 +27,14 @@
       ],
       "datasets": [
         {
-          "path": "0",
-          // the transformation of other arrays are defined relative to this, the highest resolution, array
+          "path": "s0",
+          // the transformation of other arrays are
+          // defined relative to this, the highest resolution, array
           "coordinateTransformations": [{
-            "type": "identity",
-            "input": "/0",
-            "output": "array_0"
+            "type": "scale",
+            "scale": [1, 1, 1, 1, 1],
+            "input": "s0",
+            "output": "intrinsic"
           }]
         },
         {
@@ -56,21 +58,15 @@
           }]
         }
       ],
-      "coordinateTransformations": [{
-        // the time unit (0.1 milliseconds), the voxel size for all spatial axes of "0" (0.5 micrometers)
-        "type": "scale",
-        "scale": [0.1, 1.0, 0.5, 0.5, 0.5],
-        "input" : "array_0",
-        "output" : "exampleCoordinateSystem"
-      }],
-      "type": "gaussian",
-      "metadata": {
-        "description": "the fields in metadata depend on the downscaling implementation. Here, the parameters passed to the skimage function are given",
-        "method": "skimage.transform.pyramid_gaussian",
-        "version": "0.16.1",
-        "args": "[true]",
-        "kwargs": {"multichannel": true}
-      }
+      "coordinateTransformations": [
+        {
+          "name": "additional_translation",
+          "type": "translation",
+          "translation": [0, 0, 10, 20, 30],
+          "input": "intrinsic",
+          "output": "world"
+        }
+      ]
     }
   ]
 }

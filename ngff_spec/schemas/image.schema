@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/0.6.dev1/schemas/image.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.6dev2/schemas/image.schema",
   "title": "OME-Zarr Image",
   "description": "The zarr.json attributes key",
   "type": "object",
@@ -10,13 +10,13 @@
       "type": "object",
       "properties": {
         "multiscales": {
-          "$ref": "#/$defs/multiscales"
+          "$ref": "https://ngff.openmicroscopy.org/0.6dev2/schemas/image.schema#/$defs/multiscales"
         },
         "omero": {
-          "$ref": "#/$defs/omero"
+          "$ref": "https://ngff.openmicroscopy.org/0.6dev2/schemas/image.schema#/$defs/omero"
         },
         "version": {
-          "$ref": "https://ngff.openmicroscopy.org/0.6.dev1/schemas/_version.schema"
+          "$ref": "https://ngff.openmicroscopy.org/0.6dev2/schemas/_version.schema"
         }
       },
       "required": [
@@ -48,7 +48,13 @@
                   "type": "string"
                 },
                 "coordinateTransformations": {
-                  "$ref": "coordinate_transformations.schema"
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "$ref": "https://ngff.openmicroscopy.org/0.6dev2/schemas/image.schema#/$defs/multiscale_coordinateTransformations"
+                  },
+                  "minItems": 1,
+                  "maxItems": 1
                 }
               },
               "required": [
@@ -60,14 +66,22 @@
           "version": {
             "type": "string",
             "enum": [
-              "0.6.dev1"
+              "0.6dev2"
             ]
           },
           "coordinateSystems": {
-            "$ref": "coordinate_systems.schema"
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "https://ngff.openmicroscopy.org/0.6dev2/schemas/coordinate_systems.schema#/$defs/coordinateSystem"
+            }
           },
           "coordinateTransformations": {
-            "$ref": "coordinate_transformations.schema"
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "https://ngff.openmicroscopy.org/0.6dev2/schemas/coordinate_transformations.schema#/$defs/coordinateTransformation"
+            }
           }
         },
         "required": [
@@ -76,6 +90,32 @@
       },
       "minItems": 1,
       "uniqueItems": true
+    },
+    "multiscale_coordinateTransformations": {
+      "description": "OME-NGFF coordinate transformation for multiscale resolution level datasets (only scale or scale & translate).",
+      "oneOf": [
+        {"$ref": "https://ngff.openmicroscopy.org/0.6dev2/schemas/coordinate_transformations.schema#/$defs/scale"},
+        {
+          "type": "object",
+          "properties": {
+            "type": {"const": "sequence"},
+            "transformations": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {"$ref": "https://ngff.openmicroscopy.org/0.6dev2/schemas/coordinate_transformations.schema#/$defs/scale"},
+                  {"$ref": "https://ngff.openmicroscopy.org/0.6dev2/schemas/coordinate_transformations.schema#/$defs/translation"}
+                ]
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "input": {"type": "string"},
+            "output": {"type": "string"}
+          },
+          "required": ["type", "transformations", "input", "output"]
+        }
+      ]
     },
     "omero": {
       "type": "object",
