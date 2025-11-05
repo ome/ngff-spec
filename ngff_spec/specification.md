@@ -424,9 +424,9 @@ The following transformations are supported:
 | [`affine`](#affine-md) | one of:<br>`"affine":List[List[number]]`,<br>`"path":str` | 2D affine transformation matrix stored either with JSON (`affine`) or as a zarr array at a location in this container (`path`). |
 | [`rotation`](#rotation-md) | one of:<br>`"rotation":List[List[number]]`,<br>`"path":str` | 2D rotation transformation matrix stored as an array stored either with json (`rotation`) or as a zarr array at a location in this container (`path`).|
 | [`sequence`](#sequence-md) | `"transformations":List[Transformation]` | sequence of transformations. Applying the sequence applies the composition of all transforms in the list, in order. |
-| [`displacements`](#coordinates-and-displacements-md) | `"path":str`<br>`"interpolation":str` | Displacement field transformation located at `path`. |
-| [`coordinates`](#coordinates-and-displacements-md) | `"path":str`<br>`"interpolation":str` | Coordinate field transformation located at `path`. |
-| [`inverseOf`](#inverseof-md) | `"transformation":Transformation` | The inverse of a transformation. Useful if a transform is not closed-form invertible. See forward and inverse of [bijections](#bijection) for details and examples. |
+| [`displacements`](#coordinates-displacements-md) | `"path":str`<br>`"interpolation":str` | Displacement field transformation located at `path`. |
+| [`coordinates`](#coordinates-displacements-md) | `"path":str`<br>`"interpolation":str` | Coordinate field transformation located at `path`. |
+| [`inverseOf`](#inverseof-md) | `"transformation":Transformation` | The inverse of a transformation. Useful if a transform is not closed-form invertible. See forward and inverse of [bijections](#bijection-md) for details and examples. |
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`, <br> `"input_axes": List[str]`, <br> `"output_axes": List[str]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
@@ -475,10 +475,10 @@ Conforming readers:
 Coordinate transformations can be stored in multiple places to reflect different usecases.
      
 - Transformations in individual multiscale datasets represent a special case of transformations
-  and are explained [below](#multiscales-metadata).
+  and are explained [below](#multiscales-md).
 - Additional transformations for single multiscale images MUST be stored under a field `coordinateTransformations`
   in the multiscales dictionaries.
-  This `coordinateTransformations` field MUST contain a list of valid [transformations](#transformation-types).
+  This `coordinateTransformations` field MUST contain a list of valid [transformations](#trafo-types-md).
 - Transformations between two or more images MUST be stored in the attributes of a parent zarr group.
   For transformations that store data or parameters in a zarr array,
   those zarr arrays SHOULD be stored in a zarr group called "coordinateTransformations".
@@ -632,7 +632,7 @@ or MAY output a warning that the requested operation is unsupported.
 #### Matrix transformations
 (matrix-trafo-md)=
 
-Two transformation types ([affine](#affine) and [rotation](#rotation)) are parametrized by matrices.
+Two transformation types ([affine](#affine-md) and [rotation](#rotation-md)) are parametrized by matrices.
 Matrices are applied to column vectors that represent points in the input coordinate system.
 The first and last axes in a coordinate system correspond to the top and bottom entries in the column vector, respectively.
 Matrices are stored as two-dimensional arrays, either as json or in a zarr array.
@@ -1401,7 +1401,7 @@ It is stored in a multiple resolution representation.
 
 Each `multiscales` dictionary MUST contain the field "coordinateSystems",
 whose value is an array containing coordinate system metadata
-(see [coordinate systems](#coordinatesystems-metadata)).
+(see [coordinate systems](#coordinate-systems-md)).
 The last entry of this array is the "intrinsic" coordinate system
 and MUST contain axis information pertaining to physical coordinates.
 It should be used for viewing and processing unless a use case dictates otherwise.
@@ -1432,12 +1432,12 @@ Each dictionary in `datasets` MUST contain the field `coordinateTransformations`
 whose value is a list of dictionaries that define a transformation
 that maps Zarr array coordinates for this resolution level to the "intrinsic" coordinate system
 (the last entry of the `coordinateSystems` array).
-The transformation is defined according to [transformations metadata](#transformation-types).
+The transformation is defined according to [transformations metadata](#trafo-types-md).
 The transformation MUST take as input points in the array coordinate system
 corresponding to the Zarr array at location `path`.
 The value of "input" MUST equal the value of `path`, 
 implementations should always treat the value of `input` as if it were equal to the value of `path`.
-The value of the transformation’s `output` MUST be the name of the "intrinsic" [coordinate system](#coordinatesystems-metadata).
+The value of the transformation’s `output` MUST be the name of the "intrinsic" [coordinate system](#coordinate-systems-md).
 
 This transformation MUST be one of the following:
 
