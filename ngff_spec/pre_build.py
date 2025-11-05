@@ -3,6 +3,10 @@ import os
 import glob
 from pathlib import Path
 import jsonc as json
+import logging
+
+# Suppress warnings from json-schema-for-humans about unresolvable URLs
+logging.getLogger().setLevel(logging.ERROR)
 
 # change working directory to the location of this script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -67,11 +71,20 @@ This document contains JSON examples for {example} metadata layouts.
 def build_json_schemas():
     from json_schema_for_humans.generate import generate_from_filename
     from json_schema_for_humans.generation_configuration import GenerationConfiguration
+    import json
 
     schema_source_dir = 'schemas'
     output_directory = '_generated/schemas'
     os.makedirs(output_directory, exist_ok=True)
     schema_files = glob.glob(os.path.join(schema_source_dir, '*.schema'), recursive=True)
+
+    # Create a resolver mapping for local schemas
+    schema_mapping = {}
+    for schema_file in schema_files:
+        with open(schema_file, 'r') as f:
+            schema_content = json.load(f)
+            if '$id' in schema_content:
+                schema_mapping[schema_content['$id']] = os.path.abspath(schema_file)
 
     index_markdown = """# JSON Schemas
 
@@ -98,7 +111,8 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
                 template_name='md',
                 with_footer=True,
                 show_toc=False,
-                link_to_reused_ref=False)
+                link_to_reused_ref=False,
+                custom_template_global_vars={'schema_mapping': schema_mapping})
             generate_from_filename(
                 os.path.abspath(schema_file),
                 result_file_name=os.path.abspath(output_path_md),
@@ -122,7 +136,8 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
                 template_name='js',
                 with_footer=True,
                 show_toc=False,
-                link_to_reused_ref=False)
+                link_to_reused_ref=False,
+                custom_template_global_vars={'schema_mapping': schema_mapping})
 
             generate_from_filename(
                 os.path.abspath(schema_file),
