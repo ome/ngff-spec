@@ -1,0 +1,32 @@
+{
+  "coordinateSystems" : [
+    {
+      "name": "cji",
+      "axes": [
+        {"name": "k", "discrete": true},
+        {"name": "j", "discrete": false},
+        {"name": "i", "discrete": false}
+      ]
+    },
+    {
+      "name": "cyx",
+      "axes": [
+        {"name": "c", "discrete": true},
+        {"name": "y", "discrete": false},
+        {"name": "x", "discrete": false}
+      ]
+    }
+  ],
+  "coordinateTransformations" : [ 
+    {
+      "type": "affine",
+      "affine": [
+        [1, 0, 0, 0],
+        [0, 1, 2, 3],
+        [0, 4, 5, 6]
+      ],
+      "input": "cji",
+      "output": "cyx"
+    }
+  ]
+}

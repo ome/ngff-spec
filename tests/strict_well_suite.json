@@ -1,14 +1,14 @@
 {
   "description": "Tests for the strict well JSON schema",
   "schema": {
-    "id": "schemas/strict_well.schema"
+    "id": "ngff_spec/schemas/strict_well.schema"
   },
   "tests": [
     {
       "formerly": "well/strict_no_acquisitions",
       "data": {
         "ome": {
-          "version": "0.5",
+          "version": "0.6dev2",
           "well": {
             "images": [
               {
@@ -24,7 +24,7 @@
       "formerly": "plate/strict_acquisitions",
       "data": {
         "ome": {
-          "version": "0.5",
+          "version": "0.6dev2",
           "well": {
             "images": [
               {

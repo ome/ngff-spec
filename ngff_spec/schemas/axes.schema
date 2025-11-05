@@ -1,11 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/latest/schemas/axes.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.6dev2/schemas/axes.schema",
   "title": "NGFF Axes",
   "description": "JSON from OME-NGFF .zattrs",
   "type": "array",
   "uniqueItems": true,
   "minItems": 1,
+  "maxItems": 5,
   "items": {
     "$ref": "#/$defs/axis"
   },
@@ -27,7 +28,7 @@
       }
     }
   },
-  "minContains": 0,
+  "minContains": 2,
   "maxContains": 3,
   "$defs": {
     "axis": {
@@ -35,7 +36,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the axis"
+          "minLength": 1,
+          "description": "Name of the axis. Must be unique within the coordinate system."
         },
         "longName": {
           "type": "string",
@@ -43,7 +45,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Dimension of the axis"
+          "description": "Type of the axis. Can be a predefined type or custom type."
         },
         "discrete": {
           "type": "boolean",
