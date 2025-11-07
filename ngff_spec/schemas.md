@@ -1,7 +1,11 @@
-# JSON Schemas
+---
+title: NGFF metadata JSON Schemas
+short_title: JSON Schemas
+author: ""
+---
 
 This section contains JSON schemas for various metadata layouts.
-Find below links to auto_generated markdown pages or interactive HTML pages for each schema.
+Find below links to auto-generated markdown pages or interactive HTML pages for each schema.
 
 | Schema | Markdown | HTML |
 |--------|----------|------|
