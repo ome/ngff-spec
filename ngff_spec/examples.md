@@ -1,6 +1,7 @@
 ---
 title: NGFF metadata JSON Examples
 short_title: JSON Examples
+author: ""
 ---
 
 This section contains JSON examples for various metadata layouts.

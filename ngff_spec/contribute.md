@@ -1,3 +1,6 @@
+---
+author: ""
+---
 # Contribution guide
 
 Contributions to the spec text, examples and schemas are highly welcome
