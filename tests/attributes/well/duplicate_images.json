@@ -1,0 +1,17 @@
+{
+  "_conformance": {
+    "valid": false,
+    "description": "Tests for the well JSON schema: TODO",
+    "strict": false
+  },
+  "well": {
+    "images": [
+      {
+        "path": "0"
+      },
+      {
+        "path": "0"
+      }
+    ]
+  }
+}

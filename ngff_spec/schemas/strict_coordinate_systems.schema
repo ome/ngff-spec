@@ -1,8 +1,8 @@
 {
-  "$id": "https://ngff.openmicroscopy.org/latest/schemas/strict_coordinate_systems.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.6.dev1/schemas/strict_coordinate_systems.schema",
   "allOf" : [
     {
-      "$ref": "coordinate_systems.schema"
+      "$ref": "https://ngff.openmicroscopy.org/0.6.dev1/schemas/coordinate_systems.schema"
     },
     {
       "items": {

@@ -1,0 +1,18 @@
+{
+  "_conformance": {
+    "valid": true,
+    "description": "Tests for the strict well JSON schema: TODO",
+    "strict": true
+  },
+  "ome": {
+    "version": "0.6.dev1",
+    "well": {
+      "images": [
+        {
+          "acquisition": 0,
+          "path": "0"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "_conformance": {
+    "valid": false,
+    "description": "Tests for the image-label JSON schema: TODO",
+    "strict": false
+  },
+  "ome": {
+    "version": "0.6.dev1",
+    "image-label": {
+      "colors": []
+    }
+  }
+}

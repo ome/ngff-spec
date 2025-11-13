@@ -23,7 +23,6 @@ The current released version of this specification is 0.5.
 Migration scripts will be provided between numbered versions.
 Data written with these latest changes (an "editor's draft") will not necessarily be supported.
 
-
 The conventions and specifications defined in this document
 are designed to enable next-generation file formats to represent
 the same bioimaging data that can be represented in [OME-TIFF](http://www.openmicroscopy.org/ome-files/) and beyond.
@@ -78,7 +77,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │   ├── zarr.json         # All image arrays must be up to 5-dimensional
     │   │                     # with the axis of type time before type channel, before spatial axes.
     │   │
-    │   └─ ...                # Chunks are stored conforming to the Zarr array specification and 
+    │   └─ ...                # Chunks are stored conforming to the Zarr array specification and
     │                         # metadata as specified in the array's `zarr.json`.
     │
     └── labels
@@ -127,7 +126,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     │   │   ├── 0             # First field of view of well A1
     │   │   │   │
     │   │   │   ├── zarr.json # Implements "multiscales", "omero"
-    │   │   │   ├── 0         # Resolution levels          
+    │   │   │   ├── 0         # Resolution levels
     │   │   │   ├── ...
     │   │   │   └── labels    # Labels (optional)
     │   │   └── ...           # Other fields of view
@@ -136,6 +135,7 @@ A well group SHOULD NOT be present if there are no images in the well.
 ```
 
 # OME-Zarr Metadata
+
 (metadata)=
 
 The "OME-Zarr Metadata" contains metadata keys as specified below for discovering certain types of data, especially images.
@@ -151,7 +151,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
   // ...
   "attributes": {
     "ome": {
-      "version": "0.5",
+      "version": "0.6.dev1",
       // ...
     }
   }
@@ -159,6 +159,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 ```
 
 ## "axes" metadata
+
 (axes-md)=
 
 "axes" describes the dimensions of a coordinate systems and adds an interpretation to the data along that dimension.
@@ -353,7 +354,7 @@ For example, a 3D array at path `0` defines the coordinate system:
 }
 ```
 
-though this object should not and need not explicitly appear in metadata. 
+though this object should not and need not explicitly appear in metadata.
 
 ````
 
@@ -690,6 +691,7 @@ If an operation is requested that requires the inverse of a transformation that 
 implementations MAY estimate an inverse, or MAY output a warning that the requested operation is unsupported.
 
 #### Matrix transformations
+
 (matrix-trafo-md)=
 
 Two transformation types ([affine](#affine-md) and [rotation](#rotation-md)) are parametrized by matrices.
@@ -736,6 +738,7 @@ because it is computed with the matrix-vector multiplication:
 ````
 
 ### Transformation types
+
 (trafo-types-md)=
 
 Input and output dimensionality may be determined by the value of the "input" and "output" fields, respectively.
@@ -745,6 +748,7 @@ If the value of "output" is an array, its shape gives the output dimension,
 otherwise it is given by the length of "axes" for the coordinate system with the name of the "output".
 
 #### identity
+
 (identity-md)=
 
 `identity` transformations map input coordinates to output coordinates without modification.
@@ -767,6 +771,7 @@ y = j
 ````
 
 #### mapAxis
+
 (mapAxis-md)=
 
 `mapAxis` transformations describe axis permutations as a mapping of axis names.
@@ -820,6 +825,7 @@ z = b
 ````
 
 #### translation
+
 (translation-md)=
 
 `translation` transformations are special cases of affine transformations.
@@ -844,12 +850,13 @@ Input and output dimensionality MUST be identical and MUST equal the the length 
 defines the function:
 
 ```
-x = i + 9 
+x = i + 9
 y = j - 1.42
 ```
 ````
 
 #### scale
+
 (scale-md)=
 
 `scale` transformations are special cases of affine transformations.
@@ -880,6 +887,7 @@ y = 2 * j
 ````
 
 #### affine
+
 (affine-md)=
 
 `affine`s are [matrix transformations](#matrix-trafo-md) from N-dimensional inputs to M-dimensional outputs
@@ -954,6 +962,7 @@ where the last row `[0 0 1]` is omitted in the JSON representation.
 ````
 
 #### rotation
+
 (rotation-md)=
 
 `rotation`s are [matrix transformations](#matrix-trafo-md) that are special cases of affine transformations.
@@ -987,6 +996,7 @@ y = 1*i + 0*j
 ````
 
 #### inverseOf
+
 (inverseOf-md)=
 
 An `inverseOf` transformation contains another transformation (often non-linear),
@@ -1009,6 +1019,7 @@ a choice that many users and developers find intuitive.
 ````
 
 #### sequence
+
 (sequence-md)=
 
 A `sequence` transformation consists of an ordered array of coordinate transformations,
@@ -1072,6 +1083,7 @@ and is invertible.
 ````
 
 #### coordinates and displacements
+
 (coordinates-displacements-md)=
 
 `coordinates` and `displacements` transformations store coordinates or displacements in an array
@@ -1160,23 +1172,24 @@ Metadata for these coordinate transforms have the following field:
 
 For both `coordinates` and `displacements`, the array data at referred to by `path` MUST define coordinate system and coordinate transform metadata:
 
-* Every axis name in the `coordinateTransform`'s `input` MUST appear in the coordinate system
-* The array dimension corresponding to the `coordinate` or `displacement` axis MUST have length equal to the number of dimensions of the `coordinateTransform` `output`
-* If the input coordinate system `N` axes, then the array data at `path` MUST have `(N + 1)` dimensions.
-* SHOULD have a `name` identical to the `name` of the corresponding `coordinateTransform`.
+- Every axis name in the `coordinateTransform`'s `input` MUST appear in the coordinate system
+- The array dimension corresponding to the `coordinate` or `displacement` axis MUST have length equal to the number of dimensions of the `coordinateTransform` `output`
+- If the input coordinate system `N` axes, then the array data at `path` MUST have `(N + 1)` dimensions.
+- SHOULD have a `name` identical to the `name` of the corresponding `coordinateTransform`.
 
 For `coordinates`:
 
-* `coordinateSystem` metadata MUST have exactly one axis with `"type" : "coordinate"`
-* the shape of the array along the "coordinate" axis must be exactly `N`
+- `coordinateSystem` metadata MUST have exactly one axis with `"type" : "coordinate"`
+- the shape of the array along the "coordinate" axis must be exactly `N`
 
 For `displacements`:
 
-* `coordinateSystem` metadata MUST have exactly one axis with `"type" : "displacement"`
-* the shape of the array along the "displacement" axis must be exactly `N`
-* `input` and `output` MUST have an equal number of dimensions.
+- `coordinateSystem` metadata MUST have exactly one axis with `"type" : "displacement"`
+- the shape of the array along the "displacement" axis must be exactly `N`
+- `input` and `output` MUST have an equal number of dimensions.
 
 For example, in 1D:
+
 ```json
 {
     "name" : "a coordinate field transform",
@@ -1200,7 +1213,7 @@ Example metadata for the array data at path `coordinates` above:
                 { "name": "i", "type": "space", "discrete": true },
                 { "name": "c", "type": "coordinate", "discrete": true }
             ]
-        } 
+        }
     ],
     "coordinateTransformations" : [
         {
@@ -1214,14 +1227,14 @@ Example metadata for the array data at path `coordinates` above:
 If the array in `coordinates` contains the data: `[-9, 9, 0]`, then this metadata defines the function:
 
 ```
-x = 
+x =
     if ( i < 0.5 )                      -9
     else if ( i >= 0.5 and i < 1.5 )     9
     else if ( i >= 1.5 )                 0
 ```
 
-
 A 1D example displacement field:
+
 ```json
 {
     "name" : "a displacement field transform",
@@ -1245,7 +1258,7 @@ Example metadata for the array data at path `displacements` above:
                 { "name": "x", "type": "space", "unit" : "nanometer" },
                 { "name": "d", "type": "displacement", "discrete": true }
             ]
-        } 
+        }
     ],
     "coordinateTransformations" : [
         {
@@ -1267,19 +1280,19 @@ That value gives us the displacement of the input point,
 hence the output is `1.0 + (-0.5) = 0.5`.
 
 #### byDimension
+
 (byDimension-md)=
 
 `byDimension` transformations build a high dimensional transformation using lower dimensional transformations on subsets of dimensions.
 
 <dl>
   <dt><strong>transformations</strong></dt>
-  <dd>  A list of transformations, each of which applies to a (non-strict) subset of input and output dimensions (axes). 
+  <dd>  A list of transformations, each of which applies to a (non-strict) subset of input and output dimensions (axes).
         The values of `input` and `output` fields MUST be an array of strings.
         Every axis name in `input` MUST correspond to a name of some axis in this parent object's `input` coordinate system.
         Every axis name in the parent byDimension's `output` MUST appear in exactly one of its child transformations' `output`.
         </dd>
 </dl>
-
 
 ````{admonition} Example
 
@@ -1325,8 +1338,8 @@ This transformation is invalid because the output axis `x` appears in more than 
 
 ````
 
-
 #### bijection
+
 (bijection-md)=
 
 A bijection transformation is an invertible transformation
@@ -1358,8 +1371,8 @@ the input and output of the `forward` and `inverse` transformations are understo
 
 ````
 
-
 ## "multiscales" metadata
+
 (multiscales-md)=
 
 Metadata about an image can be found under the "multiscales" key in the group-level OME-Zarr Metadata.
@@ -1429,6 +1442,7 @@ if not datasets:
 ```
 
 ## "omero" metadata (transitional)
+
 (omero-md)=
 
 [=Transitional=] information specific to the channels of an image and how to render it can be found under the "omero" key in the group-level metadata:
@@ -1474,6 +1488,7 @@ It MUST also contain the fields "start" and "end",
 which are the start and end values of the window, respectively.
 
 ## "labels" metadata
+
 (labels-md)=
 
 In OME-Zarr, Zarr arrays representing pixel-annotation data are stored in a group called "labels".
@@ -1501,7 +1516,7 @@ For example:
 {
   "attributes": {
     "ome": {
-      "version": "0.5",
+      "version": "0.6.dev1",
       "labels": [
         "cell_space_segmentation"
       ]
@@ -1541,9 +1556,8 @@ denoting arbitrary metadata associated with that label.
 Label-value objects within the `properties` array do not need to have the same keys.
 
 The value of the `source` key MUST be a JSON object containing information about the original image from which the label image derives.
-This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.  
+This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.
 The default value is `../../` since most labeled images are stored in a "labels" group that is nested within the original image group.
-
 
 ````{admonition} Example
 Here is an example of a simple `image-label` object for a label image in which 0s and 1s represent intercellular and cellular space, respectively:
@@ -1554,8 +1568,8 @@ In this case, the pixels consisting of a 0 in the Zarr array will be displayed a
 Pixels with a 1 in the Zarr array, which correspond to cellular space, will be displayed as 50% green and 50% opacity.
 ````
 
-
 ## "plate" metadata
+
 (plate-md)=
 
 For high-content screening datasets,
@@ -1641,6 +1655,7 @@ containing one field of view per acquisition.
 ````
 
 ## "well" metadata
+
 (well-md)=
 
 For high-content screening datasets,
@@ -1676,6 +1691,7 @@ The first field is part of the first acquisition, and the second field is part o
 ````
 
 # Specification naming style
+
 (naming-style)=
 
 Multi-word keys in this specification should use the `camelCase` style.
@@ -1683,6 +1699,7 @@ NB: some parts of the specification don't obey this convention as they were adde
 but they should be updated in due course.
 
 # Implementations
+
 (implementations)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).

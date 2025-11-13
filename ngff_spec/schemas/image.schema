@@ -48,7 +48,7 @@
                   "type": "string"
                 },
                 "coordinateTransformations": {
-                  "$ref": "coordinate_transformation.schema"
+                  "$ref": "https://ngff.openmicroscopy.org/0.6.dev1/schemas/coordinate_transformation.schema"
                 }
               },
               "required": [
@@ -64,10 +64,10 @@
             ]
           },
           "coordinateSystems": {
-            "$ref": "coordinate_systems.schema"
+            "$ref": "https://ngff.openmicroscopy.org/0.6.dev1/schemas/coordinate_systems.schema"
           },
           "coordinateTransformations": {
-            "$ref": "coordinate_transformation.schema"
+            "$ref": "https://ngff.openmicroscopy.org/0.6.dev1/schemas/coordinate_transformation.schema"
           }
         },
         "required": [

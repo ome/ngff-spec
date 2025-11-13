@@ -3,7 +3,7 @@
   "node_type": "group",
   "attributes": {
     "ome": {
-      "version": "0.5",
+      "version": "0.6.dev1",
       "bioformats2raw.layout": 3,
       "plate": {
         "columns": [

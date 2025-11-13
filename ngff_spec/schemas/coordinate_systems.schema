@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/latest/schemas/coordinate_systems.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.6.dev1/schemas/coordinate_systems.schema",
   "title": "NGFF CoordinateSystem",
   "description": "JSON from OME-NGFF .zattrs",
   "type": "array",
@@ -18,7 +18,7 @@
           "description": "Name of coordinate system"
         },
         "axes": {
-          "$ref": "axes.schema"
+          "$ref": "https://ngff.openmicroscopy.org/0.6.dev1/schemas/axes.schema"
         }
       },
       "required": [
