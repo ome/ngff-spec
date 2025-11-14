@@ -1,0 +1,24 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "_conformance": {
+      "description": "Tests for the plate JSON schema: TODO"
+    },
+    "ome": {
+      "version": "0.6.dev1",
+      "plate": {
+        "columns": [
+          {
+            "name": "A"
+          }
+        ],
+        "rows": [
+          {
+            "name": "1"
+          }
+        ]
+      }
+    }
+  }
+}

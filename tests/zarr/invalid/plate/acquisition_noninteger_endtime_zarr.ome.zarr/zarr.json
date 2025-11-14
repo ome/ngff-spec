@@ -1,0 +1,37 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "_conformance": {
+      "description": "Tests for the plate JSON schema: TODO"
+    },
+    "ome": {
+      "version": "0.6.dev1",
+      "plate": {
+        "acquisitions": [
+          {
+            "id": 0,
+            "endtime": "2022-05-13T13:48:06+00:00"
+          }
+        ],
+        "columns": [
+          {
+            "name": "A"
+          }
+        ],
+        "rows": [
+          {
+            "name": "1"
+          }
+        ],
+        "wells": [
+          {
+            "path": "A/1",
+            "rowIndex": 0,
+            "columnIndex": 0
+          }
+        ]
+      }
+    }
+  }
+}

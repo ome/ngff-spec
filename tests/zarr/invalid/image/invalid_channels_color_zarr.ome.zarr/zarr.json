@@ -1,0 +1,59 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "_conformance": {
+      "description": "TODO"
+    },
+    "ome": {
+      "version": "0.6.dev1",
+      "multiscales": [
+        {
+          "axes": [
+            {
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "name": "x",
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ],
+          "datasets": [
+            {
+              "path": "0",
+              "coordinateTransformations": [
+                {
+                  "scale": [
+                    1,
+                    1
+                  ],
+                  "type": "scale"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "omero": {
+        "channels": [
+          {
+            "active": true,
+            "coefficient": 1.0,
+            "color": 255,
+            "family": "linear",
+            "label": "1234",
+            "window": {
+              "end": 1765.0,
+              "max": 2555.0,
+              "min": 5.0,
+              "start": 0.0
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "_conformance": {
+    "description": "TODO"
+  },
+  "ome": {
+    "version": "0.6.dev1",
+    "multiscales": [
+      {
+        "datasets": [
+          {
+            "path": "path/to/0",
+            "coordinateTransformations": [
+              {
+                "type": "scale",
+                "scale": [
+                  1,
+                  1
+                ]
+              }
+            ]
+          }
+        ],
+        "type": "gaussian",
+        "metadata": {
+          "method": "skimage.transform.pyramid_gaussian",
+          "version": "0.16.1",
+          "args": [
+            "true",
+            "false"
+          ],
+          "kwargs": {
+            "multichannel": true
+          }
+        },
+        "axes": [
+          {
+            "name": "y",
+            "type": "space",
+            "unit": "micrometer"
+          },
+          {
+            "name": "x",
+            "type": "space",
+            "unit": "micrometer"
+          }
+        ]
+      }
+    ]
+  }
+}

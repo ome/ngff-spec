@@ -1,0 +1,17 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "_conformance": {
+      "description": "Tests for the well JSON schema: TODO"
+    },
+    "well": {
+      "images": [
+        {
+          "acquisition": "0",
+          "path": "0"
+        }
+      ]
+    }
+  }
+}

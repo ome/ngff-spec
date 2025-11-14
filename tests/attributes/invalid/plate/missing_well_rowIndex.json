@@ -1,0 +1,26 @@
+{
+  "_conformance": {
+    "description": "Tests for the plate JSON schema: TODO"
+  },
+  "ome": {
+    "version": "0.6.dev1",
+    "plate": {
+      "columns": [
+        {
+          "name": "A"
+        }
+      ],
+      "rows": [
+        {
+          "name": "1"
+        }
+      ],
+      "wells": [
+        {
+          "path": "A/1",
+          "columnIndex": 0
+        }
+      ]
+    }
+  }
+}

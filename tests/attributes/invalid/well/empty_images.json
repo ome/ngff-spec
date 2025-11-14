@@ -1,0 +1,8 @@
+{
+  "_conformance": {
+    "description": "Tests for the well JSON schema: TODO"
+  },
+  "well": {
+    "images": []
+  }
+}

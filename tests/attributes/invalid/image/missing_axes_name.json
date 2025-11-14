@@ -1,0 +1,36 @@
+{
+  "_conformance": {
+    "description": "TODO"
+  },
+  "ome": {
+    "version": "0.6.dev1",
+    "multiscales": [
+      {
+        "axes": [
+          {
+            "type": "space",
+            "unit": "micron"
+          },
+          {
+            "type": "space",
+            "unit": "micron"
+          }
+        ],
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  0.13,
+                  0.13
+                ],
+                "type": "scale"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "_conformance": {
+    "description": "TODO"
+  },
+  "ome": {
+    "version": "0.6.dev1",
+    "multiscales": [
+      {
+        "axes": [],
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_conformance": {
+    "description": "TODO"
+  },
+  "ome": {
+    "version": "0.6.dev1",
+    "multiscales": [
+      {
+        "axes": [
+          {
+            "name": "angle",
+            "type": "custom"
+          },
+          {
+            "name": "y",
+            "type": "space",
+            "unit": "micrometer"
+          },
+          {
+            "name": "x",
+            "type": "space",
+            "unit": "micrometer"
+          }
+        ],
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

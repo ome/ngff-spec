@@ -1,0 +1,13 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "_conformance": {
+      "description": "Tests for the strict image-label JSON schema: TODO"
+    },
+    "ome": {
+      "version": "0.6.dev1",
+      "image-label": {}
+    }
+  }
+}
