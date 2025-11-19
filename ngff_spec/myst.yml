@@ -2,7 +2,32 @@ version: 1
 project:
   title: Next-generation file format specification
   authors:
-    - name: NGFF-community
+    - name: John Bogovic
+      
+    - name: Jean-Marie Burel
+      orcid: "https://orcid.org/0000-0002-1789-1861"
+      affiliations:
+        - id: Dundee
+          institution: "University of Dundee"
+      github: jburel
+    - name: Sébastien Besson
+      orcid: "https://orcid.org/0000-0001-8783-1429"
+      affiliations:
+        - id: Glencoe
+          institution: "Glencoe Software, Inc."
+      github: sbesson
+    - name: Yaroslav Halchenko
+    - name: Juan Nunez-Iglesias
+    - name: William Moore
+      affiliations:
+        - Dundee
+    - name: Constantin Pape
+    - name: Normal Rzepka
+    - name: Isaac Virshup
+      
+
+
+
   github: ome/ngff-spec
   bibliography:
     - references.bib
