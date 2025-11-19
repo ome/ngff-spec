@@ -28,6 +28,23 @@ The conventions and specifications defined in this document
 are designed to enable next-generation file formats to represent
 the same bioimaging data that can be represented in [OME-TIFF](http://www.openmicroscopy.org/ome-files/) and beyond.
 
+## License
+
+This specification is derived from the [Community Specification Template](https://www.w3.org/People/Schepers/unoffical_template.html) provided by W3C, under the following terms:
+
+> By obtaining and/or copying this work, you (the licensee) agree that you have read, understood, and will comply with the following terms and conditions:
+> Permission to copy, modify, and distribute this work, with or without modification, for any purpose and without fee or royalty is hereby granted, provided that you include the following on ALL copies of the work or portions thereof, including modifications:
+> 
+> The full text of this NOTICE in a location viewable to users of the redistributed or derivative work.
+> Any pre-existing intellectual property disclaimers, notices, or terms and conditions. If none exist, the W3C Software and Document Short Notice should be included.
+> Notice of any changes or modifications, through a copyright statement on the new code or document such as:
+> "This document includes material copied from or derived from Community Specification Template. Copyright © 2025 W3C® (MIT, ERCIM, Keio, Beihang)."
+
+
+### Notice of Modifications:
+This specification includes material copied from or derived from the Community Specification Template.
+Copyright © 2025 W3C® (MIT, ERCIM, Keio, Beihang).
+
 ## Document conventions
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL”
