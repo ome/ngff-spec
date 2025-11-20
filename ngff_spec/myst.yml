@@ -2,31 +2,240 @@ version: 1
 project:
   title: Next-generation file format specification
   authors:
-    - name: John Bogovic
-      
-    - name: Jean-Marie Burel
-      orcid: "https://orcid.org/0000-0002-1789-1861"
-      affiliations:
-        - id: Dundee
-          institution: "University of Dundee"
-      github: jburel
+
+    # A
+    - name: Chris Allan
+      affiliation: Glencoe
+    # B
+    - name: Chris Barnes
+      github: clbarnes
+      affiliation: Gerbi
+    - name: Davis Bennett
+      github: d-v-b
     - name: Sébastien Besson
       orcid: "https://orcid.org/0000-0001-8783-1429"
-      affiliations:
-        - id: Glencoe
-          institution: "Glencoe Software, Inc."
       github: sbesson
-    - name: Yaroslav Halchenko
-    - name: Juan Nunez-Iglesias
+      affiliation: Glencoe
+    - name: John Bogovic
+      github: bogovicj
+      affiliation: HHMI
+    - name: Jean-Marie Burel
+      orcid: "https://orcid.org/0000-0002-1789-1861"
+      affiliation: Dundee
+      github: jburel
+
+    # C
+    - name: Forest Collmann
+      github: fcollman
+      affiliation: allenbrain
+    - name: Tommaso Comparin
+      github: tcompa
+
+    # D
+    - name: Lachlan Deakin
+      github: lDeakin
+      affiliation: ANU
+    - name: Gideon Dunster
+
+    # E
+    - name: Jan Eglinger
+      github: imagejan
+      affiliation: FMI
+
+    # F
+    - name: David Feng
+      github: dyf
+      affiliation: allenneural
+
+    # G
+    - name: Nathalie Gaudreault
+    - name: Guillaume Gay
+      github: glyg
+    - name: Ilan Gold
+      github: ilan-gold
+    - name: Xiao Gui
+      github: xgui3783
+    
+    # H
+    - name: Yaroslav O. Halchenko
+      github: yarikoptic
+      affiliation: dartmouth
+    - name: Matthew Hartley
+      github: matthewh-ebi
+      affiliation: EMBL-EBI
+    - name: Julian Hn
+      github: julianhn
+
+    # I
+    - name: Michael Innerberger
+      github: minnerbe
+      affiliations: HHMI
+
+    # K
+    - name: Mark Kittisopikul
+      github: mkitti
+      affiliation: HHMI
+    
+    # L
+    - name: Talley Lambert
+      github: tlambert03
+      affiliation: HMS
+    - name: Melissa Linkert
+      github: melissalinkert
+    - name: Ziwen Liu
+      github: ziw-liu
+    - name: Joel Lüthi
+      github: jluethi
+      affiliation: biovision
+
+    # M
+    - name: Jeremy Maitin-Shepard
+      github: jbms
+      affiliation: google
+    - name: Luca Marconato
+      github: LucaMarconato
+      affiliation: EMBL
+    - name: Matt McCormick
+      github: thewtex
+    - name: Josh Moore
+      github: joshmoore
+      affiliation: Gerbi
     - name: William Moore
-      affiliations:
-        - Dundee
+      github: will-moore
+      affiliation: Dundee
+
+    # N
+    - name: Juan Nunez-Iglesias
+      github: jni
+      affiliation: Monash
+    
+    # O/Ö
+    - name: Bugra Özdemir
+      github: bugraoezdemir
+    
+    # P
+    - name: Giovanni Palla
+      github: giovp
     - name: Constantin Pape
-    - name: Normal Rzepka
+      github: constantinpape
+      affiliation: universität_göttingen
+    - name: Eric Perlman
+      github: perlman
+    
+    # R
+    - name: Sebastian Rhode
+      github: sebi06
+      affiliation: Zeiss
+    - name: Norman Rzepka
+      github: normanrz
+
+    # S
+    - name: Stephan Saalfeld
+      github: axtimwalde
+      affiliation: HHMI
+    - name: Virginia Scarlett
+      github: virginiascarlett
+    - name: Doug Shepherd
+      github: dpshepherd
+      affiliation: ASU
+    - name: Johannes Soltwedel
+      github: jo-mueller
+      affiliation: Gerbi
+    - name: David Stansby
+      github: dstansby
+      affiliation: UCL
+    - name: Jason R. Swedlow
+      github: jrswedlow
+
+    # T
+    - name: Christian Tischer
+      github: tischi
+      affiliation: EMBL
+    - name: Dan Toloudis
+      github: toloudis
+    
+    # U
+    - name: Virginie Uhlmann
+      github: vuhlmann
+      affiliation: biovision
+
+    # V
+    - name: Wouter-Michiel Vierdag
+      github: melonora
     - name: Isaac Virshup
-      
+      github: ivirshup
+    
+    # W
+    - name: Alan Watson
+      github: alanmwatson
+    - name: Jonas Windhager
+      github: jwindhager
 
+    # Y
+    - name: Kevin Yamauchi
+      github: kevinyamauchi
 
+    # Z
+    - name: Yurii Zubov
+      github: yuriyzubov
+      affiliation: HHMI
+    - name: Dženan Zukić
+      github: dzenanz
+
+  affiliations:
+    - id: ANU
+      institution: "Australian National University"
+      ror: "https://ror.org/019wvm592"
+    - id: ASU
+      institution: "Arizona State University"
+      ror: "https://ror.org/03efmqc40"
+    - id: allenneural
+      institution: "Allen Institute for Neural Dynamics"
+      ror: "https://ror.org/04szwah67"
+    - id: allenbrain
+      institution: "Allen Institute for Brain Science"
+      ror: "https://ror.org/00dcv1019"
+    - id: biovision
+      institution: "BioVisionCenter, University of Zurich"
+    - id: Monash
+      institution: "Monash Medical Centre"
+      ror: "https://ror.org/036s9kg65"
+    - id: dartmouth
+      institution: "Dartmouth College"
+      ror: "https://ror.org/049s0rh22"
+    - id: FMI
+      institution: "Friedrich Miescher Institute for Biomedical Research"
+      ror: "https://ror.org/01bmjkv45"
+    - id: google
+      institution: "Google"
+      ror: "https://ror.org/00njsd438"
+    - id: HMS
+      institution: "Harvard Medical School"
+    - id: UCL
+      institution: "University College London"
+      ror: "https://ror.org/02jx3x895"
+    - id: Dundee
+      institution: "University of Dundee"
+      ror: "https://ror.org/03h2bxq36"
+    - id: Glencoe
+      institution: "Glencoe Software, Inc."
+    - id: universität_göttingen
+      institution: "University of Göttingen"
+      ror: "https://ror.org/01y9bpm73"
+    - id: EMBL
+      institution: "European Molecular Biology Laboratory (EMBL)"
+      ror: "https://ror.org/03mstc592"
+    - id: EMBL-EBI
+      institution: "European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI)"
+      ror: "https://ror.org/02catss52"
+    - id: Gerbi
+      institution: "German Bioimaging - Society for Microscopy and Image Analysis e.V."
+      ror: "https://ror.org/05tpnw772"
+    - id: "HHMI"
+      institution: "Howard Hughes Medical Institute, Janelia Research Campus"
+      ror: "https://ror.org/006w34k90"
+    - id: Zeiss
+      institution: "Carl Zeiss Microscopy GmbH"
 
   github: ome/ngff-spec
   bibliography:
