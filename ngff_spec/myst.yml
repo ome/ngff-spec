@@ -1,7 +1,6 @@
 version: 1
 project:
   title: Next-generation file format specification
-  license: BSD-3-Clause
   authors:
     - name: NGFF-community
   github: ome/ngff-spec
