@@ -82,6 +82,7 @@ project:
       affiliation: HMS
     - name: Melissa Linkert
       github: melissalinkert
+      affiliation: Glencoe
     - name: Ziwen Liu
       github: ziw-liu
     - name: Joel Lüthi
@@ -118,9 +119,11 @@ project:
       github: giovp
     - name: Constantin Pape
       github: constantinpape
+      orcid: "0000-0001-6562-7187"
       affiliation: universität_göttingen
     - name: Eric Perlman
       github: perlman
+      orcid: "0000-0001-5542-1302"
     
     # R
     - name: Sebastian Rhode
@@ -128,52 +131,68 @@ project:
       affiliation: Zeiss
     - name: Norman Rzepka
       github: normanrz
+      orcid: "0000-0002-8168-7929"
 
     # S
     - name: Stephan Saalfeld
       github: axtimwalde
       affiliation: HHMI
+      orcid: "0000-0002-4106-1761"
+
     - name: Virginia Scarlett
       github: virginiascarlett
+      orcid: "0000-0002-4156-2849"
     - name: Doug Shepherd
       github: dpshepherd
       affiliation: ASU
     - name: Johannes Soltwedel
       github: jo-mueller
       affiliation: Gerbi
+      orcid: "0000-0003-1273-2412"
     - name: David Stansby
       github: dstansby
       affiliation: UCL
+      orcid: "0000-0002-1365-1908"
     - name: Jason R. Swedlow
       github: jrswedlow
+      orcid: "0000-0002-2198-1958"
 
     # T
     - name: Christian Tischer
       github: tischi
       affiliation: EMBL
+      orcid: "0000-0003-4105-1990"
     - name: Dan Toloudis
       github: toloudis
+      orcid: "https://orcid.org/0000-0003-2620-1233"
     
     # U
     - name: Virginie Uhlmann
       github: vuhlmann
       affiliation: biovision
+      orcid: "0000-0002-2859-9241"
 
     # V
     - name: Wouter-Michiel Vierdag
       github: melonora
+      orcid: "0000-0003-1666-5421"
     - name: Isaac Virshup
       github: ivirshup
+      orcid: "0000-0002-1710-8945"
     
     # W
     - name: Alan Watson
       github: alanmwatson
     - name: Jonas Windhager
       github: jwindhager
+      orcid: "0000-0002-2111-5291"
+      affiliation: uppsala
 
     # Y
     - name: Kevin Yamauchi
       github: kevinyamauchi
+      orcid: "https://orcid.org/0000-0002-7818-1388"
+      affiliation: ETH
 
     # Z
     - name: Yurii Zubov
@@ -183,59 +202,65 @@ project:
       github: dzenanz
 
   affiliations:
-    - id: ANU
-      institution: "Australian National University"
-      ror: "https://ror.org/019wvm592"
-    - id: ASU
-      institution: "Arizona State University"
-      ror: "https://ror.org/03efmqc40"
-    - id: allenneural
-      institution: "Allen Institute for Neural Dynamics"
-      ror: "https://ror.org/04szwah67"
     - id: allenbrain
       institution: "Allen Institute for Brain Science"
       ror: "https://ror.org/00dcv1019"
+    - id: allenneural
+      institution: "Allen Institute for Neural Dynamics"
+      ror: "https://ror.org/04szwah67"
+    - id: ASU
+      institution: "Arizona State University"
+      ror: "https://ror.org/03efmqc40"
+    - id: ANU
+      institution: "Australian National University"
+      ror: "https://ror.org/019wvm592"
     - id: biovision
       institution: "BioVisionCenter, University of Zurich"
-    - id: Monash
-      institution: "Monash Medical Centre"
-      ror: "https://ror.org/036s9kg65"
+    - id: Zeiss
+      institution: "Carl Zeiss Microscopy GmbH"
     - id: dartmouth
       institution: "Dartmouth College"
       ror: "https://ror.org/049s0rh22"
-    - id: FMI
-      institution: "Friedrich Miescher Institute for Biomedical Research"
-      ror: "https://ror.org/01bmjkv45"
-    - id: google
-      institution: "Google"
-      ror: "https://ror.org/00njsd438"
-    - id: HMS
-      institution: "Harvard Medical School"
-    - id: UCL
-      institution: "University College London"
-      ror: "https://ror.org/02jx3x895"
-    - id: Dundee
-      institution: "University of Dundee"
-      ror: "https://ror.org/03h2bxq36"
-    - id: Glencoe
-      institution: "Glencoe Software, Inc."
-    - id: universität_göttingen
-      institution: "University of Göttingen"
-      ror: "https://ror.org/01y9bpm73"
     - id: EMBL
       institution: "European Molecular Biology Laboratory (EMBL)"
       ror: "https://ror.org/03mstc592"
     - id: EMBL-EBI
       institution: "European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI)"
       ror: "https://ror.org/02catss52"
+    - id: ETH
+      institution: "ETH Zurich"
+      ror: "https://ror.org/05a28rw58"
+    - id: FMI
+      institution: "Friedrich Miescher Institute for Biomedical Research"
+      ror: "https://ror.org/01bmjkv45"
     - id: Gerbi
       institution: "German Bioimaging - Society for Microscopy and Image Analysis e.V."
       ror: "https://ror.org/05tpnw772"
+    - id: Glencoe
+      institution: "Glencoe Software, Inc."
+    - id: google
+      institution: "Google"
+      ror: "https://ror.org/00njsd438"
+    - id: HMS
+      institution: "Harvard Medical School"
     - id: "HHMI"
       institution: "Howard Hughes Medical Institute, Janelia Research Campus"
       ror: "https://ror.org/006w34k90"
-    - id: Zeiss
-      institution: "Carl Zeiss Microscopy GmbH"
+    - id: Monash
+      institution: "Monash Medical Centre"
+      ror: "https://ror.org/036s9kg65"
+    - id: UCL
+      institution: "University College London"
+      ror: "https://ror.org/02jx3x895"
+    - id: Dundee
+      institution: "University of Dundee"
+      ror: "https://ror.org/03h2bxq36"
+    - id: universität_göttingen
+      institution: "University of Göttingen"
+      ror: "https://ror.org/01y9bpm73"
+    - id: uppsala
+      institution: "Uppsala University"
+      ror: "https://ror.org/048a87296"
 
   github: ome/ngff-spec
   bibliography:
