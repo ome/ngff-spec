@@ -21,40 +21,40 @@
           ],
           "datasets": [
             {
-              "path": "0",
+              "path": "s0",
               "coordinateTransformations": [
                 {
                   // the voxel size for the first scale level (0.5 micrometer)
                   // the time unit (0.1 milliseconds), which is the same for each scale level
                   "type": "scale",
                   "scale": [0.1, 1.0, 0.5, 0.5, 0.5],
-                  "input": "0",
+                  "input": "s0",
                   "output": "physical"
                 }
               ]
             },
             {
-              "path": "1",
+              "path": "s1",
               "coordinateTransformations": [
                 {
                   // the voxel size for the second scale level (1 micrometer)
                   // the time unit (0.1 milliseconds), which is the same for each scale level
                   "type": "scale",
                   "scale": [0.1, 1.0, 1.0, 1.0, 1.0],
-                  "input": "1",
+                  "input": "s1",
                   "output": "physical"
                 }
               ]
             },
             {
-              "path": "2",
+              "path": "s2",
               "coordinateTransformations": [
                 {
                   // the voxel size for the third scale level (2 micrometer)
                   // the time unit (0.1 milliseconds), which is the same for each scale level
                   "type": "scale",
                   "scale": [0.1, 1.0, 2.0, 2.0, 2.0],
-                  "input": "2",
+                  "input": "s2",
                   "output": "physical"
                 }
             ]
