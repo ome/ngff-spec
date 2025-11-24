@@ -78,23 +78,26 @@ def pytest_generate_tests(metafunc):
                 suites.append(Suite(schema, test["data"], test["valid"]))
 
         # Examples
-        for config_filename in glob.glob("examples/*/.config.json"):
-            with open(config_filename) as o:
-                data = json.load(o)
-            schema = data["schema"]
-            with open(schema) as f:
-                schema = json.load(f)
-            example_folder = os.path.dirname(config_filename)
-            for filename in glob.glob(f"{example_folder}/*.json"):
-                with open(filename) as f:
-                    # Strip comments
-                    data = "".join(
-                        line for line in f if not line.lstrip().startswith("//")
-                    )
-                    data = json.loads(data)
-                    data = data["attributes"]  # Only validate the attributes object
-                ids.append("example_" + str(filename).split("/")[-1][0:-5])
-                suites.append(Suite(schema, data, True))  # Assume true
+        # TODO: Split examples into snippets (used for reference in spec) and 
+        # complete examples (to be validated here)
+        # for config_filename in glob.glob("ngff_spec/examples/*/.config.json"):
+        #     with open(config_filename) as o:
+        #         data = json.load(o)
+        #     schema = data["schema"]
+        #     with open(schema) as f:
+        #         schema = json.load(f)
+        #     example_folder = os.path.dirname(config_filename)
+        #     for filename in glob.glob(f"{example_folder}/*.json"):
+        #         print(filename)
+        #         with open(filename) as f:
+        #             # Strip comments
+        #             data = "".join(
+        #                 line for line in f if not line.lstrip().startswith("//")
+        #             )
+        #             data = json.loads(data)
+        #             data = data["attributes"]  # Only validate the attributes object
+        #         ids.append("example_" + str(filename).split("/")[-1][0:-5])
+        #         suites.append(Suite(schema, data, True))  # Assume true
 
         metafunc.parametrize("suite", suites, ids=ids, indirect=True)
 
