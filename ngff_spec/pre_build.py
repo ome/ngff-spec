@@ -31,7 +31,6 @@ This section contains JSON examples for various metadata layouts.
 
     for example in example_types:
         json_files = glob.glob(os.path.join(input_directory, example, '*.json'), recursive=True)
-        markdown_file_name = os.path.join(output_directory, f'{example}.md')
 
         index_md += f"\n## {example}\n"
 
@@ -66,10 +65,10 @@ This document contains JSON examples for {example} metadata layouts.
 ```
 """
         # create 
-        with open(markdown_file_name, 'w') as md_file:
+        with open(os.path.join(output_directory, f'{example}.md'), 'w') as md_file:
             md_file.write(markdown_content)
 
-    with open(os.path.join("examples.md"), 'w') as index_file:
+    with open(os.path.join("_generated/examples.md"), 'w') as index_file:
         index_file.write(index_md)
 
 def build_json_schemas():
@@ -121,7 +120,8 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
                 with_footer=True,
                 show_toc=False,
                 link_to_reused_ref=False,
-                custom_template_global_vars={'schema_mapping': schema_mapping})
+#                custom_template_global_vars={'schema_mapping': schema_mapping}
+                )
             generate_from_filename(
                 os.path.abspath(schema_file),
                 result_file_name=os.path.abspath(output_path_md),
@@ -129,7 +129,7 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
             )
 
             # insert mySt cross-reference at top of markdown files
-            with open(output_path_md, 'r') as md_file:
+            with open(output_path_md, 'r', encoding='utf-8') as md_file:
                 md_content = md_file.read()
             crossref = f"schemas:{Path(schema_file).stem}"
             md_content = f"""---
@@ -137,7 +137,7 @@ author: ""
 ---
 ({crossref})=\n\n{md_content}
 """
-            with open(output_path_md, 'w') as md_file:
+            with open(output_path_md, 'w', encoding='utf-8') as md_file:
                 md_file.write(md_content)
 
             link_markdown = f"[{Path(schema_file).stem}](#{crossref})"
@@ -150,7 +150,8 @@ author: ""
                 with_footer=True,
                 show_toc=False,
                 link_to_reused_ref=False,
-                custom_template_global_vars={'schema_mapping': schema_mapping})
+#                custom_template_global_vars={'schema_mapping': schema_mapping}
+                )
 
             generate_from_filename(
                 os.path.abspath(schema_file),
@@ -164,7 +165,7 @@ author: ""
 
         index_markdown += f"| {Path(schema_file).stem} | {link_markdown} | {link_html} |\n"
 
-    with open(os.path.join("schemas.md"), 'w') as index_file:
+    with open(os.path.join("_generated/schemas.md"), 'w') as index_file:
         index_file.write(index_markdown)
 
 def build_footer():

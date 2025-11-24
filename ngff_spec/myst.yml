@@ -96,10 +96,10 @@ project:
           orcid: "https://orcid.org/0000-0002-2198-1958"
   toc:
     - file: specification.md
-    - file: examples.md
+    - file: _generated/examples.md
       children:
         - pattern: _generated/examples/*
-    - file: schemas.md
+    - file: _generated/schemas.md
       children:
         - pattern: _generated/schemas/markdown/*
     - file: contribute.md
