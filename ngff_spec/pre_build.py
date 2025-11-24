@@ -74,20 +74,11 @@ This document contains JSON examples for {example} metadata layouts.
 def build_json_schemas():
     from json_schema_for_humans.generate import generate_from_filename
     from json_schema_for_humans.generation_configuration import GenerationConfiguration
-    import json
 
     schema_source_dir = 'schemas'
     output_directory = '_generated/schemas'
     os.makedirs(output_directory, exist_ok=True)
     schema_files = glob.glob(os.path.join(schema_source_dir, '*.schema'), recursive=True)
-
-    # Create a resolver mapping for local schemas
-    schema_mapping = {}
-    for schema_file in schema_files:
-        with open(schema_file, 'r') as f:
-            schema_content = json.load(f)
-            if '$id' in schema_content:
-                schema_mapping[schema_content['$id']] = os.path.abspath(schema_file)
 
 
     index_markdown = """---
@@ -118,9 +109,8 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
             config_md = GenerationConfiguration(
                 template_name='md',
                 with_footer=True,
-                show_toc=False,
-                link_to_reused_ref=False,
-#                custom_template_global_vars={'schema_mapping': schema_mapping}
+                show_toc=True,
+                link_to_reused_ref=True,
                 )
             generate_from_filename(
                 os.path.abspath(schema_file),
@@ -141,7 +131,8 @@ author: ""
                 md_file.write(md_content)
 
             link_markdown = f"[{Path(schema_file).stem}](#{crossref})"
-        except Exception:
+        except Exception as e:
+            print(f"Error generating markdown for {schema_file}: {e}")
             link_markdown = ""
 
         try:
@@ -149,8 +140,7 @@ author: ""
                 template_name='js',
                 with_footer=True,
                 show_toc=False,
-                link_to_reused_ref=False,
-#                custom_template_global_vars={'schema_mapping': schema_mapping}
+                link_to_reused_ref=True,
                 )
 
             generate_from_filename(
@@ -160,7 +150,8 @@ author: ""
             )
             link_html = f"[{Path(schema_file).stem}]({output_path_html})"
 
-        except Exception:
+        except Exception as e:
+            print(f"Error generating HTML for {schema_file}: {e}")
             link_html = ""
 
         index_markdown += f"| {Path(schema_file).stem} | {link_markdown} | {link_html} |\n"
