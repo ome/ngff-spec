@@ -1,3 +1,6 @@
+---
+author: ""
+---
 # Contribution guide
 
 Contributions to the spec text, examples and schemas are highly welcome
@@ -27,6 +30,39 @@ jupyter book build ngff_spec
 ```
 
 You'll find the built webpages under `_build/html`.
+
+## First contribution
+
+If you haven't contributed to the spec before,
+please add yourself as an author in the `ngff_spec/myst.yml` metadata file.
+This should look like this, for example:
+
+```yaml
+    - name: John A. Doe
+      id: jdoe
+      orcid: xxxx-xxxx-xxxx-xxxx
+      github: jdoe
+      affiliations:
+        - id: key
+          institution: ICSLDJ University
+          city: Doeburg
+          ror: https://ror.org/....
+    - name: Jane Doe
+      affiliations: key
+```
+
+For more information see [myst documentation on author formatting](https://mystmd.org/guide/frontmatter#frontmatter-authors).
+
+When you submit your first PR,
+make sure to rebuild the `CITATION.cff` file in the root of this repository.
+To do so, run the following command:
+
+```bash
+cd ngff_spec/ && jupyter book build --cff
+```
+
+Copy the generated `CITATION.cff` file from `ngff_spec/CITATION.cff` to the root of this repository
+and submit it along with your PR.
 
 ### Text format
 

@@ -1,5 +1,7 @@
-Citing
-======
+---
+title: Citing
+author: ""
+---
 (citing)=
 
 [Next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.](https://ngff.openmicroscopy.org/0.4)

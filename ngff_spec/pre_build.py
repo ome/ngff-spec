@@ -23,6 +23,7 @@ def build_json_examples():
     index_md = """---
 title: NGFF metadata JSON Examples
 short_title: JSON Examples
+author: ""
 ---
 
 This section contains JSON examples for various metadata layouts.
@@ -35,7 +36,10 @@ This section contains JSON examples for various metadata layouts.
         index_md += f"\n## {example}\n"
 
         # add header
-        markdown_content = f"""# {example}\n\n
+        markdown_content = f"""---
+title: {example} Examples
+author: ""
+---
 
 This document contains JSON examples for {example} metadata layouts.
 
@@ -86,7 +90,12 @@ def build_json_schemas():
             if '$id' in schema_content:
                 schema_mapping[schema_content['$id']] = os.path.abspath(schema_file)
 
-    index_markdown = """# JSON Schemas
+
+    index_markdown = """---
+title: NGFF metadata JSON Schemas
+short_title: JSON Schemas
+author: ""
+---
 
 This section contains JSON schemas for various metadata layouts.
 Find below links to auto-generated markdown pages or interactive HTML pages for each schema.
@@ -123,7 +132,11 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
             with open(output_path_md, 'r') as md_file:
                 md_content = md_file.read()
             crossref = f"schemas:{Path(schema_file).stem}"
-            md_content = f"({crossref})=\n\n{md_content}"
+            md_content = f"""---
+author: ""
+---
+({crossref})=\n\n{md_content}
+"""
             with open(output_path_md, 'w') as md_file:
                 md_file.write(md_content)
 
@@ -161,8 +174,7 @@ def build_footer():
     footer_content = f"""
 <div>
     Copyright © 2020-{year}
-    <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>®</sup>
-    (<a href="https://dundee.ac.uk/"><abbr title="University of Dundee">U. Dundee</abbr></a>).
+    <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>®</sup>.
     OME trademark rules apply.
 </div>
 """
