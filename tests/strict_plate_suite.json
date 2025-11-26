@@ -8,7 +8,7 @@
       "formerly": "plate/strict_no_acquisitions",
       "data": {
         "ome": {
-          "version": "0.6dev2",
+          "version": "0.6.dev2",
           "plate": {
             "columns": [
               {
@@ -37,7 +37,7 @@
       "formerly": "plate/missing_name",
       "data": {
         "ome": {
-          "version": "0.6dev2",
+          "version": "0.6.dev2",
           "plate": {
             "columns": [
               {
@@ -65,7 +65,7 @@
       "formerly": "plate/strict_acquisitions",
       "data": {
         "ome": {
-          "version": "0.6dev2",
+          "version": "0.6.dev2",
           "plate": {
             "acquisitions": [
               {
@@ -101,7 +101,7 @@
       "formerly": "plate/missing_acquisition_name",
       "data": {
         "ome": {
-          "version": "0.6dev2",
+          "version": "0.6.dev2",
           "plate": {
             "acquisitions": [
               {
@@ -136,7 +136,7 @@
       "formerly": "plate/missing_acquisition_maximumfieldcount",
       "data": {
         "ome": {
-          "version": "0.6dev2",
+          "version": "0.6.dev2",
           "plate": {
             "acquisitions": [
               {
