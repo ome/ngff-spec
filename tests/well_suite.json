@@ -8,7 +8,7 @@
       "formerly": "well/minimal_no_acquisition",
       "data": {
         "ome": {
-          "version": "0.6.dev22",
+          "version": "0.6.dev2",
           "well": {
             "images": [
               {
