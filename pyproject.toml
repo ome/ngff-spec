@@ -22,6 +22,7 @@ testing = [
 [tool.setuptools_scm]
 write_to = "ngff_spec/_version.py"
 fallback_version = "0.0.1+nogit"
+local_scheme = "no-local-version"
 
 [build-system]
 requires = ["setuptools >= 77.0.3", "setuptools-scm"]
