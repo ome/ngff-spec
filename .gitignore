@@ -9,6 +9,9 @@ _bikeshed
 
 # do not sync auto-generated md files
 ngff_spec/_generated
+ngff_spec/footer.md
+ngff_spec/examples.md
+ngff_spec/schemas.md
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

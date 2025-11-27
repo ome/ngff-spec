@@ -3,6 +3,10 @@ import os
 import glob
 from pathlib import Path
 import jsonc as json
+import logging
+
+# Suppress warnings from json-schema-for-humans about unresolvable URLs
+logging.getLogger().setLevel(logging.ERROR)
 
 # change working directory to the location of this script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +31,6 @@ This section contains JSON examples for various metadata layouts.
 
     for example in example_types:
         json_files = glob.glob(os.path.join(input_directory, example, '*.json'), recursive=True)
-        markdown_file_name = os.path.join(output_directory, f'{example}.md')
 
         index_md += f"\n## {example}\n"
 
@@ -58,16 +61,14 @@ This document contains JSON examples for {example} metadata layouts.
 
 ```{{literalinclude}} {os.path.abspath(json_file)}
 :linenos:
-:tab-width: 2
 :language: json
-
 ```
 """
         # create 
-        with open(markdown_file_name, 'w') as md_file:
+        with open(os.path.join(output_directory, f'{example}.md'), 'w') as md_file:
             md_file.write(markdown_content)
 
-    with open(os.path.join("examples.md"), 'w') as index_file:
+    with open(os.path.join("_generated/examples.md"), 'w') as index_file:
         index_file.write(index_md)
 
 def build_json_schemas():
@@ -78,6 +79,7 @@ def build_json_schemas():
     output_directory = '_generated/schemas'
     os.makedirs(output_directory, exist_ok=True)
     schema_files = glob.glob(os.path.join(schema_source_dir, '*.schema'), recursive=True)
+
 
     index_markdown = """---
 title: NGFF metadata JSON Schemas
@@ -107,8 +109,9 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
             config_md = GenerationConfiguration(
                 template_name='md',
                 with_footer=True,
-                show_toc=False,
-                link_to_reused_ref=False)
+                show_toc=True,
+                link_to_reused_ref=True,
+                )
             generate_from_filename(
                 os.path.abspath(schema_file),
                 result_file_name=os.path.abspath(output_path_md),
@@ -116,7 +119,7 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
             )
 
             # insert mySt cross-reference at top of markdown files
-            with open(output_path_md, 'r') as md_file:
+            with open(output_path_md, 'r', encoding='utf-8') as md_file:
                 md_content = md_file.read()
             crossref = f"schemas:{Path(schema_file).stem}"
             md_content = f"""---
@@ -124,11 +127,12 @@ author: ""
 ---
 ({crossref})=\n\n{md_content}
 """
-            with open(output_path_md, 'w') as md_file:
+            with open(output_path_md, 'w', encoding='utf-8') as md_file:
                 md_file.write(md_content)
 
             link_markdown = f"[{Path(schema_file).stem}](#{crossref})"
-        except Exception:
+        except Exception as e:
+            print(f"Error generating markdown for {schema_file}: {e}")
             link_markdown = ""
 
         try:
@@ -136,7 +140,8 @@ author: ""
                 template_name='js',
                 with_footer=True,
                 show_toc=False,
-                link_to_reused_ref=False)
+                link_to_reused_ref=True,
+                )
 
             generate_from_filename(
                 os.path.abspath(schema_file),
@@ -145,12 +150,13 @@ author: ""
             )
             link_html = f"[{Path(schema_file).stem}]({output_path_html})"
 
-        except Exception:
+        except Exception as e:
+            print(f"Error generating HTML for {schema_file}: {e}")
             link_html = ""
 
         index_markdown += f"| {Path(schema_file).stem} | {link_markdown} | {link_html} |\n"
 
-    with open(os.path.join("schemas.md"), 'w') as index_file:
+    with open(os.path.join("_generated/schemas.md"), 'w') as index_file:
         index_file.write(index_markdown)
 
 def build_footer():
