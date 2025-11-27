@@ -2,7 +2,6 @@
 name = "ngff-spec"
 dynamic = ["version"]
 description = "Next-generation file format specification"
-license = {file = "LICENSE"}
 requires-python = ">=3.10"
 
 dependencies = [
@@ -19,10 +18,12 @@ testing = [
     "pytest",  # https://docs.pytest.org/en/latest/contents.html
 ]
 
-[tool.setuptools_scm]
-write_to = "ngff_spec/_version.py"
-fallback_version = "0.0.1+nogit"
+[tool.hatch.version]
+path = "ngff_spec/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ngff_spec"]
 
 [build-system]
-requires = ["setuptools >= 77.0.3", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling>=1.8.0,<1.21.1"]
+build-backend = "hatchling.build"
