@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/latest/schemas/coordinate_transformation.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/coordinate_transformations.schema",
   "title": "NGFF Coordinate Systems and Transforms",
   "description": "Coordinate Systems and transforms for OME-NGFF",
   "type": "array",
@@ -29,22 +29,6 @@
     ]
   },
   "$defs": {
-    "path_w_url": {
-      "description": "Path specification. Schema local solution until https://github.com/ome/ngff/issues/144 is resolved.",
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string",
-          "format": "uri"
-        }
-      },
-      "required": [
-        "path"
-      ]
-    },
     "coordinateTransformation": {
       "description": "OME-NGFF coordinate transformation.",
       "allOf": [
@@ -111,22 +95,27 @@
         { "$ref": "#/$defs/coordinateTransformation" },
         {
           "properties": {
-            "input": {
+            "input_axes": {
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "description": "Names of the input axes for this transformation."
             },
-            "output": {
+            "output_axes": {
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "description": "Names of the output axes for this transformation."
             }
-          }
+          },
+          "required": [
+            "input_axes",
+            "output_axes"
+          ]
         }
-      ],
-      "required": ["input", "output"]
+      ]
     },
     "identity": {
       "type": "object",
@@ -144,12 +133,11 @@
           "const": "mapAxis"
         },
         "mapAxis": {
-          "type": "object",
-          "patternProperties": {
-            ".*": {
-              "type": "string"
-            }
-          }
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "An array of integers representing the new axis order as zero-based indices of the input axes."
         },
         "required": [
           "mapAxis"
@@ -165,7 +153,15 @@
       },
       "oneOf": [
         {
-          "$ref": "#/$defs/path_w_url"
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to a zarr array containing the scale factors."
+            }
+          },
+          "required": [
+            "path"
+          ]
         },
         {
           "properties": {
@@ -192,7 +188,15 @@
       },
       "oneOf": [
         {
-          "$ref": "#/$defs/path_w_url"
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to a zarr array containing the translation vectors."
+            }
+          },
+          "required": [
+            "path"
+          ]
         },
         {
           "properties": {
@@ -209,20 +213,6 @@
         }
       ]
     },
-    "mtxFlatOrNested" : {
-      "type": "array",
-      "oneOf": [
-        {
-          "items": { "type": "number" }
-        },
-        {
-          "items": {
-              "type": "array",
-              "items" : { "type" : "number" }
-          }
-        }
-      ]
-    },
     "affine": {
       "type": "object",
       "properties": {
@@ -232,17 +222,31 @@
       },
       "oneOf": [
         {
-          "$ref": "#/$defs/path_w_url"
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to a zarr array containing the affine matrix."
+            }
+          },
+          "required": [
+            "path"
+          ]
         },
         {
           "properties": {
             "affine": {
-              "$ref": "#/$defs/mtxFlatOrNested"
-            },
-            "required": [
-              "affine"
-            ]
-          }
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": [
+            "affine"
+          ]
         }
       ]
     },
@@ -255,20 +259,31 @@
       },
       "oneOf": [
         {
-          "$ref": "#/$defs/path_w_url"
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to a zarr array containing the rotation matrix."
+            }
+          },
+          "required": [
+            "path"
+          ]
         },
         {
           "properties": {
             "rotation": {
               "type": "array",
               "items": {
-                "type": "number"
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
               }
-            },
-            "required": [
-              "rotation"
-            ]
-          }
+            }
+          },
+          "required": [
+            "rotation"
+          ]
         }
       ]
     },
@@ -284,7 +299,8 @@
       },
       "required": [
         "transformation"
-      ]
+      ],
+      "description": "The inverse of another coordinate transformation."
     },
     "bijection": {
       "type": "object",
@@ -301,7 +317,8 @@
       },
       "required": [
         "forward", "inverse"
-      ]
+      ],
+      "description": "A pair of forward and inverse coordinate transformations."
     },
     "sequence": {
       "description": "A sequence of transformations",
@@ -314,7 +331,10 @@
             "$ref": "#/$defs/coordinateTransformation"
           }
         }
-      }
+      },
+      "required": [
+        "transformations"
+      ]
     },
     "byDimension": {
       "type": "object",
@@ -326,19 +346,49 @@
             "$ref": "#/$defs/byDimensionTransformation"
           }
         }
-      }
+      },
+      "required": [
+        "transformations"
+      ],
+      "description": "A set of transformations applied independently to each dimension."
     },
     "displacements": {
       "type": "object",
       "properties": {
-        "type": { "const": "displacements" }
-      }
+        "type": { "const": "displacements" },
+        "path": {
+          "type": "string",
+          "description": "Path to the zarr array containing the displacement field."
+        },
+        "interpolation": {
+          "type": "string",
+          "enum": ["nearest", "linear", "cubic"],
+          "default": "linear",
+          "description": "Interpolation method to use when applying the displacement field."
+        }
+      },
+      "required": [
+        "path"
+      ]
     },
     "coordinates": {
       "type": "object",
       "properties": {
-        "type": { "const": "coordinates" }
-      }
+        "type": { "const": "coordinates" },
+        "path": {
+          "type": "string",
+          "description": "Path to the zarr array containing the coordinate field."
+        },
+        "interpolation": {
+          "type": "string",
+          "enum": ["nearest", "linear", "cubic"],
+          "default": "linear",
+          "description": "Interpolation method to use when applying the coordinate field."
+        }
+      },
+      "required": [
+        "path"
+      ]
     }
   }
 }

@@ -3,19 +3,39 @@
   "node_type": "group",
   "attributes": {
     "ome": {
-      "version": "0.5",
+      "version": "0.6.dev2",
       "multiscales": [
         {
-          "axes": [
+          "coordinateSystems": [
             {
-              "name": "y",
-              "type": "space",
-              "unit": "micrometer"
+              "name": "physical",
+              "axes": [
+                {
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
+                }
+              ]
             },
             {
-              "name": "x",
-              "type": "space",
-              "unit": "micrometer"
+              "name": "intrinsic",
+              "axes": [
+                {
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
+                }
+              ]
             }
           ],
           "datasets": [
@@ -24,7 +44,9 @@
               "coordinateTransformations": [
                 {
                   "scale": [1, 1],
-                  "type": "scale"
+                  "type": "scale",
+                  "input": "0",
+                  "output": "intrinsic"
                 }
               ]
             }
@@ -32,7 +54,9 @@
           "coordinateTransformations": [
             {
               "scale": [10, 10],
-              "type": "scale"
+              "type": "scale",
+              "input": "intrinsic",
+              "output": "physical"
             }
           ],
           "name": "image_with_coordinateTransformations",
