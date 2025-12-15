@@ -47,7 +47,7 @@
     },
     "_conformance": {
       "schema": {
-        "id": "ngff_spec/schemas/image.schema"
+        "id": "schemas/image.schema"
       }
     }
   }

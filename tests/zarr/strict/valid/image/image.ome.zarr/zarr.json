@@ -49,7 +49,7 @@
     },
     "_conformance": {
       "schema": {
-        "id": "ngff_spec/schemas/strict_image.schema"
+        "id": "schemas/strict_image.schema"
       }
     }
   }

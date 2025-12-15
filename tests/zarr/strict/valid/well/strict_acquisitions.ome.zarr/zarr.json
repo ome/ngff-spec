@@ -15,7 +15,7 @@
     },
     "_conformance": {
       "schema": {
-        "id": "ngff_spec/schemas/strict_well.schema"
+        "id": "schemas/strict_well.schema"
       },
       "description": "Tests for the strict well JSON schema: "
     }

@@ -4,7 +4,7 @@
   },
   "_conformance": {
     "schema": {
-      "id": "ngff_spec/schemas/well.schema"
+      "id": "schemas/well.schema"
     },
     "description": "Tests for the well JSON schema: "
   }

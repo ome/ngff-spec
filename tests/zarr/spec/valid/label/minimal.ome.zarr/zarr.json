@@ -20,7 +20,7 @@
     },
     "_conformance": {
       "schema": {
-        "id": "ngff_spec/schemas/label.schema"
+        "id": "schemas/label.schema"
       },
       "description": "Tests for the image-label JSON schema: "
     }
