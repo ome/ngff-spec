@@ -19,7 +19,7 @@ All specifications are submitted to the <https://image.sc> community for review.
 
 ## Status of This Document
 
-The current released version of this specification is 0.5.
+The current released version of this specification is 0.6.dev2.
 Migration scripts will be provided between numbered versions.
 Data written with these latest changes (an "editor's draft") will not necessarily be supported.
 
@@ -151,7 +151,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
   // ...
   "attributes": {
     "ome": {
-      "version": "0.5",
+      "version": "0.6.dev2",
       // ...
     }
   }
@@ -1563,7 +1563,7 @@ For example:
 {
   "attributes": {
     "ome": {
-      "version": "0.5",
+      "version": "0.6.dev2",
       "labels": [
         "cell_space_segmentation"
       ]
