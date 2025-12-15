@@ -12,8 +12,8 @@ footer.md
 examples.md
 schemas.md
 examples/*.md
-schemas/*.html
-schemas/*.md
+schemas/*
+!schemas/*.schema
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
