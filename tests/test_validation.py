@@ -11,7 +11,7 @@ from jsonschema import RefResolver, Draft202012Validator as Validator
 from jsonschema.exceptions import ValidationError
 
 schema_store = {}
-for schema_filename in glob.glob("ngff_spec/schemas/*"):
+for schema_filename in glob.glob("schemas/*"):
     with open(schema_filename) as f:
         schema = json.load(f)
         schema_store[schema["$id"]] = schema
@@ -61,7 +61,7 @@ def pytest_generate_tests(metafunc):
         suites: List[Schema] = []
         ids: List[str] = []
         schema_store = {}
-        for filename in glob.glob("ngff_spec/schemas/*.schema"):
+        for filename in glob.glob("schemas/*.schema"):
             with open(filename) as o:
                 schema = json.load(o)
             schema_store[schema["$id"]] = schema
@@ -80,7 +80,7 @@ def pytest_generate_tests(metafunc):
         # Examples
         # TODO: Split examples into snippets (used for reference in spec) and 
         # complete examples (to be validated here)
-        # for config_filename in glob.glob("ngff_spec/examples/*/.config.json"):
+        # for config_filename in glob.glob("examples/*/.config.json"):
         #     with open(config_filename) as o:
         #         data = json.load(o)
         #     schema = data["schema"]
@@ -124,7 +124,7 @@ def test_example_configs():
     Test that all example folders have a config file
     """
     missing = []
-    for subdir in os.walk("ngff_spec/examples"):
+    for subdir in os.walk("examples"):
         has_examples = glob.glob(f"{subdir[0]}/*.json")
         has_config = glob.glob(f"{subdir[0]}/.config.json")
         if has_examples and not has_config:
