@@ -16,7 +16,7 @@ def build_json_examples():
     """Build markdown files from json examples."""
     # glob recursively to find all json files
     input_directory = 'examples'
-    output_directory = '_generated/examples'
+    output_directory = 'examples'
     os.makedirs(output_directory, exist_ok=True)
     example_types = os.listdir(input_directory)
 
@@ -68,7 +68,7 @@ This document contains JSON examples for {example} metadata layouts.
         with open(os.path.join(output_directory, f'{example}.md'), 'w') as md_file:
             md_file.write(markdown_content)
 
-    with open(os.path.join("_generated/examples.md"), 'w') as index_file:
+    with open(os.path.join("examples.md"), 'w') as index_file:
         index_file.write(index_md)
 
 def build_json_schemas():
@@ -76,7 +76,7 @@ def build_json_schemas():
     from json_schema_for_humans.generation_configuration import GenerationConfiguration
 
     schema_source_dir = 'schemas'
-    output_directory = '_generated/schemas'
+    output_directory = 'schemas'
     os.makedirs(output_directory, exist_ok=True)
     schema_files = glob.glob(os.path.join(schema_source_dir, '*.schema'), recursive=True)
 
@@ -99,8 +99,8 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
             continue  # skip strict schemas
 
         print(f'Processing {schema_file}...')
-        output_path_md = os.path.join(output_directory, "markdown", f"{Path(schema_file).stem}" + ".md")
-        output_path_html = os.path.join(output_directory, "html", f"{Path(schema_file).stem}" + ".html")
+        output_path_md = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".md")
+        output_path_html = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".html")
         os.makedirs(os.path.dirname(output_path_md), exist_ok=True)
         os.makedirs(os.path.dirname(output_path_html), exist_ok=True)        
 
@@ -156,7 +156,7 @@ author: ""
 
         index_markdown += f"| {Path(schema_file).stem} | {link_markdown} | {link_html} |\n"
 
-    with open(os.path.join("_generated/schemas.md"), 'w') as index_file:
+    with open(os.path.join("schemas.md"), 'w') as index_file:
         index_file.write(index_markdown)
 
 def build_footer():
