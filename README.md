@@ -37,7 +37,7 @@ as well as a tool for feeding these test cases into an external validator.
 
 ### Testing tool
 
-See [`ome_zarr_conformance.py`](./ome_zarr_conformance.py).
+See [`ome_zarr_conformance.py`](./conformance/ome_zarr_conformance.py).
 
 Run it in either `attributes` or `zarr` mode, optionally with filters for test names or types.
 
@@ -56,7 +56,7 @@ The dingus should print to STDOUT a JSON object with the keys:
 Call the tool like
 
 ```sh
-python3 ./ome_zarr_conformance.py attributes -- path/to/my/dingus -dingusArg +argValue 10
+python3 ./conformance/ome_zarr_conformance.py attributes -- path/to/my/dingus -dingusArg +argValue 10
 ```
 
 Each call to the dingus will then look like
@@ -69,14 +69,14 @@ Each call to the dingus will then look like
 
 `ome_zarr_conformance.py` will parse the JSON output and format the results of all requested tests in a tab-separated table.
 
-Full usage information is available with `./ome_zarr_conformance.py --help`.
+Full usage information is available with `./conformance/ome_zarr_conformance.py --help`.
 
 ### JSON Schema tests
 
 You can use the conformance testing tool to test JSON Schema-based validation with
 
 ```sh
->>> ./ome_zarr_conformance.py attributes -- uv run jsonschema_dingus.py attributes
+>>> ./conformance/ome_zarr_conformance.py attributes -- uv run ./conformance/jsonschema_dingus.py attributes
 ```
 
 Some failures are expected as JSON Schema can only handle level 1 validation.
