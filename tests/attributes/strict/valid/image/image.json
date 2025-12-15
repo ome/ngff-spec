@@ -1,0 +1,52 @@
+{
+  "ome": {
+    "version": "0.6.dev2",
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "name": "physical",
+            "axes": [
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1
+                ],
+                "type": "scale",
+                "input": "0",
+                "output": "physical"
+              }
+            ]
+          }
+        ],
+        "name": "simple_image",
+        "type": "foo",
+        "metadata": {
+          "key": "value"
+        }
+      }
+    ]
+  },
+  "_conformance": {
+    "schema": {
+      "id": "ngff_spec/schemas/strict_image.schema"
+    }
+  }
+}

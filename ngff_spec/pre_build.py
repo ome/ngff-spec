@@ -74,6 +74,7 @@ This document contains JSON examples for {example} metadata layouts.
 def build_json_schemas():
     from json_schema_for_humans.generate import generate_from_filename
     from json_schema_for_humans.generation_configuration import GenerationConfiguration
+    import json
 
     schema_source_dir = 'schemas'
     output_directory = '_generated/schemas'

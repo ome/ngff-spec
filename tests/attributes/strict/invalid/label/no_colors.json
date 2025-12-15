@@ -1,0 +1,12 @@
+{
+  "ome": {
+    "version": "0.6.dev2",
+    "image-label": {}
+  },
+  "_conformance": {
+    "schema": {
+      "id": "ngff_spec/schemas/strict_label.schema"
+    },
+    "description": "Tests for the strict image-label JSON schema: "
+  }
+}

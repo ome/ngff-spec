@@ -1,0 +1,11 @@
+{
+  "ome": {
+    "version": "0.6.dev2",
+    "multiscales": []
+  },
+  "_conformance": {
+    "schema": {
+      "id": "ngff_spec/schemas/image.schema"
+    }
+  }
+}

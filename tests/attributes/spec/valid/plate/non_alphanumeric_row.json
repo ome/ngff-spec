@@ -1,0 +1,30 @@
+{
+  "ome": {
+    "version": "0.6.dev2",
+    "plate": {
+      "columns": [
+        {
+          "name": "A"
+        }
+      ],
+      "rows": [
+        {
+          "name": "A1"
+        }
+      ],
+      "wells": [
+        {
+          "path": "A/A1",
+          "rowIndex": 0,
+          "columnIndex": 0
+        }
+      ]
+    }
+  },
+  "_conformance": {
+    "schema": {
+      "id": "ngff_spec/schemas/plate.schema"
+    },
+    "description": "Tests for the plate JSON schema: "
+  }
+}

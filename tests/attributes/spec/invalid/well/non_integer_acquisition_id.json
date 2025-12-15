@@ -1,0 +1,16 @@
+{
+  "well": {
+    "images": [
+      {
+        "acquisition": "0",
+        "path": "0"
+      }
+    ]
+  },
+  "_conformance": {
+    "schema": {
+      "id": "ngff_spec/schemas/well.schema"
+    },
+    "description": "Tests for the well JSON schema: "
+  }
+}

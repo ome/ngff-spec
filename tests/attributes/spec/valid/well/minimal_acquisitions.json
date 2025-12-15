@@ -1,0 +1,19 @@
+{
+  "ome": {
+    "version": "0.6.dev2",
+    "well": {
+      "images": [
+        {
+          "acquisition": 1,
+          "path": "0"
+        }
+      ]
+    }
+  },
+  "_conformance": {
+    "schema": {
+      "id": "ngff_spec/schemas/well.schema"
+    },
+    "description": "Tests for the well JSON schema: "
+  }
+}
