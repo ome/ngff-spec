@@ -25,16 +25,16 @@ After installing these via the dependencies,
 navigate into the repository on your machine and build the book using the following command:
 
 ```bash
-python ngff_spec/pre_build.py
-jupyter book build ngff_spec
+python pre_build.py
+jupyter book start
 ```
 
-You'll find the built webpages under `_build/html`.
+This will build the book and start a local server to inspect the changes in your browser.
 
 ## First contribution
 
 If you haven't contributed to the spec before,
-please add yourself as an author in the `ngff_spec/myst.yml` metadata file.
+please add yourself as an author in the `myst.yml` metadata file.
 This should look like this, for example:
 
 ```yaml
@@ -58,11 +58,10 @@ make sure to rebuild the `CITATION.cff` file in the root of this repository.
 To do so, run the following command:
 
 ```bash
-cd ngff_spec/ && jupyter book build --cff
+jupyter book build --cff
 ```
 
-Copy the generated `CITATION.cff` file from `ngff_spec/CITATION.cff` to the root of this repository
-and submit it along with your PR.
+Make sure the updated `CITATION.cff` file is included in your PR.
 
 ### Text format
 
