@@ -95,7 +95,7 @@ project:
           family-names: "Swedlow"
           orcid: "https://orcid.org/0000-0002-2198-1958"
   toc:
-    - file: specification.md
+    - file: index.md
     - file: examples.md
       children:
         - pattern: examples/*.md
