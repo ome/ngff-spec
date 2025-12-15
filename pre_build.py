@@ -59,12 +59,11 @@ This document contains JSON examples for {example} metadata layouts.
 ## {os.path.splitext(json_file_name)[0]}
 ({crossref})=
 
-```{{literalinclude}} {os.path.abspath(json_file)}
+```{{literalinclude}} {Path(os.path.relpath(json_file, input_directory)).as_posix()}
 :linenos:
 :language: json
 ```
 """
-        # create 
         with open(os.path.join(output_directory, f'{example}.md'), 'w') as md_file:
             md_file.write(markdown_content)
 
