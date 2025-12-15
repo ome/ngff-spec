@@ -22,7 +22,7 @@ import logging
 
 logger = logging.getLogger("ome_zarr_conformance")
 
-here = Path(__file__).resolve().parent
+here = Path(__file__).resolve().parent.parent
 tests_dir = here / "tests"
 
 
