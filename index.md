@@ -1,3 +1,4 @@
+(ngff-spec:spec)=
 ---
 title: Next-generation file format specification
 short_title: OME-Zarr
