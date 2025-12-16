@@ -19,10 +19,10 @@ testing = [
 ]
 
 [tool.hatch.version]
-path = "ngff_spec/_version.py"
+path = "_version.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["ngff_spec"]
+packages = ["."]
 
 [build-system]
 requires = ["hatchling>=1.8.0,<1.21.1"]

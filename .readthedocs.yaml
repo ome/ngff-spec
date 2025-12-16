@@ -11,10 +11,10 @@ build:
       
     pre_build:
       # Run the script that autogenerates content before building the docs
-      - "uv run python ngff_spec/pre_build.py"
+      - "uv run python pre_build.py"
 
     build:
       html: 
-        - cd ngff_spec/ && jupyter book build --html --ci
+        - jupyter book build --html --ci
         - mkdir -p $READTHEDOCS_OUTPUT
-        - mv ./ngff_spec/_build/html $READTHEDOCS_OUTPUT
+        - mv ./_build/html $READTHEDOCS_OUTPUT

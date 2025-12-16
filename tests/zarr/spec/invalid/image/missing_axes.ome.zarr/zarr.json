@@ -1,0 +1,34 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev2",
+      "multiscales": [
+        {
+          "datasets": [
+            {
+              "path": "0",
+              "coordinateTransformations": [
+                {
+                  "scale": [
+                    1,
+                    1
+                  ],
+                  "type": "scale",
+                  "input": "0",
+                  "output": "intrinsic"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "_conformance": {
+      "schema": {
+        "id": "age.schema"
+      }
+    }
+  }
+}
