@@ -17,7 +17,7 @@ from jsonschema import Draft202012Validator as Validator
 from jsonschema.exceptions import ValidationError
 
 HERE = Path(__file__).resolve().parent
-SCHEMA_DIR = HERE / "ngff_spec" / "schemas"
+SCHEMA_DIR = HERE.parent / "schemas"
 
 
 @dataclass
