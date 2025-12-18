@@ -11,7 +11,7 @@ from jsonschema import RefResolver, Draft202012Validator as Validator
 from jsonschema.exceptions import ValidationError
 
 schema_store = {}
-for schema_filename in glob.glob("ngff_spec/schemas/*"):
+for schema_filename in glob.glob("schemas/*"):
     with open(schema_filename) as f:
         schema = json.load(f)
         schema_store[schema["$id"]] = schema
@@ -19,8 +19,9 @@ for schema_filename in glob.glob("ngff_spec/schemas/*"):
 GENERIC_SCHEMA = schema_store[
     "https://ngff.openmicroscopy.org/0.6.dev2/schemas/ome_zarr.schema"
 ]
-
-print(schema_store)
+GENERIC_STRICT_SCHEMA = schema_store[
+    "https://ngff.openmicroscopy.org/0.6.dev2/schemas/strict_ome_zarr.schema"
+]
 
 
 @dataclass
@@ -57,63 +58,55 @@ def pytest_generate_tests(metafunc):
         styled JSON tests. Metadata in each test defines which schema is used
         and whether or not the block is considered valid.
     """
-    if "suite" in metafunc.fixturenames:
-        suites: List[Schema] = []
-        ids: List[str] = []
-        schema_store = {}
-        for filename in glob.glob("ngff_spec/schemas/*.schema"):
-            with open(filename) as o:
-                schema = json.load(o)
-            schema_store[schema["$id"]] = schema
+    if "suite" not in metafunc.fixturenames:
+        return
 
-        # Validation
-        for filename in glob.glob("tests/*.json"):
-            with open(filename) as o:
-                suite = json.load(o)
-            schema = suite["schema"]
-            with open(schema["id"]) as f:
-                schema = json.load(f)
-            for test in suite["tests"]:
-                ids.append("validate_" + str(test["formerly"]).split("/")[-1][0:-5])
-                suites.append(Suite(schema, test["data"], test["valid"]))
+    suites: List[Suite] = []
+    ids: List[str] = []
 
-        # Examples
-        # TODO: Split examples into snippets (used for reference in spec) and 
-        # complete examples (to be validated here)
-        # for config_filename in glob.glob("ngff_spec/examples/*/.config.json"):
-        #     with open(config_filename) as o:
-        #         data = json.load(o)
-        #     schema = data["schema"]
-        #     with open(schema) as f:
-        #         schema = json.load(f)
-        #     example_folder = os.path.dirname(config_filename)
-        #     for filename in glob.glob(f"{example_folder}/*.json"):
-        #         print(filename)
-        #         with open(filename) as f:
-        #             # Strip comments
-        #             data = "".join(
-        #                 line for line in f if not line.lstrip().startswith("//")
-        #             )
-        #             data = json.loads(data)
-        #             data = data["attributes"]  # Only validate the attributes object
-        #         ids.append("example_" + str(filename).split("/")[-1][0:-5])
-        #         suites.append(Suite(schema, data, True))  # Assume true
+    # Validation
+    for filename in glob.glob("tests/*.json"):
+        with open(filename) as o:
+            suite = json.load(o)
+        schema_path = suite["schema"]
+        with open(schema_path["id"]) as f:
+            schema = json.load(f)
+        for test in suite["tests"]:
+            ids.append("validate_" + str(test["formerly"]).split("/")[-1][0:-5])
+            suites.append(Suite(schema, test["data"], test["valid"]))
 
-        metafunc.parametrize("suite", suites, ids=ids, indirect=True)
+    # Examples
+    for config_filename in glob.glob("../examples/*/.config.json"):
+        with open(config_filename) as o:
+            data = json.load(o)
+        schema_path = data["schema"]
+        with open(schema_path) as f:
+            schema = json.load(f)
+        example_folder = os.path.dirname(config_filename)
+        for filename in glob.glob(f"{example_folder}/*.json"):
+            with open(filename) as f:
+                # Strip comments
+                data = "".join(line for line in f if not line.lstrip().startswith("//"))
+                data = json.loads(data)
+                data = data["attributes"]  # Only validate the attributes object
+            ids.append("example_" + str(filename).split("/")[-1][0:-5])
+            suites.append(Suite(schema, data, True))  # Assume true
+
+    metafunc.parametrize("suite", suites, ids=ids, indirect=True)
 
 
 @pytest.fixture
-def suite(request):
+def suite(request) -> Suite:
     return request.param
 
 
-def test_run(suite):
+def test_run(suite: Suite):
     resolver = RefResolver.from_schema(suite.schema, store=schema_store)
     validator = Validator(suite.schema, resolver=resolver)
     suite.validate(validator)
 
 
-def test_generic_run(suite):
+def test_generic_run(suite: Suite):
     resolver = RefResolver.from_schema(GENERIC_SCHEMA, store=schema_store)
     validator = Validator(GENERIC_SCHEMA, resolver=resolver)
     suite.maybe_validate(validator)
@@ -124,7 +117,7 @@ def test_example_configs():
     Test that all example folders have a config file
     """
     missing = []
-    for subdir in os.walk("ngff_spec/examples"):
+    for subdir in os.walk("examples"):
         has_examples = glob.glob(f"{subdir[0]}/*.json")
         has_config = glob.glob(f"{subdir[0]}/.config.json")
         if has_examples and not has_config:

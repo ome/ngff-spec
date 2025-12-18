@@ -1,0 +1,18 @@
+{
+  "ome": {
+    "version": "0.6.dev2",
+    "image-label": {
+      "properties": [
+        {
+          "value": "foo"
+        }
+      ]
+    }
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/label.schema"
+    },
+    "description": "Tests for the image-label JSON schema: "
+  }
+}

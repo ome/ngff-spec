@@ -1,0 +1,41 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev2",
+      "plate": {
+        "acquisitions": [
+          {
+            "id": 0,
+            "maximumfieldcount": 1
+          }
+        ],
+        "columns": [
+          {
+            "name": "A"
+          }
+        ],
+        "name": "test plate",
+        "rows": [
+          {
+            "name": "1"
+          }
+        ],
+        "wells": [
+          {
+            "path": "A/1",
+            "rowIndex": 0,
+            "columnIndex": 0
+          }
+        ]
+      }
+    },
+    "_conformance": {
+      "schema": {
+        "id": "schemas/strict_plate.schema"
+      },
+      "description": "Tests for the strict plate JSON schema: "
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "well": {
+      "images": [
+        {
+          "path": "0"
+        },
+        {
+          "path": "0"
+        }
+      ]
+    },
+    "_conformance": {
+      "schema": {
+        "id": "schemas/well.schema"
+      },
+      "description": "Tests for the well JSON schema: "
+    }
+  }
+}
