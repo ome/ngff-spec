@@ -1,6 +1,6 @@
 version: 1
 project:
-  title: Next-generation file format specification
+  title: Next-generation file format specification 0.5
   authors:
     - name: NGFF-community
   github: ome/ngff-spec
