@@ -44,7 +44,7 @@ Examples of transitional metadata include custom additions by implementations th
 Some of the JSON examples in this document include comments.
 However, these are only for clarity purposes and comments MUST NOT be included in JSON objects.
 
-# Storage format
+## Storage format
 
 OME-Zarr is implemented using the Zarr format as defined by the
 [version 3 of the Zarr specification](https://zarr-specs.readthedocs.io/en/latest/v3/core/v3.0.html).
@@ -55,7 +55,7 @@ An overview of the layout of an OME-Zarr fileset should make understanding the f
 The hierarchy is represented here as it would appear locally
 but could equally be stored on a web server to be accessed via HTTP or in object storage like S3 or GCS.
 
-## Images
+### Images
 
 The following layout describes the expected Zarr hierarchy for images with multiple levels of resolutions and optionally associated labels.
 Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [multiscales metadata](#multiscales-md) for details.
@@ -99,7 +99,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
                 └── ...       # are supported.
 ```
 
-## High-content screening
+### High-content screening
 
 The following specification defines the hierarchy for a high-content screening
 dataset. Three groups MUST be defined above the images:
@@ -135,7 +135,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     └── ...                   # Other rows
 ```
 
-# OME-Zarr Metadata
+## OME-Zarr Metadata
 (metadata)=
 
 The "OME-Zarr Metadata" contains metadata keys as specified below for discovering certain types of data, especially images.
@@ -309,7 +309,7 @@ The continuous rectangle of the pixel is given
 by the half-open interval `[-0.5, 0.5) x [-0.5, 0.5)` (i.e., -0.5 is included, +0.5 is excluded).
 See chapter 4 and figure 4.1 of the ITK Software Guide.
 
-## bioformats2raw.layout
+### bioformats2raw.layout
 
 (bf2raw)=
 
@@ -321,7 +321,7 @@ In order to capture that information within an OME-Zarr dataset, `bioformats2raw
 The bioformats2raw layout has been added to v0.4 as a transitional specification to specify filesets that already exist in the wild.
 An upcoming NGFF specification will replace this layout with explicit metadata.
 
-### Layout
+#### Layout
 
 (bf2raw-layout)=
 
@@ -338,7 +338,7 @@ series.ome.zarr               # One converted fileset from bioformats2raw
     └── ...
 ```
 
-### bf2raw-attributes
+#### bf2raw-attributes
 (bf2raw-attributes-md)=
 
 The OME-Zarr Metadata in the top-level `zarr.json` file must contain the `bioformats2raw.layout` key:
@@ -361,8 +361,7 @@ The OME-Zarr Metadata in the `zarr.json` file within the OME group may contain t
 :language: json
 ```
 
-### Details
-
+#### Details
 (bf2raw-details)=
 
 Conforming groups:
@@ -392,7 +391,7 @@ Conforming readers:
 - MAY choose to show all images within the collection or offer the user a choice of images, as with <dfn export="true"><abbr title="High-content screening">HCS</abbr></dfn> plates;
 - MAY ignore other groups or arrays under the root of the hierarchy.
 
-## "coordinateTransformations" metadata
+### "coordinateTransformations" metadata
 (coord-trafo-md)=
 
 "coordinateTransformations" describe the mapping between two coordinate systems (defined by [coordinateSystems](#coordinate-systems-md)).
@@ -675,7 +674,7 @@ because it is computed with the matrix-vector multiplication:
 
 ::::
 
-### Transformation types
+#### Transformation types
 (trafo-types-md)=
 
 Input and output dimensionality may be determined by the coordinate system referred to by the `input` and `output` fields, respectively. 
@@ -684,7 +683,7 @@ otherwise it is given by the length of `axes` for the coordinate system with the
 If the value of `output` is an array, its shape gives the output dimension,
 otherwise it is given by the length of `axes` for the coordinate system with the name of the `output`.
 
-#### identity
+##### identity
 (identity-md)=
 
 `identity` transformations map input coordinates to output coordinates without modification.
@@ -711,7 +710,7 @@ y = j
 
 ::::
 
-#### mapAxis
+##### mapAxis
 (mapAxis-md)=
 
 `mapAxis` transformations describe axis permutations as a transpose vector of integers.
@@ -773,7 +772,7 @@ z = b
 ```
 ::::
 
-#### translation
+##### translation
 (translation-md)=
 
 `translation` transformations are special cases of affine transformations.
@@ -808,7 +807,7 @@ y = j - 1.42
 ```
 ::::
 
-#### scale
+##### scale
 (scale-md)=
 
 `scale` transformations are special cases of affine transformations.
@@ -857,7 +856,7 @@ these axes are typically not transformed, but must be represented in the scale p
 ```
 ::::
 
-#### affine
+##### affine
 (affine-md)=
 
 `affine`s are [matrix transformations](#matrix-trafo-md) from N-dimensional inputs to M-dimensional outputs.
@@ -950,7 +949,7 @@ these axes are typically not transformed, but must be represented in the transfo
 :language: json
 ```
 
-#### rotation
+##### rotation
 (rotation-md)=
 
 `rotation`s are [matrix transformations](#matrix-trafo-md) that are special cases of affine transformations.
@@ -989,7 +988,7 @@ y = 1*i + 0*j
 ```
 ::::
 
-#### inverseOf
+##### inverseOf
 (inverseOf-md)=
 
 An `inverseOf` transformation contains another transformation (often non-linear),
@@ -1020,7 +1019,7 @@ a choice that many users and developers find intuitive.
 ```
 ::::
 
-#### sequence
+##### sequence
 (sequence-md)=
 
 A `sequence` transformation consists of an ordered array of coordinate transformations,
@@ -1071,7 +1070,7 @@ y = (j + 0.9) * 3
 and is invertible.
 ::::
 
-#### coordinates and displacements
+##### coordinates and displacements
 (coordinates-displacements-md)=
 
 `coordinates` and `displacements` transformations store coordinates or displacements in an array
@@ -1285,7 +1284,7 @@ I.e. the y-displacement is first, because the y-axis is the first element of the
 
 ::::
 
-#### byDimension
+##### byDimension
 (byDimension-md)=
 
 `byDimension` transformations build a high dimensional transformation
@@ -1353,7 +1352,7 @@ Another **invalid** `byDimension` transform:
 This transformation is invalid because the output axis `x` appears in more than one transformation in the `transformations` list.
 ::::
 
-#### bijection
+##### bijection
 (bijection-md)=
 
 A bijection transformation is an invertible transformation in
@@ -1389,7 +1388,7 @@ the input and output of the `forward` and `inverse` transformations are understo
 ```
 ::::
 
-## "multiscales" metadata
+### "multiscales" metadata
 (multiscales-md)=
 
 Metadata about an image can be found under the `multiscales` key in the group-level OME-Zarr Metadata.
@@ -1490,7 +1489,7 @@ if not datasets:
     datasets = [x["path"] for x in multiscales[0]["datasets"]]
 ```
 
-## "omero" metadata (transitional)
+### "omero" metadata (transitional)
 (omero-md)=
 
 [=Transitional=] information specific to the channels of an image and how to render it can be found under the "omero" key in the group-level metadata:
@@ -1535,7 +1534,7 @@ which are the minimum and maximum values of the window, respectively.
 It MUST also contain the fields "start" and "end",
 which are the start and end values of the window, respectively.
 
-## "labels" metadata
+### "labels" metadata
 (labels-md)=
 
 In OME-Zarr, Zarr arrays representing pixel-annotation data are stored in a group called "labels".
@@ -1617,7 +1616,7 @@ Pixels with a 1 in the Zarr array, which correspond to cellular space, will be d
 ````
 
 
-## "plate" metadata
+### "plate" metadata
 (plate-md)=
 
 For high-content screening datasets,
@@ -1702,7 +1701,7 @@ containing one field of view per acquisition.
 ```
 ````
 
-## "well" metadata
+### "well" metadata
 (well-md)=
 
 For high-content screening datasets,
@@ -1737,14 +1736,14 @@ The first field is part of the first acquisition, and the second field is part o
 ```
 ````
 
-# Specification naming style
+## Specification naming style
 (naming-style)=
 
 Multi-word keys in this specification should use the `camelCase` style.
 NB: some parts of the specification don't obey this convention as they were added before this was adopted,
 but they should be updated in due course.
 
-# Implementations
+## Implementations
 (implementations-md)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
