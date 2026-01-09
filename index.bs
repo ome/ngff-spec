@@ -1,5 +1,3 @@
-# Version 0.5
-
 <pre class='metadata'>
 Title: OME-Zarr specification
 Shortname: ome-zarr
@@ -23,16 +21,16 @@ Status Text: will be provided between numbered versions. Data written with these
 Status Text: (an "editor's draft") will not necessarily be supported.
 </pre>
 
-## OME-Zarr specification
-(ome-zarr)=
-
+OME-Zarr specification {#ome-zarr}
+----------------------------------
 
 The conventions and specifications defined in this document are designed to
 enable next-generation file formats to represent the same bioimaging data
 that can be represented in \[OME-TIFF](http://www.openmicroscopy.org/ome-files/)
 and beyond.
 
-## Document conventions
+Document conventions
+--------------------
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”,
 “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be interpreted as described in
@@ -49,9 +47,8 @@ implementations that are later submitted as a formal specification. (See [[#bf2r
 Some of the JSON examples in this document include comments. However, these are only for
 clarity purposes and comments MUST NOT be included in JSON objects.
 
-## Storage format
-(storage-format)=
-
+Storage format {#storage-format}
+================================
 
 OME-Zarr is implemented using the Zarr format as defined by the
 [version 3 of the Zarr specification](https://zarr-specs.readthedocs.io/en/latest/v3/core/v3.0.html).
@@ -65,9 +62,8 @@ is represented here as it would appear locally but could equally
 be stored on a web server to be accessed via HTTP or in object storage
 like S3 or GCS.
 
-### Images
-(image-layout)=
-
+Images {#image-layout}
+----------------------
 
 The following layout describes the expected Zarr hierarchy for images with
 multiple levels of resolutions and optionally associated labels.
@@ -115,8 +111,8 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
 
 
 
-### High-content screening
-(hcs-layout)=
+High-content screening {#hcs-layout}
+------------------------------------
 
 The following specification defines the hierarchy for a high-content screening
 dataset. Three groups MUST be defined above the images:
@@ -155,8 +151,8 @@ A well group SHOULD NOT be present if there are no images in the well.
     └── ...                   # Other rows
 </pre>
 
-## OME-Zarr Metadata
-(metadata)=
+OME-Zarr Metadata {#metadata}
+=============================
 
 The "OME-Zarr Metadata" contains metadata keys as specified below 
 for discovering certain types of data, especially images.
@@ -180,8 +176,8 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 }
 ```
 
-### "axes" metadata
-(axes-md)=
+"axes" metadata {#axes-md}
+--------------------------
 
 "axes" describes the dimensions of a physical coordinate space. It is a list of dictionaries, where each dictionary describes a dimension (axis) and:
 - MUST contain the field "name" that gives the name for this dimension. The values MUST be unique across all "name" fields.
@@ -195,8 +191,8 @@ The "axes" are used as part of [[#multiscale-md]]. The length of "axes" MUST be 
 The "dimension_names" attribute MUST be included in the `zarr.json` of the Zarr array of a multiscale level and MUST match the names in the "axes" metadata.
 
 
-### "bioformats2raw.layout" (transitional)
-(bf2raw)=
+"bioformats2raw.layout" (transitional) {#bf2raw}
+------------------------------------------------
 
 [=Transitional=] "bioformats2raw.layout" metadata identifies a group which implicitly describes a series of images.
 The need for the collection stems from the common "multi-image file" scenario in microscopy. Parsers like Bio-Formats
@@ -206,8 +202,7 @@ In order to capture that information within an OME-Zarr dataset, `bioformats2raw
 The bioformats2raw layout has been added to v0.4 as a transitional specification to specify filesets that already exist
 in the wild. An upcoming NGFF specification will replace this layout with explicit metadata.
 
-#### Layout
-(bf2raw-layout)=
+<h4 id="bf2raw-layout" class="no-toc">Layout</h4>
 
 Typical Zarr layout produced by running `bioformats2raw` on a fileset that contains more than one image (series > 1):
 
@@ -222,8 +217,7 @@ series.ome.zarr               # One converted fileset from bioformats2raw
     └── ...
 </pre>
 
-#### Attributes
-(bf2raw-attributes)=
+<h4 id="bf2raw-attributes" class="no-toc">Attributes</h4>
 
 The OME-Zarr Metadata in the top-level `zarr.json` file must contain the `bioformats2raw.layout` key:
 <pre class=include-code>
@@ -247,8 +241,7 @@ path: examples/ome/series-2.json
 highlight: json
 </pre>
 
-#### Details
-(bf2raw-details)=
+<h4 id="bf2raw-details" class="no-toc">Details</h4>
 
 Conforming groups:
 
@@ -277,8 +270,8 @@ Conforming readers:
 - MAY ignore other groups or arrays under the root of the hierarchy.
 
 
-### "coordinateTransformations" metadata
-(trafo-md)=
+"coordinateTransformations" metadata {#trafo-md}
+------------------------------------------------
 
 "coordinateTransformations" describe a series of transformations that map between two coordinate spaces (defined by "axes").
 For example, to map a discrete data space of an array to the corresponding physical space.
@@ -297,8 +290,8 @@ Additional fields for the entry depend on "type" and are defined by the column `
 The transformations in the list are applied sequentially and in order.
 
 
-### "multiscales" metadata
-(multiscale-md)=
+"multiscales" metadata {#multiscale-md}
+---------------------------------------
 
 Metadata about an image can be found under the "multiscales" key in the group-level OME-Zarr Metadata. 
 Here, image refers to 2 to 5 dimensional data representing image or volumetric data with optional time or channel axes. 
@@ -353,8 +346,8 @@ if not datasets:
     datasets = [x["path"] for x in multiscales[0]["datasets"]]
 ```
 
-### "omero" metadata (transitional)
-(omero-md)=
+"omero" metadata (transitional) {#omero-md}
+-------------------------------------------
 
 [=Transitional=] information specific to the channels of an image and how to render it
 can be found under the "omero" key in the group-level metadata:
@@ -394,8 +387,8 @@ Each dictionary in "channels" MUST contain the field "window", which is a dictio
 The field "window" MUST contain the fields "min" and "max", which are the minimum and maximum values of the window, respectively.
 It MUST also contain the fields "start" and "end", which are the start and end values of the window, respectively.
 
-### "labels" metadata
-(labels-md)=
+"labels" metadata {#labels-md}
+------------------------------
 
 In OME-Zarr, Zarr arrays representing pixel-annotation data are stored in a group called "labels". Some applications--notably image segmentation--produce 
 a new image that is in the same coordinate system as a corresponding multiscale image (usually having the same dimensions and coordinate transformations). 
@@ -462,8 +455,8 @@ highlight: json
 In this case, the pixels consisting of a 0 in the Zarr array will be displayed as 50% blue and 50% opacity. Pixels with a 1 in the Zarr array, 
 which correspond to cellular space, will be displayed as 50% green and 50% opacity. 
 
-### "plate" metadata
-(plate-md)=
+"plate" metadata {#plate-md}
+----------------------------
 
 For high-content screening datasets, the plate layout can be found under the
 custom attributes of the plate group under the `plate` key in the group-level metadata.
@@ -534,8 +527,8 @@ path: examples/plate_strict/plate_2wells.json
 highlight: json
 </pre>
 
-### "well" metadata
-(well-md)=
+"well" metadata {#well-md}
+--------------------------
 
 For high-content screening datasets, the metadata about all fields of views
 under a given well can be found under the "well" key in the attributes of the
@@ -570,20 +563,20 @@ path: examples/well_strict/well_2fields.json
 highlight: json
 </pre>
 
-## Specification naming style
-(naming-style)=
+Specification naming style {#naming-style}
+==========================================
 
 Multi-word keys in this specification should use the `camelCase` style.
 NB: some parts of the specification don't obey this convention as they
 were added before this was adopted, but they should be updated in due course.
 
-## Implementations
-(implementations)=
+Implementations {#implementations}
+==================================
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
 
-## Citing
-(citing)=
+Citing {#citing}
+================
 
 [Next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.](https://ngff.openmicroscopy.org/0.4)
 J. Moore, *et al*. Open Microscopy Environment Consortium, 8 February 2022.
@@ -591,8 +584,8 @@ This edition of the specification is [https://ngff.openmicroscopy.org/0.5/](http
 The latest edition is available at [https://ngff.openmicroscopy.org/latest/](https://ngff.openmicroscopy.org/latest/).
 [(doi:10.5281/zenodo.4282107)](https://doi.org/10.5281/zenodo.4282107)
 
-## Version History
-(history)=
+Version History {#history}
+==========================
 
 <table>
   <thead>
