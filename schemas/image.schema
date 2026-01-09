@@ -9,11 +9,11 @@
       "description": "The versioned OME-Zarr Metadata namespace",
       "type": "object",
       "properties": {
-        "multiscales": {
-          "$ref": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/image.schema#/$defs/multiscales"
-        },
         "omero": {
-          "$ref": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/image.schema#/$defs/omero"
+          "$ref": "#/$defs/omero"
+        },
+        "multiscales": {
+          "$ref": "#/$defs/multiscales"
         },
         "version": {
           "$ref": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/_version.schema"
