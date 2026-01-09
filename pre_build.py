@@ -173,13 +173,13 @@ def build_footer():
     with open('footer.md', 'w') as footer_file:
         footer_file.write(footer_content)
 
-def build_legacy_bikeshed():
+def build_legacy_bikeshed(root: str = '.'):
     """Build legacy Bikeshed files."""
     import subprocess
     import glob
 
-    bikeshed_file = glob.glob('*.bs')[0]
-    subprocess.run(['bikeshed', 'build', bikeshed_file, '--output', 'index.html'], check=True)
+    bikeshed_file = os.path.normpath(f"{root}/{glob.glob('*.bs')[0]}")
+    subprocess.run(['bikeshed', 'spec', bikeshed_file, 'index.html'], check=True)
 
 build_json_examples()
 build_json_schemas()
