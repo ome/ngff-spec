@@ -10,10 +10,10 @@
       "type": "object",
       "properties": {
         "multiscales": {
-          "$ref": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/image.schema#/$defs/multiscales"
+          "$ref": "#/$defs/multiscales"
         },
         "omero": {
-          "$ref": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/image.schema#/$defs/omero"
+          "$ref": "#/$defs/omero"
         },
         "version": {
           "$ref": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/_version.schema"
