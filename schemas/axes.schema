@@ -33,6 +33,8 @@
   "$defs": {
     "axis": {
       "type": "object",
+      "name": "Axis",
+      "description": "A single coordinate system axis.",
       "properties": {
         "name": {
           "type": "string",
