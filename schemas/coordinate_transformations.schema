@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/coordinate_transformations.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema",
   "title": "NGFF Coordinate Systems and Transforms",
   "description": "Coordinate Systems and transforms for OME-NGFF",
   "type": "array",

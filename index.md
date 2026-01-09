@@ -1,9 +1,5 @@
+# 🚧 Dev: 0.6.dev3 🚧
 (ngff-spec:spec)=
----
-title: Next-generation file format specification
-short_title: OME-Zarr
----
-
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
@@ -154,7 +150,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
   // ...
   "attributes": {
     "ome": {
-      "version": "0.6.dev2",
+      "version": "0.6.dev3",
       // ...
     }
   }
@@ -1563,7 +1559,7 @@ For example:
 {
   "attributes": {
     "ome": {
-      "version": "0.6.dev2",
+      "version": "0.6.dev3",
       "labels": [
         "cell_space_segmentation"
       ]
