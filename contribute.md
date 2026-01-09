@@ -127,3 +127,13 @@ Some informative text about your example
 `````
 
 Other useful admonitions (e.g., `hint`, `note`) can be found [here](https://mystmd.org/guide/directives).
+
+## Release process checklist
+
+Before creating a release, please make sure to go through the following items to make sure the release is complete and consistent.
+
+- [ ] Update `_version.py`. Some internal code requires a version number to be provided there to auto-generate some parts of the documentation.
+- [ ] Update versions in examples. Go through the examples in the `examples/` and make sure that all version numbers in the `.json` files are up-to-date.
+- [ ] Update the specification number in the spec text. The [spec text](ngff-spec:spec) mentions its own version number in several places. Please make sure to update those to the new version.
+- [ ] Make sure all tests are passing. Run the test suite to make sure that all tests are passing before creating a release.
+- [ ] Update the version history. Add a new entry to the [version history](ngff-spec:history) file with the new version number and date, and a summary of the changes made in this release.
