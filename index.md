@@ -1,4 +1,4 @@
-# Version 0.5.2
+# Version 0.5
 
 <pre class='metadata'>
 Title: OME-Zarr specification
