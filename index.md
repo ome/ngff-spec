@@ -12,7 +12,10 @@ short_title: OME-Zarr
 ## Abstract
 
 ```{warning}
-This is **not** the released version of the ngff-specification. It is an explorative, work-in-progress document.
+This is **not** the released version of the ngff-specification.
+It is a work-in-progress document.
+Upon release, this warning will be removed and the version number in the document updated.
+
 ```
 
 This document contains next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.
@@ -20,10 +23,9 @@ All specifications are submitted to the <https://image.sc> community for review.
 
 ## Status of This Document
 
-The current released version of this specification is 0.6.dev2.
+The working title version of this specification is 0.6.dev3.
 Migration scripts will be provided between numbered versions.
 Data written with these latest changes (an "editor's draft") will not necessarily be supported.
-
 
 The conventions and specifications defined in this document
 are designed to enable next-generation file formats to represent
