@@ -7,28 +7,26 @@
     {
       "formerly": "plate/strict_no_acquisitions",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "plate": {
-            "columns": [
-              {
-                "name": "A"
-              }
-            ],
-            "name": "test plate",
-            "rows": [
-              {
-                "name": "1"
-              }
-            ],
-            "wells": [
-              {
-                "path": "A/1",
-                "rowIndex": 0,
-                "columnIndex": 0
-              }
-            ]
-          }
+        "plate": {
+          "columns": [
+            {
+              "name": "A"
+            }
+          ],
+          "name": "test plate",
+          "rows": [
+            {
+              "name": "1"
+            }
+          ],
+          "version": "0.4",
+          "wells": [
+            {
+              "path": "A/1",
+              "rowIndex": 0,
+              "columnIndex": 0
+            }
+          ]
         }
       },
       "valid": true
@@ -36,27 +34,51 @@
     {
       "formerly": "plate/missing_name",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "plate": {
-            "columns": [
-              {
-                "name": "A"
-              }
-            ],
-            "rows": [
-              {
-                "name": "1"
-              }
-            ],
-            "wells": [
-              {
-                "path": "A/1",
-                "rowIndex": 0,
-                "columnIndex": 0
-              }
-            ]
-          }
+        "plate": {
+          "columns": [
+            {
+              "name": "A"
+            }
+          ],
+          "rows": [
+            {
+              "name": "1"
+            }
+          ],
+          "version": "0.4",
+          "wells": [
+            {
+              "path": "A/1",
+              "rowIndex": 0,
+              "columnIndex": 0
+            }
+          ]
+        }
+      },
+      "valid": false
+    },
+    {
+      "formerly": "plate/missing_version",
+      "data": {
+        "plate": {
+          "columns": [
+            {
+              "name": "A"
+            }
+          ],
+          "name": "test plate",
+          "rows": [
+            {
+              "name": "1"
+            }
+          ],
+          "wells": [
+            {
+              "path": "A/1",
+              "rowIndex": 0,
+              "columnIndex": 0
+            }
+          ]
         }
       },
       "valid": false
@@ -64,35 +86,33 @@
     {
       "formerly": "plate/strict_acquisitions",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "plate": {
-            "acquisitions": [
-              {
-                "id": 0,
-                "name": "0",
-                "maximumfieldcount": 1
-              }
-            ],
-            "columns": [
-              {
-                "name": "A"
-              }
-            ],
-            "name": "test plate",
-            "rows": [
-              {
-                "name": "1"
-              }
-            ],
-            "wells": [
-              {
-                "path": "A/1",
-                "rowIndex": 0,
-                "columnIndex": 0
-              }
-            ]
-          }
+        "plate": {
+          "acquisitions": [
+            {
+              "id": 0,
+              "name": "0",
+              "maximumfieldcount": 1
+            }
+          ],
+          "columns": [
+            {
+              "name": "A"
+            }
+          ],
+          "name": "test plate",
+          "rows": [
+            {
+              "name": "1"
+            }
+          ],
+          "version": "0.4",
+          "wells": [
+            {
+              "path": "A/1",
+              "rowIndex": 0,
+              "columnIndex": 0
+            }
+          ]
         }
       },
       "valid": true
@@ -100,34 +120,32 @@
     {
       "formerly": "plate/missing_acquisition_name",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "plate": {
-            "acquisitions": [
-              {
-                "id": 0,
-                "maximumfieldcount": 1
-              }
-            ],
-            "columns": [
-              {
-                "name": "A"
-              }
-            ],
-            "name": "test plate",
-            "rows": [
-              {
-                "name": "1"
-              }
-            ],
-            "wells": [
-              {
-                "path": "A/1",
-                "rowIndex": 0,
-                "columnIndex": 0
-              }
-            ]
-          }
+        "plate": {
+          "acquisitions": [
+            {
+              "id": 0,
+              "maximumfieldcount": 1
+            }
+          ],
+          "columns": [
+            {
+              "name": "A"
+            }
+          ],
+          "name": "test plate",
+          "rows": [
+            {
+              "name": "1"
+            }
+          ],
+          "version": "0.4",
+          "wells": [
+            {
+              "path": "A/1",
+              "rowIndex": 0,
+              "columnIndex": 0
+            }
+          ]
         }
       },
       "valid": false
@@ -135,34 +153,32 @@
     {
       "formerly": "plate/missing_acquisition_maximumfieldcount",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "plate": {
-            "acquisitions": [
-              {
-                "id": 0,
-                "name": "0"
-              }
-            ],
-            "columns": [
-              {
-                "name": "A"
-              }
-            ],
-            "name": "test plate",
-            "rows": [
-              {
-                "name": "1"
-              }
-            ],
-            "wells": [
-              {
-                "path": "A/1",
-                "rowIndex": 0,
-                "columnIndex": 0
-              }
-            ]
-          }
+        "plate": {
+          "acquisitions": [
+            {
+              "id": 0,
+              "name": "0"
+            }
+          ],
+          "columns": [
+            {
+              "name": "A"
+            }
+          ],
+          "name": "test plate",
+          "rows": [
+            {
+              "name": "1"
+            }
+          ],
+          "version": "0.4",
+          "wells": [
+            {
+              "path": "A/1",
+              "rowIndex": 0,
+              "columnIndex": 0
+            }
+          ]
         }
       },
       "valid": false

@@ -7,32 +7,41 @@
     {
       "formerly": "well/strict_no_acquisitions",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "well": {
-            "images": [
-              {
-                "path": "0"
-              }
-            ]
-          }
+        "well": {
+          "images": [
+            {
+              "path": "0"
+            }
+          ],
+          "version": "0.4"
         }
       },
       "valid": true
     },
     {
+      "formerly": "plate/missing_version",
+      "data": {
+        "well": {
+          "images": [
+            {
+              "path": "0"
+            }
+          ]
+        }
+      },
+      "valid": false
+    },
+    {
       "formerly": "plate/strict_acquisitions",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "well": {
-            "images": [
-              {
-                "acquisition": 0,
-                "path": "0"
-              }
-            ]
-          }
+        "well": {
+          "images": [
+            {
+              "acquisition": 0,
+              "path": "0"
+            }
+          ],
+          "version": "0.4"
         }
       },
       "valid": true

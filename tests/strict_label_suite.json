@@ -5,11 +5,24 @@
   },
   "tests": [
     {
+      "formerly": "image-label/no_version",
+      "data": {
+        "image-label": {
+          "colors": [
+            {
+              "label-value": 1,
+              "rgba": [0, 0, 0, 0]
+            }
+          ]
+        }
+      },
+      "valid": false
+    },
+    {
       "formerly": "image-label/no_colors",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {}
+        "image-label": {
+          "version": "0.4"
         }
       },
       "valid": false
