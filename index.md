@@ -226,26 +226,24 @@ series.ome.zarr               # One converted fileset from bioformats2raw
 (version0.5:bf2raw-attributes)=
 
 The OME-Zarr Metadata in the top-level `zarr.json` file must contain the `bioformats2raw.layout` key:
-<pre class=include-code>
-path: examples/bf2raw/image.json
-highlight: json
-</pre>
+
+```{literalinclude} examples/bf2raw/image.json
+:language: json
+```
 
 If the top-level group represents a plate, the `bioformats2raw.layout` metadata will be present but
 the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow [[#plate-md]]. It is not
 possible to mix collections of images with plates at present.
 
-<pre class=include-code>
-path: examples/bf2raw/plate.json
-highlight: json
-</pre>
+```{literalinclude} examples/bf2raw/plate.json
+:language: json
+```
 
 The OME-Zarr Metadata in the `zarr.json` file within the OME group may contain the "series" key:
 
-<pre class=include-code>
-path: examples/ome/series-2.json
-highlight: json
-</pre>
+```{literalinclude} examples/ome/series-2.json
+:language: json
+```
 
 #### Details
 (version0.5:bf2raw-details)=
@@ -333,11 +331,9 @@ Each "multiscales" dictionary SHOULD contain the field "name".
 Each "multiscales" dictionary SHOULD contain the field "type", which gives the type of downscaling method used to generate the multiscale image pyramid.
 It SHOULD contain the field "metadata", which contains a dictionary with additional information about the downscaling method.
 
-<pre class=include-code>
-path: examples/multiscales_strict/multiscales_example.json
-highlight: json
-</pre>
-
+```{literalinclude} examples/multiscales_strict/multiscales_example.json
+:language: json
+```
 
 If only one multiscale is provided, use it. Otherwise, the user can choose by
 name, using the first multiscale as a fallback:
@@ -454,10 +450,10 @@ The default value is `../../` since most labeled images are stored in a "labels"
 
 Here is an example of a simple `image-label` object for a label image in which 0s and 1s represent intercellular and cellular space, respectively:
 
-<pre class=include-code>
-path: examples/label_strict/colors_properties.json
-highlight: json
-</pre>
+
+```{literalinclude} examples/label_strict/colors_properties.json
+:language: json
+```
 
 In this case, the pixels consisting of a 0 in the Zarr array will be displayed as 50% blue and 50% opacity. Pixels with a 1 in the Zarr array, 
 which correspond to cellular space, will be displayed as 50% green and 50% opacity. 
@@ -521,18 +517,16 @@ the index into the `columns` list. `rowIndex` and `columnIndex` MUST be 0-based.
 For example the following JSON object defines a plate with two acquisitions and
 6 wells (2 rows and 3 columns), containing up to 2 fields of view per acquisition.
 
-<pre class=include-code>
-path: examples/plate_strict/plate_6wells.json
-highlight: json
-</pre>
+```{literalinclude} examples/plate_strict/plate_6wells.json
+:language: json
+```
 
 The following JSON object defines a sparse plate with one acquisition and
 2 wells in a 96 well plate, containing one field of view per acquisition.
 
-<pre class=include-code>
-path: examples/plate_strict/plate_2wells.json
-highlight: json
-</pre>
+```{literalinclude} examples/plate_strict/plate_2wells.json
+:language: json
+```
 
 ### "well" metadata
 (version0.5:well-md)=
@@ -556,19 +550,17 @@ For example the following JSON object defines a well with four fields of
 view. The first two fields of view were part of the first acquisition while
 the last two fields of view were part of the second acquisition.
 
-<pre class=include-code>
-path: examples/well_strict/well_4fields.json
-highlight: json
-</pre>
+```{literalinclude} examples/well_strict/well_4fields.json
+:language: json
+```
 
 The following JSON object defines a well with two fields of view in a plate with
 four acquisitions. The first field is part of the first acquisition, and the second
 field is part of the last acquisition.
 
-<pre class=include-code>
-path: examples/well_strict/well_2fields.json
-highlight: json
-</pre>
+```{literalinclude} examples/well_strict/well_2fields.json
+:language: json
+```
 
 ## Specification naming style
 (version0.5:naming-style)=
@@ -581,68 +573,3 @@ were added before this was adopted, but they should be updated in due course.
 (implementations)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
-
-<pre class="biblio">
-{
-  "blogNov2020": {
-    "href": "https://blog.openmicroscopy.org/file-formats/community/2020/11/04/zarr-data/",
-    "title": "Public OME-Zarr data (Nov. 2020)",
-    "authors": [
-      "OME Team"
-    ],
-    "status": "Informational",
-    "publisher": "OME",
-    "id": "blogNov2020",
-    "date": "04 November 2020"
-  },
-  "imagesc26952": {
-    "href": "https://forum.image.sc/t/ome-s-position-regarding-file-formats/26952",
-    "title": "OME’s position regarding file formats",
-    "authors": [
-      "OME Team"
-    ],
-    "status": "Informational",
-    "publisher": "OME",
-    "id": "imagesc26952",
-    "date": "19 June 2020"
-  },
-  "n5": {
-    "id": "n5",
-    "href": "https://github.com/saalfeldlab/n5/issues/62",
-    "title": "N5---a scalable Java API for hierarchies of chunked n-dimensional tensors and structured meta-data",
-    "status": "Informational",
-    "authors": [
-      "John A. Bogovic",
-      "Igor Pisarev",
-      "Philipp Hanslovsky",
-      "Neil Thistlethwaite",
-      "Stephan Saalfeld"
-    ],
-    "date": "2020"
-  },
-  "ome-zarr-py": {
-    "id": "ome-zarr-py",
-    "href": "https://doi.org/10.5281/zenodo.4113931",
-    "title": "ome-zarr-py: Experimental implementation of next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.",
-    "status": "Informational",
-    "publisher": "Zenodo",
-    "authors": [
-      "OME",
-      "et al"
-    ],
-    "date": "06 October 2020"
-  },
-  "zarr": {
-    "id": "zarr",
-    "href": "https://doi.org/10.5281/zenodo.4069231",
-    "title": "Zarr: An implementation of chunked, compressed, N-dimensional arrays for Python.",
-    "status": "Informational",
-    "publisher": "Zenodo",
-    "authors": [
-      "Alistair Miles",
-      "et al"
-    ],
-    "date": "06 October 2020"
-  }
-}
-</pre>
