@@ -280,19 +280,17 @@ series.ome.zarr               # One converted fileset from bioformats2raw
 (version0.4:bf2raw-attributes)=
 
 The top-level `.zattrs` file must contain the `bioformats2raw.layout` key:
-<pre class=include-code>
-path: examples/bf2raw/image.json
-highlight: json
-</pre>
+```{literalinclude} examples/bf2raw/image.json
+language: json
+```
 
 If the top-level group represents a plate, the `bioformats2raw.layout` metadata will be present but
 the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow (plate metadata)(version0.4:plate-md). It is not
 possible to mix collections of images with plates at present.
 
-<pre class=include-code>
-path: examples/bf2raw/plate.json
-highlight: json
-</pre>
+```{literalinclude} examples/bf2raw/plate.json
+language: json
+```
 
 The `.zattrs` file within the OME group may contain the "series" key:
 
@@ -384,10 +382,9 @@ Each "multiscales" dictionary SHOULD contain the field "name". It SHOULD contain
 Each "multiscales" dictionary SHOULD contain the field "type", which gives the type of downscaling method used to generate the multiscale image pyramid.
 It SHOULD contain the field "metadata", which contains a dictionary with additional information about the downscaling method.
 
-<pre class=include-code>
-path: examples/multiscales_strict/multiscales_example.json
-highlight: json
-</pre>
+```{literalinclude} examples/multiscales_strict/multiscales_example.json
+language: json
+```
 
 
 If only one multiscale is provided, use it. Otherwise, the user can choose by
@@ -497,10 +494,9 @@ under a subgroup named "labels/" (see above).
 The `image-label` dictionary SHOULD contain a `version` key whose value MUST be a string
 specifying the version of the image-label specification.
 
-<pre class=include-code>
-path: examples/label_strict/colors_properties.json
-highlight: json
-</pre>
+```{literalinclude} examples/label_strict/colors_properties.json
+language: json
+```
 
 ### "plate" metadata
 (version0.4:plate-md)=
@@ -561,18 +557,16 @@ the index into the `columns` list. `rowIndex` and `columnIndex` MUST be 0-based.
 For example the following JSON object defines a plate with two acquisitions and
 6 wells (2 rows and 3 columns), containing up to 2 fields of view per acquisition.
 
-<pre class=include-code>
-path: examples/plate_strict/plate_6wells.json
-highlight: json
-</pre>
+```{literalinclude} examples/plate_strict/plate_6wells.json
+:language: json
+```
 
 The following JSON object defines a sparse plate with one acquisition and
 2 wells in a 96 well plate, containing one field of view per acquisition.
 
-<pre class=include-code>
-path: examples/plate_strict/plate_2wells.json
-highlight: json
-</pre>
+```{literalinclude} examples/plate_strict/plate_2wells.json
+:language: json
+```
 
 ### "well" metadata
 (version0.4:well-md)=
@@ -596,19 +590,18 @@ For example the following JSON object defines a well with four fields of
 view. The first two fields of view were part of the first acquisition while
 the last two fields of view were part of the second acquisition.
 
-<pre class=include-code>
-path: examples/well_strict/well_4fields.json
-highlight: json
-</pre>
+
+```{literalinclude} examples/well_strict/well_4fields.json
+:language: json
+```
 
 The following JSON object defines a well with two fields of view in a plate with
 four acquisitions. The first field is part of the first acquisition, and the second
 field is part of the last acquisition.
 
-<pre class=include-code>
-path: examples/well_strict/well_2fields.json
-highlight: json
-</pre>
+```{literalinclude} examples/well_strict/well_2fields.json
+:language: json
+```
 
 ## Specification naming style
 (version0.4:naming-style)=
