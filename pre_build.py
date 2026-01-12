@@ -18,7 +18,7 @@ def build_json_examples():
     input_directory = 'examples'
     output_directory = 'examples'
     os.makedirs(output_directory, exist_ok=True)
-    example_types = os.listdir(input_directory)
+    example_types = [d for d in os.listdir(input_directory) if os.path.isdir(os.path.join(input_directory, d))]
 
     index_md = """---
 title: NGFF metadata JSON Examples
