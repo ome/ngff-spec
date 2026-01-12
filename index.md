@@ -73,7 +73,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │                         # Group level attributes are stored in the `zarr.json` file and include
     │                         # "multiscales" and "omero" (see below).
     │
-    ├── 0                     # Each multiscale level is stored as a separate Zarr array,
+    ├── s0                    # Each multiscale level is stored as a separate Zarr array,
     │   ...                   # which is a folder containing chunk files which compose the array.
     ├── n                     # The name of the array is arbitrary with the ordering defined by
     │   │                     # by the "multiscales" metadata, but is often a sequence starting at 0.
@@ -98,7 +98,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
                 ├── zarr.json # Zarr Group which is both a multiscaled image as well as a labeled image.
                 │             # Metadata of the related image and as well as display information under the "image-label" key.
                 │
-                ├── 0         # Each multiscale level is stored as a separate Zarr array, as above, but only integer values
+                ├── s0        # Each multiscale level is stored as a separate Zarr array, as above, but only integer values
                 └── ...       # are supported.
 ```
 
@@ -130,7 +130,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     │   │   ├── 0             # First field of view of well A1
     │   │   │   │
     │   │   │   ├── zarr.json # Implements "multiscales", "omero"
-    │   │   │   ├── 0         # Resolution levels          
+    │   │   │   ├── s0        # Resolution levels
     │   │   │   ├── ...
     │   │   │   └── labels    # Labels (optional)
     │   │   └── ...           # Other fields of view
@@ -498,12 +498,12 @@ store.zarr                      # Root folder of the zarr store
 │
 ├── volume
 │   ├── zarr.json              # group level attributes (multiscales)
-│   └── 0                      # a group containing the 0th scale
+│   └── s0                     # a group containing the 0th scale
 │       └── image              # a zarr array
 │           └── zarr.json      # physical coordinate system and transformations here
 └── crop
     ├── zarr.json              # group level attributes (multiscales)
-    └── 0                      # a group containing the 0th scale
+    └── s0                     # a group containing the 0th scale
         └── image              # a zarr array
             └── zarr.json      # physical coordinate system and transformations here
 </pre>
