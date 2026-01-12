@@ -81,41 +81,64 @@ For an overview of supported referencing syntax,
 see the [MyST doc pages](https://mystmd.org/guide/cross-references).
 It is recommended to use the following syntax in this document for consistency:
 
-```
+```markdown
 anchor: (your-reference-name)=
 reference: [This is a reference](#your-reference-name)
 ```
 
-#### Admonitions
+For cross-referencing in the spec document,
+make sure to prepend the reference anchor with `versionX` like so:
 
-We suggest using [admonitions](https://mystmd.org/guide/admonitions) for example code and other highlighting.
-For examples, please use the following syntax to highlight your examples:
+```markdown
+## Some header
+(version0.9:some-header)=
+```
+
+Otherwise, the same anchors may not be possible to resolve
+if multiple versions of the spec document are built and viewed together.
+
+#### Citations
+
+ngff-spec relies on [sphinxcontrib-bibtex](https://pypi.org/project/sphinxcontrib-bibtex/) for citations.
+To add a citation to the text, add it as a bibtex entry in the `references.bib` file in the root of this repository.
+You can then cite it in the text using the following syntax:
+
+```markdown
+This is a citation {cite:t}`citation_key`.
+```
+
+where `citation_key` is the key of the bibtex entry in the `references.bib` file.
+
+#### Json examples
+
+We suggest using [dropdowns](https://mystmd.org/guide/dropdowns-cards-and-tabs) for example code and other highlighting.
+For examples, please use the following syntax to wrap your examples:
 
 `````markdown
-````{admonition} Example
+:::{dropdown} Example
 
 Some informative text about your example
 ```json
 "key": "value"
 ```
-````
+:::
 `````
 
 which results in
 
-````{admonition} Example
+:::{dropdown} Example
 
 Some informative text about your example
 ```json
 "key": "value"
 ```
-````
+:::
 
 If you want to link in example metadata from somewhere in this repo (i.e, a json file),
 use this syntax:
 
 `````markdown
-````{admonition} Example
+:::dropdown Example
 
 Some informative text about your example
 ```{literalinclude} path/to/example.json
@@ -123,10 +146,10 @@ Some informative text about your example
 :linenos:
 :tab-width: 2
 ```
-````
+:::
 `````
 
-Other useful admonitions (e.g., `hint`, `note`) can be found [here](https://mystmd.org/guide/directives).
+Other useful admonitions and directives (e.g., `hint`, `note`) can be found [here](https://mystmd.org/guide/directives).
 
 ## Release process checklist
 
