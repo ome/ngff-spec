@@ -25,7 +25,7 @@ Status Text: (an "editor's draft") will not necessarily be supported.
 </pre>
 
 ## Introduction
-
+(version0.4:intro)=
 
 Bioimaging science is at a crossroads. Currently, the drive to acquire more,
 larger, preciser spatial measurements is unfortunately at odds with our ability
@@ -52,8 +52,8 @@ Such next-generation file formats layout data so that individual portions, or
 entire datasets.
 
 
-Why "<dfn export="true"><abbr title="Next-generation file-format">NGFF</abbr></dfn>"? {#why-ngff}
--------------------------------------------------------------------------------------------------
+### Why "<dfn export="true"><abbr title="Next-generation file-format">NGFF</abbr></dfn>"?
+(version0.4:why-ngff)=
 
 A short description of what is needed for an imaging format is "a hierarchy
 of n-dimensional (dense) arrays with metadata". This combination of features
@@ -66,9 +66,9 @@ parallelization.
 
 As a result, a number of formats have been developed more recently which provide
 the basic data structure of an HDF5 file, but do so in a more cloud-friendly way.
-In the [PyData](https://pydata.org/) community, the Zarr [[zarr]] format was developed
+In the [PyData](https://pydata.org/) community, the Zarr (@zarr) format was developed
 for easily storing collections of [NumPy](https://numpy.org/) arrays. In the
-[ImageJ](https://imagej.net/) community, N5 [[n5]] was developed to work around
+[ImageJ](https://imagej.net/) community, N5 (@n5) was developed to work around
 the limitations of HDF5 ("N5" was originally short for "Not-HDF5").
 Both of these formats permit storing individual chunks of data either locally in
 separate files or in cloud-based object stores as separate keys.
@@ -79,7 +79,7 @@ specification. The editor's draft will soon be entering a [request for comments 
 process comes to an end, this document will be updated.
 
 ### OME-NGFF
-(ome-ngff)=
+(version0.4:ome-ngff)=
 
 The conventions and specifications defined in this document are designed to
 enable next-generation file formats to represent the same bioimaging data
@@ -89,7 +89,7 @@ binary containers. Eventually, we hope, the moniker "next-generation" will no lo
 applicable, and this will simply be the most efficient, common, and useful representation
 of bioimaging data, whether during acquisition or sharing in the cloud.
 
-Note: The following text makes use of OME-Zarr [[ome-zarr-py]], the current prototype implementation,
+Note: The following text makes use of OME-Zarr (@ome-zarr-py), the current prototype implementation,
 for all examples.
 
 ### Document conventions
@@ -103,14 +103,14 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 intention of removing it in the future. Implementations may be expected (MUST) or
 encouraged (SHOULD) to support the reading of the data, but writing will usually
 be optional (MAY). Examples of transitional metadata include custom additions by
-implementations that are later submitted as a formal specification. (See [[#bf2raw]])
+implementations that are later submitted as a formal specification. (See (bioformats2raw metadata)(#version0.4:bf2raw))
 </p>
 
 Some of the JSON examples in this document include comments. However, these are only for
 clarity purposes and comments MUST NOT be included in JSON objects.
 
 ## On-disk (or in-cloud) layout
-(on-disk)=
+(version0.4:on-disk)=
 
 An overview of the layout of an OME-Zarr fileset should make
 understanding the following metadata sections easier. The hierarchy
@@ -126,11 +126,11 @@ OME-NGFF metadata MUST be stored as attributes in the corresponding Zarr
 groups.
 
 ### Images
-(image-layout)=
+(version0.4:image-layout)=
 
 The following layout describes the expected Zarr hierarchy for images with
 multiple levels of resolutions and optionally associated labels.
-Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [[#multiscale-md]] for details.
+Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see (multiscales metadata)(#version0.4:multiscale-md) for details.
 For this example we assume an image with 5 dimensions and axes called `t,c,z,y,x`.
 
 <pre>
@@ -183,18 +183,18 @@ For this example we assume an image with 5 dimensions and axes called `t,c,z,y,x
 
 
 ### High-content screening
-(hcs-layout)=
+(version0.4:hcs-layout)=
 
 The following specification defines the hierarchy for a high-content screening
 dataset. Three groups MUST be defined above the images:
 
 -   the group above the images defines the well and MUST implement the
-    [well specification](#well-md). All images contained in a well are fields
+    [well specification](#version0.4:well-md). All images contained in a well are fields
     of view of the same well
 -   the group above the well defines a row of wells
 -   the group above the well row defines an entire plate i.e. a two-dimensional
     collection of wells organized in rows and columns. It MUST implement the
-    [plate specification](#plate-md)
+    [plate specification](#version0.4:plate-md)
 
 A well row group SHOULD NOT be present if there are no images in the well row.
 A well group SHOULD NOT be present if there are no images in the well.
@@ -230,13 +230,13 @@ A well group SHOULD NOT be present if there are no images in the well.
 </pre>
 
 ## Metadata
-(metadata)=
+(version0.4:metadata)=
 
 The various `.zattrs` files throughout the above array hierarchy may contain metadata
 keys as specified below for discovering certain types of data, especially images.
 
 ### "axes" metadata
-(axes-md)
+(version0.4:axes-md)
 
 "axes" describes the dimensions of a physical coordinate space. It is a list of dictionaries, where each dictionary describes a dimension (axis) and:
 - MUST contain the field "name" that gives the name for this dimension. The values MUST be unique across all "name" fields.
@@ -245,10 +245,10 @@ keys as specified below for discovering certain types of data, especially images
     - Units for "space" axes: 'angstrom', 'attometer', 'centimeter', 'decimeter', 'exameter', 'femtometer', 'foot', 'gigameter', 'hectometer', 'inch', 'kilometer', 'megameter', 'meter', 'micrometer', 'mile', 'millimeter', 'nanometer', 'parsec', 'petameter', 'picometer', 'terameter', 'yard', 'yoctometer', 'yottameter', 'zeptometer', 'zettameter'
     - Units for "time" axes: 'attosecond', 'centisecond', 'day', 'decisecond', 'exasecond', 'femtosecond', 'gigasecond', 'hectosecond', 'hour', 'kilosecond', 'megasecond', 'microsecond', 'millisecond', 'minute', 'nanosecond', 'petasecond', 'picosecond', 'second', 'terasecond', 'yoctosecond', 'yottasecond', 'zeptosecond', 'zettasecond'
 
-If part of [[#multiscale-md]], the length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
+If part of (multiscales metadata)(#version0.4:multiscale-md), the length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 ### "bioformats2raw.layout" (transitional)
-(bf2raw)=
+(version0.4:bf2raw)=
 
 [=Transitional=] "bioformats2raw.layout" metadata identifies a group which implicitly describes a series of images.
 The need for the collection stems from the common "multi-image file" scenario in microscopy. Parsers like Bio-Formats
@@ -259,7 +259,7 @@ The bioformats2raw layout has been added to v0.4 as a transitional specification
 in the wild. An upcoming NGFF specification will replace this layout with explicit metadata.
 
 #### Layout
-(bf2raw-layout)=
+(version0.4:bf2raw-layout)=
 
 Typical Zarr layout produced by running `bioformats2raw` on a fileset that contains more than one image (series > 1):
 
@@ -277,7 +277,7 @@ series.ome.zarr               # One converted fileset from bioformats2raw
 </pre>
 
 #### Attributes
-(bf2raw-attributes)=
+(version0.4:bf2raw-attributes)=
 
 The top-level `.zattrs` file must contain the `bioformats2raw.layout` key:
 <pre class=include-code>
@@ -286,7 +286,7 @@ highlight: json
 </pre>
 
 If the top-level group represents a plate, the `bioformats2raw.layout` metadata will be present but
-the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow [[#plate-md]]. It is not
+the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow (plate metadata)(version0.4:plate-md). It is not
 possible to mix collections of images with plates at present.
 
 <pre class=include-code>
@@ -302,7 +302,7 @@ highlight: json
 </pre>
 
 #### Details
-(bf2raw-details)=
+(version0.4:bf2raw-details)=
 
 Conforming groups:
 
@@ -331,7 +331,7 @@ Conforming readers:
 - MAY ignore other groups or arrays under the root of the hierarchy.
 
 ### "coordinateTransformations" metadata
-(trafo-md)=
+(version0.4:trafo-md)=
 
 "coordinateTransformations" describe a series of transformations that map between two coordinate spaces (defined by "axes").
 For example, to map a discrete data space of an array to the corresponding physical space.
@@ -351,13 +351,13 @@ The transformations in the list are applied sequentially and in order.
 
 
 ### "multiscales" metadata
-(multiscale-md)=
+(version0.4:multiscale-md)=
 
 Metadata about an image can be found under the "multiscales" key in the group-level metadata. Here, image refers to 2 to 5 dimensional data representing image or volumetric data with optional time or channel axes. It is stored in a multiple resolution representation.
 
 "multiscales" contains a list of dictionaries where each entry describes a multiscale image.
 
-Each "multiscales" dictionary MUST contain the field "axes", see [[#axes-md]].
+Each "multiscales" dictionary MUST contain the field "axes", see (axes metadata)(#version0.4:axes-md).
 The length of "axes" must be between 2 and 5 and MUST be equal to the dimensionality of the zarr arrays storing the image data (see "datasets:path").
 The "axes" MUST contain 2 or 3 entries of "type:space" and MAY contain one additional entry of "type:time" and MAY contain one additional entry of "type:channel" or a null / custom type.
 The order of the entries MUST correspond to the order of dimensions of the zarr arrays. In addition, the entries MUST be ordered by "type" where the "time" axis must come first (if present), followed by the  "channel" or custom axis (if present) and the axes of type "space".
@@ -369,7 +369,7 @@ to the current zarr group. The "path"s MUST be ordered from largest (i.e. highes
 
 Each "datasets" dictionary MUST have the same number of dimensions and MUST NOT have more than 5 dimensions. The number of dimensions and order MUST correspond to number and order of "axes".
 Each dictionary in "datasets" MUST contain the field "coordinateTransformations", which contains a list of transformations that map the data coordinates to the physical coordinates (as specified by "axes") for this resolution level.
-The transformations are defined according to [[#trafo-md]]. The transformation MUST only be of type `translation` or `scale`.
+The transformations are defined according to (transformations metadata)(#version0.4:trafo-md). The transformation MUST only be of type `translation` or `scale`.
 They MUST contain exactly one `scale` transformation that specifies the pixel size in physical units or time duration. If scaling information is not available or applicable for one of the axes, the value MUST express the scaling factor between the current resolution and the first resolution for the given axis, defaulting to 1.0 if there is no downsampling along the axis.
 It MAY contain exactly one `translation` that specifies the offset from the origin in physical units. If `translation` is given it MUST be listed after `scale` to ensure that it is given in physical coordinates.
 The length of the `scale` and `translation` array MUST be the same as the length of "axes".
@@ -404,8 +404,8 @@ if not datasets:
     datasets = [x["path"] for x in multiscales[0]["datasets"]]
 ```
 
-### "omero" metadata (transitional) {#omero-md}
-(omero-md)=
+### "omero" metadata (transitional)
+(version0.4:omero-md)=
 
 [=Transitional=] information specific to the channels of an image and how to render it
 can be found under the "omero" key in the group-level metadata:
@@ -447,7 +447,7 @@ The field "window" MUST contain the fields "min" and "max", which are the minimu
 It MUST also contain the fields "start" and "end", which are the start and end values of the window, respectively.
 
 ### "labels" metadata
-(labels-md)=
+(version0.4:labels-md)=
 
 The special group "labels" found under an image Zarr contains the key `labels` containing
 the paths to label objects which can be found underneath the group:
@@ -463,7 +463,7 @@ the paths to label objects which can be found underneath the group:
 Unlisted groups MAY be labels.
 
 ### "image-label" metadata
-(label-md)=
+(version0.4:label-md)=
 
 Groups containing the `image-label` dictionary represent an image segmentation
 in which each unique pixel value represents a separate segmented object.
@@ -503,7 +503,7 @@ highlight: json
 </pre>
 
 ### "plate" metadata
-(plate-md)=
+(version0.4:plate-md)=
 
 For high-content screening datasets, the plate layout can be found under the
 custom attributes of the plate group under the `plate` key in the group-level metadata.
@@ -575,7 +575,7 @@ highlight: json
 </pre>
 
 ### "well" metadata
-(well-md)=
+(version0.4:well-md)=
 
 For high-content screening datasets, the metadata about all fields of views
 under a given well can be found under the "well" key in the attributes of the
@@ -611,14 +611,14 @@ highlight: json
 </pre>
 
 ## Specification naming style
-(naming-style)=
+(version0.4:naming-style)=
 
 Multi-word keys in this specification should use the `camelCase` style.
 NB: some parts of the specification don't obey this convention as they
 were added before this was adopted, but they should be updated in due course.
 
 ## Implementations
-(implementations)=
+(version0.4:implementations)=
 
 Projects which support reading and/or writing OME-NGFF data include:
 
