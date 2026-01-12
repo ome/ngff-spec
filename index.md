@@ -24,7 +24,7 @@ Status Text: (an "editor's draft") will not necessarily be supported.
 </pre>
 
 ## OME-Zarr specification
-(ome-zarr)=
+(version0.5:ome-zarr)=
 
 
 The conventions and specifications defined in this document are designed to
@@ -50,7 +50,7 @@ Some of the JSON examples in this document include comments. However, these are 
 clarity purposes and comments MUST NOT be included in JSON objects.
 
 ## Storage format
-(storage-format)=
+(version0.5:storage-format)=
 
 
 OME-Zarr is implemented using the Zarr format as defined by the
@@ -66,7 +66,7 @@ be stored on a web server to be accessed via HTTP or in object storage
 like S3 or GCS.
 
 ### Images
-(image-layout)=
+(version0.5:image-layout)=
 
 
 The following layout describes the expected Zarr hierarchy for images with
@@ -116,18 +116,18 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
 
 
 ### High-content screening
-(hcs-layout)=
+(version0.5:hcs-layout)=
 
 The following specification defines the hierarchy for a high-content screening
 dataset. Three groups MUST be defined above the images:
 
 -   the group above the images defines the well and MUST implement the
-    [well specification](#well-md). All images contained in a well are fields
+    [well specification](#version0.5:well-md). All images contained in a well are fields
     of view of the same well
 -   the group above the well defines a row of wells
 -   the group above the well row defines an entire plate i.e. a two-dimensional
     collection of wells organized in rows and columns. It MUST implement the
-    [plate specification](#plate-md)
+    [plate specification](#version0.5:plate-md)
 
 A well row group SHOULD NOT be present if there are no images in the well row.
 A well group SHOULD NOT be present if there are no images in the well.
@@ -156,7 +156,7 @@ A well group SHOULD NOT be present if there are no images in the well.
 </pre>
 
 ## OME-Zarr Metadata
-(metadata)=
+(version0.5:metadata)=
 
 The "OME-Zarr Metadata" contains metadata keys as specified below 
 for discovering certain types of data, especially images.
@@ -181,7 +181,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 ```
 
 ### "axes" metadata
-(axes-md)=
+(version0.5:axes-md)=
 
 "axes" describes the dimensions of a physical coordinate space. It is a list of dictionaries, where each dictionary describes a dimension (axis) and:
 - MUST contain the field "name" that gives the name for this dimension. The values MUST be unique across all "name" fields.
@@ -190,13 +190,13 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
     - Units for "space" axes: 'angstrom', 'attometer', 'centimeter', 'decimeter', 'exameter', 'femtometer', 'foot', 'gigameter', 'hectometer', 'inch', 'kilometer', 'megameter', 'meter', 'micrometer', 'mile', 'millimeter', 'nanometer', 'parsec', 'petameter', 'picometer', 'terameter', 'yard', 'yoctometer', 'yottameter', 'zeptometer', 'zettameter'
     - Units for "time" axes: 'attosecond', 'centisecond', 'day', 'decisecond', 'exasecond', 'femtosecond', 'gigasecond', 'hectosecond', 'hour', 'kilosecond', 'megasecond', 'microsecond', 'millisecond', 'minute', 'nanosecond', 'petasecond', 'picosecond', 'second', 'terasecond', 'yoctosecond', 'yottasecond', 'zeptosecond', 'zettasecond'
 
-The "axes" are used as part of [[#multiscale-md]]. The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
+The "axes" are used as part of [multiscales metadata](#version0.5:multiscale-md). The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 The "dimension_names" attribute MUST be included in the `zarr.json` of the Zarr array of a multiscale level and MUST match the names in the "axes" metadata.
 
 
 ### "bioformats2raw.layout" (transitional)
-(bf2raw)=
+(version0.5:bf2raw)=
 
 [=Transitional=] "bioformats2raw.layout" metadata identifies a group which implicitly describes a series of images.
 The need for the collection stems from the common "multi-image file" scenario in microscopy. Parsers like Bio-Formats
@@ -223,7 +223,7 @@ series.ome.zarr               # One converted fileset from bioformats2raw
 </pre>
 
 #### Attributes
-(bf2raw-attributes)=
+(version0.5:bf2raw-attributes)=
 
 The OME-Zarr Metadata in the top-level `zarr.json` file must contain the `bioformats2raw.layout` key:
 <pre class=include-code>
@@ -248,7 +248,7 @@ highlight: json
 </pre>
 
 #### Details
-(bf2raw-details)=
+(version0.5:bf2raw-details)=
 
 Conforming groups:
 
@@ -278,7 +278,7 @@ Conforming readers:
 
 
 ### "coordinateTransformations" metadata
-(trafo-md)=
+(version0.5:trafo-md)=
 
 "coordinateTransformations" describe a series of transformations that map between two coordinate spaces (defined by "axes").
 For example, to map a discrete data space of an array to the corresponding physical space.
@@ -298,7 +298,7 @@ The transformations in the list are applied sequentially and in order.
 
 
 ### "multiscales" metadata
-(multiscale-md)=
+(version0.5:multiscale-md)=
 
 Metadata about an image can be found under the "multiscales" key in the group-level OME-Zarr Metadata. 
 Here, image refers to 2 to 5 dimensional data representing image or volumetric data with optional time or channel axes. 
@@ -306,7 +306,7 @@ It is stored in a multiple resolution representation.
 
 "multiscales" contains a list of dictionaries where each entry describes a multiscale image.
 
-Each "multiscales" dictionary MUST contain the field "axes", see [[#axes-md]].
+Each "multiscales" dictionary MUST contain the field "axes", see [axes metadata](#version0.5:axes-md).
 The length of "axes" must be between 2 and 5 and MUST be equal to the dimensionality of the zarr arrays storing the image data (see "datasets:path").
 The "axes" MUST contain 2 or 3 entries of "type:space" and MAY contain one additional entry of "type:time" and MAY contain one additional entry of "type:channel" or a null / custom type.
 The order of the entries MUST correspond to the order of dimensions of the zarr arrays. In addition, the entries MUST be ordered by "type" where the "time" axis must come first (if present), followed by the  "channel" or custom axis (if present) and the axes of type "space".
@@ -318,7 +318,7 @@ to the current zarr group. The "path"s MUST be ordered from largest (i.e. highes
 
 Each "datasets" dictionary MUST have the same number of dimensions and MUST NOT have more than 5 dimensions. The number of dimensions and order MUST correspond to number and order of "axes".
 Each dictionary in "datasets" MUST contain the field "coordinateTransformations", which contains a list of transformations that map the data coordinates to the physical coordinates (as specified by "axes") for this resolution level.
-The transformations are defined according to [[#trafo-md]]. The transformation MUST only be of type `translation` or `scale`.
+The transformations are defined according to [transformations metadata](#version0.5:trafo-md). The transformation MUST only be of type `translation` or `scale`.
 They MUST contain exactly one `scale` transformation that specifies the pixel size in physical units or time duration. If scaling information is not available or applicable for one of the axes, the value MUST express the scaling factor between the current resolution and the first resolution for the given axis, defaulting to 1.0 if there is no downsampling along the axis.
 It MAY contain exactly one `translation` that specifies the offset from the origin in physical units. If `translation` is given it MUST be listed after `scale` to ensure that it is given in physical coordinates.
 The length of the `scale` and `translation` array MUST be the same as the length of "axes".
@@ -354,7 +354,7 @@ if not datasets:
 ```
 
 ### "omero" metadata (transitional)
-(omero-md)=
+(version0.5:omero-md)=
 
 [=Transitional=] information specific to the channels of an image and how to render it
 can be found under the "omero" key in the group-level metadata:
@@ -395,7 +395,7 @@ The field "window" MUST contain the fields "min" and "max", which are the minimu
 It MUST also contain the fields "start" and "end", which are the start and end values of the window, respectively.
 
 ### "labels" metadata
-(labels-md)=
+(version0.5:labels-md)=
 
 In OME-Zarr, Zarr arrays representing pixel-annotation data are stored in a group called "labels". Some applications--notably image segmentation--produce 
 a new image that is in the same coordinate system as a corresponding multiscale image (usually having the same dimensions and coordinate transformations). 
@@ -463,7 +463,7 @@ In this case, the pixels consisting of a 0 in the Zarr array will be displayed a
 which correspond to cellular space, will be displayed as 50% green and 50% opacity. 
 
 ### "plate" metadata
-(plate-md)=
+(version0.5:plate-md)=
 
 For high-content screening datasets, the plate layout can be found under the
 custom attributes of the plate group under the `plate` key in the group-level metadata.
@@ -535,7 +535,7 @@ highlight: json
 </pre>
 
 ### "well" metadata
-(well-md)=
+(version0.5:well-md)=
 
 For high-content screening datasets, the metadata about all fields of views
 under a given well can be found under the "well" key in the attributes of the
@@ -571,7 +571,7 @@ highlight: json
 </pre>
 
 ## Specification naming style
-(naming-style)=
+(version0.5:naming-style)=
 
 Multi-word keys in this specification should use the `camelCase` style.
 NB: some parts of the specification don't obey this convention as they
@@ -581,99 +581,6 @@ were added before this was adopted, but they should be updated in due course.
 (implementations)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
-
-## Citing
-(citing)=
-
-[Next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.](https://ngff.openmicroscopy.org/0.4)
-J. Moore, *et al*. Open Microscopy Environment Consortium, 8 February 2022.
-This edition of the specification is [https://ngff.openmicroscopy.org/0.5/](https://ngff.openmicroscopy.org/0.5/]).
-The latest edition is available at [https://ngff.openmicroscopy.org/latest/](https://ngff.openmicroscopy.org/latest/).
-[(doi:10.5281/zenodo.4282107)](https://doi.org/10.5281/zenodo.4282107)
-
-## Version History
-(history)=
-
-<table>
-  <thead>
-    <tr>
-      <td>Revision</td>
-      <td>Date</td>
-      <td>Description</td>
-    </tr>
-  </thead>
-  <tr>
-    <td>0.5.2</td>
-    <td>2025-01-10</td>
-    <td>Clarify that the <code>dimension_names</code> field in <code>axes</code> MUST be included.</td>
-  </tr>
-  <tr>
-    <td>0.5.1</td>
-    <td>2025-01-10</td>
-    <td>Re-add the improved omero description in PR-191.</td>
-  </tr>
-  <tr>
-    <td>0.5.0</td>
-    <td>2024-11-21</td>
-    <td>use Zarr v3 in OME-Zarr, see <a href="https://ngff.openmicroscopy.org/rfc/2">RFC-2</a>.</td>
-  </tr>
-  <tr>
-    <td>0.4.1</td>
-    <td>2023-02-09</td>
-    <td>expand on "labels" description</td>
-  </tr>
-  <tr>
-    <td>0.4.1</td>
-    <td>2022-09-26</td>
-    <td>transitional metadata for image collections ("bioformats2raw.layout")</td>
-  </tr>
-  <tr>
-    <td>0.4.0</td>
-    <td>2022-02-08</td>
-    <td>multiscales: add axes type, units and coordinateTransformations</td>
-  </tr>
-  <tr>
-    <td>0.4.0</td>
-    <td>2022-02-08</td>
-    <td>plate: add rowIndex/columnIndex                </td>
-  </tr>
-  <tr>
-    <td>0.3.0</td>
-    <td>2021-08-24</td>
-    <td>Add axes field to multiscale metadata     </td>
-  </tr>
-  <tr>
-    <td>0.2.0</td>
-    <td>2021-03-29</td>
-    <td>Change chunk dimension separator to "/"   </td>
-  </tr>
-  <tr>
-    <td>0.1.4</td>
-    <td>2020-11-26</td>
-    <td>Add HCS specification                      </td>
-  </tr>
-  <tr>
-    <td>0.1.3</td>
-    <td>2020-09-14</td>
-    <td>Add labels specification                   </td>
-  </tr>
-  <tr>
-    <td>0.1.2     </td>
-    <td>2020-05-07</td>
-    <td>Add description of "omero" metadata        </td>
-  </tr>
-  <tr>
-    <td>0.1.1     </td>
-    <td>2020-05-06</td>
-    <td>Add info on the ordering of resolutions    </td>
-  </tr>
-  <tr>
-    <td>0.1.0     </td>
-    <td>2020-04-20</td>
-    <td>First version for internal demo            </td>
-  </tr>
-</table>
-
 
 <pre class="biblio">
 {
