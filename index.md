@@ -512,7 +512,7 @@ The `plate` dictionary MAY contain an `acquisitions` key whose value MUST be a l
 JSON objects defining the acquisitions for a given plate to which wells can refer to. Each
 acquisition object MUST contain an `id` key whose value MUST be an unique integer identifier
 greater than or equal to 0 within the context of the plate to which fields of view can refer
-to (see #well-md).
+to (see [well metadata](version0.4:well-md)).
 Each acquisition object SHOULD contain a `name` key whose value MUST be a string identifying
 the name of the acquisition. Each acquisition object SHOULD contain a `maximumfieldcount`
 key whose value MUST be a positive integer indicating the maximum number of fields of view for the
@@ -587,7 +587,7 @@ specifying all fields of views for a given well. Each image object MUST contain 
 MUST contain only alphanumeric characters, MUST be case-sensitive, and MUST NOT be a duplicate
 of any other `path` in the `images` list. If multiple acquisitions were performed in the plate,
 it MUST contain an `acquisition` key whose value MUST be an integer identifying the acquisition
-which MUST match one of the acquisition JSON objects defined in the plate metadata (see #plate-md).
+which MUST match one of the acquisition JSON objects defined in the plate metadata (see [plate-metadata](version0.4:plate-md)).
 
 The `well` dictionary SHOULD contain a `version` key whose value MUST be a string specifying the
 version of the well specification.
