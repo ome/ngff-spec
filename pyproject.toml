@@ -2,7 +2,7 @@
 name = "ngff-spec"
 dynamic = ["version"]
 description = "Next-generation file format specification"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 
 dependencies = [
     "json-schema-for-humans",
@@ -27,3 +27,8 @@ packages = ["."]
 [build-system]
 requires = ["hatchling>=1.8.0,<1.21.1"]
 build-backend = "hatchling.build"
+
+[tool.codespell]
+skip = 'references.bib'
+count = true
+quiet-level = 3
