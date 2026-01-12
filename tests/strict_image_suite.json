@@ -9,80 +9,43 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.5",
           "multiscales": [
             {
               "name": "example",
-              "coordinateSystems": [
+              "axes": [
                 {
-                  "name": "world",
-                  "axes": [
-                    {
-                      "name": "t",
-                      "type": "time",
-                      "unit": "millisecond"
-                    },
-                    {
-                      "name": "c",
-                      "type": "channel"
-                    },
-                    {
-                      "name": "z",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "y",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "x",
-                      "type": "space",
-                      "unit": "micrometer"
-                    }
-                  ]
+                  "name": "t",
+                  "type": "time",
+                  "unit": "millisecond"
                 },
                 {
-                  "name": "intrinsic",
-                  "axes": [
-                    {
-                      "name": "t",
-                      "type": "time",
-                      "unit": "millisecond"
-                    },
-                    {
-                      "name": "c",
-                      "type": "channel"
-                    },
-                    {
-                      "name": "z",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "y",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "x",
-                      "type": "space",
-                      "unit": "micrometer"
-                    }
-                  ]
+                  "name": "c",
+                  "type": "channel"
+                },
+                {
+                  "name": "z",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
                 }
-              ]
-              ,
+              ],
               "datasets": [
                 {
                   "path": "0",
                   "coordinateTransformations": [
                     {
                       "type": "scale",
-                      "scale": [1.0, 1.0, 0.5, 0.5, 0.5],
-                      "input": "0",
-                      "output": "intrinsic"
+                      "scale": [1.0, 1.0, 0.5, 0.5, 0.5]
                     }
                   ]
                 },
@@ -91,9 +54,7 @@
                   "coordinateTransformations": [
                     {
                       "type": "scale",
-                      "scale": [1.0, 1.0, 1.0, 1.0, 1.0],
-                      "input": "1",
-                      "output": "intrinsic"
+                      "scale": [1.0, 1.0, 1.0, 1.0, 1.0]
                     }
                   ]
                 },
@@ -102,9 +63,7 @@
                   "coordinateTransformations": [
                     {
                       "type": "scale",
-                      "scale": [1.0, 1.0, 2.0, 2.0, 2.0],
-                      "input": "2",
-                      "output": "intrinsic"
+                      "scale": [1.0, 1.0, 2.0, 2.0, 2.0]
                     }
                   ]
                 }
@@ -112,9 +71,7 @@
               "coordinateTransformations": [
                 {
                   "type": "scale",
-                  "scale": [0.1, 1.0, 1.0, 1.0, 1.0],
-                  "input": "world",
-                  "output": "intrinsic"
+                  "scale": [0.1, 1.0, 1.0, 1.0, 1.0]
                 }
               ],
               "type": "gaussian",
@@ -138,39 +95,19 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.5",
           "multiscales": [
             {
-              "coordinateSystems": [
+              "axes": [
                 {
-                  "name": "world",
-                  "axes": [
-                    {
-                      "name": "y",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "x",
-                      "type": "space",
-                      "unit": "micrometer"
-                    }
-                  ]
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
                 },
                 {
-                  "name": "physical",
-                  "axes": [
-                    {
-                      "name": "y",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "x",
-                      "type": "space",
-                      "unit": "micrometer"
-                    }
-                  ]
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
                 }
               ],
               "datasets": [
@@ -179,9 +116,7 @@
                   "coordinateTransformations": [
                     {
                       "scale": [1, 1],
-                      "type": "scale",
-                      "input": "0",
-                      "output": "physical"
+                      "type": "scale"
                     }
                   ]
                 }
@@ -189,9 +124,7 @@
               "coordinateTransformations": [
                 {
                   "scale": [10, 10],
-                  "type": "scale",
-                  "input": "physical",
-                  "output": "world"
+                  "type": "scale"
                 }
               ],
               "name": "image_with_coordinateTransformations",
@@ -210,7 +143,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.5",
           "@id": "top",
           "@type": "ngff:Image",
           "multiscales": [
@@ -223,9 +156,7 @@
                   "coordinateTransformations": [
                     {
                       "type": "scale",
-                      "scale": [1, 1],
-                      "input": "path/to/0",
-                      "output": "physical"
+                      "scale": [1, 1]
                     }
                   ]
                 }
@@ -239,21 +170,16 @@
                   "multichannel": true
                 }
               },
-              "coordinateSystems": [
+              "axes": [
                 {
-                  "name": "physical",
-                  "axes": [
-                    {
-                      "name": "y",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "x",
-                      "type": "space",
-                      "unit": "micrometer"
-                    }
-                  ]
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
                 }
               ]
             }
@@ -267,24 +193,19 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.5",
           "multiscales": [
             {
-              "coordinateSystems": [
+              "axes": [
                 {
-                  "name": "physical",
-                  "axes": [
-                    {
-                      "name": "y",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "x",
-                      "type": "space",
-                      "unit": "micrometer"
-                    }
-                  ]
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
                 }
               ],
               "datasets": [
@@ -293,9 +214,7 @@
                   "coordinateTransformations": [
                     {
                       "scale": [1, 1],
-                      "type": "scale",
-                      "input": "0",
-                      "output": "physical"
+                      "type": "scale"
                     }
                   ]
                 }
@@ -316,65 +235,32 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.5",
           "multiscales": [
             {
-              "coordinateSystems": [
+              "axes": [
                 {
-                  "name": "world",
-                  "axes": [
-                    {
-                      "name": "t",
-                      "type": "time"
-                    },
-                    {
-                      "name": "c",
-                      "type": "channel"
-                    },
-                    {
-                      "name": "z",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "y",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "x",
-                      "type": "space",
-                      "unit": "micrometer"
-                    }
-                  ]
+                  "name": "t",
+                  "type": "time"
                 },
                 {
-                  "name": "physical",
-                  "axes": [
-                    {
-                      "name": "t",
-                      "type": "time"
-                    },
-                    {
-                      "name": "c",
-                      "type": "channel"
-                    },
-                    {
-                      "name": "z",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "y",
-                      "type": "space",
-                      "unit": "micrometer"
-                    },
-                    {
-                      "name": "x",
-                      "type": "space",
-                      "unit": "micrometer"
-                    }
-                  ]
+                  "name": "c",
+                  "type": "channel"
+                },
+                {
+                  "name": "z",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
                 }
               ],
               "datasets": [
@@ -383,9 +269,11 @@
                   "coordinateTransformations": [
                     {
                       "scale": [1, 1, 0.5, 0.13, 0.13],
-                      "type": "scale",
-                      "input": "0",
-                      "output": "physical"
+                      "type": "scale"
+                    },
+                    {
+                      "translation": [0, 9, 0.5, 25.74, 21.58],
+                      "type": "translation"
                     }
                   ]
                 },
@@ -394,19 +282,9 @@
                   "coordinateTransformations": [
                     {
                       "scale": [1, 1, 1, 0.26, 0.26],
-                      "type": "scale",
-                      "input": "1",
-                      "output": "physical"
+                      "type": "scale"
                     }
                   ]
-                }
-              ],
-              "coordinateTransformations": [
-                {
-                  "translation": [0, 9, 0.5, 25.74, 21.58],
-                  "type": "translation",
-                  "input": "intrinsic",
-                  "output": "world"
                 }
               ],
               "name": "image_with_omero_metadata",
@@ -453,7 +331,7 @@
               "defaultZ": 2,
               "model": "color"
             },
-            "version": "0.6.dev2"
+            "version": "0.5-dev"
           }
         }
       },
