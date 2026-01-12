@@ -16,6 +16,7 @@ dependencies = [
 testing = [
     "tox",
     "pytest",  # https://docs.pytest.org/en/latest/contents.html
+    "pytest-httpserver",  # Provides httpserver fixture for mocking HTTP requests
     "pyld",
     "pyshacl",
     "schema_salad",
