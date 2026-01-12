@@ -9,7 +9,3 @@ J. Moore, *et al*. Open Microscopy Environment Consortium, 29 March, 2021.
 This edition of the specification is [https://ngff.openmicroscopy.org/0.2/](https://ngff.openmicroscopy.org/0.2/]).
 The latest edition is available at [https://ngff.openmicroscopy.org/latest/](https://ngff.openmicroscopy.org/latest/).
 [(doi:10.5281/zenodo.4282107)](https://doi.org/10.5281/zenodo.4282107)
-
-```{bibliography}
-:style: unsrt
-```

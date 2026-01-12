@@ -65,9 +65,9 @@ parallelization.
 
 As a result, a number of formats have been developed more recently which provide
 the basic data structure of an HDF5 file, but do so in a more cloud-friendly way.
-In the [PyData](https://pydata.org/) community, the Zarr (@zarr) format was developed
+In the [PyData](https://pydata.org/) community, the Zarr ({cite:t}`zarr`) format was developed
 for easily storing collections of [NumPy](https://numpy.org/) arrays. In the
-[ImageJ](https://imagej.net/) community, N5 (@n5) was developed to work around
+[ImageJ](https://imagej.net/) community, N5 ({cite:t}`n5`) was developed to work around
 the limitations of HDF5 ("N5" was originally short for "Not-HDF5").
 Both of these formats permit storing individual chunks of data either locally in
 separate files or in cloud-based object stores as separate keys.
@@ -88,7 +88,7 @@ binary containers. Eventually, we hope, the moniker "next-generation" will no lo
 applicable, and this will simply be the most efficient, common, and useful representation
 of bioimaging data, whether during acquisition or sharing in the cloud.
 
-Note: The following text makes use of OME-Zarr (@ome-zarr-py), the current prototype implementation,
+Note: The following text makes use of OME-Zarr ({cite:t}`ome-zarr-py`), the current prototype implementation,
 for all examples.
 
 ## On-disk (or in-cloud) layout
@@ -568,68 +568,3 @@ version of this diagram is available from the [OME2020 Workshop](https://downloa
 Mouseover the blackboxes representing the implementations above to get a quick tip on how to use them.
 
 Note: If you would like to see your project listed, please open an issue or PR on the [ome/ngff](https://github.com/ome/ngff) repository.
-
-<pre class="biblio">
-{
-  "blogNov2020": {
-    "href": "https://blog.openmicroscopy.org/file-formats/community/2020/11/04/zarr-data/",
-    "title": "Public OME-Zarr data (Nov. 2020)",
-    "authors": [
-      "OME Team"
-    ],
-    "status": "Informational",
-    "publisher": "OME",
-    "id": "blogNov2020",
-    "date": "04 November 2020"
-  },
-  "imagesc26952": {
-    "href": "https://forum.image.sc/t/ome-s-position-regarding-file-formats/26952",
-    "title": "OME’s position regarding file formats",
-    "authors": [
-      "OME Team"
-    ],
-    "status": "Informational",
-    "publisher": "OME",
-    "id": "imagesc26952",
-    "date": "19 June 2020"
-  },
-  "n5": {
-    "id": "n5",
-    "href": "https://github.com/saalfeldlab/n5/issues/62",
-    "title": "N5---a scalable Java API for hierarchies of chunked n-dimensional tensors and structured meta-data",
-    "status": "Informational",
-    "authors": [
-      "John A. Bogovic",
-      "Igor Pisarev",
-      "Philipp Hanslovsky",
-      "Neil Thistlethwaite",
-      "Stephan Saalfeld"
-    ],
-    "date": "2020"
-  },
-  "ome-zarr-py": {
-    "id": "ome-zarr-py",
-    "href": "https://doi.org/10.5281/zenodo.4113931",
-    "title": "ome-zarr-py: Experimental implementation of next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.",
-    "status": "Informational",
-    "publisher": "Zenodo",
-    "authors": [
-      "OME",
-      "et al"
-    ],
-    "date": "06 October 2020"
-  },
-  "zarr": {
-    "id": "zarr",
-    "href": "https://doi.org/10.5281/zenodo.4069231",
-    "title": "Zarr: An implementation of chunked, compressed, N-dimensional arrays for Python.",
-    "status": "Informational",
-    "publisher": "Zenodo",
-    "authors": [
-      "Alistair Miles",
-      "et al"
-    ],
-    "date": "06 October 2020"
-  }
-}
-</pre>
