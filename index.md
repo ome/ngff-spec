@@ -26,7 +26,7 @@ Status Text: (an "editor's draft") will not necessarily be supported.
 
 
 ## Introduction
-(intro)=
+(version0.3:intro)=
 
 Bioimaging science is at a crossroads. Currently, the drive to acquire more,
 larger, preciser spatial measurements is unfortunately at odds with our ability
@@ -53,8 +53,8 @@ Such next-generation file formats layout data so that individual portions, or
 entire datasets.
 
 
-## Why "<dfn export="true"><abbr title="Next-generation file-format">NGFF</abbr></dfn>"? 
-(why-ngff)=
+### Why "<dfn export="true"><abbr title="Next-generation file-format">NGFF</abbr></dfn>"? 
+(version0.3:why-ngff)=
 
 A short description of what is needed for an imaging format is "a hierarchy
 of n-dimensional (dense) arrays with metadata". This combination of features
@@ -80,7 +80,7 @@ specification. The editor's draft will soon be entering a [request for comments 
 process comes to an end, this document will be updated.
 
 ### OME-NGFF
-(ome-ngff)=
+(version0.3:ome-ngff)=
 
 The conventions and specifications defined in this document are designed to
 enable next-generation file formats to represent the same bioimaging data
@@ -94,7 +94,7 @@ Note: The following text makes use of OME-Zarr [[ome-zarr-py]], the current prot
 for all examples.
 
 ## On-disk (or in-cloud) layout
-(on-disk)=
+(version0.3:on-disk)=
 
 An overview of the layout of an OME-Zarr fileset should make
 understanding the following metadata sections easier. The hierarchy
@@ -103,7 +103,7 @@ be stored on a web server to be accessed via HTTP or in object storage
 like S3 or GCS.
 
 ### Images
-(image-layout)=
+(version0.3:image-layout)=
 
 The following layout describes the expected Zarr hierarchy for images with
 multiple levels of resolutions and optionally associated labels.
@@ -156,18 +156,18 @@ multiple levels of resolutions and optionally associated labels.
 ```
 
 ### High-content screening
-(hcs-layout)=
+(version0.3:hcs-layout)=
 
 The following specification defines the hierarchy for a high-content screening
 dataset. Three groups must be defined above the images:
 
 -   the group above the images defines the well and MUST implement the
-    [well specification](#well-md). All images contained in a well are fields
+    [well specification](#version0.3:well-md). All images contained in a well are fields
     of view of the same well
 -   the group above the well defines a row of wells
 -   the group above the well row defines an entire plate i.e. a two-dimensional
     collection of wells organized in rows and columns. It MUST implement the
-    [plate specification](#plate-md)
+    [plate specification](#version0.3:plate-md)
 
 
 ```
@@ -200,13 +200,13 @@ dataset. Three groups must be defined above the images:
 ```
 
 ## Metadata
-(metadata)=
+(version0.3:metadata)=
 
 The various `.zattrs` files throughout the above array hierarchy may contain metadata
 keys as specified below for discovering certain types of data, especially images.
 
 ### "multiscales" metadata
-(multiscale-md)=
+(version0.3:multiscale-md)=
 
 Metadata about the multiple resolution representations of the image can be
 found under the "multiscales" key in the group-level metadata.
@@ -275,7 +275,7 @@ if not datasets:
 ```
 
 ### "omero" metadata
-(omero-md)=
+(version0.3:omero-md)=
 
 Information specific to the channels of an image and how to render it
 can be found under the "omero" key in the group-level metadata:
@@ -311,7 +311,7 @@ See https://docs.openmicroscopy.org/omero/5.6.1/developers/Web/WebGateway.html#i
 for more information.
 
 ### "labels" metadata
-(labels-md)=
+(version0.3:labels-md)=
 
 The special group "labels" found under an image Zarr contains the key `labels` containing
 the paths to label objects which can be found underneath the group:
@@ -327,7 +327,7 @@ the paths to label objects which can be found underneath the group:
 Unlisted groups MAY be labels.
 
 ### "image-label" metadata
-(label-md)=
+(version0.3:image-label)=
 
 Groups containing the `image-label` dictionary represent an image segmentation
 in which each unique pixel value represents a separate segmented object.
@@ -393,7 +393,7 @@ above).
 ```
 
 ### "plate" metadata
-(plate-md)=
+(version0.3:plate-md)=
 
 For high-content screening datasets, the plate layout can be found under the
 custom attributes of the plate group under the `plate` key.
@@ -497,7 +497,7 @@ For example the following JSON object defines a plate with two acquisition and
 ```
 
 ### "well" metadata
-(well-md)=
+(version0.3:well-md)=
 
 For high-content screening datasets, the metadata about all fields of views
 under a given  well can be found under the "well" key in the attributes of the
@@ -544,7 +544,7 @@ the last two fields of view were part of the second acquisition.
 ```
 
 ## Implementations
-(implementations)=
+(version0.3:implementations)=
 
 Projects which support reading and/or writing OME-NGFF data include:
 
@@ -577,9 +577,6 @@ version of this diagram is available from the [OME2020 Workshop](https://downloa
 Mouseover the blackboxes representing the implementations above to get a quick tip on how to use them.
 
 Note: If you would like to see your project listed, please open an issue or PR on the [ome/ngff](https://github.com/ome/ngff) repository.
-
-## Citing
-(citing)=
 
 <pre class="biblio">
 {
