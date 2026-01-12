@@ -18,6 +18,7 @@ testing = [
     "pytest",  # https://docs.pytest.org/en/latest/contents.html
     "pyld",
     "pyshacl",
+    "schema_salad",
 ]
 
 [tool.hatch.version]
