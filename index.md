@@ -209,7 +209,7 @@ and adds an interpretation to the samples along that dimension.
 It is a list of dictionaries,
 where each dictionary describes a dimension (axis) and:
 - MUST contain the field "name" that gives the name for this dimension.
-  The values MUST be unique across all "name" fields in the same coordinate system.
+  The value MUST be a non-empty string.
 - SHOULD contain the field "type".
   It SHOULD be one of the strings "array", "space", "time", "channel", "coordinate", or "displacement"
   but MAY take other string values for custom axis types that are not part of this specification yet.
@@ -225,6 +225,7 @@ where each dictionary describes a dimension (axis) and:
   The value MUST be a string,
   and can provide a longer name or description of an axis and its properties.
 
+The values in the "name" fields MUST be unique within the same coordinate system.
 The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 Arrays are inherently discrete (see Array coordinate systems, below)
