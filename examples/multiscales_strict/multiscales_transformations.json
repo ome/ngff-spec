@@ -1,71 +1,47 @@
 {
-  "zarr_format": 3,
-  "node_type": "group",
-  "attributes": {
-    "ome": {
-      "version": "0.6.dev2",
-      "multiscales": [
+    "multiscales": [
         {
-          "coordinateSystems": [
-            {
-              "name": "physical",
-              "axes": [
+            "axes": [
                 {
-                  "name": "y",
-                  "type": "space",
-                  "unit": "micrometer"
+                    "name": "y",
+                    "type": "space",
+                    "unit": "micrometer"
                 },
                 {
-                  "name": "x",
-                  "type": "space",
-                  "unit": "micrometer"
+                    "name": "x",
+                    "type": "space",
+                    "unit": "micrometer"
                 }
-              ]
-            },
-            {
-              "name": "intrinsic",
-              "axes": [
+            ],
+            "datasets": [
                 {
-                  "name": "y",
-                  "type": "space",
-                  "unit": "micrometer"
-                },
-                {
-                  "name": "x",
-                  "type": "space",
-                  "unit": "micrometer"
+                    "path": "0",
+                    "coordinateTransformations": [
+                        {
+                            "scale": [
+                                1,
+                                1
+                            ],
+                            "type": "scale"
+                        }
+                    ]
                 }
-              ]
-            }
-          ],
-          "datasets": [
-            {
-              "path": "0",
-              "coordinateTransformations": [
+            ],
+            "coordinateTransformations": [
                 {
-                  "scale": [1, 1],
-                  "type": "scale",
-                  "input": "0",
-                  "output": "intrinsic"
+                    "scale": [
+                        10,
+                        10
+                    ],
+                    "type": "scale"
                 }
-              ]
+            ],
+            "version": "0.4",
+            "name": "image_with_coordinateTransformations",
+            "type": "foo",
+            "metadata": {
+                "key": "value"
             }
-          ],
-          "coordinateTransformations": [
-            {
-              "scale": [10, 10],
-              "type": "scale",
-              "input": "intrinsic",
-              "output": "physical"
-            }
-          ],
-          "name": "image_with_coordinateTransformations",
-          "type": "foo",
-          "metadata": {
-            "key": "value"
-          }
         }
-      ]
-    }
-  }
+    ]
 }

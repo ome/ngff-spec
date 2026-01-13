@@ -7,15 +7,12 @@
     {
       "formerly": "well/minimal_no_acquisition",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "well": {
-            "images": [
-              {
-                "path": "0"
-              }
-            ]
-          }
+        "well": {
+          "images": [
+            {
+              "path": "0"
+            }
+          ]
         }
       },
       "valid": true
@@ -23,16 +20,13 @@
     {
       "formerly": "well/minimal_acquisitions",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "well": {
-            "images": [
-              {
-                "acquisition": 1,
-                "path": "0"
-              }
-            ]
-          }
+        "well": {
+          "images": [
+            {
+              "acquisition": 1,
+              "path": "0"
+            }
+          ]
         }
       },
       "valid": true
@@ -58,6 +52,20 @@
               "path": "0"
             }
           ]
+        }
+      },
+      "valid": false
+    },
+    {
+      "formerly": "well/invalid_version",
+      "data": {
+        "well": {
+          "images": [
+            {
+              "path": "0"
+            }
+          ],
+          "version": "foo"
         }
       },
       "valid": false

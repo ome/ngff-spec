@@ -7,16 +7,13 @@
     {
       "formerly": "image-label/minimal",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {
-            "colors": [
-              {
-                "label-value": 1,
-                "rgba": [0, 0, 0, 0]
-              }
-            ]
-          }
+        "image-label": {
+          "colors": [
+            {
+              "label-value": 1,
+              "rgba": [0, 0, 0, 0]
+            }
+          ]
         }
       },
       "valid": true
@@ -24,21 +21,18 @@
     {
       "formerly": "image-label/minimal_properties",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {
-            "colors": [
-              {
-                "label-value": 1,
-                "rgba": [0, 0, 0, 0]
-              }
-            ],
-            "properties": [
-              {
-                "label-value": 1
-              }
-            ]
-          }
+        "image-label": {
+          "colors": [
+            {
+              "label-value": 1,
+              "rgba": [0, 0, 0, 0]
+            }
+          ],
+          "properties": [
+            {
+              "label-value": 1
+            }
+          ]
         }
       },
       "valid": true
@@ -46,11 +40,8 @@
     {
       "formerly": "image-label/empty_colors",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {
-            "colors": []
-          }
+        "image-label": {
+          "colors": []
         }
       },
       "valid": false
@@ -58,11 +49,8 @@
     {
       "formerly": "image-label/empty_properties",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {
-            "properties": []
-          }
+        "image-label": {
+          "properties": []
         }
       },
       "valid": false
@@ -70,15 +58,12 @@
     {
       "formerly": "image-label/colors_no_label_value",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {
-            "colors": [
-              {
-                "rgba": [0, 0, 0, 0]
-              }
-            ]
-          }
+        "image-label": {
+          "colors": [
+            {
+              "rgba": [0, 0, 0, 0]
+            }
+          ]
         }
       },
       "valid": false
@@ -86,15 +71,12 @@
     {
       "formerly": "image-label/properties_no_label_value",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {
-            "properties": [
-              {
-                "value": "foo"
-              }
-            ]
-          }
+        "image-label": {
+          "properties": [
+            {
+              "value": "foo"
+            }
+          ]
         }
       },
       "valid": false
@@ -102,16 +84,13 @@
     {
       "formerly": "image-label/colors_rgba_length",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {
-            "colors": [
-              {
-                "label-value": 1,
-                "rgba": [0, 0, 0]
-              }
-            ]
-          }
+        "image-label": {
+          "colors": [
+            {
+              "label-value": 1,
+              "rgba": [0, 0, 0]
+            }
+          ]
         }
       },
       "valid": false
@@ -119,16 +98,13 @@
     {
       "formerly": "image-label/colors_rgba_type",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {
-            "colors": [
-              {
-                "label-value": 1,
-                "rgba": [0, 0, 0, 500]
-              }
-            ]
-          }
+        "image-label": {
+          "colors": [
+            {
+              "label-value": 1,
+              "rgba": [0, 0, 0, 500]
+            }
+          ]
         }
       },
       "valid": false
@@ -136,20 +112,17 @@
     {
       "formerly": "image-label/colors_duplicate",
       "data": {
-        "ome": {
-          "version": "0.6.dev2",
-          "image-label": {
-            "colors": [
-              {
-                "label-value": 1,
-                "rgba": [0, 0, 0, 0]
-              },
-              {
-                "label-value": 1,
-                "rgba": [0, 0, 0, 0]
-              }
-            ]
-          }
+        "image-label": {
+          "colors": [
+            {
+              "label-value": 1,
+              "rgba": [0, 0, 0, 0]
+            },
+            {
+              "label-value": 1,
+              "rgba": [0, 0, 0, 0]
+            }
+          ]
         }
       },
       "valid": false

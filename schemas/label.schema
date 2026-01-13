@@ -1,31 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/label.schema",
-  "title": "OME-Zarr labelled image schema",
-  "description": "The zarr.json attributes key",
+  "$id": "https://ngff.openmicroscopy.org/0.4/schemas/label.schema",
+  "title": "OME-NGFF labelled image schema",
+  "description": "JSON from OME-NGFF .zattrs",
   "type": "object",
   "properties": {
-    "ome": {
-      "description": "The versioned OME-Zarr Metadata namespace",
-      "type": "object",
-      "properties": {
-        "image-label": {
-          "$ref": "#/$defs/image-label"
-        },
-        "version": {
-          "$ref": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/_version.schema"
-        }
-      },
-      "required": [
-        "image-label",
-        "version"
-      ]
-    }
-  },
-  "required": [
-    "ome"
-  ],
-  "$defs": {
     "image-label": {
       "type": "object",
       "properties": {
@@ -84,6 +63,13 @@
               "type": "string"
             }
           }
+        },
+        "version": {
+          "description": "The version of the specification",
+          "type": "string",
+          "enum": [
+            "0.4"
+          ]
         }
       }
     }

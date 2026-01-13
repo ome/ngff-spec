@@ -2,41 +2,11 @@
 author: ""
 ---
 # Version History
-(history)=
+(ngff-spec:history)=
 
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-
-## [0.6.dev2] - 2025-12-02
-
-### Changed
-
-Implemented feedback from [RFC-5 review 1 and 2](https://ngff.openmicroscopy.org/rfc/5/reviews/index.html)
-
-## [0.6dev1] - 2025-11-18
-
-### Added
-
-Initial proposal for RFC-5: Transforms. [See proposal text](https://ngff.openmicroscopy.org/rfc/5/versions/1/index.html).
-
-## [0.5.2] - 2025-01-10
-
-### Changed
-
-- Clarify that the `dimension_names` field in `axes` MUST be included.
-
-## [0.5.1] - 2025-01-10
-
-### Added
-
-- Re-add the improved omero description in PR-191.
-
-## [0.5.0] - 2024-11-21
-
-### Changed
-
-- use Zarr v3 in OME-Zarr, see [RFC-2](https://ngff.openmicroscopy.org/rfc/2).
 
 ## [0.4.1] - 2023-02-09
 
