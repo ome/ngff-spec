@@ -14,6 +14,8 @@ schemas.md
 examples/*.md
 schemas/*
 !schemas/*.schema
+!schemas/jsonld
+!schemas/salad_schema
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
