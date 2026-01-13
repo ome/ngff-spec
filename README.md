@@ -7,7 +7,7 @@ This repository contains the central [specification text](./specification.md),
 a comprehensive list of [metadata examples](./examples)
 as well as [json schemas](./schemas) to validate written ome-zarr image data.
 
-The built documentation including contribution hints can be found **[here](https://ngff-spec.readthedocs.io/en/latest/specification.html)**.
+The built documentation including contribution hints can be found **[here](https://ngff-spec.readthedocs.io/en/latest/)**.
 
 ## Conformance tests
 
