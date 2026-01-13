@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/bf2raw.schema",
-  "title": "OME-Zarr container produced by bioformats2raw",
-  "description": "The zarr.json attributes key",
+  "title": "bioformats2raw",
+  "description": "OME-Zarr bioformats2raw metadata.",
   "type": "object",
   "properties": {
     "ome": {

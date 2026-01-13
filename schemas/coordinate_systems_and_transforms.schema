@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ngff.openmicroscopy.org/0.6.dev2/schemas/coordinate_systems_and_transforms.schema",
-  "title": "NGFF Coordinate Systems and Transforms",
-  "description": "Coordinate Systems and transforms for OME-NGFF",
+  "title": "Coordinate Systems and Transforms",
+  "description": "OME-Zarr coordinate systems and transforms.",
   "type": "object",
   "properties": {
     "coordinateSystems": {
