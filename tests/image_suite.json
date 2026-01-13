@@ -9,7 +9,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -58,7 +58,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -105,7 +105,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -150,7 +150,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "datasets": [
@@ -203,7 +203,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -251,7 +251,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -296,7 +296,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -338,7 +338,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -382,7 +382,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -426,7 +426,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -484,7 +484,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -545,7 +545,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -587,7 +587,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -626,7 +626,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -672,7 +672,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -716,7 +716,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -766,7 +766,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -802,7 +802,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -834,7 +834,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -865,7 +865,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "datasets": [
@@ -892,7 +892,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -936,7 +936,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -986,7 +986,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "axes": [],
@@ -1014,7 +1014,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -1064,7 +1064,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": []
         }
       },
@@ -1075,7 +1075,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -1136,7 +1136,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
@@ -1174,7 +1174,7 @@
       "description": "TBD",
       "data": {
         "ome": {
-          "version": "0.6.dev2",
+          "version": "0.6.dev3",
           "multiscales": [
             {
               "coordinateSystems": [
