@@ -18,7 +18,7 @@ def build_json_examples():
     input_directory = 'examples'
     output_directory = 'examples'
     os.makedirs(output_directory, exist_ok=True)
-    example_types = os.listdir(input_directory)
+    example_types = [d for d in os.listdir(input_directory) if os.path.isdir(os.path.join(input_directory, d))]
 
     index_md = """---
 title: NGFF metadata JSON Examples
@@ -173,6 +173,15 @@ def build_footer():
     with open('footer.md', 'w') as footer_file:
         footer_file.write(footer_content)
 
+def build_legacy_bikeshed(root: str = '.'):
+    """Build legacy Bikeshed files."""
+    import subprocess
+    import glob
+
+    bikeshed_file = os.path.normpath(f"{root}/{glob.glob('*.bs')[0]}")
+    subprocess.run(['bikeshed', 'spec', bikeshed_file, 'index.html'], check=True)
+
 build_json_examples()
 build_json_schemas()
 build_footer()
+build_legacy_bikeshed()

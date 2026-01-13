@@ -17,11 +17,10 @@ for schema_filename in glob.glob("schemas/*"):
         schema_store[schema["$id"]] = schema
 
 GENERIC_SCHEMA = schema_store[
-    "https://ngff.openmicroscopy.org/0.6.dev2/schemas/ome_zarr.schema"
+    "https://ngff.openmicroscopy.org/0.5/schemas/ome_zarr.schema"
 ]
-GENERIC_STRICT_SCHEMA = schema_store[
-    "https://ngff.openmicroscopy.org/0.6.dev2/schemas/strict_ome_zarr.schema"
-]
+
+print(schema_store)
 
 
 @dataclass
@@ -58,55 +57,55 @@ def pytest_generate_tests(metafunc):
         styled JSON tests. Metadata in each test defines which schema is used
         and whether or not the block is considered valid.
     """
-    if "suite" not in metafunc.fixturenames:
-        return
+    if "suite" in metafunc.fixturenames:
+        suites: List[Schema] = []
+        ids: List[str] = []
 
-    suites: List[Suite] = []
-    ids: List[str] = []
+        # Validation
+        for filename in glob.glob("tests/*.json"):
+            with open(filename) as o:
+                suite = json.load(o)
+            schema = suite["schema"]
+            with open(schema["id"]) as f:
+                schema = json.load(f)
+            for test in suite["tests"]:
+                ids.append("validate_" + str(test["formerly"]).split("/")[-1][0:-5])
+                suites.append(Suite(schema, test["data"], test["valid"]))
 
-    # Validation
-    for filename in glob.glob("tests/*.json"):
-        with open(filename) as o:
-            suite = json.load(o)
-        schema_path = suite["schema"]
-        with open(schema_path["id"]) as f:
-            schema = json.load(f)
-        for test in suite["tests"]:
-            ids.append("validate_" + str(test["formerly"]).split("/")[-1][0:-5])
-            suites.append(Suite(schema, test["data"], test["valid"]))
+        # Examples
+        for config_filename in glob.glob("examples/*/.config.json"):
+            with open(config_filename) as o:
+                data = json.load(o)
+            schema = data["schema"]
+            with open(schema) as f:
+                schema = json.load(f)
+            example_folder = os.path.dirname(config_filename)
+            for filename in glob.glob(f"{example_folder}/*.json"):
+                with open(filename) as f:
+                    # Strip comments
+                    data = "".join(
+                        line for line in f if not line.lstrip().startswith("//")
+                    )
+                    data = json.loads(data)
+                    data = data["attributes"]  # Only validate the attributes object
+                ids.append("example_" + str(filename).split("/")[-1][0:-5])
+                suites.append(Suite(schema, data, True))  # Assume true
 
-    # Examples
-    for config_filename in glob.glob("../examples/*/.config.json"):
-        with open(config_filename) as o:
-            data = json.load(o)
-        schema_path = data["schema"]
-        with open(schema_path) as f:
-            schema = json.load(f)
-        example_folder = os.path.dirname(config_filename)
-        for filename in glob.glob(f"{example_folder}/*.json"):
-            with open(filename) as f:
-                # Strip comments
-                data = "".join(line for line in f if not line.lstrip().startswith("//"))
-                data = json.loads(data)
-                data = data["attributes"]  # Only validate the attributes object
-            ids.append("example_" + str(filename).split("/")[-1][0:-5])
-            suites.append(Suite(schema, data, True))  # Assume true
-
-    metafunc.parametrize("suite", suites, ids=ids, indirect=True)
+        metafunc.parametrize("suite", suites, ids=ids, indirect=True)
 
 
 @pytest.fixture
-def suite(request) -> Suite:
+def suite(request):
     return request.param
 
 
-def test_run(suite: Suite):
+def test_run(suite):
     resolver = RefResolver.from_schema(suite.schema, store=schema_store)
     validator = Validator(suite.schema, resolver=resolver)
     suite.validate(validator)
 
 
-def test_generic_run(suite: Suite):
+def test_generic_run(suite):
     resolver = RefResolver.from_schema(GENERIC_SCHEMA, store=schema_store)
     validator = Validator(GENERIC_SCHEMA, resolver=resolver)
     suite.maybe_validate(validator)
