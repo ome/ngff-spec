@@ -1,9 +1,8 @@
-(ngff-spec:spec)=
 ---
 title: Next-generation file format specification
 short_title: OME-Zarr
 ---
-
+(ngff-spec:spec:head)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
