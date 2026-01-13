@@ -1,19 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/image.schema",
-  "title": "OME-Zarr Image",
-  "description": "The zarr.json attributes key",
+  "title": "Image",
+  "description": "OME-Zarr image.",
   "type": "object",
   "properties": {
     "ome": {
       "description": "The versioned OME-Zarr Metadata namespace",
       "type": "object",
       "properties": {
-        "multiscales": {
-          "$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/image.schema#/$defs/multiscales"
-        },
         "omero": {
-          "$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/image.schema#/$defs/omero"
+          "$ref": "#/$defs/omero"
+        },
+        "multiscales": {
+          "$ref": "#/$defs/multiscales"
         },
         "version": {
           "$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/_version.schema"
