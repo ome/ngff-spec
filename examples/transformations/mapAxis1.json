@@ -8,14 +8,14 @@
     { 
       "name": "equivalent to identity",
       "type": "mapAxis", 
-      "mapAxis": { "x":"i", "y":"j" },
+      "mapAxis": [0, 1],
       "input": "in",
       "output": "out1" 
     },
     { 
       "name": "permutation",
       "type": "mapAxis", 
-      "mapAxis": { "y":"i", "x":"j" },
+      "mapAxis": [1, 0],
       "input": "in",
       "output": "out2" 
     }
