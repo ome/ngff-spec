@@ -1,0 +1,45 @@
+{
+  "ome": {
+    "version": "0.6.dev2",
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "name": "intrinsic",
+            "axes": [
+              {
+                "name": "t",
+                "type": "time"
+              },
+              {
+                "name": "c",
+                "type": "channel"
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1
+                ],
+                "type": "scale",
+                "input": "0",
+                "output": "intrinsic"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    }
+  }
+}

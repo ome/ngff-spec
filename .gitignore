@@ -8,7 +8,12 @@ _bikeshed
 .*plist
 
 # do not sync auto-generated md files
-ngff_spec/_generated
+footer.md
+examples.md
+schemas.md
+examples/*.md
+schemas/*
+!schemas/*.schema
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -35,7 +40,6 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-*_version.py
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -87,9 +91,6 @@ target/
 
 # OS
 .DS_Store
-
-# written by setuptools_scm
-*/_version.py
 
 # PyBuilder
 .idea

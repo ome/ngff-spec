@@ -8,7 +8,7 @@
       "formerly": "well/strict_no_acquisitions",
       "data": {
         "ome": {
-          "version": "0.5",
+          "version": "0.6.dev2",
           "well": {
             "images": [
               {
@@ -24,7 +24,7 @@
       "formerly": "plate/strict_acquisitions",
       "data": {
         "ome": {
-          "version": "0.5",
+          "version": "0.6.dev2",
           "well": {
             "images": [
               {

@@ -8,7 +8,7 @@
       "formerly": "image-label/no_colors",
       "data": {
         "ome": {
-          "version": "0.5",
+          "version": "0.6.dev2",
           "image-label": {}
         }
       },
