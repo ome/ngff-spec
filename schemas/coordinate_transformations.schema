@@ -165,45 +165,28 @@
             "type": "integer"
           },
           "description": "An array of integers representing the new axis order as zero-based indices of the input axes."
-        },
-        "required": [
-          "mapAxis"
-        ]
-      }
+        }
+      },
+      "required": [
+        "mapAxis"
+      ]
     },
     "scale": {
       "type": "object",
       "properties": {
         "type": {
           "const": "scale"
+        },
+        "scale": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
         }
       },
-      "oneOf": [
-        {
-          "properties": {
-            "path": {
-              "type": "string",
-              "description": "Path to a zarr array containing the scale factors."
-            }
-          },
-          "required": [
-            "path"
-          ]
-        },
-        {
-          "properties": {
-            "scale": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "exclusiveMinimum": 0
-              }
-            }
-          },
-          "required": [
-            "scale"
-          ]
-        }
+      "required": [
+        "scale"
       ]
     },
     "translation": {
@@ -211,33 +194,16 @@
       "properties": {
         "type": {
           "const": "translation"
-        }
-      },
-      "oneOf": [
-        {
-          "properties": {
-            "path": {
-              "type": "string",
-              "description": "Path to a zarr array containing the translation vectors."
-            }
-          },
-          "required": [
-            "path"
-          ]
         },
-        {
-          "properties": {
-            "translation": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          "required": [
-            "translation"
-          ]
-        }
+        "translation": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }        
+      },
+      "required": [
+        "translation"
       ]
     },
     "affine": {
