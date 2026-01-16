@@ -97,9 +97,6 @@
               "$ref": "#/$defs/rotation"
             },
             {
-              "$ref": "#/$defs/inverseOf"
-            },
-            {
               "$ref": "#/$defs/bijection"
             },
             {
@@ -316,21 +313,6 @@
           ]
         }
       ]
-    },
-    "inverseOf": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "const": "inverseOf"
-        },
-        "transformation": {
-          "$ref": "#/$defs/coordinateTransformation"
-        }
-      },
-      "required": [
-        "transformation"
-      ],
-      "description": "The inverse of another coordinate transformation."
     },
     "bijection": {
       "type": "object",
