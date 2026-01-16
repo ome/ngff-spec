@@ -150,11 +150,14 @@
         "type": {
           "const": "identity"
         }
-      }
+      },
+      "title": "Identity Transformation",
+      "description": "Identity transformation that maps input coordinates directly to output coordinates without modification."
     },
     "mapAxis": {
       "type": "object",
-      "description": "Permute axes by name",
+      "title": "Map Axis Transformation",
+      "description": "Permute axes by mapping input axes to output axes.",
       "properties": {
         "type": {
           "const": "mapAxis"
@@ -173,6 +176,8 @@
     },
     "scale": {
       "type": "object",
+      "title": "Scale Transformation",
+      "description": "Scale transformation that scales coordinates by specified factors along each axis.",
       "properties": {
         "type": {
           "const": "scale"
@@ -191,6 +196,8 @@
     },
     "translation": {
       "type": "object",
+      "title": "Translation Transformation",
+      "description": "Translation transformation that shifts coordinates by specified offsets along each axis.",
       "properties": {
         "type": {
           "const": "translation"
@@ -208,6 +215,8 @@
     },
     "affine": {
       "type": "object",
+      "title": "Affine Transformation",
+      "description": "Affine transformation represented by a transformation matrix.",
       "properties": {
         "type": {
           "const": "affine"
@@ -245,6 +254,8 @@
     },
     "rotation": {
       "type": "object",
+      "title": "Rotation Transformation",
+      "description": "Rotation transformation represented by a rotation matrix.",
       "properties": {
         "type": {
           "const": "rotation"
@@ -282,6 +293,8 @@
     },
     "bijection": {
       "type": "object",
+      "title": "Bijection Transformation",
+      "description": "A pair of forward and inverse coordinate transformations.",
       "properties": {
         "type": {
           "const": "bijection"
@@ -295,11 +308,11 @@
       },
       "required": [
         "forward", "inverse"
-      ],
-      "description": "A pair of forward and inverse coordinate transformations."
+      ]
     },
     "sequence": {
-      "description": "A sequence of transformations",
+      "title": "Sequence Transformation",
+      "description": "A sequence of transformations applied in order.",
       "type": "object",
       "properties": {
         "type": { "const": "sequence" },
@@ -316,6 +329,8 @@
     },
     "byDimension": {
       "type": "object",
+      "title": "By Dimension Transformation",
+      "description": "A set of transformations applied independently to each dimension.",
       "properties": {
         "type": { "const": "byDimension" },
         "transformations": {
@@ -327,11 +342,12 @@
       },
       "required": [
         "transformations"
-      ],
-      "description": "A set of transformations applied independently to each dimension."
+      ]
     },
     "displacements": {
       "type": "object",
+      "title": "Displacement Field Transformation",
+      "description": "Transformation defined by a displacement field stored in a zarr array.",
       "properties": {
         "type": { "const": "displacements" },
         "path": {
@@ -351,6 +367,8 @@
     },
     "coordinates": {
       "type": "object",
+      "title": "Coordinate Field Transformation",
+      "description": "Transformation defined by a coordinate field stored in a zarr array.",
       "properties": {
         "type": { "const": "coordinates" },
         "path": {
