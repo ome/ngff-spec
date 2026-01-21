@@ -67,6 +67,7 @@
         "schema": {
         "id": "schemas/scene.schema"
         },
-        "description": "Tests for the scene JSON schema: "
+        "description": "Tests for the scene JSON schema: ",
+        "valid": false
     }
 }
