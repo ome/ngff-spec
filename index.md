@@ -186,7 +186,7 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
   // ...
   "attributes": {
     "ome": {
-      "version": "0.6.dev2",
+      "version": "0.6.dev3",
       // ...
     }
   }
@@ -1402,7 +1402,7 @@ For example:
 {
   "attributes": {
     "ome": {
-      "version": "0.6.dev2",
+      "version": "0.6.dev3",
       "labels": [
         "cell_space_segmentation"
       ]
