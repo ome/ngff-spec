@@ -77,5 +77,6 @@
         "axes"
       ]
     }
-  }
+  },
+  "required": ["coordinateTransformations"]
 }
