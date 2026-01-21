@@ -9,12 +9,16 @@ import pytest
 
 from jsonschema import RefResolver, Draft202012Validator as Validator
 from jsonschema.exceptions import ValidationError
+from pathlib import Path
+
+os.chdir(Path(__file__).parent.parent)
 
 schema_store = {}
 for schema_filename in glob.glob("schemas/*"):
-    with open(schema_filename) as f:
-        schema = json.load(f)
-        schema_store[schema["$id"]] = schema
+    if schema_filename.endswith('.schema'):
+        with open(schema_filename) as f:
+            schema = json.load(f)
+            schema_store[schema["$id"]] = schema
 
 GENERIC_SCHEMA = schema_store[
     "https://ngff.openmicroscopy.org/0.6.dev2/schemas/ome_zarr.schema"
@@ -124,3 +128,7 @@ def test_example_configs():
             missing.append(subdir[0])
     if missing:
         raise Exception(f"Directories missing configs: {missing}")
+
+
+if __name__ == '__main__':
+    pytest.main([__file__])
