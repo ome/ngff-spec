@@ -18,6 +18,7 @@
     "schema": {
       "id": "schemas/label.schema"
     },
-    "description": "Tests for the image-label JSON schema: "
+    "description": "Tests for the image-label JSON schema: ",
+    "valid": false
   }
 }
