@@ -70,7 +70,3 @@ def test_attributes(case_fname: Path):
     else:
         with pytest.raises(ValidationError):
             validator.validate(case_obj)
-
-
-if __name__ == '__main__':
-    pytest.main([__file__])
