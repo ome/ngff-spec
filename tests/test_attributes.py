@@ -45,7 +45,7 @@ def test_attributes(case_fname: Path):
     case_obj: dict[str, Any] = json.loads(case_fname.read_text())
 
     conformance = case_obj.get("_conformance", {})
-    valid = conformance.get("valid", True)
+    valid = 'valid' in case_obj
     strict = conformance.get("strict", False)
 
     if strict:
