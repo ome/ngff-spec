@@ -8,6 +8,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.6.dev3] - 2026-01-21
+
+### Changed
+
+Implemented feedback from Hackathon:
+- Renamed top-level group for transformations to "Scene"
+- Transformations in scene metadata must be object with fields "name" and "path"
+- Made syntax of `mapAxis` and `byDimension` transforms consistent with other transforms
+- For detailed set of changes see [complete overview](https://ngff.openmicroscopy.org/rfc/5/responses/2/index.html)
+- Zarr parameter storage no longer allowed for scale/translation 
+
+### Removed
+
+- Removed `inverseOf` transformation
+
 ## [0.6.dev2] - 2025-12-02
 
 ### Changed
