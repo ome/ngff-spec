@@ -45,7 +45,7 @@ def test_attributes(case_fname: Path):
     case_obj: dict[str, Any] = json.loads(case_fname.read_text())
 
     conformance = case_obj.get("_conformance", {})
-    valid = 'valid' in case_obj
+    valid = conformance.get("valid", True)
     strict = conformance.get("strict", False)
 
     if strict:
@@ -70,3 +70,7 @@ def test_attributes(case_fname: Path):
     else:
         with pytest.raises(ValidationError):
             validator.validate(case_obj)
+
+
+if __name__ == '__main__':
+    pytest.main([__file__])

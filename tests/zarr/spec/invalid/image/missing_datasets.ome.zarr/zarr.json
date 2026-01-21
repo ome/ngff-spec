@@ -29,7 +29,8 @@
     "_conformance": {
       "schema": {
         "id": "age.schema"
-      }
+      },
+      "valid": false
     }
   }
 }

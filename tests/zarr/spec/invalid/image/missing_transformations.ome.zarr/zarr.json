@@ -34,7 +34,8 @@
     "_conformance": {
       "schema": {
         "id": "schemas/image.schema"
-      }
+      },
+      "valid": false
     }
   }
 }
