@@ -79,7 +79,8 @@
           }
         },
         "required": [
-          "datasets", "coordinateSystems"
+          "datasets",
+          "coordinateSystems"
         ]
       },
       "minItems": 1,
