@@ -106,7 +106,8 @@
               "maxItems": 2
             },
             "input": {"type": "string"},
-            "output": {"type": "string"}
+            "output": {"type": "string"},
+            "name": {"type": "string"}
           },
           "required": ["type", "transformations", "input", "output"]
         }
