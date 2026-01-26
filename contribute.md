@@ -68,8 +68,6 @@ Make sure the updated `CITATION.cff` file is included in your PR.
 Contributions should conform to [Semantic Line Breaks (SemBr)](https://sembr.org/),
 to improve change tracking.
 
-### Formatting hints
-
 The specification uses MyST extensively for a number of formatting options
 to make the text readable and improve structure.
 
@@ -96,6 +94,18 @@ make sure to prepend the reference anchor with `versionX` like so:
 
 Otherwise, the same anchors may not be possible to resolve
 if multiple versions of the spec document are built and viewed together.
+
+#### Highlighting
+
+If you refer to fields or values that would appear in JSON files,
+please use backticks to highlight them, like so:
+
+```markdown
+The `multiscales` field contains an array of dictionaries.
+```
+
+You may still use bold, italics or quotation marks for emphasis where appropriate,
+but please use backticks for JSON fields and values.
 
 #### Citations
 
