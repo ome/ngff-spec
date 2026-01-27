@@ -76,34 +76,34 @@
               ,
               "datasets": [
                 {
-                  "path": "0",
+                  "path": "s0",
                   "coordinateTransformations": [
                     {
                       "type": "scale",
                       "scale": [1.0, 1.0, 0.5, 0.5, 0.5],
-                      "input": "0",
+                      "input": "s0",
                       "output": "intrinsic"
                     }
                   ]
                 },
                 {
-                  "path": "1",
+                  "path": "s1",
                   "coordinateTransformations": [
                     {
                       "type": "scale",
                       "scale": [1.0, 1.0, 1.0, 1.0, 1.0],
-                      "input": "1",
+                      "input": "s1",
                       "output": "intrinsic"
                     }
                   ]
                 },
                 {
-                  "path": "2",
+                  "path": "s2",
                   "coordinateTransformations": [
                     {
                       "type": "scale",
                       "scale": [1.0, 1.0, 2.0, 2.0, 2.0],
-                      "input": "2",
+                      "input": "s2",
                       "output": "intrinsic"
                     }
                   ]
@@ -175,12 +175,12 @@
               ],
               "datasets": [
                 {
-                  "path": "0",
+                  "path": "s0",
                   "coordinateTransformations": [
                     {
                       "scale": [1, 1],
                       "type": "scale",
-                      "input": "0",
+                      "input": "s0",
                       "output": "physical"
                     }
                   ]
@@ -289,12 +289,12 @@
               ],
               "datasets": [
                 {
-                  "path": "0",
+                  "path": "s0",
                   "coordinateTransformations": [
                     {
                       "scale": [1, 1],
                       "type": "scale",
-                      "input": "0",
+                      "input": "s0",
                       "output": "physical"
                     }
                   ]
@@ -379,23 +379,23 @@
               ],
               "datasets": [
                 {
-                  "path": "0",
+                  "path": "s0",
                   "coordinateTransformations": [
                     {
                       "scale": [1, 1, 0.5, 0.13, 0.13],
                       "type": "scale",
-                      "input": "0",
+                      "input": "s0",
                       "output": "physical"
                     }
                   ]
                 },
                 {
-                  "path": "1",
+                  "path": "s1",
                   "coordinateTransformations": [
                     {
                       "scale": [1, 1, 1, 0.26, 0.26],
                       "type": "scale",
-                      "input": "1",
+                      "input": "s1",
                       "output": "physical"
                     }
                   ]
