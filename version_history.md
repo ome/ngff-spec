@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.6.dev3] - 2025-01-27
 
+### Changed
+
+- Updated version keys from `0.6.dev2` to `0.6.dev3` everywhere
+
 ### Removed
 
 - Removed `version` field from `multiscales` metadata in the image schema (`schemas/image.schema`) since it is already required at `ome > version`
