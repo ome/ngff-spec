@@ -177,9 +177,10 @@ def build_legacy_bikeshed(root: str = '.'):
     """Build legacy Bikeshed files."""
     import subprocess
     import glob
+    import sys
 
     bikeshed_file = os.path.normpath(f"{root}/{glob.glob('*.bs')[0]}")
-    subprocess.run(['bikeshed', 'spec', bikeshed_file, 'index.html'], check=True)
+    subprocess.run([sys.executable, '-m', 'bikeshed', 'spec', bikeshed_file, 'index.html'], check=True)
 
 build_json_examples()
 build_json_schemas()
