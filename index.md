@@ -82,7 +82,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │   ├── zarr.json         # All image arrays must be up to 5-dimensional
     │   │                     # with the axis of type time before type channel, before spatial axes.
     │   │
-    │   └─ ...                # Chunks are stored conforming to the Zarr array specification and 
+    │   └─ ...                # Chunks are stored conforming to the Zarr array specification and
     │                         # metadata as specified in the array's `zarr.json`.
     │
     └── labels
@@ -131,7 +131,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     │   │   ├── 0             # First field of view of well A1
     │   │   │   │
     │   │   │   ├── zarr.json # Implements "multiscales", "omero"
-    │   │   │   ├── 0         # Resolution levels          
+    │   │   │   ├── 0         # Resolution levels
     │   │   │   ├── ...
     │   │   │   └── labels    # Labels (optional)
     │   │   └── ...           # Other fields of view
@@ -194,7 +194,7 @@ Coordinate Systems metadata example
 The axes of a coordinate system (see below) give information
 about the types, units, and other properties of the coordinate system's dimensions.
 Axis names may contain semantically meaningful information, but can be arbitrary.
-As a result, two coordinate systems that have identical axes in the same order 
+As a result, two coordinate systems that have identical axes in the same order
 may not be "the same" in the sense that measurements at the same point
 refer to different physical entities and therefore should not be analyzed jointly.
 Tasks that require images, annotations, regions of interest, etc.,
@@ -291,7 +291,7 @@ Then `dim_0` has length 4, `dim_1` has length 3, and `dim_2` has length 5.
 The axes and their order align with the shape of the corresponding zarr array,
 and whose data depends on the byte order used to store chunks.
 As described in the [Zarr array metadata](https://zarr.readthedocs.io/en/stable/spec/v3.html#arrays),
-the last dimension of an array in "C" order are stored contiguously on disk or in-memory when directly loaded. 
+the last dimension of an array in "C" order are stored contiguously on disk or in-memory when directly loaded.
 
 The name and axes names MAY be customized by including a `arrayCoordinateSystem` field
 in the user-defined attributes of the array whose value is a coordinate system object.
@@ -432,7 +432,7 @@ The following transformations are supported:
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`, <br> `"input_axes": List[str]`, <br> `"output_axes": List[str]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
-(e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation). 
+(e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
 
 :::{dropdown} Example
 (spec:example:coordinate_transformation_scale)=
@@ -443,7 +443,7 @@ Implementations SHOULD prefer to store transformations as a sequence of less exp
     { "name": "in", "axes": [{"name": "j"}, {"name": "i"}] },
     { "name": "out", "axes": [{"name": "y"}, {"name": "x"}] }
   ],
-  "coordinateTransformations": [ 
+  "coordinateTransformations": [
     {
       "type": "scale",
       "scale": [2, 3.12],
@@ -473,7 +473,7 @@ Conforming readers:
 - SHOULD be able to apply transformations to images;
 
 Coordinate transformations can be stored in multiple places to reflect different usecases.
-     
+
 - Transformations in individual multiscale datasets represent a special case of transformations
   and are explained [below](#multiscales-md).
 - Additional transformations for single multiscale images MUST be stored under a field `coordinateTransformations`
@@ -601,7 +601,7 @@ where a coordinate is the location/value of that point along its corresponding a
 The indexes of axis dimensions correspond to indexes into transformation parameter arrays.
 
 When rendering transformed images and interpolating,
-implementations may need the "inverse" transformation - 
+implementations may need the "inverse" transformation -
 from the output to the input coordinate system.
 Inverse transformations will not be explicitly specified
 when they can be computed in closed form from the forward transformation.
@@ -676,7 +676,7 @@ because it is computed with the matrix-vector multiplication:
 #### Transformation types
 (trafo-types-md)=
 
-Input and output dimensionality may be determined by the coordinate system referred to by the `input` and `output` fields, respectively. 
+Input and output dimensionality may be determined by the coordinate system referred to by the `input` and `output` fields, respectively.
 If the value of `input` is a path to an array, its shape gives the input dimension,
 otherwise it is given by the length of `axes` for the coordinate system with the name of the `input`.
 If the value of `output` is an array, its shape gives the output dimension,
@@ -801,7 +801,7 @@ The list MUST have length `N`.
 defines the function:
 
 ```
-x = i + 9 
+x = i + 9
 y = j - 1.42
 ```
 :::
@@ -1103,7 +1103,7 @@ of the `i`th output axis. See the example below.
 
 `coordinates` and `displacements` transformations are not invertible in general,
 but implementations MAY approximate their inverses.
-Metadata for these coordinate transforms have the following fields: 
+Metadata for these coordinate transforms have the following fields:
 
 <dl>
   <dt><strong>path</strong></dt>
@@ -1170,7 +1170,7 @@ Example metadata for the array data at path `coordinates` above:
         { "name": "i", "type": "space", "discrete": true },
         { "name": "c", "type": "coordinate", "discrete": true }
       ]
-    } 
+    }
   ],
   "coordinateTransformations" : [
     {
@@ -1184,7 +1184,7 @@ Example metadata for the array data at path `coordinates` above:
 If the array in `coordinates` contains the data: `[-9, 9, 0]`, then this metadata defines the function:
 
 ```
-x = 
+x =
     if ( i < 0.5 )                      -9
     else if ( i >= 0.5 and i < 1.5 )     9
     else if ( i >= 1.5 )                 0
@@ -1217,7 +1217,7 @@ Example metadata for the array data at path `displacements` above:
         { "name": "x", "type": "space", "unit" : "nanometer" },
         { "name": "d", "type": "displacement", "discrete": true }
       ]
-    } 
+    }
   ],
   "coordinateTransformations" : [
     {
@@ -1406,24 +1406,27 @@ It should be used for viewing and processing unless a use case dictates otherwis
 It will generally be a representation of the image in its native physical coordinate system.
 
 The following MUST hold for all coordinate systems inside multiscales metadata.
-The length of `axes` must be between 2 and 5
-and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
-The `axes` MUST contain 2 or 3 entries of `type:space`
-and MAY contain one additional entry of `type:time`
-and MAY contain one additional entry of `type:channel` or a null / custom type.
-In addition, the entries MUST be ordered by `type` where the `time` axis must come first (if present),
-followed by the  `channel` or custom axis (if present) and the axes of type `space`.
-If there are three spatial axes where two correspond to the image plane (`yx`)
-and images are stacked along the other (anisotropic) axis (`z`),
-the spatial axes SHOULD be ordered as `zyx`.
+The length of `axes` MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
+
+:::{hint}
+In previous versions of this specification, the count, order, and types of axes were constrained to:
+
+- optional `time` axis, conventionally called `t`
+- optional `channel` or custom-typed axis, conventionally called `c`
+- optional `space` axis, conventionally called `z`, conventionally the anisotropic slicing dimension
+- space axis, conventionally called `y`
+- space axis, conventionally called `x`
+
+These are no longer enforced, but are RECOMMENDED where the data's structure and usage allow.
+:::
+
 Each `multiscales` dictionary MUST contain the field `datasets`,
 which is a list of dictionaries describing the arrays storing the individual resolution levels.
 Each dictionary in `datasets` MUST contain the field `path`,
 whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
 The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
-Every Zarr array referred to by a `path` MUST have the same number of dimensions
-and MUST NOT have more than 5 dimensions.
-The number of dimensions and order MUST correspond to number and order of `axes`.
+Every Zarr array referred to by a `path` MUST have the same number of dimensions.
+The number and order of dimensions MUST correspond to number and order of `axes`.
 
 Each dictionary in `datasets` MUST contain the field `coordinateTransformations`,
 whose value is a list of dictionaries that define a transformation
@@ -1432,7 +1435,7 @@ that maps Zarr array coordinates for this resolution level to the "intrinsic" co
 The transformation is defined according to [transformations metadata](#trafo-types-md).
 The transformation MUST take as input points in the array coordinate system
 corresponding to the Zarr array at location `path`.
-The value of `input` MUST equal the value of `path`, 
+The value of `input` MUST equal the value of `path`,
 implementations should always treat the value of `input` as if it were equal to the value of `path`.
 The value of the transformation’s `output` MUST be the name of the "intrinsic" [coordinate system](#coordinate-systems-md).
 
@@ -1601,7 +1604,7 @@ denoting arbitrary metadata associated with that label.
 Label-value objects within the `properties` array do not need to have the same keys.
 
 The value of the `source` key MUST be a JSON object containing information about the original image from which the label image derives.
-This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.  
+This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.
 The default value is `../../` since most labeled images are stored in a "labels" group that is nested within the original image group.
 
 
