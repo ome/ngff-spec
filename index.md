@@ -1406,24 +1406,27 @@ It should be used for viewing and processing unless a use case dictates otherwis
 It will generally be a representation of the image in its native physical coordinate system.
 
 The following MUST hold for all coordinate systems inside multiscales metadata.
-The length of `axes` must be between 2 and 5
-and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
-The `axes` MUST contain 2 or 3 entries of `type:space`
-and MAY contain one additional entry of `type:time`
-and MAY contain one additional entry of `type:channel` or a null / custom type.
-In addition, the entries MUST be ordered by `type` where the `time` axis must come first (if present),
-followed by the  `channel` or custom axis (if present) and the axes of type `space`.
-If there are three spatial axes where two correspond to the image plane (`yx`)
-and images are stacked along the other (anisotropic) axis (`z`),
-the spatial axes SHOULD be ordered as `zyx`.
+The length of `axes` MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
+
+:::{hint}
+In previous versions of this specification, the count, order, and types of axes were constrained to:
+
+- optional `time` axis, conventionally called `t`
+- optional `channel` or custom-typed axis, conventionally called `c`
+- optional `space` axis, conventionally called `z`, conventionally the anisotropic slicing dimension
+- space axis, conventionally called `y`
+- space axis, conventionally called `x`
+
+These are no longer enforced, but are RECOMMENDED where the data's structure and usage allow.
+:::
+
 Each `multiscales` dictionary MUST contain the field `datasets`,
 which is a list of dictionaries describing the arrays storing the individual resolution levels.
 Each dictionary in `datasets` MUST contain the field `path`,
 whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
 The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
-Every Zarr array referred to by a `path` MUST have the same number of dimensions
-and MUST NOT have more than 5 dimensions.
-The number of dimensions and order MUST correspond to number and order of `axes`.
+Every Zarr array referred to by a `path` MUST have the same number of dimensions.
+The number and order of dimensions MUST correspond to number and order of `axes`.
 
 Each dictionary in `datasets` MUST contain the field `coordinateTransformations`,
 whose value is a list of dictionaries that define a transformation
