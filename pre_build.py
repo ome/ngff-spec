@@ -25,11 +25,7 @@ def build_json_examples():
         if os.path.isdir(os.path.join(input_directory, p))
         ]
 
-    index_md = """---
-title: NGFF metadata JSON Examples
-short_title: JSON Examples
-author: ""
----
+    index_md = """# NGFF metadata JSON Examples
 
 This section contains JSON examples for various metadata layouts.
 """
@@ -40,10 +36,7 @@ This section contains JSON examples for various metadata layouts.
         index_md += f"\n## {example}\n"
 
         # add header
-        markdown_content = f"""---
-title: {example} Examples
-author: ""
----
+        markdown_content = f"""# {example} Examples
 
 This document contains JSON examples for {example} metadata layouts.
 
@@ -84,11 +77,7 @@ def build_json_schemas():
     schema_files = glob.glob(os.path.join(schema_source_dir, '*.schema'), recursive=True)
 
 
-    index_markdown = """---
-title: NGFF metadata JSON Schemas
-short_title: JSON Schemas
-author: ""
----
+    index_markdown = """# NGFF metadata JSON Schemas
 
 This section contains JSON schemas for various metadata layouts.
 Find below links to auto-generated markdown pages or interactive HTML pages for each schema.
