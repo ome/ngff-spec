@@ -2,7 +2,7 @@
 status: w3c/CG-FINAL
 level: 1
 date: 2023-05-25
-version: 0.3
+version: 0.4
 title: Next-generation file formats (NGFF)
 abstract: >-
     This document contains next-generation file format (NGFF)
@@ -31,31 +31,7 @@ authors:
           ror: https://ror.org/03mstc592
 ---
 
-<pre class='metadata'>
-Title: Next-generation file formats (NGFF)
-Shortname: ome-ngff
-Level: 1
-Status: w3c/CG-FINAL
-TR: https://ngff.openmicroscopy.org/0.4/
-URL: https://ngff.openmicroscopy.org/0.4/
-Repository: https://github.com/ome/ngff
-Issue Tracking: Forums https://forum.image.sc/tag/ome-ngff
-Logo: http://www.openmicroscopy.org/img/logos/ome-logomark.svg
-Local Boilerplate: header yes, copyright yes
-Boilerplate: style-darkmode off
-Markup Shorthands: markdown yes
-Editor: Josh Moore, University of Dundee (UoD) https://www.dundee.ac.uk, https://orcid.org/0000-0003-4028-811X
-Editor: Sébastien Besson, University of Dundee (UoD) https://www.dundee.ac.uk, 
-Abstract: This document contains next-generation file format (NGFF)
-Abstract: specifications for storing bioimaging data in the cloud.
-Abstract: All specifications are submitted to the https://image.sc community for review.
-Status Text: This is the 0.4 release of this specification. Migration scripts
-Status Text: will be provided between numbered versions. Data written with the latest version
-Status Text: (an "editor's draft") will not necessarily be supported.
-</pre>
-
-
-# Version 0.3
+# Version 0.4
 
 ## Introduction
 (version0.4:intro)=
