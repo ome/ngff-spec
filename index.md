@@ -3,6 +3,7 @@ status: w3c/CG-FINAL
 level: 1
 date: 2020-11-20
 version: 0.1
+title: Next-generation file formats (NGFF)
 abstract: >-
     This document contains next-generation file format (NGFF)
     specifications for storing bioimaging data in the cloud.
