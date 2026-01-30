@@ -10,6 +10,7 @@ dependencies = [
     "jupyter-book==2.0.0b3",
     "jsonschema_markdown",
     "mystmd==1.6.3",
+    "bikeshed>=6.1.1",
 ]
 
 [project.optional-dependencies]
