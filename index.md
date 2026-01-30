@@ -1,31 +1,25 @@
+---
+status: w3c/CG-FINAL
+level: 1
+date: 2025-01-28
+version: 0.5
+title: Next-generation file formats (NGFF)
+abstract: >-
+    This document contains next-generation file format (NGFF)
+    specifications for storing bioimaging data in the cloud.
+    All specifications are submitted to the https://image.sc community for review.
+authors:
+    - name: "Editor: Josh Moore"
+      roles: Editor
+      affiliations:
+        - name: University of Dundee (UoD)
+          ror: https://ror.org/03h2bxq36
+          url: https://www.dundee.ac.uk
+---
 # Version 0.5
 
-<pre class='metadata'>
-Title: OME-Zarr specification
-Shortname: ome-zarr
-Level: 1
-Status: w3c/CG-FINAL
-TR: https://ngff.openmicroscopy.org/0.5/
-URL: https://ngff.openmicroscopy.org/0.5/
-Repository: https://github.com/ome/ngff
-Issue Tracking: Forums https://forum.image.sc/tag/ome-ngff
-Logo: http://www.openmicroscopy.org/img/logos/ome-logomark.svg
-Local Boilerplate: header yes, copyright yes
-Boilerplate: style-darkmode off
-Markup Shorthands: markdown yes
-Editor: Josh Moore, German BioImaging e.V., https://gerbi-gmb.de/, https://orcid.org/0000-0003-4028-811X
-Text Macro: NGFFVERSION 0.5
-Abstract: This document contains next-generation file format (NGFF)
-Abstract: specifications for storing bioimaging data in the cloud.
-Abstract: All specifications are submitted to the https://image.sc community for review.
-Status Text: The current released version of this specification is 0.5. Migration scripts
-Status Text: will be provided between numbered versions. Data written with these latest changes
-Status Text: (an "editor's draft") will not necessarily be supported.
-</pre>
-
-## OME-Zarr specification
-(version0.5:ome-zarr)=
-
+## Introduction
+(version0.5:intro)=
 
 The conventions and specifications defined in this document are designed to
 enable next-generation file formats to represent the same bioimaging data
