@@ -1,3 +1,5 @@
+# Version 0.1
+
 ---
 status: w3c/CG-FINAL
 level: 1
@@ -19,8 +21,6 @@ authors:
         - name: Open Microscopy Environment (OME)
           url: https://www.openmicroscopy.org
 ---
-
-# Version 0.1
 
 ## Introduction
 (version0.1:intro)=
