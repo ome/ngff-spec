@@ -12,9 +12,9 @@ authors:
     - name: "Editor: Josh Moore"
       roles: Editor
       affiliations:
-        - name: University of Dundee (UoD)
-          ror: https://ror.org/03h2bxq36
-          url: https://www.dundee.ac.uk
+        - name: German BioImaging e.V.
+          ror: https://ror.org/05tpnw772
+          url: https://gerbi-gmb.de
 ---
 # Version 0.5
 
