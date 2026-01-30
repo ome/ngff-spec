@@ -8,6 +8,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Changed
+
+- Changed the constraints for valid `path` values in `wells` for HCS plates to allow some non-alphanumeric characters.
+
+
 ## [0.6.dev2] - 2025-12-02
 
 ### Changed
