@@ -16,6 +16,12 @@ schemas/*
 !schemas/*.schema
 !schemas/jsonld
 !schemas/salad_schema
+examples/**/*.md
+schemas/**/*.html
+schemas/**/*.css
+schemas/**/*.js
+schemas/**/*.md
+*index.html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
