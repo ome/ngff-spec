@@ -3,7 +3,7 @@ project:
   title: Next-generation file format specification
   authors:
     - name: NGFF-community
-  github: ome/ngff-spec
+  github: https://github.com/ome/ngff-spec
   bibliography:
     - references.bib
   exports:
@@ -20,7 +20,7 @@ project:
           value: 10.1101/2023.02.17.528834v2
           description: OME-Zarr preprint (2023)
       repository-code: 'https://github.com/ome/ngff'
-      url: 'https://ngff.openmicroscopy.org'
+      url: https://ngff.openmicroscopy.org/0.1/
       abstract: >-
         A growing community is constructing a next-generation file
         format (NGFF) for bioimaging to overcome problems of
@@ -96,10 +96,10 @@ project:
           orcid: "https://orcid.org/0000-0002-2198-1958"
   toc:
     - file: index.md
-    - file: examples.md
+    - file: examples/index.md
       children:
-        - pattern: examples/*.md
-    - file: schemas.md
+        - pattern: examples/**/*.md
+    - file: schemas/index.md
       children:
         - pattern: schemas/*.md
     - file: contribute.md
