@@ -576,3 +576,12 @@ version of this diagram is available from the [OME2020 Workshop](https://downloa
 Mouseover the blackboxes representing the implementations above to get a quick tip on how to use them.
 
 Note: If you would like to see your project listed, please open an issue or PR on the [ome/ngff](https://github.com/ome/ngff) repository.
+
+## Other resources
+
+```{toctree}
+:maxdepth: 1
+
+examples/index
+schemas/index
+```
