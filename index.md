@@ -567,3 +567,12 @@ were added before this was adopted, but they should be updated in due course.
 (implementations)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
+
+## Other resources
+
+```{toctree}
+:maxdepth: 1
+
+examples/index
+schemas/index
+```
