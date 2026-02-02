@@ -145,10 +145,13 @@ A well group SHOULD NOT be present if there are no images in the well.
 The "OME-Zarr Metadata" contains metadata keys as specified below for discovering certain types of data, especially images.
 
 The OME-Zarr Metadata is stored in the various `zarr.json` files throughout the above array hierarchy.
-In this file, the metadata is stored under the namespaced key `ome` in `attributes`.
-The version of the OME-Zarr Metadata MUST be denoted as a string in the `version` key under the `ome` namespace.
-
 The OME-Zarr Metadata version MUST be consistent within a hierarchy.
+
+The group `attributes` MUST contain a key `ome`. The value of the `ome` key MUST be a JSON
+object that MUST contain a `version` key, the value of which MUST be a string.
+
+In this file, the metadata is stored under the namespaced key 
+`ome` in `attributes`:
 
 ```jsonc
 {
