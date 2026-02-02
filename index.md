@@ -206,7 +206,7 @@ Every coordinate system:
 The elements of `axes` correspond to the index of each array dimension and coordinates for points in that coordinate system.
 For the below example, the `x` dimension is the last dimension.
 The "dimensionality" of a coordinate system is indicated by the length of its `axes` array.
-The "volume_micrometers" example coordinate system below is three dimensional (3D).
+The `volume_micrometers` example coordinate system below is three dimensional (3D).
 
 :::{dropdown} Example
 
@@ -347,7 +347,7 @@ See chapter 4 and figure 4.1 of the ITK Software Guide.
 
 (bf2raw)=
 
-[=Transitional=] "bioformats2raw.layout" metadata identifies a group which implicitly describes a series of images.
+[=Transitional=] `"bioformats2raw.layout` metadata identifies a group which implicitly describes a series of images.
 The need for the collection stems from the common "multi-image file" scenario in microscopy.
 Parsers like Bio-Formats define a strict, stable ordering of the images in a single container that can be used to refer to them by other tools.
 
@@ -382,14 +382,14 @@ The OME-Zarr Metadata in the top-level `zarr.json` file must contain the `biofor
 ```
 
 If the top-level group represents a plate, the `bioformats2raw.layout` metadata will be present
-but the "plate" key MUST also be present, takes precedence and parsing of such datasets should follow (see [plate metadata](#plate-md)).
+but the `plate` key MUST also be present, takes precedence and parsing of such datasets should follow (see [plate metadata](#plate-md)).
 It is not possible to mix collections of images with plates at present.
 
 ```{literalinclude} examples/bf2raw/plate.json
 :language: json
 ```
 
-The OME-Zarr Metadata in the `zarr.json` file within the OME group may contain the "series" key:
+The OME-Zarr Metadata in the `zarr.json` file within the OME group may contain the `series` key:
 
 ```{literalinclude} examples/ome/series-2.json
 :language: json
@@ -401,7 +401,7 @@ The OME-Zarr Metadata in the `zarr.json` file within the OME group may contain t
 Conforming groups:
 
 - MUST have the value `3` for the `bioformats2raw.layout` key in their OME-Zarr Metadata in the `zarr.json` at the top of the hierarchy;
-- SHOULD have OME metadata representing the entire collection of images in a file named "OME/METADATA.ome.xml" which:
+- SHOULD have OME metadata representing the entire collection of images in a file named `OME/METADATA.ome.xml` which:
   - MUST adhere to the OME-XML specification but
   - MUST use `<MetadataOnly/>` elements as opposed to `<BinData/>`, `<BinaryOnly/>` or `<TiffData/>`;
   - MAY make use of the [minimum specification](https://docs.openmicroscopy.org/ome-model/6.2.2/specifications/minimum.html).
@@ -410,12 +410,12 @@ Additionally, the logic for finding the Zarr group for each image follows the fo
 
 - If `plate` metadata is present, images MUST be located at the defined location.
   - Matching `series` metadata (as described next) SHOULD be provided for tools that are unaware of the `plate` specification.
-- If the "OME" Zarr group exists, it:
+- If the `OME` Zarr group exists, it:
   - MAY contain a `series` attribute. If so:
     - `series` MUST be a list of string objects, each of which is a path to an image group.
     - The order of the paths MUST match the order of the `Image` elements in `OME/METADATA.ome.xml` if provided.
 - If the `series` attribute does not exist and no `plate` is present:
-  - separate `multiscales` images MUST be stored in consecutively numbered groups starting from 0 (i.e. "0/", "1/", "2/", "3/", ...).
+  - separate `multiscales` images MUST be stored in consecutively numbered groups starting from 0 (i.e. `0/`, `1/`, `2/`, `3/`, ...).
 - Every `multiscales` group MUST represent exactly one OME-XML `Image` in the same order as either the series index or the group numbers.
 Conforming readers:
 
@@ -685,13 +685,13 @@ y = i
 :language: json
 ```
 
-The "projection_down" transformation defines the function:
+The `projection_down` transformation defines the function:
 
 ```
 x = b
 ```
 
-and the "projection_up" transformation defines the function:
+and the `projection_up` transformation defines the function:
 
 ```
 x = a
@@ -706,7 +706,7 @@ z = b
 `translation` transformations are special cases of affine transformations.
 When possible, a translation transformation should be preferred to its equivalent affine.
 Input and output dimensionality MUST be identical
-and MUST equal the the length of the "translation" array (N).
+and MUST equal the the length of the `translation` array (N).
 `translation` transformations are invertible.
 
 **translation**
@@ -733,7 +733,7 @@ y = j - 1.42
 `scale` transformations are special cases of affine transformations.
 When possible, a scale transformation SHOULD be preferred to its equivalent affine.
 Input and output dimensionality MUST be identical
-and MUST equal the the length of the "scale" array (N).
+and MUST equal the the length of the `scale` array (N).
 Values in the `scale` array SHOULD be non-zero;
 in that case, `scale` transformations are invertible.
 
@@ -1081,7 +1081,7 @@ Example metadata for the array data at path `displacements` above:
 
 If the array in `displacements` contains the data: `[-1, 0, 1]`,
 this transformation maps the point `[1.0]` to the point `[0.5]`.
-A scale transformation maps the array coordinates to the "x" axis.
+A scale transformation maps the array coordinates to the `x` axis.
 Using the inverse of the scale transform, we see that we need the position `0.5` in array coordinates.
 The transformation specifies linear interpolation,
 which in this case yields `(0.5 * -1) + (0.5 * 0) = -0.5`.
@@ -1241,7 +1241,7 @@ It is stored in a multiple resolution representation.
 
 `multiscales` contains an array of dictionaries where each entry describes a multiscale image.
 
-Each `multiscales` dictionary MUST contain the field "coordinateSystems",
+Each `multiscales` dictionary MUST contain the field `coordinateSystems`,
 whose value is an array containing coordinate system metadata
 (see [coordinate systems](#coordinate-systems-md)).
 
@@ -1544,7 +1544,7 @@ containing one field of view per acquisition.
 (well-md)=
 
 For high-content screening datasets,
-the metadata about all fields of views under a given well can be found under the "well" key in the attributes of the well group.
+the metadata about all fields of views under a given well can be found under the `well` key in the attributes of the well group.
 
 The `well` dictionary MUST contain an `images` key
 whose value MUST be a list of JSON objects specifying all fields of views for a given well.
