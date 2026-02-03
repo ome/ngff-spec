@@ -125,16 +125,16 @@
             "input_axes": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "integer"
               },
-              "description": "Names of the input axes for this transformation."
+              "description": "Index of the input axes for this transformation."
             },
             "output_axes": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "integer"
               },
-              "description": "Names of the output axes for this transformation."
+              "description": "Index of the output axes for this transformation."
             }
           },
           "required": [
