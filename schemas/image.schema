@@ -74,7 +74,56 @@
             "type": "array",
             "minItems": 1,
             "items": {
-              "$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/coordinateTransformation"
+              "allOf": [
+                {
+                  "$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/coordinateTransformation"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "input": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "path": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "output": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "path": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "input",
+                    "output"
+                  ]
+                }
+              ]
             }
           }
         },
