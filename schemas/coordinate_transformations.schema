@@ -165,8 +165,13 @@
         "mapAxis": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4
           },
+          "minItems": 2,
+          "maxItems": 5,
+          "uniqueItems": true,
           "description": "An array of integers representing the new axis order as zero-based indices of the input axes."
         }
       },
