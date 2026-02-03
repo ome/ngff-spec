@@ -27,14 +27,14 @@
         {
           "type": "translation",
           "translation": [ 1, 3 ],
-          "input_axes": [ "i", "k" ],
-          "output_axes": [ "y", "x" ]
+          "input_axes": [ 3, 2 ],
+          "output_axes": [ 2, 1 ]
         },
         {
           "type": "scale",
           "scale": [ 2 ],
-          "input_axes": [ "j" ],
-          "output_axes": [ "z" ]
+          "input_axes": [ 1 ],
+          "output_axes": [ 0 ]
         }
       ]
     }
