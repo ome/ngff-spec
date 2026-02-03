@@ -1176,9 +1176,8 @@ This is an **invalid** `byDimension` transform:
 :language: json
 ```
 
-It is invalid for two reasons.
-First because input `0` used by the scale transformation is not an axis of the `byDimension` transformation's `input`.
-Second, the `x` axis of the `output` does not appear in the `output` of any child transformation.
+It is invalid because the `output_axes` arrays of both transformations refer to the index of an axis that doesn't exist.
+The coordinate system has two axes (indices `0` and `1`), but the transformations refers to index `2`.
 
 :::
 
