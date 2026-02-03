@@ -26,12 +26,12 @@
                     "description": "The path for this field of view subgroup",
                     "type": "string",
                     "minLength": 1,
+                    "pattern": "^[A-Za-z0-9_.-]+$",
                     "not": {
                       "anyOf": [
                         { "const": "." },
                         { "const": ".." },
                         { "pattern": "^__" },
-                        { "pattern": "/" }
                       ]
                     }
                   }

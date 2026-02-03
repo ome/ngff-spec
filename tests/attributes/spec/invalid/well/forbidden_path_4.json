@@ -2,7 +2,7 @@
   "well": {
     "images": [
       {
-        "path": "some/forbidden/path"
+        "path": "!@#$%^&*()+={}[]"
       }
     ]
   },
