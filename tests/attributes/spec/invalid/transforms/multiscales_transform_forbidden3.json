@@ -1,0 +1,69 @@
+{
+	"ome": {
+		"version": "0.6.dev3",
+		"multiscales": [
+			{
+				"name": "multiscales",
+				"coordinateSystems": [
+					{
+						"name": "physical",
+						"axes": [
+							{
+								"type": "space",
+								"name": "z",
+								"unit": "micrometer",
+								"discrete": false
+							},
+							{
+								"type": "space",
+								"name": "y",
+								"unit": "micrometer",
+								"discrete": false
+							},
+							{
+								"type": "space",
+								"name": "x",
+								"unit": "micrometer",
+								"discrete": false
+							}
+						]
+					}
+				],
+				"datasets": [
+					{
+						"path": "array",
+						"coordinateTransformations": [
+							{
+								"type": "sequence",
+								"output": "physical",
+								"input": "array",
+								"transformations": [
+									{
+										"type": "mapAxis",
+										"mapAxis": [0, 1, 2],
+										"name": "a_map_axis_transform"
+									},
+									{
+										"type": "translation",
+										"translation": [
+											30,
+											20,
+											10
+										]
+									}
+								],
+								"name": "transform-name"
+							}
+						]
+					}
+				]
+			}
+		]
+  },
+	"_conformance": {
+		"schema": {
+					"id": "schemas/image.schema"
+		},
+    "valid": false
+	}
+}

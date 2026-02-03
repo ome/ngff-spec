@@ -10,12 +10,6 @@
 						"axes": [
 							{
 								"type": "space",
-								"name": "z",
-								"unit": "micrometer",
-								"discrete": false
-							},
-							{
-								"type": "space",
 								"name": "y",
 								"unit": "micrometer",
 								"discrete": false
@@ -31,12 +25,6 @@
 					{
 						"name": "output",
 						"axes": [
-							{
-								"type": "space",
-								"name": "z",
-								"unit": "micrometer",
-								"discrete": false
-							},
 							{
 								"type": "space",
 								"name": "y",
@@ -57,23 +45,9 @@
 						"path": "array",
 						"coordinateTransformations": [
 							{
-								"type": "sequence",
-								"input": "array",
+								"type": "identity",
 								"output": "physical",
-								"transformations": [
-									{
-										"type": "scale",
-										"scale": [1, 1, 1]
-									},
-									{
-										"type": "translation",
-										"translation": [
-											30,
-											20,
-											10
-										]
-									}
-								],
+								"input": "array",
 								"name": "transform-name"
 							}
 						]
@@ -81,9 +55,7 @@
 				],
 				"coordinateTransformations": [
 					{
-						"type": "translation",
-						"translation": [1, 1, 1],
-						"name": "some_additional_transform",
+						"type": "rotation",
 						"input": "physical",
 						"output": "output"
 					}
@@ -94,6 +66,7 @@
 	"_conformance": {
 		"schema": {
 					"id": "schemas/image.schema"
-		}
+		},
+    "valid": false
 	}
 }
