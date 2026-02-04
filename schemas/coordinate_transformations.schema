@@ -115,35 +115,6 @@
         }
       ]
     },
-    "byDimensionTransformation": {
-      "type": "object",
-      "description": "Transformation used inside a byDimension transformation",
-      "allOf": [
-        { "$ref": "#/$defs/coordinateTransformation" },
-        {
-          "properties": {
-            "input_axes": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              },
-              "description": "Index of the input axes for this transformation."
-            },
-            "output_axes": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              },
-              "description": "Index of the output axes for this transformation."
-            }
-          },
-          "required": [
-            "input_axes",
-            "output_axes"
-          ]
-        }
-      ]
-    },
     "identity": {
       "type": "object",
       "properties": {
@@ -360,7 +331,31 @@
         "transformations": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/byDimensionTransformation"
+            "allOf": [
+              { "$ref": "#/$defs/coordinateTransformation" },
+              {
+                "properties": {
+                  "input_axes": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "Index of the input axes for this transformation."
+                  },
+                  "output_axes": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "Index of the output axes for this transformation."
+                  }
+                },
+                "required": [
+                  "input_axes",
+                  "output_axes"
+                ]
+              }
+            ]
           }
         }
       },

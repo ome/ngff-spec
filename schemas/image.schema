@@ -51,10 +51,61 @@
                   "type": "array",
                   "uniqueItems": true,
                   "items": {
-                    "$ref": "#/$defs/multiscale_coordinateTransformations"
+                    "oneOf": [
+                      {
+                        "allOf": [
+                          {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/scale"},
+                          {
+                            "type": "object",
+                            "properties": {
+                              "input": {"type": "string"},
+                              "output": {"type": "string"},
+                              "name": {"type": "string"}
+                            },
+                            "required": ["input", "output"]
+                          }
+                        ]
+                      },
+                      {
+                        "allOf": [
+                          {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/identity"},
+                          {
+                            "type": "object",
+                            "properties": {
+                              "input": {"type": "string"},
+                              "output": {"type": "string"},
+                              "name": {"type": "string"}
+                            },
+                            "required": ["input", "output"]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "sequence"},
+                          "transformations": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/scale"},
+                                {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/translation"}
+                              ]
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
+                          },
+                          "input": {"type": "string"},
+                          "output": {"type": "string"},
+                          "name": {"type": "string"}
+                        },
+                        "required": ["type", "transformations", "input", "output"]
+                      }
+                    ]
                   },
                   "minItems": 1,
-                  "maxItems": 1
+                  "maxItems": 1,
+                  "description": "Multiscale transformations (identity/scale/sequence of scale and translation) from this dataset to the coordinate system specified by 'output'."
                 }
               },
               "required": [
@@ -134,60 +185,6 @@
       },
       "minItems": 1,
       "uniqueItems": true
-    },
-    "multiscale_coordinateTransformations": {
-      "description": "OME-NGFF coordinate transformation for multiscale resolution level datasets (only scale or scale & translate).",
-      "oneOf": [
-        {
-          "allOf": [
-            {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/scale"},
-            {
-              "type": "object",
-              "properties": {
-                "input": {"type": "string"},
-                "output": {"type": "string"},
-                "name": {"type": "string"}
-              },
-              "required": ["input", "output"]
-            }
-          ]
-        },
-        {
-          "allOf": [
-            {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/identity"},
-            {
-              "type": "object",
-              "properties": {
-                "input": {"type": "string"},
-                "output": {"type": "string"},
-                "name": {"type": "string"}
-              },
-              "required": ["input", "output"]
-            }
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {"const": "sequence"},
-            "transformations": {
-              "type": "array",
-              "items": {
-                "oneOf": [
-                  {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/scale"},
-                  {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/translation"}
-                ]
-              },
-              "minItems": 2,
-              "maxItems": 2
-            },
-            "input": {"type": "string"},
-            "output": {"type": "string"},
-            "name": {"type": "string"}
-          },
-          "required": ["type", "transformations", "input", "output"]
-        }
-      ]
     },
     "omero": {
       "type": "object",
