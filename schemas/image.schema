@@ -138,8 +138,34 @@
     "multiscale_coordinateTransformations": {
       "description": "OME-NGFF coordinate transformation for multiscale resolution level datasets (only scale or scale & translate).",
       "oneOf": [
-        {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/scale"},
-        {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/identity"},
+        {
+          "allOf": [
+            {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/scale"},
+            {
+              "type": "object",
+              "properties": {
+                "input": {"type": "string"},
+                "output": {"type": "string"},
+                "name": {"type": "string"}
+              },
+              "required": ["input", "output"]
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {"$ref": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema#/$defs/identity"},
+            {
+              "type": "object",
+              "properties": {
+                "input": {"type": "string"},
+                "output": {"type": "string"},
+                "name": {"type": "string"}
+              },
+              "required": ["input", "output"]
+            }
+          ]
+        },
         {
           "type": "object",
           "properties": {
@@ -162,6 +188,7 @@
           "required": ["type", "transformations", "input", "output"]
         }
       ]
+    }
     },
     "omero": {
       "type": "object",
