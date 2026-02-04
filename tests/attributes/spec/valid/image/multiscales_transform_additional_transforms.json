@@ -115,8 +115,6 @@
 							},
 							{
 								"type": "byDimension",
-								"output": "physical",
-								"input": "array_coordinates",
 								"transformations": [
 									{
 										"type": "scale",
