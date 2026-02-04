@@ -1,0 +1,89 @@
+{
+  "ome": {
+    "version": "0.6.dev3",
+    "multiscales": [
+      {
+        "name": "multiscales",
+        "coordinateSystems": [
+          {
+            "name": "physical",
+            "axes": [
+              {
+                "type": "space",
+                "name": "y",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
+                "name": "x",
+                "unit": "micrometer",
+                "discrete": false
+              }
+            ]
+          },
+          {
+            "name": "array_coordinates",
+            "axes": [
+              {
+                "type": "array",
+                "name": "dim_0",
+                "discrete": true
+              },
+              {
+                "type": "array",
+                "name": "dim_1",
+                "discrete": true
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "s0",
+            "coordinateTransformations": [
+              {
+                "type": "identity",
+                "output": "array_coordinates",
+                "input": "s0",
+                "name": "transform-name"
+              }
+            ]
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "type": "byDimension",
+            "input": "array_coordinates",
+            "output": "physical",
+            "transformations": [
+              {
+                "type": "scale",
+                "output_axes": [0],
+                "input_axes": [0],
+                "scale": [2],
+                "input": "array_coordinates",
+                "output": "intermediate"
+              },
+              {
+                "type": "translation",
+                "output_axes": [1],
+                "input_axes": [1],
+                "translation": [-10],
+                "input": "intermediate",
+                
+              }
+            ],
+            "name": "transform-name"
+          }
+        ]
+      }
+    ]
+  },
+  "_conformance": {
+    "schema": {
+    "id": "schemas/image.schema"
+    },
+    "description": "Tests for the image JSON schema: byDimension transformation"
+  }
+}

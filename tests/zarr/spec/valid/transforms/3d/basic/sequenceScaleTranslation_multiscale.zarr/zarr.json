@@ -1,0 +1,131 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev3",
+      "multiscales": [
+        {
+          "name": "multiscales",
+          "coordinateSystems": [
+            {
+              "name": "physical",
+              "axes": [
+                {
+                  "type": "space",
+                  "name": "z",
+                  "unit": "micrometer",
+                  "discrete": false
+                },
+                {
+                  "type": "space",
+                  "name": "y",
+                  "unit": "micrometer",
+                  "discrete": false
+                },
+                {
+                  "type": "space",
+                  "name": "x",
+                  "unit": "micrometer",
+                  "discrete": false
+                }
+              ]
+            }
+          ],
+          "datasets": [
+            {
+              "path": "s0",
+              "coordinateTransformations": [
+                {
+                  "type": "sequence",
+                  "output": "physical",
+                  "input": "s0",
+                  "transformations": [
+                    {
+                      "type": "scale",
+                      "scale": [
+                        4,
+                        3,
+                        2
+                      ]
+                    },
+                    {
+                      "type": "translation",
+                      "translation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "name": ""
+                    }
+                  ],
+                  "name": "transform-name"
+                }
+              ]
+            },
+            {
+              "path": "s1",
+              "coordinateTransformations": [
+                {
+                  "type": "sequence",
+                  "output": "physical",
+                  "input": "s1",
+                  "transformations": [
+                    {
+                      "type": "scale",
+                      "scale": [
+                        8,
+                        6,
+                        4
+                      ]
+                    },
+                    {
+                      "type": "translation",
+                      "translation": [
+                        2,
+                        1.5,
+                        1
+                      ],
+                      "name": ""
+                    }
+                  ],
+                  "name": "transform-name"
+                }
+              ]
+            },
+            {
+              "path": "s2",
+              "coordinateTransformations": [
+                {
+                  "type": "sequence",
+                  "output": "physical",
+                  "input": "s2",
+                  "transformations": [
+                    {
+                      "type": "scale",
+                      "scale": [
+                        16,
+                        12,
+                        8
+                      ]
+                    },
+                    {
+                      "type": "translation",
+                      "translation": [
+                        6,
+                        4.5,
+                        3
+                      ],
+                      "name": ""
+                    }
+                  ],
+                  "name": "transform-name"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
