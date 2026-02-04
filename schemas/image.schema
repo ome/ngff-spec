@@ -188,7 +188,6 @@
           "required": ["type", "transformations", "input", "output"]
         }
       ]
-    }
     },
     "omero": {
       "type": "object",
