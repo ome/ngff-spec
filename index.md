@@ -1525,7 +1525,7 @@ for more information.
 The `omero` metadata is optional, but if present it MUST contain the field `channels`,
 which is an array of dictionaries describing the channels of the image.
 The `channels` array length SHOULD correspond to the size of the `c` axis.
-Each dictionary in `channels` MAY contain the following fields:
+Each object in `channels` MAY contain the following fields:
 
 - `color` (string) String of 6 hexadecimal digits specifying the color of the channel in RGB format.
 - `label` (string) Channel name.
