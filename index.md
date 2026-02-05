@@ -1712,7 +1712,7 @@ Each image object MUST contain a `path` key
 whose value MUST be a string specifying the path to the field of view.
 The `path` MUST be case-sensitive, and MUST NOT be a duplicate of any other `path` in the `images` list.
 The `path` MUST follow [Zarr node name naming conventions](https://github.com/zarr-developers/zarr-specs/blob/main/docs/v3/core/index.rst#node-names) including the recommended limitations of characters to ensure consistency across different storage systems and programming languages. 
-Specifically: The `path` MUST NOT only be composed of periods like `.` or `..` or start with the reserved prefix `__`; 
+Specifically: The `path` MUST NOT consist only of periods (like `.` or `..`) or start with the reserved prefix `__`; 
 The `path` MUST NOT be an empty string and MUST NOT contain `/` characters; 
 The `path` MUST only use characters in the sets `a-z`, `A-Z`, `0-9`, `-`, `_`, `.`. 
 If multiple acquisitions were performed in the plate,
