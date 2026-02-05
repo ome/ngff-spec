@@ -1524,14 +1524,20 @@ for more information.
 
 The `omero` metadata is optional, but if present it MUST contain the field `channels`,
 which is an array of objects describing the channels of the image.
-Each object in `channels` MUST contain the field `color`,
-which is a string of 6 hexadecimal digits specifying the color of the channel in RGB format.
-Each object in `channels` MUST contain the field `window`,
-which is a object describing the windowing of the channel.
-The field `window` MUST contain the fields `min` and `max`,
-which are the minimum and maximum values of the window, respectively.
-It MUST also contain the fields `start` and `end`,
-which are the start and end values of the window, respectively.
+The `channels` array length SHOULD correspond to the size of the respective channels axis, if present.
+Each object in `channels` MAY contain the following fields:
+
+- `color` (string) String of 6 hexadecimal digits specifying the color of the channel in RGB format.
+- `label` (string) Channel name.
+- `active` (boolean) Indicates whether the channel should be displayed.
+- `window` (dictionary) Values describing the windowing of the channel. All values are optional (MAY).
+  The `min` and `max` values may be used by viewers as the range of channel sliders.
+  All values can be floating-point numbers, but will likely be integers for integer pixel types.
+  - `min` (float) Should correspond to the minimum pixel intensity for that channel.
+  - `max` (float) Should correspond to the maximum pixel intensity for that channel.
+  - `start` (float) Start of the rendering window.
+  - `end` (float) End of the rendering window.
+- `inverted` (boolean) If true, the rendering of darkest to brightest pixels should be inverted.
 
 ### "labels" metadata
 (labels-md)=
