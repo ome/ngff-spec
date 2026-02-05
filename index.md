@@ -1676,7 +1676,7 @@ In such a case, it may be easier to align instrument 2 (medium-resolution) with 
 
 In this case, the "scene" metadata would contain the following coordinate transformations:
 
-```json
+```jsonc
 "scene": {
   "coordinateTransformations": [
     {
