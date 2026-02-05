@@ -1,27 +1,27 @@
-# Version 0.2
+---
+status: w3c/CG-FINAL
+level: 1
+date: 2021-04-26
+version: 0.2
+title: Next-generation file formats (NGFF)
+abstract: >-
+    This document contains next-generation file format (NGFF)
+    specifications for storing bioimaging data in the cloud.
+    All specifications are submitted to the https://image.sc community for review.
+authors:
+    - name: "Editor: Josh Moore"
+      roles: Editor
+      affiliations:
+        - name: Open Microscopy Environment (OME)
+          url: https://www.openmicroscopy.org
+    - name: "Editor: Sébastien Besson"
+      roles: Editor
+      affiliations:
+        - name: Open Microscopy Environment (OME)
+          url: https://www.openmicroscopy.org
+---
 
-<pre class='metadata'>
-Title: Next-generation file formats (NGFF)
-Shortname: ome-ngff
-Level: 1
-Status: w3c/CG-FINAL
-TR: https://ngff.openmicroscopy.org/0.2/
-URL: https://ngff.openmicroscopy.org/0.2/
-Repository: https://github.com/ome/ngff
-Issue Tracking: Forums https://forum.image.sc/tag/ome-ngff
-Logo: http://www.openmicroscopy.org/img/logos/ome-logomark.svg
-Local Boilerplate: header yes, copyright yes
-Boilerplate: style-darkmode off
-Markup Shorthands: markdown yes
-Editor: Josh Moore, Open Microscopy Environment (OME) https://www.openmicroscopy.org
-Editor: Sébastien Besson, Open Microscopy Environment (OME) https://www.openmicroscopy.org
-Abstract: This document contains next-generation file format (NGFF)
-Abstract: specifications for storing bioimaging data in the cloud.
-Abstract: All specifications are submitted to the https://image.sc community for review.
-Status Text: This is the 0.2 release of this specification. Migration scripts
-Status Text: will be provided between numbered versions. Data written with the latest version
-Status Text: (an "editor's draft") will not necessarily be supported.
-</pre>
+# Version 0.2
 
 ## Introduction
 (version0.2:intro)=
@@ -568,3 +568,12 @@ version of this diagram is available from the [OME2020 Workshop](https://downloa
 Mouseover the blackboxes representing the implementations above to get a quick tip on how to use them.
 
 Note: If you would like to see your project listed, please open an issue or PR on the [ome/ngff](https://github.com/ome/ngff) repository.
+
+## Other resources
+
+```{toctree}
+:maxdepth: 1
+
+examples/index
+schemas/index
+```
