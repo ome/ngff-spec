@@ -18,56 +18,57 @@ def build_json_examples():
     input_directory = 'examples'
     output_directory = 'examples'
     os.makedirs(output_directory, exist_ok=True)
-    example_types = [d for d in os.listdir(input_directory) if os.path.isdir(os.path.join(input_directory, d))]
 
-    index_md = """---
-title: NGFF metadata JSON Examples
-short_title: JSON Examples
-author: ""
----
+    # iterate over all folders in the examples directory
+    example_types = [
+        p for p in os.listdir(input_directory)
+        if os.path.isdir(os.path.join(input_directory, p))
+        ]
+
+    index_md = """# NGFF metadata JSON Examples
 
 This section contains JSON examples for various metadata layouts.
 """
 
-    for example in example_types:
-        json_files = glob.glob(os.path.join(input_directory, example, '*.json'), recursive=True)
+    for root, subdirs, files in os.walk(input_directory):
+        for subdir in subdirs:
 
-        index_md += f"\n## {example}\n"
+            json_files = glob.glob(os.path.join(root, subdir, '*.json'), recursive=True)
+            if not json_files:
+                continue
+            category = '_'.join(os.path.relpath(os.path.join(root, subdir), input_directory).split(os.sep))
 
-        # add header
-        markdown_content = f"""---
-title: {example} Examples
-author: ""
----
+            index_md += f"\n## {category}\n"
 
-This document contains JSON examples for {example} metadata layouts.
+            # add header
+            markdown_content = f"""# {category} Examples
+
+This document contains JSON examples for {category} metadata layouts.
 
 """
 
+            # append each json file content
+            for json_file in json_files:
+                print(f'Processing {json_file}...')
 
-        # append each json file content
-        for json_file in json_files:
-            print(f'Processing {json_file}...')
+                crossref = f"examples:{category}:{Path(json_file).stem}"
+                index_md += f"- [{Path(json_file).stem}](#{crossref})\n"
 
-            crossref = f"examples:{example}:{Path(json_file).stem}"
-            index_md += f"- [{Path(json_file).stem}](#{crossref})\n"
+                json_file_name = Path(json_file).stem
 
-            json_file_name = Path(json_file).stem
-
-            # Create the Markdown content
-            markdown_content += f"""
-## {os.path.splitext(json_file_name)[0]}
+                # Create the Markdown content
+                markdown_content += f"""## {os.path.splitext(json_file_name)[0]}
 ({crossref})=
 
-```{{literalinclude}} {Path(os.path.relpath(json_file, input_directory)).as_posix()}
+```{{literalinclude}} {Path(os.path.relpath(json_file, Path(json_file).parent)).as_posix()}
 :linenos:
 :language: json
 ```
 """
-        with open(os.path.join(output_directory, f'{example}.md'), 'w') as md_file:
-            md_file.write(markdown_content)
+                with open(os.path.join(Path(json_file).parent, f'{category}.md'), 'w') as md_file:
+                    md_file.write(markdown_content)
 
-    with open(os.path.join("examples.md"), 'w') as index_file:
+    with open(Path(output_directory) / "index.md", 'w') as index_file:
         index_file.write(index_md)
 
 def build_json_schemas():
@@ -81,11 +82,7 @@ def build_json_schemas():
     schema_files = glob.glob(os.path.join(schema_source_dir, '*.schema'), recursive=True)
 
 
-    index_markdown = """---
-title: NGFF metadata JSON Schemas
-short_title: JSON Schemas
-author: ""
----
+    index_markdown = """# NGFF metadata JSON Schemas
 
 This section contains JSON schemas for various metadata layouts.
 Find below links to auto-generated markdown pages or interactive HTML pages for each schema.
@@ -156,7 +153,7 @@ author: ""
 
         index_markdown += f"| {Path(schema_file).stem} | {link_markdown} | {link_html} |\n"
 
-    with open(os.path.join("schemas.md"), 'w') as index_file:
+    with open(Path(output_directory) / "index.md", 'w') as index_file:
         index_file.write(index_markdown)
 
 def build_footer():
@@ -164,12 +161,12 @@ def build_footer():
     from datetime import datetime
     year = datetime.now().year
     footer_content = f"""
-<div>
-    Copyright © 2020-{year}
-    <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>®</sup>.
-    OME trademark rules apply.
-</div>
-"""
+    <div>
+        Copyright © 2020-{year}
+        <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>®</sup>.
+        OME trademark rules apply.
+    </div>
+    """
     with open('footer.md', 'w') as footer_file:
         footer_file.write(footer_content)
 
@@ -177,9 +174,10 @@ def build_legacy_bikeshed(root: str = '.'):
     """Build legacy Bikeshed files."""
     import subprocess
     import glob
+    import sys
 
     bikeshed_file = os.path.normpath(f"{root}/{glob.glob('*.bs')[0]}")
-    subprocess.run(['bikeshed', 'spec', bikeshed_file, 'index.html'], check=True)
+    subprocess.run([sys.executable, '-m', 'bikeshed', 'spec', bikeshed_file, 'index.html'], check=True)
 
 build_json_examples()
 build_json_schemas()
