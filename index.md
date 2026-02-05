@@ -4,6 +4,7 @@ short_title: OME-Zarr
 ---
 
 # 🚧 Dev: 0.6.dev3 🚧
+
 (ngff-spec:spec:head)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
@@ -82,7 +83,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │   ├── zarr.json         # All image arrays must be up to 5-dimensional
     │   │                     # with the axis of type time before type channel, before spatial axes.
     │   │
-    │   └─ ...                # Chunks are stored conforming to the Zarr array specification and 
+    │   └─ ...                # Chunks are stored conforming to the Zarr array specification and
     │                         # metadata as specified in the array's `zarr.json`.
     │
     └── labels
@@ -131,7 +132,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     │   │   ├── 0             # First field of view of well A1
     │   │   │   │
     │   │   │   ├── zarr.json # Implements "multiscales", "omero"
-    │   │   │   ├── 0         # Resolution levels          
+    │   │   │   ├── 0         # Resolution levels
     │   │   │   ├── ...
     │   │   │   └── labels    # Labels (optional)
     │   │   └── ...           # Other fields of view
@@ -140,6 +141,7 @@ A well group SHOULD NOT be present if there are no images in the well.
 ```
 
 ## OME-Zarr Metadata
+
 (metadata)=
 
 The "OME-Zarr Metadata" contains metadata keys as specified below for discovering certain types of data, especially images.
@@ -163,10 +165,12 @@ The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 ```
 
 ### "coordinateSystems" metadata
+
 (coordinate-systems-md)=
 
 A `coordinateSystem` is a JSON object with a `name` field and a `axes` field.
 Every coordinate system:
+
 - MUST contain the field `name`.
   The value MUST be a non-empty string that is unique among all entries under `coordinateSystems`.
 - MUST contain the field `axes`, whose value is an array of valid `axes` (see below).
@@ -189,12 +193,13 @@ Coordinate Systems metadata example
     ]
 }
 ```
+
 :::
 
 The axes of a coordinate system (see below) give information
 about the types, units, and other properties of the coordinate system's dimensions.
 Axis names may contain semantically meaningful information, but can be arbitrary.
-As a result, two coordinate systems that have identical axes in the same order 
+As a result, two coordinate systems that have identical axes in the same order
 may not be "the same" in the sense that measurements at the same point
 refer to different physical entities and therefore should not be analyzed jointly.
 Tasks that require images, annotations, regions of interest, etc.,
@@ -209,6 +214,7 @@ and adds an interpretation to the samples along that dimension.
 
 It is an array of objects,
 where each object describes a dimension (axis) and:
+
 - MUST contain the field `name` that gives the name for this dimension.
   The values MUST be unique across all `name` fields in the same coordinate system.
 - SHOULD contain the field `type`.
@@ -220,8 +226,8 @@ where each object describes a dimension (axis) and:
 - SHOULD contain the field `unit` to specify the physical unit of this dimension.
   The value SHOULD be one of the following strings,
   which are valid units according to UDUNITS-2.
-    - Units for `space` axes: 'angstrom', 'attometer', 'centimeter', 'decimeter', 'exameter', 'femtometer', 'foot', 'gigameter', 'hectometer', 'inch', 'kilometer', 'megameter', 'meter', 'micrometer', 'mile', 'millimeter', 'nanometer', 'parsec', 'petameter', 'picometer', 'terameter', 'yard', 'yoctometer', 'yottameter', 'zeptometer', 'zettameter'
-    - Units for `time` axes: 'attosecond', 'centisecond', 'day', 'decisecond', 'exasecond', 'femtosecond', 'gigasecond', 'hectosecond', 'hour', 'kilosecond', 'megasecond', 'microsecond', 'millisecond', 'minute', 'nanosecond', 'petasecond', 'picosecond', 'second', 'terasecond', 'yoctosecond', 'yottasecond', 'zeptosecond', 'zettasecond'
+  - Units for `space` axes: 'angstrom', 'attometer', 'centimeter', 'decimeter', 'exameter', 'femtometer', 'foot', 'gigameter', 'hectometer', 'inch', 'kilometer', 'megameter', 'meter', 'micrometer', 'mile', 'millimeter', 'nanometer', 'parsec', 'petameter', 'picometer', 'terameter', 'yard', 'yoctometer', 'yottameter', 'zeptometer', 'zettameter'
+  - Units for `time` axes: 'attosecond', 'centisecond', 'day', 'decisecond', 'exasecond', 'femtosecond', 'gigasecond', 'hectosecond', 'hour', 'kilosecond', 'megasecond', 'microsecond', 'millisecond', 'minute', 'nanosecond', 'petasecond', 'picosecond', 'second', 'terasecond', 'yoctosecond', 'yottasecond', 'zeptosecond', 'zettasecond'
 - MAY contain the field `longName`.
   The value MUST be a string,
   and can provide a longer name or description of an axis and its properties.
@@ -260,6 +266,7 @@ The i-th axis has `"name": "dim_i"` (these are the same default names used by [x
 As with all coordinate systems, the dimension names must be unique and non-null.
 
 :::{dropdown} Example
+
 ```json
 {
   "arrayCoordinateSystem" : {
@@ -275,6 +282,7 @@ As with all coordinate systems, the dimension names must be unique and non-null.
 ```
 
 For example, if 0/zarr.json contains:
+
 ```jsonc
 {
     "zarr_format": 3,
@@ -291,7 +299,7 @@ Then `dim_0` has length 4, `dim_1` has length 3, and `dim_2` has length 5.
 The axes and their order align with the shape of the corresponding zarr array,
 and whose data depends on the byte order used to store chunks.
 As described in the [Zarr array metadata](https://zarr.readthedocs.io/en/stable/spec/v3.html#arrays),
-the last dimension of an array in "C" order are stored contiguously on disk or in-memory when directly loaded. 
+the last dimension of an array in "C" order are stored contiguously on disk or in-memory when directly loaded.
 
 The name and axes names MAY be customized by including a `arrayCoordinateSystem` field
 in the user-defined attributes of the array whose value is a coordinate system object.
@@ -342,6 +350,7 @@ series.ome.zarr               # One converted fileset from bioformats2raw
 ```
 
 #### bf2raw-attributes
+
 (bf2raw-attributes-md)=
 
 The OME-Zarr Metadata in the top-level `zarr.json` file must contain the `bioformats2raw.layout` key:
@@ -365,6 +374,7 @@ The OME-Zarr Metadata in the `zarr.json` file within the OME group may contain t
 ```
 
 #### Details
+
 (bf2raw-details)=
 
 Conforming groups:
@@ -394,6 +404,7 @@ Conforming readers:
 - MAY ignore other groups or arrays under the root of the hierarchy.
 
 ### "coordinateTransformations" metadata
+
 (coord-trafo-md)=
 
 `coordinateTransformations` describe the mapping between two coordinate systems (defined by [`coordinateSystems`](#coordinate-systems-md)).
@@ -432,7 +443,7 @@ The following transformations are supported:
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`, <br> `"input_axes": List[str]`, <br> `"output_axes": List[str]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
-(e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation). 
+(e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
 
 :::{dropdown} Example
 (spec:example:coordinate_transformation_scale)=
@@ -443,7 +454,7 @@ Implementations SHOULD prefer to store transformations as a sequence of less exp
     { "name": "in", "axes": [{"name": "j"}, {"name": "i"}] },
     { "name": "out", "axes": [{"name": "y"}, {"name": "x"}] }
   ],
-  "coordinateTransformations": [ 
+  "coordinateTransformations": [
     {
       "type": "scale",
       "scale": [2, 3.12],
@@ -466,6 +477,7 @@ i.e., the mapping from the first input axis to the first output axis is determin
 :::
 
 Conforming readers:
+
 - MUST parse `identity`, `scale`, `translation` transformations;
 - SHOULD parse `mapAxis`, `affine`, `rotation` transformations;
 - SHOULD display an informative warning if encountering transformations that cannot be parsed or displayed by a viewer;
@@ -473,7 +485,7 @@ Conforming readers:
 - SHOULD be able to apply transformations to images;
 
 Coordinate transformations can be stored in multiple places to reflect different usecases.
-     
+
 - Transformations in individual multiscale datasets represent a special case of transformations
   and are explained [below](#multiscales-md).
 - Additional transformations for single multiscale images MUST be stored under a field `coordinateTransformations`
@@ -482,7 +494,6 @@ Coordinate transformations can be stored in multiple places to reflect different
 - Transformations between two or more images MUST be stored in the attributes of a parent zarr group.
   For transformations that store data or parameters in a zarr array,
   those zarr arrays SHOULD be stored in a zarr group called `coordinateTransformations`.
-
 
 <pre>
 store.zarr                      # Root folder of the zarr store
@@ -571,6 +582,7 @@ The image at path `sampleA_instrument2` would have this as the first listed coor
     }
 ],
 ```
+
 :::
 
 #### Additional details
@@ -601,7 +613,7 @@ where a coordinate is the location/value of that point along its corresponding a
 The indexes of axis dimensions correspond to indexes into transformation parameter arrays.
 
 When rendering transformed images and interpolating,
-implementations may need the "inverse" transformation - 
+implementations may need the "inverse" transformation -
 from the output to the input coordinate system.
 Inverse transformations will not be explicitly specified
 when they can be computed in closed form from the forward transformation.
@@ -629,6 +641,7 @@ implementations MAY estimate an inverse,
 or MAY output a warning that the requested operation is unsupported.
 
 #### Matrix transformations
+
 (matrix-trafo-md)=
 
 Two transformation types ([affine](#affine-md) and [rotation](#rotation-md)) are parametrized by matrices.
@@ -674,15 +687,17 @@ because it is computed with the matrix-vector multiplication:
 :::
 
 #### Transformation types
+
 (trafo-types-md)=
 
-Input and output dimensionality may be determined by the coordinate system referred to by the `input` and `output` fields, respectively. 
+Input and output dimensionality may be determined by the coordinate system referred to by the `input` and `output` fields, respectively.
 If the value of `input` is a path to an array, its shape gives the input dimension,
 otherwise it is given by the length of `axes` for the coordinate system with the name of the `input`.
 If the value of `output` is an array, its shape gives the output dimension,
 otherwise it is given by the length of `axes` for the coordinate system with the name of the `output`.
 
 ##### identity
+
 (identity-md)=
 
 `identity` transformations map input coordinates to output coordinates without modification.
@@ -710,6 +725,7 @@ y = j
 :::
 
 ##### mapAxis
+
 (mapAxis-md)=
 
 `mapAxis` transformations describe axis permutations as a transpose vector of integers.
@@ -724,7 +740,6 @@ The value at position `i` in the array indicates which input axis becomes the `i
 
 The `input` and `output` fields MAY be omitted if wrapped in another transformation that provides `input`/`output`
 (e.g., [`sequence`](#sequence-md), [`inverseOf`](#inverseof-md), ['byDimension](#bydimension-md) or [`bijection`](#bijection-md)).
-
 
 :::{dropdown} Example 1
 :animate: fade-in
@@ -769,9 +784,11 @@ x = a
 y = b
 z = b
 ```
+
 :::
 
 ##### translation
+
 (translation-md)=
 
 `translation` transformations are special cases of affine transformations.
@@ -801,12 +818,14 @@ The array MUST have length `N`.
 defines the function:
 
 ```
-x = i + 9 
+x = i + 9
 y = j - 1.42
 ```
+
 :::
 
 ##### scale
+
 (scale-md)=
 
 `scale` transformations are special cases of affine transformations.
@@ -840,6 +859,7 @@ defines the function:
 x = 3.12 * i
 y = 2 * j
 ```
+
 i.e., the mapping from the first input axis to the first output axis is determined by the first scale parameter.
 
 :::
@@ -853,9 +873,11 @@ these axes are typically not transformed, but must be represented in the scale p
 ```{literalinclude} examples/transformations/scale_with_discrete.json
 :language: json
 ```
+
 :::
 
 ##### affine
+
 (affine-md)=
 
 `affine`s are [matrix transformations](#matrix-trafo-md) from N-dimensional inputs to M-dimensional outputs.
@@ -949,6 +971,7 @@ these axes are typically not transformed, but must be represented in the transfo
 ```
 
 ##### rotation
+
 (rotation-md)=
 
 `rotation`s are [matrix transformations](#matrix-trafo-md) that are special cases of affine transformations.
@@ -985,9 +1008,11 @@ defines the function:
 x = 0*i - 1*j
 y = 1*i + 0*j
 ```
+
 :::
 
 ##### inverseOf
+
 (inverseOf-md)=
 
 An `inverseOf` transformation contains another transformation (often non-linear),
@@ -1016,9 +1041,11 @@ a choice that many users and developers find intuitive.
 ```{literalinclude} examples/transformations/inverseOf.json
 :language: json
 ```
+
 :::
 
 ##### sequence
+
 (sequence-md)=
 
 A `sequence` transformation consists of an ordered array of coordinate transformations,
@@ -1070,6 +1097,7 @@ and is invertible.
 :::
 
 ##### coordinates and displacements
+
 (coordinates-displacements-md)=
 
 `coordinates` and `displacements` transformations store coordinates or displacements in an array
@@ -1088,14 +1116,14 @@ constrain the array size and the coordinate system metadata for the array (field
 The `input` and `output` fields MAY be omitted if wrapped in another transformation that provides `input`/`output`
 (e.g., [`sequence`](#sequence-md), [`inverseOf`](#inverseof-md), [`byDimension`](#bydimension-md) or [`bijection`](#bijection-md)).
 
-* If the input coordinate system has `N` axes,
+- If the input coordinate system has `N` axes,
   the array at location path MUST have `N+1` dimensions
-* The field coordinate system MUST contain an axis identical to every axis
+- The field coordinate system MUST contain an axis identical to every axis
   of its input coordinate system in the same order.
-* The field coordinate system MUST contain an axis with type `coordinate` or `displacement`, respectively,
+- The field coordinate system MUST contain an axis with type `coordinate` or `displacement`, respectively,
   for transformations of type `coordinates` or `displacements`.
-    * This SHOULD be the last axis (contiguous on disk when c-order).
-* If the output coordinate system has `M` axes,
+  - This SHOULD be the last axis (contiguous on disk when c-order).
+- If the output coordinate system has `M` axes,
   the length of the array along the `coordinate`/`displacement` dimension MUST be of length `M`.
 
 The `i`th value of the array along the `coordinate` or `displacement` axis refers to the coordinate or displacement
@@ -1103,7 +1131,7 @@ of the `i`th output axis. See the example below.
 
 `coordinates` and `displacements` transformations are not invertible in general,
 but implementations MAY approximate their inverses.
-Metadata for these coordinate transforms have the following fields: 
+Metadata for these coordinate transforms have the following fields:
 
 <dl>
   <dt><strong>path</strong></dt>
@@ -1120,33 +1148,33 @@ Metadata for these coordinate transforms have the following fields:
         </ul></dd>
 </dl>
 
-
 For both `coordinates` and `displacements`,
 the array data at referred to by `path` MUST define coordinate system
 and coordinate transform metadata:
 
-* Every axis name in the `coordinateTransform`'s `input`
+- Every axis name in the `coordinateTransform`'s `input`
   MUST appear in the coordinate system.
-* The array dimension corresponding to the `coordinate` or `displacement` axis
+- The array dimension corresponding to the `coordinate` or `displacement` axis
   MUST have length equal to the number of dimensions of the `coordinateTransform` `output`
-* If the input coordinate system `N` axes,
+- If the input coordinate system `N` axes,
   then the array data at `path` MUST have `(N + 1)` dimensions.
-* SHOULD have a `name` identical to the `name` of the corresponding `coordinateTransform`.
+- SHOULD have a `name` identical to the `name` of the corresponding `coordinateTransform`.
 
 For `coordinates`:
 
-* `coordinateSystem` metadata MUST have exactly one axis with `"type" : "coordinate"`
-* the shape of the array along the "coordinate" axis must be exactly `N`
+- `coordinateSystem` metadata MUST have exactly one axis with `"type" : "coordinate"`
+- the shape of the array along the "coordinate" axis must be exactly `N`
 
 For `displacements`:
 
-* `coordinateSystem` metadata MUST have exactly one axis with `"type" : "displacement"`
-* the shape of the array along the "displacement" axis must be exactly `N`
-* `input` and `output` MUST have an equal number of dimensions.
+- `coordinateSystem` metadata MUST have exactly one axis with `"type" : "displacement"`
+- the shape of the array along the "displacement" axis must be exactly `N`
+- `input` and `output` MUST have an equal number of dimensions.
 
 :::{dropdown} Example 1
 :animate: fade-in
 For example, in 1D:
+
 ```json
 {
     "name" : "a coordinate field transform",
@@ -1170,7 +1198,7 @@ Example metadata for the array data at path `coordinates` above:
         { "name": "i", "type": "space", "discrete": true },
         { "name": "c", "type": "coordinate", "discrete": true }
       ]
-    } 
+    }
   ],
   "coordinateTransformations" : [
     {
@@ -1184,16 +1212,18 @@ Example metadata for the array data at path `coordinates` above:
 If the array in `coordinates` contains the data: `[-9, 9, 0]`, then this metadata defines the function:
 
 ```
-x = 
+x =
     if ( i < 0.5 )                      -9
     else if ( i >= 0.5 and i < 1.5 )     9
     else if ( i >= 1.5 )                 0
 ```
+
 :::
 
 :::{dropdown} Example 2
 :animate: fade-in
 A 1D example displacement field:
+
 ```json
 {
   "name" : "a displacement field transform",
@@ -1217,7 +1247,7 @@ Example metadata for the array data at path `displacements` above:
         { "name": "x", "type": "space", "unit" : "nanometer" },
         { "name": "d", "type": "displacement", "discrete": true }
       ]
-    } 
+    }
   ],
   "coordinateTransformations" : [
     {
@@ -1284,6 +1314,7 @@ I.e. the y-displacement is first, because the y-axis is the first element of the
 :::
 
 ##### byDimension
+
 (byDimension-md)=
 
 `byDimension` transformations build a high dimensional transformation
@@ -1303,7 +1334,6 @@ The `input` and `output` fields MUST always be included for this transformations
         </dd>
 </dl>
 
-
 :::{dropdown} Example 1
 :animate: fade-in
 
@@ -1312,6 +1342,7 @@ A valid `byDimension` transformation:
 ```{literalinclude} examples/transformations/byDimension1.json
 :language: json
 ```
+
 :::
 
 :::{dropdown} Example 2
@@ -1322,6 +1353,7 @@ Another valid `byDimension` transformation:
 ```{literalinclude} examples/transformations/byDimension2.json
 :language: json
 ```
+
 :::
 
 :::{dropdown} Example 3
@@ -1352,6 +1384,7 @@ This transformation is invalid because the output axis `x` appears in more than 
 :::
 
 ##### bijection
+
 (bijection-md)=
 
 A bijection transformation is an invertible transformation in
@@ -1385,9 +1418,11 @@ the input and output of the `forward` and `inverse` transformations are understo
 ```{literalinclude} examples/transformations/bijection_verbose.json
 :language: json
 ```
+
 :::
 
 ### "multiscales" metadata
+
 (multiscales-md)=
 
 Metadata about an image can be found under the `multiscales` key in the group-level OME-Zarr Metadata.
@@ -1406,24 +1441,27 @@ It should be used for viewing and processing unless a use case dictates otherwis
 It will generally be a representation of the image in its native physical coordinate system.
 
 The following MUST hold for all coordinate systems inside multiscales metadata.
-The length of `axes` must be between 2 and 5
-and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
-The `axes` MUST contain 2 or 3 entries of `type:space`
-and MAY contain one additional entry of `type:time`
-and MAY contain one additional entry of `type:channel` or a null / custom type.
-In addition, the entries MUST be ordered by `type` where the `time` axis must come first (if present),
-followed by the  `channel` or custom axis (if present) and the axes of type `space`.
-If there are three spatial axes where two correspond to the image plane (`yx`)
-and images are stacked along the other (anisotropic) axis (`z`),
-the spatial axes SHOULD be ordered as `zyx`.
-Each `multiscales` object MUST contain the field `datasets`,
-which is an array of objects describing the arrays storing the individual resolution levels.
-Each object in `datasets` MUST contain the field `path`,
+The length of `axes` MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
+
+:::{hint}
+In previous versions of this specification, the count, order, and types of axes were constrained to:
+
+- optional `time` axis, conventionally called `t`
+- optional `channel` or custom-typed axis, conventionally called `c`
+- optional `space` axis, conventionally called `z`, conventionally the anisotropic slicing dimension
+- space axis, conventionally called `y`
+- space axis, conventionally called `x`
+
+These are no longer enforced, but are RECOMMENDED where the data's structure and usage allow.
+:::
+
+Each `multiscales` dictionary MUST contain the field `datasets`,
+which is a list of dictionaries describing the arrays storing the individual resolution levels.
+Each dictionary in `datasets` MUST contain the field `path`,
 whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
 The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
-Every Zarr array referred to by a `path` MUST have the same number of dimensions
-and MUST NOT have more than 5 dimensions.
-The number of dimensions and order MUST correspond to number and order of `axes`.
+Every Zarr array referred to by a `path` MUST have the same number of dimensions.
+The number and order of dimensions MUST correspond to number and order of `axes`.
 
 Each object in `datasets` MUST contain the field `coordinateTransformations`,
 whose value is an array of objects that define a transformation
@@ -1432,14 +1470,14 @@ that maps Zarr array coordinates for this resolution level to the "intrinsic" co
 The transformation is defined according to [transformations metadata](#trafo-types-md).
 The transformation MUST take as input points in the array coordinate system
 corresponding to the Zarr array at location `path`.
-The value of `input` MUST equal the value of `path`, 
+The value of `input` MUST equal the value of `path`,
 implementations should always treat the value of `input` as if it were equal to the value of `path`.
 The value of the transformation’s `output` MUST be the name of the "intrinsic" [coordinate system](#coordinate-systems-md).
 
 This transformation MUST be one of the following:
 
-* A single scale or identity transformation
-* A sequence transformation containing one scale and one translation transformation.
+- A single scale or identity transformation
+- A sequence transformation containing one scale and one translation transformation.
 
 In these cases, the scale transformation specifies the pixel size in physical units or time duration.
 If scaling information is not available or applicable for one of the axes,
@@ -1463,14 +1501,15 @@ which gives the type of downscaling method used to generate the multiscale image
 It SHOULD contain the field `metadata`,
 which contains a object with additional information about the downscaling method.
 
-
 :::{dropdown} Example
 :animate: fade-in
 
 A complete example of json-file for a 5D (TCZYX) multiscales with 3 resolution levels could look like this:
+
 ```{literalinclude} examples/multiscales_strict/multiscales_example.json
 :language: json
 ```
+
 :::
 
 If only one multiscale is provided, use it.
@@ -1489,6 +1528,7 @@ if not datasets:
 ```
 
 ### "omero" metadata (transitional)
+
 (omero-md)=
 
 [=Transitional=] information specific to the channels of an image and how to render it can be found under the `omero` key in the group-level metadata:
@@ -1534,6 +1574,7 @@ It MUST also contain the fields `start` and `end`,
 which are the start and end values of the window, respectively.
 
 ### "labels" metadata
+
 (labels-md)=
 
 In OME-Zarr, Zarr arrays representing pixel-annotation data are stored in a group called `labels`.
@@ -1557,6 +1598,7 @@ All label images SHOULD be listed within this metadata file.
 
 :::{dropdown} Example
 For example:
+
 ```json
 {
   "attributes": {
@@ -1569,6 +1611,7 @@ For example:
   }
 }
 ```
+
 :::
 
 The `zarr.json` file for the label image MUST implement the multiscales specification.
@@ -1601,21 +1644,22 @@ denoting arbitrary metadata associated with that label.
 Label-value objects within the `properties` array do not need to have the same keys.
 
 The value of the `source` key MUST be a JSON object containing information about the original image from which the label image derives.
-This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.  
+This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.
 The default value is `../../` since most labeled images are stored in a "labels" group that is nested within the original image group.
-
 
 :::{dropdown} Example
 Here is an example of a simple `image-label` object for a label image in which 0s and 1s represent intercellular and cellular space, respectively:
+
 ```{literalinclude} examples/label_strict/colors_properties.json
 :language: json
 ```
+
 In this case, the pixels consisting of a 0 in the Zarr array will be displayed as 50% blue and 50% opacity.
 Pixels with a 1 in the Zarr array, which correspond to cellular space, will be displayed as 50% green and 50% opacity.
 :::
 
-
 ### "plate" metadata
+
 (plate-md)=
 
 For high-content screening datasets,
@@ -1698,9 +1742,11 @@ containing one field of view per acquisition.
 ```{literalinclude} examples/plate_strict/plate_2wells.json
 :language: json
 ```
+
 :::
 
 ### "well" metadata
+
 (well-md)=
 
 For high-content screening datasets,
@@ -1733,9 +1779,11 @@ The first field is part of the first acquisition, and the second field is part o
 ```{literalinclude} examples/well_strict/well_2fields.json
 :language: json
 ```
+
 :::
 
 ## Specification naming style
+
 (naming-style)=
 
 Multi-word keys in this specification should use the `camelCase` style.
@@ -1743,6 +1791,7 @@ NB: some parts of the specification don't obey this convention as they were adde
 but they should be updated in due course.
 
 ## Implementations
+
 (implementations-md)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
