@@ -1746,3 +1746,12 @@ but they should be updated in due course.
 (implementations-md)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
+
+## Other resources
+
+```{toctree}
+:maxdepth: 1
+
+examples/index
+schemas/index
+```
