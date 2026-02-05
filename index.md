@@ -4,7 +4,7 @@ short_title: OME-Zarr
 ---
 
 # 🚧 Dev: 0.6.dev3 🚧
-(ngff-spec:spec:head)=
+(ngff-spec:spec:0.6.dev3)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
@@ -145,10 +145,10 @@ A well group SHOULD NOT be present if there are no images in the well.
 The "OME-Zarr Metadata" contains metadata keys as specified below for discovering certain types of data, especially images.
 
 The OME-Zarr Metadata is stored in the various `zarr.json` files throughout the above array hierarchy.
-In this file, the metadata is stored under the namespaced key `ome` in `attributes`.
-The version of the OME-Zarr Metadata is denoted as a string in the `version` attribute within the `ome` namespace.
-
 The OME-Zarr Metadata version MUST be consistent within a hierarchy.
+
+The group `attributes` MUST contain a key `ome`. The value of the `ome` key MUST be a JSON
+object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](ngff-spec:spec:0.6.dev3).
 
 ```jsonc
 {
@@ -1578,9 +1578,8 @@ In addition to the `multiscales` key, the OME-Zarr Metadata in this image-level 
 whose value is also a JSON object.
 The `image-label` object stores information about the display colors, source image,
 and optionally, further arbitrary properties of the label image.
-That `image-label` object SHOULD contain the following keys: first, a `colors` key,
+That `image-label` object SHOULD contain a `colors` key,
 whose value MUST be a JSON array describing color information for the unique label values.
-Second, a `version` key, whose value MUST be a string specifying the version of the OME-Zarr `image-label` schema.
 
 Conforming readers SHOULD display labels using the colors specified by the `colors` JSON array, as follows.
 This array contains one JSON object for each unique custom label.
@@ -1665,11 +1664,8 @@ and MUST NOT be a duplicate of any other `name` in the `rows` array.
 Care SHOULD be taken to avoid collisions on case-insensitive filesystems
 (e.g. avoid using both `Aa` and `aA`).
 
-The `plate` object MUST contain a `version` key
-whose value MUST be a string specifying the version of the plate specification.
-
-The `plate` object MUST contain a `wells` key
-whose value MUST be an array of JSON objects defining the wells of the plate.
+The `plate` dictionary MUST contain a `wells` key
+whose value MUST be a list of JSON objects defining the wells of the plate.
 Each well object MUST contain a `path` key
 whose value MUST be a string specifying the path to the well subgroup.
 The `path` MUST consist of a `name` in the `rows` array,
@@ -1714,9 +1710,6 @@ The `path` MUST contain only alphanumeric characters, MUST be case-sensitive, an
 If multiple acquisitions were performed in the plate,
 it MUST contain an `acquisition` key whose value MUST be an integer identifying the acquisition
 which MUST match one of the acquisition JSON objects defined in the [plate metadata](#plate-md).
-
-The `well` object SHOULD contain a `version` key
-whose value MUST be a string specifying the version of the well specification.
 
 :::{dropdown} Example
 For example the following JSON object defines a well with four fields of view.
