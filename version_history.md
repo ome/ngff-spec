@@ -12,12 +12,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Implemented feedback from Hackathon:
+  - BREAKING CHANGE: Renamed top-level group for transformations to "Scene"
+  - BREAKING CHANGE: Transformations in scene metadata must be object with fields "name" and "path"
+  - BREAKING CHANGE: Made syntax of `mapAxis` and `byDimension` transforms consistent with other transforms
+  - BREAKING CHANGE: Zarr parameter storage no longer allowed for scale/translation 
+  - For detailed set of changes see [complete overview](https://ngff.openmicroscopy.org/rfc/5/responses/2/index.html)
 - Updated version keys from `0.6.dev2` to `0.6.dev3` everywhere
 - style: Homogeneous use of backticks in spec document
 
 ### Removed
 
-- Removed `version` field from `multiscales` metadata in the image schema (`schemas/image.schema`) since it is already required at `ome > version`.
+- BREAKING CHANGE: Removed `inverseOf` transformation
+- Removed `version` field from `multiscales` metadata in the image schema (`schemas/image.schema`) since it is already required at `ome > version`
 - Removed `version` field from `plate`, `well` and `labels` metadata in the spec document since it is already required at `ome > version`.
 
 ## [0.6.dev2] - 2025-12-02
