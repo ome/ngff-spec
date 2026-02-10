@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6.dev2",
+    "version": "0.6.dev3",
     "@id": "top",
     "@type": "ngff:Image",
     "multiscales": [

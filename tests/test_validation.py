@@ -21,10 +21,10 @@ for schema_filename in glob.glob("schemas/*"):
             schema_store[schema["$id"]] = schema
 
 GENERIC_SCHEMA = schema_store[
-    "https://ngff.openmicroscopy.org/0.6.dev2/schemas/ome_zarr.schema"
+    "https://ngff.openmicroscopy.org/0.6.dev3/schemas/ome_zarr.schema"
 ]
 GENERIC_STRICT_SCHEMA = schema_store[
-    "https://ngff.openmicroscopy.org/0.6.dev2/schemas/strict_ome_zarr.schema"
+    "https://ngff.openmicroscopy.org/0.6.dev3/schemas/strict_ome_zarr.schema"
 ]
 
 
