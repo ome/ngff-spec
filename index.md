@@ -1533,8 +1533,8 @@ Each object in `channels` MAY contain the following fields:
 - `window` (dictionary) Values describing the windowing of the channel. All values are optional (MAY).
   The `min` and `max` values may be used by viewers as the range of channel sliders.
   All values can be floating-point numbers, but will likely be integers for integer pixel types.
-  - `min` (float) Should correspond to the minimum pixel intensity for that channel.
-  - `max` (float) Should correspond to the maximum pixel intensity for that channel.
+  - `min` (float) Default setting for lower bound for values of `start` field.
+  - `max` (float) Default setting for upper bound for values of `end` field.
   - `start` (float) Start of the rendering window.
   - `end` (float) End of the rendering window.
 - `inverted` (boolean) If true, the rendering of darkest to brightest pixels should be inverted.
