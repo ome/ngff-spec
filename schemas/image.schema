@@ -137,9 +137,7 @@
                 },
                 "required": [
                   "start",
-                  "min",
-                  "end",
-                  "max"
+                  "end"
                 ]
               },
               "label": {
@@ -152,6 +150,9 @@
                 "type": "string"
               },
               "active": {
+                "type": "boolean"
+              },
+              "inverted": {
                 "type": "boolean"
               }
             }

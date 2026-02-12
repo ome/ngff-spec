@@ -1530,11 +1530,13 @@ Each object in `channels` MAY contain the following fields:
 - `color` (string) String of 6 hexadecimal digits specifying the color of the channel in RGB format.
 - `label` (string) Channel name.
 - `active` (boolean) Indicates whether the channel should be displayed.
-- `window` (dictionary) Values describing the windowing of the channel. All values are optional (MAY).
-  The `min` and `max` values may be used by viewers as the range of channel sliders.
+- `window` (dictionary) Values describing the windowing of the channel.
+  If provided, `start` and `end` values MUST be specified.
   All values can be floating-point numbers, but will likely be integers for integer pixel types.
   - `min` (float) Default setting for lower bound for values of `start` field.
+    MAY be used by viewers as the lower range of channel sliders.
   - `max` (float) Default setting for upper bound for values of `end` field.
+    MAY be used by viewers as the upper range of channel sliders.
   - `start` (float) Start of the rendering window.
   - `end` (float) End of the rendering window.
 - `inverted` (boolean) If true, the rendering of darkest to brightest pixels should be inverted.
