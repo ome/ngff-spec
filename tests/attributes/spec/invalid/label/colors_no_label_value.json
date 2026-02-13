@@ -1,0 +1,24 @@
+{
+  "ome": {
+    "version": "0.6.dev3",
+    "image-label": {
+      "colors": [
+        {
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/label.schema"
+    },
+    "description": "Tests for the image-label JSON schema: ",
+    "valid": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "well": {
+    "images": [
+      {
+        "path": "0"
+      },
+      {
+        "path": "0"
+      }
+    ]
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/well.schema"
+    },
+    "description": "Tests for the well JSON schema: ",
+    "valid": false
+  }
+}

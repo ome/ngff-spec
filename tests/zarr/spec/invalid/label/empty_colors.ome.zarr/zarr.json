@@ -1,0 +1,19 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev3",
+      "image-label": {
+        "colors": []
+      }
+    },
+    "_conformance": {
+      "schema": {
+        "id": "schemas/label.schema"
+      },
+      "description": "Tests for the image-label JSON schema: ",
+      "valid": false
+    }
+  }
+}

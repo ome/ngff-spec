@@ -1,0 +1,12 @@
+{
+  "well": {
+    "images": []
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/well.schema"
+    },
+    "description": "Tests for the well JSON schema: ",
+    "valid": false
+  }
+}

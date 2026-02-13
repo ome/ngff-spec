@@ -1,0 +1,72 @@
+{
+  "multiscales": [
+    {
+      "version": "0.6.dev3",
+      "name": "example",
+      "coordinateSystems" : [
+        {
+          "name" : "world",
+          "axes": {
+            "t": {"type": "time", "unit": "millisecond"},
+            "c": {"type": "channel"},
+            "z": {"type": "space", "unit": "micrometer"},
+            "y": {"type": "space", "unit": "micrometer"},
+            "x": {"type": "space", "unit": "micrometer"}
+          }
+        },
+        {
+          "name" : "intrinsic",
+          "axes": [
+            {"name": "t", "type": "time", "unit": "millisecond"},
+            {"name": "c", "type": "channel"},
+            {"name": "z", "type": "space", "unit": "micrometer"},
+            {"name": "y", "type": "space", "unit": "micrometer"},
+            {"name": "x", "type": "space", "unit": "micrometer"}
+          ]
+        }
+      ],
+      "datasets": [
+        {
+          "path": "s0",
+          // the transformation of other arrays are
+          // defined relative to this, the highest resolution, array
+          "coordinateTransformations": [{
+            "type": "scale",
+            "scale": [1, 1, 1, 1, 1],
+            "input": "s0",
+            "output": "intrinsic"
+          }]
+        },
+        {
+          "path": "1",
+          "coordinateTransformations": [{
+            // the second scale level (downscaled by a factor of 2 relative to "0" in zyx)
+            "type": "scale",
+            "scale": [1, 1, 2, 2, 2],
+            "input" : "/1",
+            "output" : "array_0"
+          }]
+        },
+        {
+          "path": "2",
+          "coordinateTransformations": [{
+            // the third scale level (downscaled by a factor of 4 relative to "0" in zyx)
+            "type": "scale",
+            "scale": [1, 1, 4, 4, 4],
+            "input" : "/2",
+            "output" : "array_0"
+          }]
+        }
+      ],
+      "coordinateTransformations": [
+        {
+          "name": "additional_translation",
+          "type": "translation",
+          "translation": [0, 0, 10, 20, 30],
+          "input": "intrinsic",
+          "output": "world"
+        }
+      ]
+    }
+  ]
+}
