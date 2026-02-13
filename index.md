@@ -148,7 +148,7 @@ The OME-Zarr Metadata is stored in the various `zarr.json` files throughout the 
 The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 
 The group `attributes` MUST contain a key `ome`. The value of the `ome` key MUST be a JSON
-object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](ngff-spec:spec:0.6.dev3).
+object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](#ngff-spec:spec:0.6.dev3).
 
 ```jsonc
 {
@@ -509,6 +509,7 @@ store.zarr                      # Root folder of the zarr store
 
 :::{dropdown} Example
 (spec:example:coordinate_transformation)=
+
 Two instruments simultaneously image the same sample from two different angles,
 and the 3D data from both instruments are calibrated to "micrometer" units.
 An analysis of sample A requires measurements from images taken from both instruments at certain points in space.
@@ -694,7 +695,6 @@ The `input` and `output` fields MAY be omitted if wrapped in another transformat
 (e.g., [`sequence`](#sequence-md), [`inverseOf`](#inverseof-md), ['byDimension](#bydimension-md) or [`bijection`](#bijection-md)).
 
 :::{dropdown} Example
-:animate: fade-in
 
 ```{literalinclude} examples/transformations/identity.json
 :language: json
@@ -727,7 +727,6 @@ The `input` and `output` fields MAY be omitted if wrapped in another transformat
 
 
 :::{dropdown} Example 1
-:animate: fade-in
 
 ```{literalinclude} examples/transformations/mapAxis1.json
 :language: json
@@ -750,7 +749,6 @@ y = i
 :::
 
 :::{dropdown} Example 2
-:animate: fade-in
 
 ```{literalinclude} examples/transformations/mapAxis2.json
 :language: json
@@ -792,7 +790,6 @@ The array at this path MUST be 1D, and its length MUST be `N`.
 The array MUST have length `N`.
 
 :::{dropdown} Example
-:animate: fade-in
 
 ```{literalinclude} examples/transformations/translation.json
 :language: json
@@ -828,7 +825,6 @@ The array at this path MUST be 1D, and its length MUST be `N`.
 The array MUST have length `N`.
 
 :::{dropdown} Example 1
-:animate: fade-in
 
 ```{literalinclude} examples/transformations/scale.json
 :language: json
@@ -845,7 +841,6 @@ i.e., the mapping from the first input axis to the first output axis is determin
 :::
 
 :::{dropdown} Example 2
-:animate: fade-in
 
 If the data contains discrete axes (e.g., channels),
 these axes are typically not transformed, but must be represented in the scale parameters.
@@ -878,7 +873,7 @@ The matrix MUST be stored as 2D nested array (an array of arrays of numbers)
 where the outer array MUST be length `M` and the inner arrays MUST be length `N+1`.
 
 :::{dropdown} Example 1
-:animate: fade-in
+
 A 2D-2D example:
 
 ```{literalinclude} examples/transformations/affine2d2d.json
@@ -905,7 +900,7 @@ where the last row `[0 0 1]` is omitted in the JSON representation.
 :::
 
 :::{dropdown} Example 2
-:animate: fade-in
+
 An example with two dimensional inputs and three dimensional outputs.
 The affine transformation adds a translation by 1 along the new z-axis.
 
@@ -939,7 +934,6 @@ where the last row `[0 0 1]` is omitted in the JSON representation.
 :::
 
 :::{dropdown} Example 3
-:animate: fade-in
 
 If the image data contains discrete axes (e.g., channels),
 these axes are typically not transformed, but must be represented in the transformation matrix.
@@ -972,7 +966,7 @@ The matrix MUST be stored as a 2D nested array (an array of arrays of numbers) w
 and the inner arrays MUST be length `N`.
 
 :::{dropdown} Example
-:animate: fade-in
+
 A 2D example
 
 ```{literalinclude} examples/transformations/rotation.json
@@ -1011,7 +1005,7 @@ a choice that many users and developers find intuitive.
 ```
 
 :::{dropdown} Example
-:animate: fade-in
+
 
 ```{literalinclude} examples/transformations/inverseOf.json
 :language: json
@@ -1051,7 +1045,7 @@ f2(f1(f0(x)))
 :::
 
 :::{dropdown} Example
-:animate: fade-in
+
 
 This sequence:
 
@@ -1145,7 +1139,7 @@ For `displacements`:
 * `input` and `output` MUST have an equal number of dimensions.
 
 :::{dropdown} Example 1
-:animate: fade-in
+
 For example, in 1D:
 ```json
 {
@@ -1192,7 +1186,7 @@ x =
 :::
 
 :::{dropdown} Example 2
-:animate: fade-in
+
 A 1D example displacement field:
 ```json
 {
@@ -1240,7 +1234,6 @@ hence the output is `1.0 + (-0.5) = 0.5`.
 :::
 
 :::{dropdown} Example 3
-:animate: fade-in
 
 In this example, the array located at `displacementField` MUST have three dimensions.
 One dimension MUST correspond to an axis with `type : displacement` (in this example, the last dimension),
@@ -1305,7 +1298,7 @@ The `input` and `output` fields MUST always be included for this transformations
 
 
 :::{dropdown} Example 1
-:animate: fade-in
+
 
 A valid `byDimension` transformation:
 
@@ -1315,7 +1308,6 @@ A valid `byDimension` transformation:
 :::
 
 :::{dropdown} Example 2
-:animate: fade-in
 
 Another valid `byDimension` transformation:
 
@@ -1325,7 +1317,6 @@ Another valid `byDimension` transformation:
 :::
 
 :::{dropdown} Example 3
-:animate: fade-in
 
 This is an **invalid** `byDimension` transform:
 
@@ -1340,7 +1331,6 @@ Second, the `x` axis of the `output` does not appear in the `output` of any chil
 :::
 
 :::{dropdown} Example 4
-:animate: fade-in
 
 Another **invalid** `byDimension` transform:
 
@@ -1374,7 +1364,6 @@ so bijection transforms should only be expected to be correct / consistent for p
 It may not be correct for any point of appropriate dimensionality.
 
 :::{dropdown} Example
-:animate: fade-in
 
 ```{literalinclude} examples/transformations/bijection.json
 :language: json
@@ -1465,7 +1454,6 @@ which contains a object with additional information about the downscaling method
 
 
 :::{dropdown} Example
-:animate: fade-in
 
 A complete example of json-file for a 5D (TCZYX) multiscales with 3 resolution levels could look like this:
 ```{literalinclude} examples/multiscales_strict/multiscales_example.json
