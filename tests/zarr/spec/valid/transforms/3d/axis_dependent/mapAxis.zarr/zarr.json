@@ -1,0 +1,81 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev3",
+      "multiscales": [
+        {
+          "name": "multiscales",
+          "coordinateSystems": [
+            {
+              "name": "physical",
+              "axes": [
+                {
+                  "type": "space",
+                  "name": "z",
+                  "unit": "micrometer",
+                  "discrete": false
+                },
+                {
+                  "type": "space",
+                  "name": "y",
+                  "unit": "micrometer",
+                  "discrete": false
+                },
+                {
+                  "type": "space",
+                  "name": "x",
+                  "unit": "micrometer",
+                  "discrete": false
+                }
+              ]
+            },
+            {
+              "name": "array",
+              "axes": [
+                {
+                  "type": "array",
+                  "name": "dim_0",
+                  "discrete": true
+                },
+                {
+                  "type": "array",
+                  "name": "dim_1",
+                  "discrete": true
+                },
+                {
+                  "type": "array",
+                  "name": "dim_2",
+                  "discrete": true
+                }
+              ]
+            }
+          ],
+          "datasets": [
+            {
+              "path": "0",
+              "coordinateTransformations": [
+                {
+                  "type": "identity",
+                  "output": "array",
+                  "input": "0"
+                }
+              ]
+
+            }
+          ],
+          "coordinateTransformations": [
+            {
+              "type": "mapAxis",
+              "output": "physical",
+              "input": "array",
+              "name": "transform-name",
+              "mapAxis": [2, 1, 0]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

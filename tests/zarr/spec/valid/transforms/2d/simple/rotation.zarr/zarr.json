@@ -1,0 +1,76 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev3",
+      "multiscales": [
+        {
+          "name": "multiscales",
+          "coordinateSystems": [
+            {
+              "name": "rotated",
+              "axes": [
+                {
+                  "type": "space",
+                  "name": "y",
+                  "unit": "micrometer",
+                  "discrete": false
+                },
+                {
+                  "type": "space",
+                  "name": "x",
+                  "unit": "micrometer",
+                  "discrete": false
+                }
+              ]
+            },
+            {
+              "name": "physical",
+              "axes": [
+                {
+                  "type": "space",
+                  "name": "y",
+                  "unit": "micrometer",
+                  "discrete": false
+                },
+                {
+                  "type": "space",
+                  "name": "x",
+                  "unit": "micrometer",
+                  "discrete": false
+                }
+              ]
+            }
+          ],
+          "datasets": [
+            {
+              "path": "array",
+              "coordinateTransformations": [
+                {
+                  "type": "scale",
+                  "output": "physical",
+                  "input": "array",
+                  "scale": [1, 1],
+                  "name": "array to physical"
+                }
+              ]
+            }
+          ],
+          "coordinateTransformations":[
+            {
+              "name": "rotation",
+              "input": "physical",
+              "output": "rotated",
+              "type": "rotation",
+              "rotation": [
+                [0, 1],
+                [-1, 0]
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

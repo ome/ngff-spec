@@ -1,0 +1,72 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev2",
+      "multiscales": [
+        {
+          "name": "multiscales",
+          "coordinateSystems": [
+            {
+              "name": "physical",
+              "axes": [
+                {
+                  "type": "space",
+                  "name": "y",
+                  "unit": "micrometer",
+                  "discrete": false
+                },
+                {
+                  "type": "space",
+                  "name": "x",
+                  "unit": "micrometer",
+                  "discrete": false
+                }
+              ]
+            },
+            {
+              "name": "scaled",
+              "axes": [
+                {
+                  "type": "array",
+                  "name": "y",
+                  "discrete": false
+                },
+                {
+                  "type": "array",
+                  "name": "x",
+                  "discrete": false
+                }
+              ]
+            }
+          ],
+          "datasets": [
+            {
+              "path": "0",
+              "coordinateTransformations": [
+                {
+                  "type": "scale",
+                  "output": "scaled",
+                  "input": "0",
+                  "scale": [1, 1],
+                  "name": "tform-name"
+                }
+              ]
+            }
+          ],
+          "coordinateTransformations": [
+            {
+              "type": "coordinates",
+              "output": "scaled",
+              "input": "physical",
+              "path": "coordinatesField",
+              "interpolation": "linear",
+              "name": "inverse-cfield"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
