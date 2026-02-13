@@ -2,7 +2,302 @@ version: 1
 project:
   title: Next-generation file format specification
   authors:
-    - name: NGFF-community
+
+    # A
+    - name: Chris Allan
+      affiliation: Glencoe
+      github: chris-allan
+    # B
+    - name: Chris Barnes
+      github: clbarnes
+      affiliation: Gerbi
+    - name: Davis Bennett
+      github: d-v-b
+    - name: Sébastien Besson
+      orcid: "https://orcid.org/0000-0001-8783-1429"
+      github: sbesson
+      affiliation: Glencoe
+    - name: John Bogovic
+      github: bogovicj
+      affiliation: HHMI
+    - name: Jean-Marie Burel
+      orcid: "https://orcid.org/0000-0002-1789-1861"
+      affiliation: Dundee
+      github: jburel
+
+    # C
+    - name: Forest Collmann
+      github: fcollman
+      affiliation: allenbrain
+    - name: Tommaso Comparin
+      github: tcompa
+
+    # D
+    - name: Lachlan Deakin
+      github: lDeakin
+      affiliation: ANU
+    - name: Gideon Dunster
+      affiliation: allencell
+
+    # E
+    - name: Jan Eglinger
+      github: imagejan
+      affiliation: FMI
+
+    # F
+    - name: David Feng
+      github: dyf
+      affiliation: allenneural
+
+    # G
+    - name: Nathalie Gaudreault
+      affiliation: allencell
+    - name: Guillaume Gay
+      github: glyg
+      orcid: https://orcid.org/0000-0002-5444-5246
+      affiliation: francebioimaging
+    - name: Ilan Gold
+      github: ilan-gold
+    - name: Xiao Gui
+      github: xgui3783
+    
+    # H
+    - name: Yaroslav O. Halchenko
+      github: yarikoptic
+      affiliation: dartmouth
+    - name: Matthew Hartley
+      github: matthewh-ebi
+      orcid: https://orcid.org/0000-0001-6178-2884
+      affiliation: EMBL-EBI
+    - name: Julian Hn
+      github: julianhn
+
+    # I
+    - name: Michael Innerberger
+      github: minnerbe
+      affiliations: HHMI
+      orcid: 0000-0002-7001-8682
+
+    # K
+    - name: Mark Kittisopikul
+      github: mkitti
+      affiliation: HHMI
+      orcid: 0000-0002-9558-6248
+    
+    # L
+    - name: Talley Lambert
+      github: tlambert03
+      affiliation: HMS
+      orcid: 0000-0002-2409-0181
+    - name: Melissa Linkert
+      github: melissalinkert
+      affiliation: Glencoe
+    - name: Ziwen Liu
+      github: ziw-liu
+      orcid: 0000-0001-7843-1992
+    - name: Joel Lüthi
+      github: jluethi
+      affiliation: biovision
+      orcid: 0000-0003-3023-170X
+
+    # M
+    - name: Jeremy Maitin-Shepard
+      github: jbms
+      affiliation: google
+      orcid: 0000-0001-8453-7961
+    - name: Luca Marconato
+      github: LucaMarconato
+      orcid: 0000-0003-3198-1326
+      affiliation: EMBL
+    - name: Matt McCormick
+      orcid: 0000-0001-9475-3756
+      github: thewtex
+      affiliation: fideus
+    - name: Josh Moore
+      github: joshmoore
+      affiliation: Gerbi
+      orcid: 0000-0003-4028-811X
+    - name: William Moore
+      github: will-moore
+      affiliation: Dundee
+      orcid: 0000-0002-7264-8338
+
+    # N
+    - name: Juan Nunez-Iglesias
+      github: jni
+      orcid: 0000-0002-7239-5828
+      affiliation: Monash
+    
+    # O/Ö
+    - name: Bugra Özdemir
+      github: bugraoezdemir
+    
+    # P
+    - name: Giovanni Palla
+      github: giovp
+      orcid: 0000-0002-8004-4462
+      affiliation: HH_munich
+    - name: Constantin Pape
+      github: constantinpape
+      orcid: 0000-0001-6562-7187
+      affiliation: universität_göttingen
+    - name: Eric Perlman
+      github: perlman
+      orcid: 0000-0001-5542-1302
+      affiliation: yikes
+      url: https://www.yikes.com/
+    
+    # R
+    - name: Sebastian Rhode
+      github: sebi06
+      affiliation: Zeiss
+    - name: Norman Rzepka
+      github: normanrz
+      orcid: "0000-0002-8168-7929"
+
+    # S
+    - name: Stephan Saalfeld
+      github: axtimwalde
+      affiliation: HHMI
+      orcid: "0000-0002-4106-1761"
+
+    - name: Virginia Scarlett
+      github: virginiascarlett
+      orcid: "0000-0002-4156-2849"
+    - name: Doug Shepherd
+      github: dpshepherd
+      affiliation: ASU
+    - name: Johannes Soltwedel
+      github: jo-mueller
+      affiliation: Gerbi
+      orcid: "0000-0003-1273-2412"
+    - name: David Stansby
+      github: dstansby
+      affiliation: UCL
+      orcid: "0000-0002-1365-1908"
+    - name: Jason R. Swedlow
+      github: jrswedlow
+      orcid: "0000-0002-2198-1958"
+
+    # T
+    - name: Christian Tischer
+      github: tischi
+      affiliation: EMBL
+      orcid: "0000-0003-4105-1990"
+    - name: Dan Toloudis
+      github: toloudis
+      orcid: "https://orcid.org/0000-0003-2620-1233"
+    
+    # U
+    - name: Virginie Uhlmann
+      github: vuhlmann
+      affiliation: biovision
+      orcid: "0000-0002-2859-9241"
+
+    # V
+    - name: Wouter-Michiel Vierdag
+      github: melonora
+      orcid: "0000-0003-1666-5421"
+    - name: Isaac Virshup
+      github: ivirshup
+      orcid: "0000-0002-1710-8945"
+    
+    # W
+    - name: Alan Watson
+      github: alanmwatson
+    - name: Jonas Windhager
+      github: jwindhager
+      orcid: "0000-0002-2111-5291"
+      affiliation: uppsala
+
+    # Y
+    - name: Kevin Yamauchi
+      github: kevinyamauchi
+      orcid: "https://orcid.org/0000-0002-7818-1388"
+      affiliation: ETH
+
+    # Z
+    - name: Yurii Zubov
+      github: yuriyzubov
+      affiliation: HHMI
+    - name: Dženan Zukić
+      github: dzenanz
+
+  affiliations:
+    - id: allenbrain
+      institution: "Allen Institute for Brain Science"
+      ror: "https://ror.org/00dcv1019"
+    - id: allenneural
+      institution: "Allen Institute for Neural Dynamics"
+      ror: "https://ror.org/04szwah67"
+    - id: allencell
+      institution: "Allen Institute for Cell Science"
+      ror: "https://ror.org/05kg6bp11"
+    - id: ASU
+      institution: "Arizona State University"
+      ror: "https://ror.org/03efmqc40"
+    - id: ANU
+      institution: "Australian National University"
+      ror: "https://ror.org/019wvm592"
+    - id: biovision
+      institution: "BioVisionCenter, University of Zurich"
+    - id: Zeiss
+      institution: "Carl Zeiss Microscopy GmbH"
+    - id: dartmouth
+      institution: "Dartmouth College"
+      ror: "https://ror.org/049s0rh22"
+    - id: EMBL
+      institution: "European Molecular Biology Laboratory (EMBL)"
+      ror: "https://ror.org/03mstc592"
+    - id: EMBL-EBI
+      institution: "European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI)"
+      ror: "https://ror.org/02catss52"
+    - id: ETH
+      institution: "ETH Zurich"
+      ror: "https://ror.org/05a28rw58"
+    - id: fideus
+      institution: Fideus Labs
+      url: https://fideus.io
+    - id: FMI
+      institution: "Friedrich Miescher Institute for Biomedical Research"
+      ror: "https://ror.org/01bmjkv45"
+    - id: francebioimaging
+      institution: "France BioImaging"
+      ror: "https://ror.org/01y7vt929"
+    - id: Gerbi
+      institution: "German Bioimaging - Society for Microscopy and Image Analysis e.V."
+      ror: "https://ror.org/05tpnw772"
+    - id: Glencoe
+      institution: "Glencoe Software, Inc."
+    - id: google
+      institution: "Google"
+      ror: "https://ror.org/00njsd438"
+    - id: HMS
+      institution: "Harvard Medical School"
+    - id: HHMI
+      institution: "Howard Hughes Medical Institute, Janelia Research Campus"
+      ror: "https://ror.org/006w34k90"
+    - id: HH_munich
+      institution: "Helmholtz Zentrum München"
+      ror: "https://ror.org/01y9bpm73"
+    - id: Monash
+      institution: "Monash Medical Centre"
+      ror: "https://ror.org/036s9kg65"
+    - id: UCL
+      institution: "University College London"
+      ror: "https://ror.org/02jx3x895"
+    - id: Dundee
+      institution: "University of Dundee"
+      ror: "https://ror.org/03h2bxq36"
+    - id: universität_göttingen
+      institution: "University of Göttingen"
+      ror: "https://ror.org/01y9bpm73"
+    - id: uppsala
+      institution: "Uppsala University"
+      ror: "https://ror.org/048a87296"
+    - id: yikes
+      institution: "Yikes, LLC."
+
   github: ome/ngff-spec
   bibliography:
     - references.bib

@@ -10,6 +10,7 @@ dependencies = [
     "jupyter-book==2.0.0b3",
     "jsonschema_markdown",
     "mystmd==1.6.3",
+    "tomli",
 ]
 
 [project.optional-dependencies]
@@ -17,6 +18,9 @@ testing = [
     "tox",
     "pytest",  # https://docs.pytest.org/en/latest/contents.html
 ]
+
+[tool.codespell]
+ignore-words-list = "Comparin"
 
 [tool.hatch.version]
 path = "_version.py"
