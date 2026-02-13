@@ -6,6 +6,7 @@ project:
     # A
     - name: Chris Allan
       affiliation: Glencoe
+      github: chris-allan
     # B
     - name: Chris Barnes
       github: clbarnes
@@ -36,6 +37,7 @@ project:
       github: lDeakin
       affiliation: ANU
     - name: Gideon Dunster
+      affiliation: allencell
 
     # E
     - name: Jan Eglinger
@@ -49,8 +51,11 @@ project:
 
     # G
     - name: Nathalie Gaudreault
+      affiliation: allencell
     - name: Guillaume Gay
       github: glyg
+      orcid: https://orcid.org/0000-0002-5444-5246
+      affiliation: francebioimaging
     - name: Ilan Gold
       github: ilan-gold
     - name: Xiao Gui
@@ -62,6 +67,7 @@ project:
       affiliation: dartmouth
     - name: Matthew Hartley
       github: matthewh-ebi
+      orcid: https://orcid.org/0000-0001-6178-2884
       affiliation: EMBL-EBI
     - name: Julian Hn
       github: julianhn
@@ -70,44 +76,56 @@ project:
     - name: Michael Innerberger
       github: minnerbe
       affiliations: HHMI
+      orcid: 0000-0002-7001-8682
 
     # K
     - name: Mark Kittisopikul
       github: mkitti
       affiliation: HHMI
+      orcid: 0000-0002-9558-6248
     
     # L
     - name: Talley Lambert
       github: tlambert03
       affiliation: HMS
+      orcid: 0000-0002-2409-0181
     - name: Melissa Linkert
       github: melissalinkert
       affiliation: Glencoe
     - name: Ziwen Liu
       github: ziw-liu
+      orcid: 0000-0001-7843-1992
     - name: Joel Lüthi
       github: jluethi
       affiliation: biovision
+      orcid: 0000-0003-3023-170X
 
     # M
     - name: Jeremy Maitin-Shepard
       github: jbms
       affiliation: google
+      orcid: 0000-0001-8453-7961
     - name: Luca Marconato
       github: LucaMarconato
+      orcid: 0000-0003-3198-1326
       affiliation: EMBL
     - name: Matt McCormick
+      orcid: 0000-0001-9475-3756
       github: thewtex
+      affiliation: fideus
     - name: Josh Moore
       github: joshmoore
       affiliation: Gerbi
+      orcid: 0000-0003-4028-811X
     - name: William Moore
       github: will-moore
       affiliation: Dundee
+      orcid: 0000-0002-7264-8338
 
     # N
     - name: Juan Nunez-Iglesias
       github: jni
+      orcid: 0000-0002-7239-5828
       affiliation: Monash
     
     # O/Ö
@@ -117,13 +135,17 @@ project:
     # P
     - name: Giovanni Palla
       github: giovp
+      orcid: 0000-0002-8004-4462
+      affiliation: HH_munich
     - name: Constantin Pape
       github: constantinpape
-      orcid: "0000-0001-6562-7187"
+      orcid: 0000-0001-6562-7187
       affiliation: universität_göttingen
     - name: Eric Perlman
       github: perlman
-      orcid: "0000-0001-5542-1302"
+      orcid: 0000-0001-5542-1302
+      affiliation: yikes
+      url: https://www.yikes.com/
     
     # R
     - name: Sebastian Rhode
@@ -208,6 +230,9 @@ project:
     - id: allenneural
       institution: "Allen Institute for Neural Dynamics"
       ror: "https://ror.org/04szwah67"
+    - id: allencell
+      institution: "Allen Institute for Cell Science"
+      ror: "https://ror.org/05kg6bp11"
     - id: ASU
       institution: "Arizona State University"
       ror: "https://ror.org/03efmqc40"
@@ -230,9 +255,15 @@ project:
     - id: ETH
       institution: "ETH Zurich"
       ror: "https://ror.org/05a28rw58"
+    - id: fideus
+      institution: Fideus Labs
+      url: https://fideus.io
     - id: FMI
       institution: "Friedrich Miescher Institute for Biomedical Research"
       ror: "https://ror.org/01bmjkv45"
+    - id: francebioimaging
+      institution: "France BioImaging"
+      ror: "https://ror.org/01y7vt929"
     - id: Gerbi
       institution: "German Bioimaging - Society for Microscopy and Image Analysis e.V."
       ror: "https://ror.org/05tpnw772"
@@ -243,9 +274,12 @@ project:
       ror: "https://ror.org/00njsd438"
     - id: HMS
       institution: "Harvard Medical School"
-    - id: "HHMI"
+    - id: HHMI
       institution: "Howard Hughes Medical Institute, Janelia Research Campus"
       ror: "https://ror.org/006w34k90"
+    - id: HH_munich
+      institution: "Helmholtz Zentrum München"
+      ror: "https://ror.org/01y9bpm73"
     - id: Monash
       institution: "Monash Medical Centre"
       ror: "https://ror.org/036s9kg65"
@@ -261,6 +295,8 @@ project:
     - id: uppsala
       institution: "Uppsala University"
       ror: "https://ror.org/048a87296"
+    - id: yikes
+      institution: "Yikes, LLC."
 
   github: ome/ngff-spec
   bibliography:
