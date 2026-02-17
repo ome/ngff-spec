@@ -1574,10 +1574,11 @@ For example:
 The `zarr.json` file for the label image MUST implement the multiscales specification.
 Within the `multiscales` object, the JSON array associated with the `datasets` key MUST have the same number of entries (scale levels) as the original unlabeled image.
 
-In addition to the `multiscales` key, the OME-Zarr Metadata in this image-level `zarr.json` file SHOULD contain another key, `image-label`,
+In addition to the `multiscales` key, the OME-Zarr Metadata in this image-level `zarr.json` file MUST contain another key, `image-label`,
 whose value is also a JSON object.
-The `image-label` object stores information about the display colors, source image,
-and optionally, further arbitrary properties of the label image.
+The presence of the `image-label` object signals that this image contains labels.
+It can optionally store information about the display colors, source image, and further arbitrary properties of the label image.
+
 That `image-label` object SHOULD contain a `colors` key,
 whose value MUST be a JSON array describing color information for the unique label values.
 
