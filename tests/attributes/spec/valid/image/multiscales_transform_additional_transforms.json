@@ -117,16 +117,20 @@
 								"type": "byDimension",
 								"transformations": [
 									{
-										"type": "scale",
+										"transformation": {
+											"type": "scale",
+											"scale": [2]
+										},
 										"output_axes": [0],
-										"input_axes": [0],
-										"scale": [2]
+										"input_axes": [0]
 									},
 									{
-										"type": "translation",
+										"transformation": {
+											"type": "translation",
+											"translation": [-10]
+										},
 										"output_axes": [1],
-										"input_axes": [1],
-										"translation": [-10]
+										"input_axes": [1]
 									}
 								],
 								"name": "transform-name"
