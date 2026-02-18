@@ -10,16 +10,20 @@
       "output": "out",
       "transformations": [
         {
-          "type": "translation",
-          "translation": [-1.0],
-          "input_axes": [1],
-          "output_axes": [1]
+          "transformation": {
+            "type": "translation",
+            "translation": [-1.0]
+          },
+          "input_axes": ["i"],
+          "output_axes": ["x"]
         },
         {
-          "type": "scale",
-          "scale": [2.0],
-          "input_axes": [0],
-          "output_axes": [0]
+          "transformation": {
+            "type": "scale",
+            "scale": [2.0]
+          },
+          "input_axes": ["j"],
+          "output_axes": ["y"]
         }
       ]
     }

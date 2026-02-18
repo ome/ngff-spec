@@ -25,14 +25,18 @@
       "output": "out",
       "transformations": [
         {
-          "type": "translation",
-          "translation": [ 1, 3 ],
+          "transformation": {
+            "type": "translation",
+            "translation": [ 0.5, 1.5 ]
+          },
           "input_axes": [ 3, 2 ],
-          "output_axes": [ 2, 1 ]
+          "output_axes": [ 1, 2 ]
         },
         {
-          "type": "scale",
-          "scale": [ 2 ],
+          "transformation": {
+            "type": "scale",
+            "scale": [ 2 ]
+          },
           "input_axes": [ 1 ],
           "output_axes": [ 0 ]
         }
