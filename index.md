@@ -1578,11 +1578,16 @@ whose value MUST be an array of valid [transformations](#trafo-types-md).
 It MAY contain the field `coordinateSystems`,
 whose values MUST be an array of valid [coordinate systems](#coordinate-systems-md).
 
-If used inside "scene" metadata, the `input` and `output` fields of `coordinateTransformations` MUST contain a json object,
-which MUST contain either the `path` or the `name` field, or both.
-The value of the `path` field is the path to a multiscale image subgroup.
-The value of the `name` field is the name of a `coordinateSystem` either in the multiscale image subgroup specified by the path,
-or within the `scene` dictionary itself.
+If used inside `scene` metadata, the `input` and `output` fields of `coordinateTransformations` MUST contain a json object,
+which MUST contain the field `name` and MAY contain the field `path`.
+
+**name**
+  Refers to the name of a `coordinateSystem` either in the multiscale image subgroup specified by the path,
+  or within the `scene` dictionary itself.
+
+**path**
+  Refers to the path of a multiscale image subgroup in the Zarr hierarchy.
+
 If `name` refers to a coordinate system in the `scene` dictionary,
 the `path` value MAY be omitted or null.
 If `name` refers to a coordinate system in the multiscale image subgroup specified by `path`,
