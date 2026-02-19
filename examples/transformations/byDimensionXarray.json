@@ -24,14 +24,14 @@
         {
           "type": "coordinates",
           "path": "xCoordinates",
-          "input_axes": [ "dim_0" ],
-          "output_axes": [ "x" ]
+          "input_axes": [ 0 ],
+          "output_axes": [ 0 ]
         },
         {
           "type": "coordinates",
           "path": "yCoordinates",
-          "input_axes": [ "dim_1" ],
-          "output_axes": [ "y" ]
+          "input_axes": [ 1 ],
+          "output_axes": [ 1 ]
         }
       ]
     }

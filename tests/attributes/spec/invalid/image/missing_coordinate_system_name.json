@@ -3,14 +3,28 @@
     "version": "0.6.dev3",
     "multiscales": [
       {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ]
+          }
+        ],
         "datasets": [
           {
             "path": "0",
             "coordinateTransformations": [
               {
                 "scale": [
-                  1,
-                  1
+                  0.13,
+                  0.13
                 ],
                 "type": "scale",
                 "input": "0",

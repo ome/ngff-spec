@@ -1,44 +1,87 @@
 {
-  "coordinateSystems": [
-    {
-      "name": "in",
-      "axes": [
-        { "name": "0", "type": "array" },
-        { "name": "1", "type": "array" },
-        { "name": "2", "type": "array" },
-        { "name": "3", "type": "array" },
-        { "name": "4", "type": "array" }
-      ]
-    },
-    {
-      "name": "out",
-      "axes": [
-        { "name": "x", "type": "space" },
-        { "name": "y", "type": "space" },
-        { "name": "z", "type": "space" }
-      ]
-    }
-  ],
-  "coordinateTransformations": [
-    {
-      "type": "byDimension",
-      "name": "5D-to-3D-not-contiguous",
-      "input": "in",
-      "output": "out",
-      "transformations": [
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev3",
+      "multiscales": [
         {
-          "type": "mapAxis",
-          "mapAxis": { "0": "x", "2": "z" },
-          "input_axes": [ "0", "2" ],
-          "output_axes": [ "x", "z" ]
-        },
-        {
-          "type": "scale",
-          "scale": [ 2 ],
-          "input_axes": [ "1" ],
-          "output_axes": [ "y" ]
+          "name": "multiscales",
+          "coordinateSystems": [
+            {
+              "name": "physical",
+              "axes": [
+                {
+                  "type": "space",
+                  "name": "y",
+                  "unit": "micrometer",
+                  "discrete": false
+                },
+                {
+                  "type": "space",
+                  "name": "x",
+                  "unit": "micrometer",
+                  "discrete": false
+                }
+              ]
+            },
+            {
+              "name": "array_coordinates",
+              "axes": [
+                {
+                  "type": "array",
+                  "name": "dim_0",
+                  "discrete": true
+                },
+                {
+                  "type": "array",
+                  "name": "dim_1",
+                  "discrete": true
+                }
+              ]
+            }
+          ],
+          "datasets": [
+            {
+              "path": "array",
+              "coordinateTransformations": [
+                {
+                  "type": "byDimension",
+                  "output": "physical",
+                  "input": "array",
+                  "transformations": [
+                    {
+                      "type": "scale",
+                      "output_axes": [
+                        "x"
+                      ],
+                      "input_axes": [
+                        "dim_1"
+                      ],
+                      "scale": [
+                        2
+                      ]
+                    },
+                    {
+                      "type": "translation",
+                      "output_axes": [
+                        "y"
+                      ],
+                      "input_axes": [
+                        "dim_0"
+                      ],
+                      "translation": [
+                        -10
+                      ]
+                    }
+                  ],
+                  "name": "transform-name"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
-  ]
+  }
 }
