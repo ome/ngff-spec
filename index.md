@@ -161,15 +161,15 @@ store.zarr                      # One scene dataset
 │       └── zarr.json
 │
 ├── volume
-│   ├── zarr.json               # group level attributes (multiscales)
-│   └── 0                       # a group containing the 0th scale
-│       └── image               # a Zarr array
-│           └── zarr.json       # physical coordinate system and transformations here
+│   ├── zarr.json               # Implements "multiscales"
+│   ├── 0                       # Resolution levels
+│   ├── ...
+│   └── labels                  # Labels (optional)
 └── crop
-    ├── zarr.json               # group level attributes (multiscales)
-    └── 0                       # a group containing the 0th scale
-        └── image               # a Zarr array
-            └── zarr.json       # physical coordinate system and transformations here
+    ├── zarr.json               # Implements "multiscales"
+    ├── 0                       # Resolution levels
+    ├── ...
+    └── labels                  # Labels (optional)
 </pre>
 
 ## OME-Zarr Metadata
