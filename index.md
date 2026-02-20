@@ -162,12 +162,14 @@ store.zarr                      # One scene dataset
 │
 ├── volume
 │   ├── zarr.json               # Implements "multiscales"
-│   ├── 0                       # Resolution levels
+│   ├── scale0                  # Resolution levels
+│   ├── scale1
 │   ├── ...
 │   └── labels                  # Labels (optional)
 └── crop
     ├── zarr.json               # Implements "multiscales"
-    ├── 0                       # Resolution levels
+    ├── scale0                  # Resolution levels
+    ├── scale1
     ├── ...
     └── labels                  # Labels (optional)
 </pre>
