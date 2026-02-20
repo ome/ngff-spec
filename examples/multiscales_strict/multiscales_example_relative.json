@@ -38,23 +38,23 @@
           }]
         },
         {
-          "path": "1",
+          "path": "s1",
           "coordinateTransformations": [{
-            // the second scale level (downscaled by a factor of 2 relative to "0" in zyx)
+            // the second scale level (downscaled by a factor of 2 relative to "s0" in zyx)
             "type": "scale",
             "scale": [1, 1, 2, 2, 2],
-            "input" : "/1",
-            "output" : "array_0"
+            "input" : "s1",
+            "output" : "intrinsic"
           }]
         },
         {
-          "path": "2",
+          "path": "s2",
           "coordinateTransformations": [{
-            // the third scale level (downscaled by a factor of 4 relative to "0" in zyx)
+            // the third scale level (downscaled by a factor of 4 relative to "s0" in zyx)
             "type": "scale",
             "scale": [1, 1, 4, 4, 4],
-            "input" : "/2",
-            "output" : "array_0"
+            "input" : "s2",
+            "output" : "intrinsic"
           }]
         }
       ],

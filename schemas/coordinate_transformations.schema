@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ngff.openmicroscopy.org/0.6.dev3/schemas/coordinate_transformations.schema",
-  "title": "Coordinate Systems and Transforms",
-  "description": "OME-Zarr Coordinate Systems and transforms.",
+  "title": "Coordinate Transformations",
+  "description": "OME-Zarr Coordinate transforms.",
   "type": "array",
   "uniqueItems": true,
   "minItems": 1,
@@ -15,10 +15,40 @@
         "type": "object",
         "properties": {
           "input": {
-            "type": "string"
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
           },
           "output": {
-            "type": "string"
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
           }
         },
         "required": [
@@ -67,9 +97,6 @@
               "$ref": "#/$defs/rotation"
             },
             {
-              "$ref": "#/$defs/inverseOf"
-            },
-            {
               "$ref": "#/$defs/bijection"
             },
             {
@@ -88,46 +115,20 @@
         }
       ]
     },
-    "byDimensionTransformation": {
-      "type": "object",
-      "description": "Transformation used inside a byDimension transformation",
-      "allOf": [
-        { "$ref": "#/$defs/coordinateTransformation" },
-        {
-          "properties": {
-            "input_axes": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Names of the input axes for this transformation."
-            },
-            "output_axes": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Names of the output axes for this transformation."
-            }
-          },
-          "required": [
-            "input_axes",
-            "output_axes"
-          ]
-        }
-      ]
-    },
     "identity": {
       "type": "object",
       "properties": {
         "type": {
           "const": "identity"
         }
-      }
+      },
+      "title": "Identity Transformation",
+      "description": "Identity transformation that maps input coordinates directly to output coordinates without modification."
     },
     "mapAxis": {
       "type": "object",
-      "description": "Permute axes by name",
+      "title": "Map Axis Transformation",
+      "description": "Permute axes by mapping input axes to output axes.",
       "properties": {
         "type": {
           "const": "mapAxis"
@@ -135,86 +136,63 @@
         "mapAxis": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4
           },
+          "minItems": 2,
+          "maxItems": 5,
+          "uniqueItems": true,
           "description": "An array of integers representing the new axis order as zero-based indices of the input axes."
-        },
-        "required": [
-          "mapAxis"
-        ]
-      }
+        }
+      },
+      "required": [
+        "mapAxis"
+      ]
     },
     "scale": {
       "type": "object",
+      "title": "Scale Transformation",
+      "description": "Scale transformation that scales coordinates by specified factors along each axis.",
       "properties": {
         "type": {
           "const": "scale"
+        },
+        "scale": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
         }
       },
-      "oneOf": [
-        {
-          "properties": {
-            "path": {
-              "type": "string",
-              "description": "Path to a zarr array containing the scale factors."
-            }
-          },
-          "required": [
-            "path"
-          ]
-        },
-        {
-          "properties": {
-            "scale": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "exclusiveMinimum": 0
-              }
-            }
-          },
-          "required": [
-            "scale"
-          ]
-        }
+      "required": [
+        "scale"
       ]
     },
     "translation": {
       "type": "object",
+      "title": "Translation Transformation",
+      "description": "Translation transformation that shifts coordinates by specified offsets along each axis.",
       "properties": {
         "type": {
           "const": "translation"
-        }
-      },
-      "oneOf": [
-        {
-          "properties": {
-            "path": {
-              "type": "string",
-              "description": "Path to a zarr array containing the translation vectors."
-            }
-          },
-          "required": [
-            "path"
-          ]
         },
-        {
-          "properties": {
-            "translation": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          "required": [
-            "translation"
-          ]
-        }
+        "translation": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }        
+      },
+      "required": [
+        "translation"
       ]
     },
     "affine": {
       "type": "object",
+      "title": "Affine Transformation",
+      "description": "Affine transformation represented by a transformation matrix.",
       "properties": {
         "type": {
           "const": "affine"
@@ -252,6 +230,8 @@
     },
     "rotation": {
       "type": "object",
+      "title": "Rotation Transformation",
+      "description": "Rotation transformation represented by a rotation matrix.",
       "properties": {
         "type": {
           "const": "rotation"
@@ -272,13 +252,32 @@
         {
           "properties": {
             "rotation": {
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "type": "number"
+              "oneOf": [
+                {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } }
+                },
+                {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "items": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } }
+                },
+                {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } }
+                },
+                {
+                  "type": "array",
+                  "minItems": 5,
+                  "maxItems": 5,
+                  "items": { "type": "array", "minItems": 5, "maxItems": 5, "items": { "type": "number" } }
                 }
-              }
+              ]
             }
           },
           "required": [
@@ -287,23 +286,10 @@
         }
       ]
     },
-    "inverseOf": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "const": "inverseOf"
-        },
-        "transformation": {
-          "$ref": "#/$defs/coordinateTransformation"
-        }
-      },
-      "required": [
-        "transformation"
-      ],
-      "description": "The inverse of another coordinate transformation."
-    },
     "bijection": {
       "type": "object",
+      "title": "Bijection Transformation",
+      "description": "A pair of forward and inverse coordinate transformations.",
       "properties": {
         "type": {
           "const": "bijection"
@@ -317,11 +303,11 @@
       },
       "required": [
         "forward", "inverse"
-      ],
-      "description": "A pair of forward and inverse coordinate transformations."
+      ]
     },
     "sequence": {
-      "description": "A sequence of transformations",
+      "title": "Sequence Transformation",
+      "description": "A sequence of transformations applied in order.",
       "type": "object",
       "properties": {
         "type": { "const": "sequence" },
@@ -338,22 +324,49 @@
     },
     "byDimension": {
       "type": "object",
+      "title": "By Dimension Transformation",
+      "description": "A set of transformations applied independently to each dimension.",
       "properties": {
         "type": { "const": "byDimension" },
         "transformations": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/byDimensionTransformation"
+            "type": "object",
+            "properties": {
+              "transformation": {
+                "$ref": "#/$defs/coordinateTransformation"
+              },
+              "input_axes": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "Names of the input axes for this transformation."
+              },
+              "output_axes": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "Names of the output axes for this transformation."
+              }
+            },
+            "required": [
+              "transformation",
+              "input_axes",
+              "output_axes"
+            ]
           }
         }
       },
       "required": [
         "transformations"
-      ],
-      "description": "A set of transformations applied independently to each dimension."
+      ]
     },
     "displacements": {
       "type": "object",
+      "title": "Displacement Field Transformation",
+      "description": "Transformation defined by a displacement field stored in a zarr array.",
       "properties": {
         "type": { "const": "displacements" },
         "path": {
@@ -373,6 +386,8 @@
     },
     "coordinates": {
       "type": "object",
+      "title": "Coordinate Field Transformation",
+      "description": "Transformation defined by a coordinate field stored in a zarr array.",
       "properties": {
         "type": { "const": "coordinates" },
         "path": {

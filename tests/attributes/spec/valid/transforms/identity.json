@@ -1,0 +1,48 @@
+{
+  "ome": {
+    "version": "0.6.dev3",
+    "multiscales": [
+      {
+        "name": "multiscales",
+        "coordinateSystems": [
+          {
+            "name": "physical",
+            "axes": [
+              {
+                "type": "space",
+                "name": "y",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
+                "name": "x",
+                "unit": "micrometer",
+                "discrete": false
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "array",
+            "coordinateTransformations": [
+              {
+                "type": "identity",
+                "output": "physical",
+                "input": "array",
+                "name": "transform-name"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "_conformance": {
+    "schema": {
+    "id": "schemas/image.schema"
+    },
+    "description": "Tests for the image JSON schema: "
+  }
+}
