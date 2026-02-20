@@ -1,0 +1,18 @@
+{
+  "ome": {
+    "version": "0.6.dev2",
+    "well": {
+      "images": [
+        {
+          "path": "0_a-b.image"
+        }
+      ]
+    }
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/well.schema"
+    },
+    "description": "Tests for the well JSON schema: "
+  }
+}
