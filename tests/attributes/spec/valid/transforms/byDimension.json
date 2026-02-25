@@ -62,16 +62,16 @@
                   "type": "scale",
                   "scale": [2]
                 },
-                "output_axes": [0],
-                "input_axes": [0]
+                "output_axes": ["y"],
+                "input_axes": ["y"]
               },
               {
                 "transformation": {
                   "type": "translation",
                   "translation": [-10]
                 },
-                "output_axes": [1],
-                "input_axes": [1]
+                "output_axes": ["x"],
+                "input_axes": ["x"]
                 
               }
             ],
