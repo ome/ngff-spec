@@ -1,10 +1,13 @@
 {
-  "well": {
-    "images": [
-      {
-        "path": ".."
-      }
-    ]
+  "ome": {
+    "version": "0.6.dev3",
+    "well": {
+      "images": [
+        {
+          "path": ".."
+        }
+      ]
+    }
   },
   "_conformance": {
     "schema": {
