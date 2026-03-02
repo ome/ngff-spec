@@ -1547,7 +1547,11 @@ The `well` object MUST contain an `images` key
 whose value MUST be an array of JSON objects specifying all fields of views for a given well.
 Each image object MUST contain a `path` key
 whose value MUST be a string specifying the path to the field of view.
-The `path` MUST contain only alphanumeric characters, MUST be case-sensitive, and MUST NOT be a duplicate of any other `path` in the `images` array.
+The `path` MUST be case-sensitive, and MUST NOT be a duplicate of any other `path` in the `images` list.
+The `path` MUST follow [Zarr node name naming conventions](https://github.com/zarr-developers/zarr-specs/blob/main/docs/v3/core/index.rst#node-names) including the recommended limitations of characters to ensure consistency across different storage systems and programming languages. 
+Specifically: The `path` MUST NOT consist only of periods (like `.` or `..`) or start with the reserved prefix `__`; 
+The `path` MUST NOT be an empty string and MUST NOT contain `/` characters; 
+The `path` MUST only use characters in the sets `a-z`, `A-Z`, `0-9`, `-`, `_`, `.`. 
 If multiple acquisitions were performed in the plate,
 it MUST contain an `acquisition` key whose value MUST be an integer identifying the acquisition
 which MUST match one of the acquisition JSON objects defined in the [plate metadata](#plate-md).
