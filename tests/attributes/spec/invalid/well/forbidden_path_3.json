@@ -10,6 +10,7 @@
     "schema": {
       "id": "schemas/well.schema"
     },
+    "valid": false,
     "description": "Tests for the well JSON schema: "
   }
 }
