@@ -25,7 +25,14 @@
                   "path": {
                     "description": "The path for this field of view subgroup",
                     "type": "string",
-                    "pattern": "^[A-Za-z0-9]+$"
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9_.-]+$",
+                    "not": {
+                      "anyOf": [
+                        { "pattern": "^\\.+$" },
+                        { "pattern": "^__" }
+                      ]
+                    }
                   }
                 },
                 "required": [
