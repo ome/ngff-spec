@@ -1141,7 +1141,7 @@ I.e. the y-displacement is first, because the y-axis is the first element of the
 using lower dimensional transformations on subsets of dimensions.
 
 **transformations**
-: MUST be an array of objects, which MUST contain
+: MUST be an array of objects where each object MUST contain
   the fields `input_axes`, `output_axes` and `transformation`.
   The values of `input_axes` and `output_axes` are arrays of integers.
   The integer values in these arrays correspond to the axis indices in the `byDimension`'s or its parent's
