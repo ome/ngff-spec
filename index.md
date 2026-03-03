@@ -1305,6 +1305,15 @@ which gives the type of downscaling method used to generate the multiscale image
 It SHOULD contain the field `metadata`,
 which contains a object with additional information about the downscaling method.
 
+Each `multiscales` object SHOULD contain the field `uuid`,
+which is a  [RFC 4122](https://www.ietf.org/rfc/rfc4122.txt) compliant string representation of a universally unique identifier,
+(e.g., `"urn":"uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"`)
+and SHOULD use a compliant generator to minimize potential conflicts.
+
+The uuid field is used to uniquely assign an identity to objects in the dataset.
+Users MAY choose to store identical objects, i.e. with the same uuid,
+in multiple filesets with the intent that changes to either may eventually be applied to all copies.
+
 
 :::{dropdown} Example
 
