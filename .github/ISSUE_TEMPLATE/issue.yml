@@ -1,11 +1,11 @@
 name: Issue
-description: Report a website/build issue
+description: Report an ngff-spec technical issue
 title: "[Issue]: "
 body:
   - type: markdown
     attributes:
       value: |
-        Note: spec-level issues should go to https://github.com/ome/ngff/issues.
+        Note: spec-level considerations should usually go to https://github.com/ome/ngff/issues.
         Please use this repo for typos, docs structure, or website/build issues.
   - type: textarea
     id: details
