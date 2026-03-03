@@ -95,7 +95,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
         │
         └── original          # Intermediate folders are permitted but not necessary and currently contain no extra metadata.
             │
-            └── s0            # Multiscale, labeled image. The name is unimportant but is registered in the "labels" group above.
+            └── 0             # Multiscale, labeled image. The name is unimportant but is registered in the "labels" group above.
                 ├── zarr.json # Zarr Group which is both a multiscaled image as well as a labeled image.
                 │             # Metadata of the related image and as well as display information under the "image-label" key.
                 │
