@@ -40,12 +40,12 @@
           ],
           "datasets": [
             {
-              "path": "0",
+              "path": "s0",
               "coordinateTransformations": [
                 {
                   "scale": [1, 1],
                   "type": "scale",
-                  "input": "0",
+                  "input": "s0",
                   "output": "intrinsic"
                 }
               ]
