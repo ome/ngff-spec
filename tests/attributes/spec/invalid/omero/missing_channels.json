@@ -1,0 +1,56 @@
+{
+  "ome": {
+    "version": "0.6.dev3",
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "name": "physical",
+            "axes": [
+              {
+                "name": "z",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "s0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "input": "s0",
+                "output": "physical",
+                "type": "scale"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "omero": {
+    }
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    },
+    "valid": false
+  }
+}

@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Updated version keys from `0.6.dev2` to `0.6.dev3` everywhere
 - style: Homogeneous use of backticks in spec document
+- spec: Released requirements for `omero` metadata in the spec document and in schemas.
 
 ### Removed
 

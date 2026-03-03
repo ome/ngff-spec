@@ -1491,12 +1491,13 @@ if not datasets:
 ### "omero" metadata (transitional)
 (omero-md)=
 
-[=Transitional=] information specific to the channels of an image and how to render it can be found under the `omero` key in the group-level metadata:
+Information specific to the channels of an image and how to render it
+can be found under the `omero` key in the group-level metadata (i.e., under `"ome" > "omero"`):
 
 ```json
-"id": 1,                              # ID in OMERO
-"name": "example.tif",                # Name as shown in the UI
-"channels": [                         # Array matching the c dimension size
+"id": 1,                              // ID in OMERO
+"name": "example.tif",                // Name as shown in the UI
+"channels": [                         // Array matching the c dimension size
     {
         "active": true,
         "coefficient": 1,
@@ -1513,9 +1514,9 @@ if not datasets:
     }
 ],
 "rdefs": {
-    "defaultT": 0,                    # First timepoint to show the user
-    "defaultZ": 118,                  # First Z section to show the user
-    "model": "color"                  # "color" or "greyscale"
+    "defaultT": 0,                    // First timepoint to show the user
+    "defaultZ": 118,                  // First Z section to show the user
+    "model": "color"                  // "color" or "greyscale"
 }
 ```
 
@@ -1525,11 +1526,13 @@ for more information.
 The `omero` metadata is optional, but if present it MUST contain the field `channels`,
 which is an array of objects describing the channels of the image.
 The `channels` array length SHOULD correspond to the size of the respective channels axis, if present.
-Each object in `channels` MAY contain the following fields:
+Each object in `channels` is optional and MAY contain the following fields:
 
 - `color` (string) String of 6 hexadecimal digits specifying the color of the channel in RGB format.
 - `label` (string) Channel name.
 - `active` (boolean) Indicates whether the channel should be displayed.
+- `coefficient`: (float) Value to multiply the pixel values of the channel by when rendering.
+- `family`: (string) Used transfer function family for rendering the channel, e.g. "linear", "log", "gamma".
 - `window` (dictionary) Values describing the windowing of the channel.
   If provided, `start` and `end` values MUST be specified.
   All values can be floating-point numbers, but will likely be integers for integer pixel types.
