@@ -10,7 +10,8 @@
       "schema": {
         "id": "schemas/strict_label.schema"
       },
-      "description": "Tests for the strict image-label JSON schema: "
+      "description": "Tests for the strict image-label JSON schema: ",
+      "valid": false
     }
   }
 }

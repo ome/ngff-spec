@@ -20,6 +20,7 @@
     "schema": {
       "id": "schemas/plate.schema"
     },
-    "description": "Tests for the plate JSON schema: "
+    "description": "Tests for the plate JSON schema: ",
+    "valid": false
   }
 }

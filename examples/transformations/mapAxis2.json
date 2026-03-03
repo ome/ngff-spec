@@ -8,14 +8,14 @@
     { 
       "name": "projection down",
       "type": "mapAxis", 
-      "mapAxis": { "x": "b" },
+      "mapAxis": [1],
       "input": "in",
       "output": "out_down" 
     },
     { 
       "name": "projection up",
       "type": "mapAxis", 
-      "mapAxis": { "z": "b", "y": "b", "x": "a" },
+      "mapAxis": [1, 1, 0],
       "input": "in",
       "output": "out_up" 
     }
