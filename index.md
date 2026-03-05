@@ -330,8 +330,11 @@ a coordinate transformation is used (see [coordinate transformations metadata](#
 
 :::{dropdown} Example
 
-In the following example, an array coordinate system is used as the primary target of the multiscales coordinate transformations.
-A single coordinate transformation is then used to project the image into the `physical` coordinate system:
+In the following example, an array coordinate system is used
+as the primary target of the multiscales coordinate transformations.
+This is useful in the case that other transformations (e.g., in a [`scene`](#scene-md) storage layout)
+are specified in pixel units rather than in physical units.
+A single coordinate transformation (`scale` at the bottom) is then used to project the image into the `physical` coordinate system:
 
 ```json
 
@@ -379,10 +382,7 @@ A single coordinate transformation is then used to project the image into the `p
   ]
 }
 
-In this example, the transformation at the bottom serves the purpose of
-associating the pixel coordinates with physical coordinates.
-The used coordinate system `arrayCoordinateSystem` allows other transformations (e.g., in a [`scene`](#scene-md) storage layout)
-to use coordinate transformations that are specified in pixel units rather than in physical units, if necessary
+
 ```
 
 #### Coordinate convention
