@@ -359,8 +359,7 @@ A single coordinate transformation is then used to project the image into the `p
           "path": "scale0",
           "coordinateTransformations": [
             {
-              "type": "scale",
-              "scale": [1.0, 1.0],
+              "type": "identity",
               "input": "scale0",
               "output": "arrayCoordinateSystem"
             }
