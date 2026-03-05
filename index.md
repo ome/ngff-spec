@@ -289,11 +289,25 @@ This is possible by using **array coordinate systems**.
 Every array has a default coordinate system whose parameters need not be explicitly defined.
 The dimensionality of each array coordinate system equals the dimensionality of its corresponding Zarr array.
 Its name is the path to the array in the container,
-its axes have `"type": "array"`, are unitless, and have default names.
+its axes have `"type": "array"`, are unitless, and have default names corresponding to the `dimension_names` in zarr.
 The i-th axis has `"name": "dim_i"` (these are the same default names used by [xarray](https://docs.xarray.dev/en/stable/user-guide/terminology.html)).
 As with all coordinate systems, the dimension names must be unique and non-null.
 
 :::{dropdown} Example
+For example, if s0/zarr.json contains:
+```json
+{
+    "zarr_format": 3,
+    "node_type": "array",
+    "shape": [4, 3, 5],
+    "dimension_names": ["dim_0", "dim_1", "dim_2"],
+    //...
+}
+```
+
+then the corresponding array coordinate system can be explicitly defined in the list of [coordinate systems](#coordinate-systems-md) like this:
+
+
 ```json
 {
   "name" : "myDataArray",
@@ -306,15 +320,7 @@ As with all coordinate systems, the dimension names must be unique and non-null.
 
 ```
 
-For example, if 0/zarr.json contains:
-```json
-{
-    "zarr_format": 3,
-    "node_type": "array",
-    "shape": [4, 3, 5],
-    //...
-}
-```
+
 
 Then `dim_0` has length 4, `dim_1` has length 3, and `dim_2` has length 5.
 
