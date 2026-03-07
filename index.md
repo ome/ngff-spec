@@ -78,6 +78,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │   ...                   # which is a folder containing chunk files which compose the array.
     ├── n                     # The name of the array is arbitrary with the ordering defined by
     │   │                     # by the "multiscales" metadata, but is often a sequence starting at 0.
+    │   │                     # All arrays must have the same datatype and number of dimensions.
     │   │
     │   ├── zarr.json         # All image arrays must be up to 5-dimensional
     │   │                     # with the axis of type time before type channel, before spatial axes.
@@ -1262,7 +1263,7 @@ which is an array of objects describing the arrays storing the individual resolu
 Each object in `datasets` MUST contain the field `path`,
 whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
 The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
-Every Zarr array referred to by a `path` MUST have the same number of dimensions
+Every Zarr array referred to by a `path` MUST have the same number of dimensions and datatype,
 and MUST NOT have more than 5 dimensions.
 The number of dimensions and order MUST correspond to number and order of `axes`.
 
