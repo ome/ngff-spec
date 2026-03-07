@@ -13,8 +13,184 @@ abstract: >-
   institutional, and global data management and analysis tasks.
 title: Next-generation file format specification
 authors:
-  - family-names: NGFF-community
-    given-names: ''
+  - family-names: Allan
+    given-names: Chris
+    affiliation: Glencoe Software, Inc.
+  - family-names: Barnes
+    given-names: Chris
+    affiliation: German Bioimaging - Society for Microscopy and Image Analysis e.V.
+  - family-names: Bennett
+    given-names: Davis
+  - family-names: Besson
+    given-names: Sébastien
+    affiliation: Glencoe Software, Inc.
+    orcid: 0000-0001-8783-1429
+  - family-names: Bogovic
+    given-names: John
+    affiliation: Howard Hughes Medical Institute, Janelia Research Campus
+  - family-names: Burel
+    given-names: Jean-Marie
+    affiliation: University of Dundee
+    orcid: 0000-0002-1789-1861
+  - family-names: Collmann
+    given-names: Forest
+    affiliation: Allen Institute for Brain Science
+  - family-names: Comparin
+    given-names: Tommaso
+  - family-names: Deakin
+    given-names: Lachlan
+    affiliation: Australian National University
+  - family-names: Dunster
+    given-names: Gideon
+    affiliation: Allen Institute for Cell Science
+  - family-names: Eglinger
+    given-names: Jan
+    affiliation: Friedrich Miescher Institute for Biomedical Research
+  - family-names: Feng
+    given-names: David
+    affiliation: Allen Institute for Neural Dynamics
+  - family-names: Gaudreault
+    given-names: Nathalie
+    affiliation: Allen Institute for Cell Science
+  - family-names: Gay
+    given-names: Guillaume
+    affiliation: France BioImaging
+    orcid: 0000-0002-5444-5246
+  - family-names: Gold
+    given-names: Ilan
+  - family-names: Gui
+    given-names: Xiao
+  - family-names: Halchenko
+    given-names: Yaroslav O.
+    affiliation: Dartmouth College
+  - family-names: Hartley
+    given-names: Matthew
+    affiliation: >-
+      European Molecular Biology Laboratory, European Bioinformatics Institute
+      (EMBL-EBI)
+    orcid: 0000-0001-6178-2884
+  - family-names: Hn
+    given-names: Julian
+  - family-names: Innerberger
+    given-names: Michael
+    affiliation: Howard Hughes Medical Institute, Janelia Research Campus
+    orcid: 0000-0002-7001-8682
+  - family-names: Kittisopikul
+    given-names: Mark
+    affiliation: Howard Hughes Medical Institute, Janelia Research Campus
+    orcid: 0000-0002-9558-6248
+  - family-names: Lambert
+    given-names: Talley
+    affiliation: Harvard Medical School
+    orcid: 0000-0002-2409-0181
+  - family-names: Linkert
+    given-names: Melissa
+    affiliation: Glencoe Software, Inc.
+  - family-names: Liu
+    given-names: Ziwen
+    orcid: 0000-0001-7843-1992
+  - family-names: Lüthi
+    given-names: Joel
+    affiliation: BioVisionCenter, University of Zurich
+    orcid: 0000-0003-3023-170X
+  - family-names: Maitin-Shepard
+    given-names: Jeremy
+    affiliation: Google
+    orcid: 0000-0001-8453-7961
+  - family-names: Marconato
+    given-names: Luca
+    affiliation: European Molecular Biology Laboratory (EMBL)
+    orcid: 0000-0003-3198-1326
+  - family-names: McCormick
+    given-names: Matt
+    affiliation: Fideus Labs
+    orcid: 0000-0001-9475-3756
+  - family-names: Moore
+    given-names: Josh
+    affiliation: German Bioimaging - Society for Microscopy and Image Analysis e.V.
+    orcid: 0000-0003-4028-811X
+  - family-names: Moore
+    given-names: William
+    affiliation: University of Dundee
+    orcid: 0000-0002-7264-8338
+  - family-names: Nunez-Iglesias
+    given-names: Juan
+    affiliation: Monash Medical Centre
+    orcid: 0000-0002-7239-5828
+  - family-names: Özdemir
+    given-names: Bugra
+  - family-names: Palla
+    given-names: Giovanni
+    affiliation: Helmholtz Zentrum München
+    orcid: 0000-0002-8004-4462
+  - family-names: Pape
+    given-names: Constantin
+    affiliation: University of Göttingen
+    orcid: 0000-0001-6562-7187
+  - family-names: Perlman
+    given-names: Eric
+    affiliation: Yikes, LLC.
+    orcid: 0000-0001-5542-1302
+    website: https://www.yikes.com/
+  - family-names: Rhode
+    given-names: Sebastian
+    affiliation: Carl Zeiss Microscopy GmbH
+  - family-names: Rzepka
+    given-names: Norman
+    orcid: 0000-0002-8168-7929
+  - family-names: Saalfeld
+    given-names: Stephan
+    affiliation: Howard Hughes Medical Institute, Janelia Research Campus
+    orcid: 0000-0002-4106-1761
+  - family-names: Scarlett
+    given-names: Virginia
+    orcid: 0000-0002-4156-2849
+  - family-names: Shepherd
+    given-names: Doug
+    affiliation: Arizona State University
+  - family-names: Soltwedel
+    given-names: Johannes
+    affiliation: German Bioimaging - Society for Microscopy and Image Analysis e.V.
+    orcid: 0000-0003-1273-2412
+  - family-names: Stansby
+    given-names: David
+    affiliation: University College London
+    orcid: 0000-0002-1365-1908
+  - family-names: Swedlow
+    given-names: Jason R.
+    orcid: 0000-0002-2198-1958
+  - family-names: Tischer
+    given-names: Christian
+    affiliation: European Molecular Biology Laboratory (EMBL)
+    orcid: 0000-0003-4105-1990
+  - family-names: Toloudis
+    given-names: Dan
+    orcid: 0000-0003-2620-1233
+  - family-names: Uhlmann
+    given-names: Virginie
+    affiliation: BioVisionCenter, University of Zurich
+    orcid: 0000-0002-2859-9241
+  - family-names: Vierdag
+    given-names: Wouter-Michiel
+    orcid: 0000-0003-1666-5421
+  - family-names: Virshup
+    given-names: Isaac
+    orcid: 0000-0002-1710-8945
+  - family-names: Watson
+    given-names: Alan
+  - family-names: Windhager
+    given-names: Jonas
+    affiliation: Uppsala University
+    orcid: 0000-0002-2111-5291
+  - family-names: Yamauchi
+    given-names: Kevin
+    affiliation: ETH Zurich
+    orcid: 0000-0002-7818-1388
+  - family-names: Zubov
+    given-names: Yurii
+    affiliation: Howard Hughes Medical Institute, Janelia Research Campus
+  - family-names: Zukić
+    given-names: Dženan
 identifiers:
   - type: doi
     value: 10.1038/s41592-021-01326-w
