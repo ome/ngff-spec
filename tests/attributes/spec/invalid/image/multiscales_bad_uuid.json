@@ -4,7 +4,7 @@
 		"multiscales": [
 			{
 				"name": "multiscales",
-				"uuid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
+				"uuid": 123,
 				"coordinateSystems": [
 					{
 						"name": "physical",
@@ -67,6 +67,7 @@
 	"_conformance": {
 		"schema": {
 					"id": "schemas/image.schema"
-		}
+		},
+		"valid": false
 	}
 }
