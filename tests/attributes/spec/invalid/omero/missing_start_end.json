@@ -1,0 +1,94 @@
+{
+  "ome": {
+    "version": "0.6.dev3",
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "name": "physical",
+            "axes": [
+              {
+                "name": "z",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "s0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "input": "s0",
+                "output": "physical",
+                "type": "scale"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "omero": {
+      "channels": [
+        {
+          "label": "Channel:0",
+          "color": "#ff0000",
+          "active": true,
+          "family": "linear",
+          "coefficient": 1.0,
+          "inverted": false,
+          "window": {
+            "min": 0,
+            "max": 255
+          }
+        },
+        {
+          "label": "Channel:1",
+          "color": "#00ff00",
+          "active": true,
+          "family": "log",
+          "coefficient": 0.5,
+          "inverted": true,
+          "window": {
+            "min": 0,
+            "max": 255
+          }
+        },
+        {
+          "label": "Channel:2",
+          "color": "#0000ff",
+          "active": true,
+          "family": "gamma",
+          "coefficient": 2.0,
+          "inverted": false,
+          "window": {
+            "min": 0,
+            "max": 255
+          }
+        }
+      ]
+    }
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    },
+    "valid": false
+  }
+}

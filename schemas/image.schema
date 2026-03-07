@@ -212,13 +212,14 @@
                 },
                 "required": [
                   "start",
-                  "min",
-                  "end",
-                  "max"
+                  "end"
                 ]
               },
               "label": {
                 "type": "string"
+              },
+              "coefficient": {
+                "type": "number"
               },
               "family": {
                 "type": "string"
@@ -227,6 +228,9 @@
                 "type": "string"
               },
               "active": {
+                "type": "boolean"
+              },
+              "inverted": {
                 "type": "boolean"
               }
             }
