@@ -24,14 +24,16 @@
         "maxContains": 3
       },
       {
-        "contains": {
-          "type": "object",
-          "properties": {
-            "type": { "const": "array" }
-          },
-          "required": ["type"]
-        },
-        "minContains": 2
+        "not": {
+          "contains": {
+            "not": {
+              "properties": {
+                "type": { "const": "array" }
+              },
+              "required": ["type"]
+            }
+          }
+        }
       }
     ],
   "minContains": 2,

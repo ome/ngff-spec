@@ -277,6 +277,7 @@ As such, label images may be interpolated using "nearest neighbor" to obtain lab
 ```
 
 #### Array coordinate systems
+(array-coordinate-systems-md)=
 
 The dimensions of an array do not have an interpretation
 until they are associated with a coordinate system via a coordinate transformation.
@@ -288,34 +289,38 @@ This is possible by using **array coordinate systems**.
 Every array has a default coordinate system whose parameters need not be explicitly defined.
 The dimensionality of each array coordinate system equals the dimensionality of its corresponding Zarr array.
 Its name is the path to the array in the container,
-its axes have `"type": "array"`, are unitless, and have default names.
+its axes have `"type": "array"`, are unitless, and have default names corresponding to the `dimension_names` in zarr.
 The i-th axis has `"name": "dim_i"` (these are the same default names used by [xarray](https://docs.xarray.dev/en/stable/user-guide/terminology.html)).
 As with all coordinate systems, the dimension names must be unique and non-null.
 
 :::{dropdown} Example
-```json
-{
-  "arrayCoordinateSystem" : {
-    "name" : "myDataArray",
-    "axes" : [
-      {"name": "dim_0", "type": "array"},
-      {"name": "dim_1", "type": "array"},
-      {"name": "dim_2", "type": "array"}
-    ]
-  }
-}
-
-```
-
-For example, if 0/zarr.json contains:
+For example, if s0/zarr.json contains:
 ```json
 {
     "zarr_format": 3,
     "node_type": "array",
     "shape": [4, 3, 5],
+    "dimension_names": ["dim_0", "dim_1", "dim_2"],
     //...
 }
 ```
+
+then the corresponding array coordinate system can be explicitly defined in the list of [coordinate systems](#coordinate-systems-md) like this:
+
+
+```json
+{
+  "name" : "myDataArray",
+  "axes" : [
+    {"name": "dim_0", "type": "array"},
+    {"name": "dim_1", "type": "array"},
+    {"name": "dim_2", "type": "array"}
+  ]
+}
+
+```
+
+
 
 Then `dim_0` has length 4, `dim_1` has length 3, and `dim_2` has length 5.
 
@@ -326,10 +331,65 @@ and whose data depends on the byte order used to store chunks.
 As described in the [Zarr array metadata](https://zarr.readthedocs.io/en/stable/spec/v3.html#arrays),
 the last dimension of an array in "C" order are stored contiguously on disk or in-memory when directly loaded. 
 
-The name and axes names MAY be customized by including a `arrayCoordinateSystem` field
-in the user-defined attributes of the array whose value is a coordinate system object.
-The length of `axes` MUST be equal to the dimensionality.
-The value of `type` for each object in the axes array MUST equal `"array"`.
+To associate an array coordinate system with a physical coordinate system,
+a coordinate transformation is used (see [coordinate transformations metadata](#coord-trafo-md)).
+
+:::{dropdown} Example
+
+In the following example, an array coordinate system is used
+as the primary target of the multiscales coordinate transformations.
+This is useful in the case that other transformations (e.g., in a [`scene`](#scene-md) storage layout)
+are specified in pixel units rather than in physical units.
+A single coordinate transformation (`scale` at the bottom) is then used to project the image into the `physical` coordinate system:
+
+```json
+
+{
+  "multiscales": [
+    {
+      "coordinateSystems" : [
+        {
+          "name": "physical",
+          "axes": [
+            {"name": "y", "type": "space", "unit": "micrometer"},
+            {"name": "x", "type": "space", "unit": "micrometer"}
+          ]
+        },
+        {
+          "name": "arrayCoordinateSystem",
+          "axes": [
+            {"name": "dim_0", "type": "array"},
+            {"name": "dim_1", "type": "array"}
+          ]
+        }
+      ],
+      "datasets": [
+        {
+          "path": "scale0",
+          "coordinateTransformations": [
+            {
+              "type": "identity",
+              "input": "scale0",
+              "output": "arrayCoordinateSystem"
+            }
+          ]
+
+        }
+      ],
+      "coordinateTransformations": [
+        {
+          "type": "scale",
+          "scale": [0.236, 0.236],
+          "input": "arrayCoordinateSystem",
+          "output": "physical"
+        }
+      ]
+    }
+  ]
+}
+
+
+```
 
 #### Coordinate convention
 
@@ -1249,9 +1309,11 @@ whose value is an array containing coordinate system metadata
 The following MUST hold for all coordinate systems inside multiscales metadata.
 The length of `axes` must be between 2 and 5
 and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
-The `axes` MUST contain 2 or 3 entries of `type:space`
-and MAY contain one additional entry of `type:time`
-and MAY contain one additional entry of `type:channel` or a null / custom type.
+The `axes` MUST contain either of:
+- 2 or 3 entries of `type:space`
+  and MAY contain one additional entry of `type:time`
+  and MAY contain one additional entry of `type:channel` or a null / custom type.
+- only entries of type `array` (see [array coordinate systems](#array-coordinate-systems-md)).
 In addition, the entries MUST be ordered by `type` where the `time` axis must come first (if present),
 followed by the  `channel` or custom axis (if present) and the axes of type `space`.
 If there are three spatial axes where two correspond to the image plane (`yx`)
