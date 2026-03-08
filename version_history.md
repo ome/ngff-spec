@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - BREAKING CHANGE: Made syntax of `mapAxis` and `byDimension` transforms consistent with other transforms
   - BREAKING CHANGE: Zarr parameter storage no longer allowed for scale/translation 
   - For detailed set of changes see [complete overview](https://ngff.openmicroscopy.org/rfc/5/responses/2/index.html)
+- BREAKING CHANGE: Consolidated usage of `arrayCoordinateSystems` to explicitly defined array coordinate systems.
 - Updated version keys from `0.6.dev2` to `0.6.dev3` everywhere
 - style: Homogeneous use of backticks in spec document
 - specification: Changed the constraints for valid `path` values in `wells` for HCS plates to allow some non-alphanumeric characters.
