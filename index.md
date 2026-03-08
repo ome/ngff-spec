@@ -281,16 +281,14 @@ As such, label images may be interpolated using "nearest neighbor" to obtain lab
 
 The dimensions of an array do not have an interpretation
 until they are associated with a coordinate system via a coordinate transformation.
-Nevertheless, it can be useful to refer to the "raw" coordinates of the array.
-Some applications might prefer to define points or regions-of-interest in "pixel coordinates" rather than "physical coordinates," for example.
+Nevertheless, some applications might prefer to define points or regions-of-interest
+in "pixel coordinates" rather than "physical coordinates," for example.
 Indicating that choice explicitly will be important for interoperability.
 This is possible by using **array coordinate systems**.
 
-Every array has a default coordinate system whose parameters need not be explicitly defined.
 The dimensionality of each array coordinate system equals the dimensionality of its corresponding Zarr array.
-Its name is the path to the array in the container,
-its axes have `"type": "array"`, are unitless, and have default names corresponding to the `dimension_names` in zarr.
-The i-th axis has `"name": "dim_i"` (these are the same default names used by [xarray](https://docs.xarray.dev/en/stable/user-guide/terminology.html)).
+Its axes have `"type": "array"`, are unitless, and have default names that SHOULD correspond to the `dimension_names` in zarr.
+I.e., the i-th axis has `"name": "dim_i"` (these are the same default names used by [xarray](https://docs.xarray.dev/en/stable/user-guide/terminology.html)).
 As with all coordinate systems, the dimension names must be unique and non-null.
 
 :::{dropdown} Example
@@ -319,8 +317,6 @@ then the corresponding array coordinate system can be explicitly defined in the 
 }
 
 ```
-
-
 
 Then `dim_0` has length 4, `dim_1` has length 3, and `dim_2` has length 5.
 
