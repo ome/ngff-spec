@@ -8,12 +8,6 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
-
-### Changed
-
-- Changed the constraints for valid `path` values in `wells` for HCS plates to allow some non-alphanumeric characters.
-
 ## [0.6.dev3] - 2025-01-27
 
 ### Changed
@@ -26,6 +20,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - For detailed set of changes see [complete overview](https://ngff.openmicroscopy.org/rfc/5/responses/2/index.html)
 - Updated version keys from `0.6.dev2` to `0.6.dev3` everywhere
 - style: Homogeneous use of backticks in spec document
+- specification: Changed the constraints for valid `path` values in `wells` for HCS plates to allow some non-alphanumeric characters.
+- specification: Corrected that `version` field is not required under plate/well/labels metadata. 
+- style: Adopted JSON terminology for "object" and "array" in the spec document.
 
 ### Removed
 
