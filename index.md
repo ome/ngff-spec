@@ -332,7 +332,7 @@ a coordinate transformation is used (see [coordinate transformations metadata](#
 
 :::{dropdown} Example
 
-In the following example, an array coordinate system is used
+In this example, an array coordinate system is used
 as the primary target of the multiscales coordinate transformations.
 This is useful in the case that other transformations (e.g., in a [`scene`](#scene-md) storage layout)
 are specified in pixel units rather than in physical units.
@@ -377,15 +377,16 @@ A single coordinate transformation (`scale` at the bottom) is then used to proje
           "type": "scale",
           "scale": [0.236, 0.236],
           "input": "arrayCoordinateSystem",
-          "output": "physical"
+          "output": "physical",
+          "name": "array_to_physical"
         }
       ]
     }
   ]
 }
 
-
 ```
+:::
 
 #### Coordinate convention
 
