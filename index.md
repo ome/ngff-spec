@@ -1249,11 +1249,14 @@ whose value is an array containing coordinate system metadata
 The following MUST hold for all coordinate systems inside multiscales metadata.
 The length of `axes` must be between 2 and 5
 and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
-The `axes` MUST contain 2 or 3 entries of `type:space`
-and MAY contain one additional entry of `type:time`
-and MAY contain one additional entry of `type:channel` or a null / custom type.
+The `axes` MUST contain either of:
+- 2 or 3 entries of `"type":"space"`
+  and MAY contain one additional entry of `"type":"time"`
+  and MAY contain one additional entry of `"type":"channel"` or a null / custom type.
+- only entries of `"type":"array"`
+
 In addition, the entries MUST be ordered by `type` where the `time` axis must come first (if present),
-followed by the  `channel` or custom axis (if present) and the axes of type `space`.
+followed by the  `channel` or custom axis (if present) and the axes of type `space` (if present).
 If there are three spatial axes where two correspond to the image plane (`yx`)
 and images are stacked along the other (anisotropic) axis (`z`),
 the spatial axes SHOULD be ordered as `zyx`.
