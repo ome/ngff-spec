@@ -1,0 +1,45 @@
+{
+  "ome": {
+    "version": "0.6.dev3",
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "name": "intrinsic",
+            "axes": [
+              {
+                "name": "y",
+                "type": "array"
+              },
+              {
+                "name": "x",
+                "type": "array"
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1.0,
+                  1.0
+                ],
+                "input": "0",
+                "output": "intrinsic",
+                "type": "scale"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    }
+  }
+}
