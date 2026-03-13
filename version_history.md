@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - For detailed set of changes see [complete overview](https://ngff.openmicroscopy.org/rfc/5/responses/2/index.html)
 - Updated version keys from `0.6.dev2` to `0.6.dev3` everywhere
 - style: Homogeneous use of backticks in spec document
-- spec: Constrained datatype of multiscales datasets to be the same across all resolutions
+- specification: Constrained datatype of multiscales datasets to be the same across all resolutions
 
 ### Removed
 
