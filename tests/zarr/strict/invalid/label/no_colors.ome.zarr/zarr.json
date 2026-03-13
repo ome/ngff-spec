@@ -3,14 +3,15 @@
   "node_type": "group",
   "attributes": {
     "ome": {
-      "version": "0.6.dev2",
+      "version": "0.6.dev3",
       "image-label": {}
     },
     "_conformance": {
       "schema": {
         "id": "schemas/strict_label.schema"
       },
-      "description": "Tests for the strict image-label JSON schema: "
+      "description": "Tests for the strict image-label JSON schema: ",
+      "valid": false
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6.dev2",
+    "version": "0.6.dev3",
     "image-label": {
       "properties": [
         {
@@ -13,6 +13,7 @@
     "schema": {
       "id": "schemas/label.schema"
     },
-    "description": "Tests for the image-label JSON schema: "
+    "description": "Tests for the image-label JSON schema: ",
+    "valid": false
   }
 }

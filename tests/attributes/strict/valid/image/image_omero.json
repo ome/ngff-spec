@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6.dev2",
+    "version": "0.6.dev3",
     "multiscales": [
       {
         "coordinateSystems": [
@@ -155,12 +155,13 @@
         "defaultZ": 2,
         "model": "color"
       },
-      "version": "0.6.dev2"
+      "version": "0.6.dev3"
     }
   },
   "_conformance": {
     "schema": {
       "id": "schemas/strict_image.schema"
-    }
+    },
+    "strict": true
   }
 }
