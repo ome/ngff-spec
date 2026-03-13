@@ -74,10 +74,11 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │                         # Group level attributes are stored in the `zarr.json` file and include
     │                         # "multiscales" and "omero" (see below).
     │
-    ├── 0                     # Each multiscale level is stored as a separate Zarr array,
+    ├── s0                    # Each multiscale level is stored as a separate Zarr array,
     │   ...                   # which is a folder containing chunk files which compose the array.
     ├── n                     # The name of the array is arbitrary with the ordering defined by
     │   │                     # by the "multiscales" metadata, but is often a sequence starting at 0.
+    │   │                     # All arrays must have the same datatype and number of dimensions.
     │   │
     │   ├── zarr.json         # All image arrays must be up to 5-dimensional
     │   │                     # with the axis of type time before type channel, before spatial axes.
@@ -99,7 +100,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
                 ├── zarr.json # Zarr Group which is both a multiscaled image as well as a labeled image.
                 │             # Metadata of the related image and as well as display information under the "image-label" key.
                 │
-                ├── 0         # Each multiscale level is stored as a separate Zarr array, as above, but only integer values
+                ├── s0        # Each multiscale level is stored as a separate Zarr array, as above, but only integer values
                 └── ...       # are supported.
 ```
 
@@ -131,7 +132,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     │   │   ├── 0             # First field of view of well A1
     │   │   │   │
     │   │   │   ├── zarr.json # Implements "multiscales", "omero"
-    │   │   │   ├── 0         # Resolution levels          
+    │   │   │   ├── s0        # Resolution levels          
     │   │   │   ├── ...
     │   │   │   └── labels    # Labels (optional)
     │   │   └── ...           # Other fields of view
@@ -1262,7 +1263,7 @@ which is an array of objects describing the arrays storing the individual resolu
 Each object in `datasets` MUST contain the field `path`,
 whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
 The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
-Every Zarr array referred to by a `path` MUST have the same number of dimensions
+Every Zarr array referred to by a `path` MUST have the same number of dimensions and datatype,
 and MUST NOT have more than 5 dimensions.
 The number of dimensions and order MUST correspond to number and order of `axes`.
 
