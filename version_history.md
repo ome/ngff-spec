@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - style: Homogeneous use of backticks in spec document
 - specification: Changed the constraints for valid `path` values in `wells` for HCS plates to allow some non-alphanumeric characters.
 - specification: Corrected that `version` field is not required under plate/well/labels metadata. 
+- specification: Constrained datatype of multiscales datasets to be the same across all resolutions
 - style: Adopted JSON terminology for "object" and "array" in the spec document.
 
 ### Removed
