@@ -74,10 +74,11 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │                         # Group level attributes are stored in the `zarr.json` file and include
     │                         # "multiscales" and "omero" (see below).
     │
-    ├── 0                     # Each multiscale level is stored as a separate Zarr array,
+    ├── s0                    # Each multiscale level is stored as a separate Zarr array,
     │   ...                   # which is a folder containing chunk files which compose the array.
     ├── n                     # The name of the array is arbitrary with the ordering defined by
     │   │                     # by the "multiscales" metadata, but is often a sequence starting at 0.
+    │   │                     # All arrays must have the same datatype and number of dimensions.
     │   │
     │   ├── zarr.json         # All image arrays must be up to 5-dimensional
     │   │                     # with the axis of type time before type channel, before spatial axes.
@@ -99,7 +100,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
                 ├── zarr.json # Zarr Group which is both a multiscaled image as well as a labeled image.
                 │             # Metadata of the related image and as well as display information under the "image-label" key.
                 │
-                ├── 0         # Each multiscale level is stored as a separate Zarr array, as above, but only integer values
+                ├── s0        # Each multiscale level is stored as a separate Zarr array, as above, but only integer values
                 └── ...       # are supported.
 ```
 
@@ -131,7 +132,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     │   │   ├── 0             # First field of view of well A1
     │   │   │   │
     │   │   │   ├── zarr.json # Implements "multiscales", "omero"
-    │   │   │   ├── 0         # Resolution levels          
+    │   │   │   ├── s0        # Resolution levels          
     │   │   │   ├── ...
     │   │   │   └── labels    # Labels (optional)
     │   │   └── ...           # Other fields of view
@@ -245,7 +246,7 @@ and adds an interpretation to the samples along that dimension.
 It is an array of objects,
 where each object describes a dimension (axis) and:
 - MUST contain the field `name` that gives the name for this dimension.
-  The values MUST be unique across all `name` fields in the same coordinate system.
+  The value MUST be a non-empty string.
 - SHOULD contain the field `type`.
   It SHOULD be one of the strings `array`, `space`, `time`, `channel`, `coordinate`, or `displacement`
   but MAY take other string values for custom axis types that are not part of this specification yet.
@@ -260,6 +261,9 @@ where each object describes a dimension (axis) and:
 - MAY contain the field `longName`.
   The value MUST be a string,
   and can provide a longer name or description of an axis and its properties.
+
+The values in the `name` fields MUST be unique within the same coordinate system.
+The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 Arrays are inherently discrete (see Array coordinate systems, below)
 but are often used to store discrete samples of a continuous variable.
@@ -460,7 +464,7 @@ The following transformations are supported:
 | [`displacements`](#coordinates-displacements-md) | `"path":str` | Displacement field transformation located at `path`. |
 | [`coordinates`](#coordinates-displacements-md) | `"path":str` | Coordinate field transformation located at `path`. |
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
-| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`, <br> `"input_axes": List[str]`, <br> `"output_axes": List[str]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
+| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"input_axes": List[number]`, <br> and `"output_axes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
 (e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation). 
@@ -1262,7 +1266,7 @@ which is an array of objects describing the arrays storing the individual resolu
 Each object in `datasets` MUST contain the field `path`,
 whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
 The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
-Every Zarr array referred to by a `path` MUST have the same number of dimensions
+Every Zarr array referred to by a `path` MUST have the same number of dimensions and datatype,
 and MUST NOT have more than 5 dimensions.
 The number of dimensions and order MUST correspond to number and order of `axes`.
 
