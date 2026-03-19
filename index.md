@@ -201,10 +201,10 @@ object that MUST contain a `version` key, the value of which MUST be a string sp
 ### "coordinateSystems" metadata
 (coordinate-systems-md)=
 
-A `coordinateSystem` is a JSON object with a `name` field and a `axes` field.
+A coordinate system is a JSON object with a `name` field and a `axes` field.
 Every coordinate system:
 - MUST contain the field `name`.
-  The value MUST be a non-empty string that is unique among all entries under `coordinateSystems`.
+  The value MUST be a non-empty string that is unique among all entries in a `coordinateSystems` array.
 - MUST contain the field `axes`, whose value is an array of valid `axes` (see below).
 The elements of `axes` correspond to the index of each array dimension and coordinates for points in that coordinate system.
 For the below example, the `x` dimension is the last dimension.
