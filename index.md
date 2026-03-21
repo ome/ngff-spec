@@ -1299,8 +1299,9 @@ If applications require additional transformations,
 each `multiscales` object MAY contain the field `coordinateTransformations`,
 describing transformations that are applied to all resolution levels in the same manner.
 The value of `input` MUST equal the name of the "intrinsic" coordinate system.
-The value of `output` MUST be the name of the output coordinate System
-which is different from the "intrinsic" coordinate system.
+The value of `output` MUST be the name of a coordinate System
+which is different from the "intrinsic" coordinate system
+and which is defined in the `coordinateSystems` field of the `multiscales` metadata.
 
 Each `multiscales` object SHOULD contain the field `name`.
 
