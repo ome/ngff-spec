@@ -1193,8 +1193,8 @@ I.e. the y-displacement is first, because the y-axis is the first element of the
 ```{warning}
 The `interpolation` field refers to the method that is used to interpolate the `coordinate` or `displacement` array,
 *not* the method used to interpolate the image when applying the transformation to an image.
-The `interpolation` field, if provided, is not a normative  in the sense that usage of a different method is invalid under the spec.
-While implementations may prefer to use faster methods for rendering (i.e., `linear` or `nearest`), this can lead to pathological cases:
+The `interpolation` field, if provided, is not normative in the sense that usage of a different method is invalid under the spec.
+Implementations may prefer to use faster methods for rendering (i.e., `linear` or `nearest`) but this may lead to pathological cases:
 - If `nearest` interpolation is used for a `coordinates` transformation,
   the transformed image collapses into a single point at the nearest coordinate in the coordinate field.
 - If `nearest` interpolation is used for a `displacements` transformation,
