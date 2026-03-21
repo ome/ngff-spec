@@ -1147,7 +1147,7 @@ That value gives us the displacement of the input point,
 hence the output is `1.0 + (-0.5) = 0.5`.
 :::
 
-:::{dropdown} Example 3
+:::{dropdown} Example 3: 3D displacement transformation
 
 In this example, the array located at `displacementField` MUST have three dimensions.
 One dimension MUST correspond to an axis with `type : displacement` (in this example, the last dimension),
