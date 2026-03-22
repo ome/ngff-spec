@@ -946,7 +946,7 @@ and is invertible.
 (coordinates-displacements-md)=
 
 `coordinates` and `displacements` transformations store a vector field in an array,
-defining a mapping from an input coordinate system to an output coordinate system of the same dimensionality.
+defining a mapping from an input coordinate system of dimensionality `N` to an output coordinate system of dimensionality `M`.
 The array contains either coordinates (absolute positions)
 or displacements (relative shifts) for each point in the input space.
 
@@ -1026,11 +1026,15 @@ the array data at referred to by `path` MUST define the following metadata field
 The array at `path` MUST satisfy:
 
   - **Dimensionality**: If the input coordinate system has `N` axes, the array at location `path` MUST have `N+1` dimensions.
-  - **Vector dimension length**: The length of the array along the `coordinate`/`displacement` dimension MUST equal `N`,
-    the number of axes in the output and output coordinate system.
+  - **Vector dimension length**: 
+    - For `coordinates` transformations, the length of the array along the `coordinate` dimension (last axis) MUST equal `M`,
+      the number of axes in the output coordinate system.
+    - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
+      the number of axes in the input (and output) coordinate system. `displacements` require `M=N`.
   - **Vector component mapping**: The `i`th value of the array along the `coordinate` or `displacement` axis refers to the `i`th output axis.
 
-The output coordinate system MUST have the same number of axes (`M`) as the input coordinate system (`N`).
+For a `displacements` transform, the output coordinate system MUST have the same number of axes (`M`) as the input coordinate system (`N`).
+For a `coordinates` transform, the output coordinate system can have a different number of axes (`M`) than the input coordinate system (`N`).
 
 ```{hint}
 Applying the transformation amounts to following the following steps:
