@@ -503,7 +503,7 @@ i.e., the mapping from the first input axis to the first output axis is determin
 Conforming readers:
 - MUST parse `identity`, `scale`, `translation` transformations;
 - SHOULD parse `mapAxis`, `affine`, `rotation` transformations;
-- SHOULD display an informative warning if encountering transformations that cannot be parsed or displayed by a viewer;
+- SHOULD display an informative warning if encountering transformations that cannot be parsed or displayed by a consumer;
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
 
@@ -970,6 +970,7 @@ Metadata for these coordinate transforms have the following fields:
     - `"nearest"` for nearest neighbor interpolation,
     - `"linear"` for linear interpolation (default)
     - `"cubic"` for cubic interpolation, etc.
+    Consumers SHOULD clearly communicate to users if a different interpolation method is used.
 
 
 ```{hint}
@@ -1302,6 +1303,13 @@ the input and output of the `forward` and `inverse` transformations are understo
 :language: json
 ```
 :::
+
+```{hint}
+The exact values in a transformed image depend on the interpolation used when applying any transformation to the image
+and on the exact implementation of this transformation.
+Exact reproducibility of pixel values in a transformed image is not expected across different implementations
+and therefore also out of scope for the specified transformation types in this specification document.
+```
 
 ### "multiscales" metadata
 (multiscales-md)=
