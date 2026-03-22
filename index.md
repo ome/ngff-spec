@@ -1089,7 +1089,16 @@ Example metadata for the array data at path `i2xCoordinates` above:
 Here, the axis `i` refers to the input positions along the `i`-axis (i.e., pixel indices).
 The `c` axis holds the corresponding output coordinates.
 
-If the array in `coordinates` contains the data: `[-9, 9, 0]`, then this metadata defines the following function to map
+If the array in `coordinates` contains the data:
+```
+[
+  [-9],  // Output coordinate for i=0
+  [9],   // Output coordinate for i=1
+  [0]    // Output coordinate for i=2
+]
+```
+
+then this metadata defines the following function to map
 the `i` axis (`input` coordinate system) to the `x` axis (`output` coordinate system):
 
 ```
@@ -1142,7 +1151,16 @@ Example metadata for the array data at path `displacements` above:
 Since the input and output coordinate system may be defined in physical units,
 a scale transformation is needed to map the displacement vectors into the same physical units as the input point.
 
-If the array in `displacements` contains the data: `[-1, 0, 1]`,
+If the array in `displacements` contains the data:
+
+```
+[
+  [-1],  // Displacement for x=0
+  [0],   // Displacement for x=1
+  [1]    // Displacement for x=2
+]
+```
+
 this transformation maps the point `[1.0]` to the point `[0.5]`.
 A scale transformation maps the array coordinates to the `x` axis.
 Using the inverse of the scale transform, we see that we need the position `0.5` in array coordinates.
@@ -1152,7 +1170,7 @@ That value gives us the displacement of the input point,
 hence the output is `1.0 + (-0.5) = 0.5`.
 :::
 
-:::{dropdown} Example 3: 3D displacement transformation
+:::{dropdown} Example 3: 2D displacement transformation
 
 In this example, the array located at `displacementField` MUST have three dimensions.
 One dimension MUST correspond to an axis with `type : displacement` (in this example, the last dimension),
