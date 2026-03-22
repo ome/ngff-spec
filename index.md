@@ -964,9 +964,7 @@ The array containing the coordinates or displacements MUST:
 - have one dimension corresponding to every axis of the input coordinate system
 - have one additional dimension to hold components of the vector (either coordinates or displacements)
 
-The last axis of the array (the vector dimension) MUST have a length equal to the number of dimensions in the output coordinate system.
-Metadata for these coordinate transforms have the following fields: 
-
+Metadata for these coordinate transforms have the following fields:
 
 **path**
 :  The location of the coordinate array in this (or another) container.
@@ -1040,9 +1038,6 @@ The array at `path` MUST satisfy:
     - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
       the number of axes in the input (and output) coordinate system. `displacements` require `M=N`.
   - **Vector component mapping**: The `i`th value of the array along the `coordinate` or `displacement` axis refers to the `i`th output axis.
-
-For a `displacements` transform, the output coordinate system MUST have the same number of axes (`M`) as the input coordinate system (`N`).
-For a `coordinates` transform, the output coordinate system can have a different number of axes (`M`) than the input coordinate system (`N`).
 
 ```{hint}
 Applying the transformation amounts to following the following steps:
