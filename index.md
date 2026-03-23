@@ -346,13 +346,11 @@ if not datasets:
 ### "omero" metadata (transitional)
 (version0.5:omero-md)=
 
-[=Transitional=] information specific to the channels of an image and how to render it
-can be found under the "omero" key in the group-level metadata:
-
-```json
-"id": 1,                              # ID in OMERO
-"name": "example.tif",                # Name as shown in the UI
-"channels": [                         # Array matching the c dimension size
+| type | fields | description |
+|------|--------|-------------|
+| `identity` | | identity transformation, is the default transformation and is typically not explicitly defined |
+| `translation` | one of: `"translation":List[float]`, `"path":str` | translation vector, stored either as a list of floats (`"translation"`) or as binary data at a location in this container (`path`). The length of vector defines number of dimensions. |
+| `scale` | one of: `"scale":List[float]`, `"path":str` | scale vector, stored either as a list of floats (`scale`) or as binary data at a location in this container (`path`). The length of vector defines number of dimensions. |s": [                         # Array matching the c dimension size
     {
         "active": true,
         "coefficient": 1,
