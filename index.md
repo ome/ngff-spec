@@ -1,6 +1,7 @@
 ---
 title: Next-generation file format specification
 short_title: OME-Zarr
+authors: " "
 ---
 
 # 🚧 Dev: 0.6.dev3 🚧
