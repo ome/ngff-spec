@@ -14,14 +14,14 @@ project:
     - name: Davis Bennett
       github: d-v-b
     - name: Sébastien Besson
-      orcid: "https://orcid.org/0000-0001-8783-1429"
+      orcid: "0000-0001-8783-1429"
       github: sbesson
       affiliation: Glencoe
     - name: John Bogovic
       github: bogovicj
       affiliation: HHMI
     - name: Jean-Marie Burel
-      orcid: "https://orcid.org/0000-0002-1789-1861"
+      orcid: "0000-0002-1789-1861"
       affiliation: Dundee
       github: jburel
 
@@ -54,7 +54,7 @@ project:
       affiliation: allencell
     - name: Guillaume Gay
       github: glyg
-      orcid: https://orcid.org/0000-0002-5444-5246
+      orcid: "0000-0002-5444-5246"
       affiliation: francebioimaging
     - name: Ilan Gold
       github: ilan-gold
@@ -67,7 +67,7 @@ project:
       affiliation: dartmouth
     - name: Matthew Hartley
       github: matthewh-ebi
-      orcid: https://orcid.org/0000-0001-6178-2884
+      orcid: "0000-0001-6178-2884"
       affiliation: EMBL-EBI
     - name: Julian Hn
       github: julianhn
@@ -185,7 +185,7 @@ project:
       orcid: "0000-0003-4105-1990"
     - name: Dan Toloudis
       github: toloudis
-      orcid: "https://orcid.org/0000-0003-2620-1233"
+      orcid: "0000-0003-2620-1233"
     
     # U
     - name: Virginie Uhlmann
@@ -212,7 +212,7 @@ project:
     # Y
     - name: Kevin Yamauchi
       github: kevinyamauchi
-      orcid: "https://orcid.org/0000-0002-7818-1388"
+      orcid: "0000-0002-7818-1388"
       affiliation: ETH
 
     # Z
