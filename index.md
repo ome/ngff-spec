@@ -8,6 +8,10 @@ short_title: OME-Zarr
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
+```{include} _authors.md
+```
+
+
 **Editor:** Josh Moore, ([German BioImaging e.V.](https://gerbi-gmb.de)), [<img src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" alt="ORCID iD" height=12 width=12 style="vertical-align: middle;"/>](https://orcid.org/0000-0003-4028-811X)
 
 ## Abstract
