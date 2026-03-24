@@ -78,10 +78,11 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │                         # Group level attributes are stored in the `zarr.json` file and include
     │                         # "multiscales" and "omero" (see below).
     │
-    ├── 0                     # Each multiscale level is stored as a separate Zarr array,
+    ├── s0                    # Each multiscale level is stored as a separate Zarr array,
     │   ...                   # which is a folder containing chunk files which compose the array.
     ├── n                     # The name of the array is arbitrary with the ordering defined by
     │   │                     # by the "multiscales" metadata, but is often a sequence starting at 0.
+    │   │                     # All arrays must have the same datatype and number of dimensions.
     │   │
     │   ├── zarr.json         # All image arrays must be up to 5-dimensional
     │   │                     # with the axis of type time before type channel, before spatial axes.
@@ -103,7 +104,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
                 ├── zarr.json # Zarr Group which is both a multiscaled image as well as a labeled image.
                 │             # Metadata of the related image and as well as display information under the "image-label" key.
                 │
-                ├── 0         # Each multiscale level is stored as a separate Zarr array, as above, but only integer values
+                ├── s0        # Each multiscale level is stored as a separate Zarr array, as above, but only integer values
                 └── ...       # are supported.
 ```
 
@@ -135,7 +136,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     │   │   ├── 0             # First field of view of well A1
     │   │   │   │
     │   │   │   ├── zarr.json # Implements "multiscales", "omero"
-    │   │   │   ├── 0         # Resolution levels          
+    │   │   │   ├── s0        # Resolution levels          
     │   │   │   ├── ...
     │   │   │   └── labels    # Labels (optional)
     │   │   └── ...           # Other fields of view
@@ -157,7 +158,7 @@ those Zarr arrays SHOULD be stored in a Zarr group on the same level as images c
 store.zarr                      # One scene dataset
 │
 ├── zarr.json                   # coordinate transformations describing the relationship between two image coordinate systems
-│                               # are stored in the "scene" dictionary here.
+│                               # are stored in the "scene" object here.
 │                               # I.e., transformations between coordinate systems in the 'volume' and 'crop' multiscale images are stored here.
 │
 ├── coordinateTransformations   # transformations that use array storage for their parameters should go in a Zarr group named "coordinateTransformations".
@@ -249,7 +250,7 @@ and adds an interpretation to the samples along that dimension.
 It is an array of objects,
 where each object describes a dimension (axis) and:
 - MUST contain the field `name` that gives the name for this dimension.
-  The values MUST be unique across all `name` fields in the same coordinate system.
+  The value MUST be a non-empty string.
 - SHOULD contain the field `type`.
   It SHOULD be one of the strings `array`, `space`, `time`, `channel`, `coordinate`, or `displacement`
   but MAY take other string values for custom axis types that are not part of this specification yet.
@@ -264,6 +265,9 @@ where each object describes a dimension (axis) and:
 - MAY contain the field `longName`.
   The value MUST be a string,
   and can provide a longer name or description of an axis and its properties.
+
+The values in the `name` fields MUST be unique within the same coordinate system.
+The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 Arrays are inherently discrete (see Array coordinate systems, below)
 but are often used to store discrete samples of a continuous variable.
@@ -456,15 +460,15 @@ The following transformations are supported:
 |------|--------|-------------|
 | [`identity`](#identity-md) | | The identity transformation is the do-nothing transformation and is typically not explicitly defined. |
 | [`mapAxis`](#mapaxis-md) | `"mapAxis":List[number]` | an axis permutation as a transpose array of integer indices that refer to the ordering of the axes in the respective coordinate system. |
-| [`translation`](#translation-md) | one of:<br>`"translation":List[number]`,<br>`"path":str` | Translation vector, stored either as an array of numbers (`"translation"`) or as a Zarr array at a location in this container (`path`). |
-| [`scale`](#scale-md) | one of:<br>`"scale":List[number]`,<br>`"path":str` | Scale vector, stored either as an array of numbers (`scale`) or as a Zarr array at a location in this container (`path`). |
+| [`translation`](#translation-md) | <br>`"translation":List[number]` | Translation vector, stored either as an array of numbers (`"translation"`) or as a Zarr array at a location in this container (`path`). |
+| [`scale`](#scale-md) | <br>`"scale":List[number]` | Scale vector, stored either as an array of numbers (`scale`) or as a Zarr array at a location in this container (`path`). |
 | [`affine`](#affine-md) | one of:<br>`"affine":List[List[number]]`,<br>`"path":str` | 2D affine transformation matrix stored either with JSON (`affine`) or as a Zarr array at a location in this container (`path`). |
 | [`rotation`](#rotation-md) | one of:<br>`"rotation":List[List[number]]`,<br>`"path":str` | 2D rotation transformation matrix stored as an array stored either with json (`rotation`) or as a Zarr array at a location in this container (`path`).|
 | [`sequence`](#sequence-md) | `"transformations":List[Transformation]` | sequence of transformations. Applying the sequence applies the composition of all transforms in the list, in order. |
 | [`displacements`](#coordinates-displacements-md) | `"path":str` | Displacement field transformation located at `path`. |
 | [`coordinates`](#coordinates-displacements-md) | `"path":str` | Coordinate field transformation located at `path`. |
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
-| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`, <br> `"input_axes": List[str]`, <br> `"output_axes": List[str]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
+| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"input_axes": List[number]`, <br> and `"output_axes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
 (e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation). 
@@ -518,8 +522,8 @@ Coordinate transformations can be stored in multiple places to reflect different
   The output can be another coordinate system defined under `multiscales > coordinateSystems`.
   
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more images
-  MUST be stored in the attributes of a [`scene` dictionary](#scene-md) in a [scene Zarr group](#scene-format).
-  In this case, the `input` and `output` values are dictionaries
+  MUST be stored in the attributes of a [`scene` object](#scene-md) in a [scene Zarr group](#scene-format).
+  In this case, the `input` and `output` values are objects
   that refer to coordinate systems in the same zarr.json or in the metadata of multiscale image subgroups.
 
 This separation of transformations (inside `multiscales > datasets`, under `multiscales > coordinateTransformations` and under `scene > coordinateTransformations`) provides flexibility for different use cases while still maintaining a level of rigidity for implementations.
@@ -1145,8 +1149,8 @@ I.e. the y-displacement is first, because the y-axis is the first element of the
 using lower dimensional transformations on subsets of dimensions.
 
 **transformations**
-: MUST be an array of wrapped transformations.
-  Each item MUST contain `input_axes`, `output_axes` and `transformation` fields.
+: MUST be an array of objects where each object MUST contain
+  the fields `input_axes`, `output_axes` and `transformation`.
   The values of `input_axes` and `output_axes` are arrays of integers.
   The integer values in these arrays correspond to the axis indices in the `byDimension`'s or its parent's
   `input` and `output` coordinate systems, respectively.
@@ -1266,7 +1270,7 @@ which is an array of objects describing the arrays storing the individual resolu
 Each object in `datasets` MUST contain the field `path`,
 whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
 The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
-Every Zarr array referred to by a `path` MUST have the same number of dimensions
+Every Zarr array referred to by a `path` MUST have the same number of dimensions and datatype,
 and MUST NOT have more than 5 dimensions.
 The number of dimensions and order MUST correspond to number and order of `axes`.
 
@@ -1509,7 +1513,7 @@ and MUST NOT be a duplicate of any other `name` in the `rows` array.
 Care SHOULD be taken to avoid collisions on case-insensitive filesystems
 (e.g. avoid using both `Aa` and `aA`).
 
-The `plate` dictionary MUST contain a `wells` key
+The `plate` object MUST contain a `wells` key
 whose value MUST be a list of JSON objects defining the wells of the plate.
 Each well object MUST contain a `path` key
 whose value MUST be a string specifying the path to the well subgroup.
@@ -1583,7 +1587,7 @@ The first field is part of the first acquisition, and the second field is part o
 For images that share a spatial relationship,
 the `scene` metadata layout can be used to describe the relationship between images.
 
-The `scene` dictionary MUST contain the field `coordinateTransformations`,
+The `scene` object MUST contain the field `coordinateTransformations`,
 whose value MUST be an array of valid [transformations](#trafo-types-md).
 It MAY contain the field `coordinateSystems`,
 whose values MUST be an array of valid [coordinate systems](#coordinate-systems-md).
@@ -1593,12 +1597,12 @@ which MUST contain the field `name` and MAY contain the field `path`.
 
 **name**
   Refers to the name of a `coordinateSystem` either in the multiscale image subgroup specified by the path,
-  or within the `scene` dictionary itself.
+  or within the `scene` object itself.
 
 **path**
   Refers to the path of a multiscale image subgroup in the Zarr hierarchy.
 
-If `name` refers to a coordinate system in the `scene` dictionary,
+If `name` refers to a coordinate system in the `scene` object,
 the `path` value MAY be omitted or null.
 If `name` refers to a coordinate system in the multiscale image subgroup specified by `path`,
 both `path` and `name` MUST be provided.
