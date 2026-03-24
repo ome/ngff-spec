@@ -2,6 +2,83 @@ version: 1
 project:
 
   authors:
+    # Core: RFC process/editors
+    # RFC5 AUTHORS
+    - name: Josh Moore
+      github: joshmoore
+      affiliation: Gerbi
+      orcid: 0000-0003-4028-811X
+
+    - name: John Bogovic
+      github: bogovicj
+      affiliation: HHMI
+
+    - name: Johannes Soltwedel
+      github: jo-mueller
+      affiliation: Gerbi
+      orcid: "0000-0003-1273-2412"
+
+    - name: Luca Marconato
+      github: LucaMarconato
+      orcid: 0000-0003-3198-1326
+      affiliation: EMBL
+
+    - name: Davis Bennett
+      github: d-v-b
+
+    - name: William Moore
+      github: will-moore
+      affiliation: Dundee
+      orcid: 0000-0002-7264-8338
+
+    - name: Matt McCormick
+      orcid: 0000-0001-9475-3756
+      github: thewtex
+      affiliation: fideus
+
+    # RFC5 REVIEWERS
+    - name: Dan Toloudis
+      github: toloudis
+      orcid: "0000-0003-2620-1233"
+
+    - name: Forest Collmann
+      github: fcollman
+      affiliation: allenbrain
+
+    - name: Nathalie Gaudreault
+      affiliation: allencell
+
+    - name: David Feng
+      github: dyf
+      affiliation: allenneural
+
+    - name: Jean-Marie Burel
+      orcid: "0000-0002-1789-1861"
+      affiliation: Dundee
+      github: jburel
+
+    - name: Jason R. Swedlow
+      github: jrswedlow
+      orcid: "0000-0002-2198-1958"
+
+    # RFC5 commenters
+    - name: Ilan Gold
+      github: ilan-gold
+    - name: Jeremy Maitin-Shepard
+      github: jbms
+      affiliation: google
+      orcid: 0000-0001-8453-7961
+    - name: David Stansby
+      github: dstansby
+      affiliation: UCL
+      orcid: "0000-0002-1365-1908"
+
+    - name: Sébastien Besson
+      orcid: "0000-0001-8783-1429"
+      github: sbesson
+      affiliation: Glencoe
+
+    # ngff-spec repo contributors
     # A
     - name: Chris Allan
       affiliation: Glencoe
@@ -11,24 +88,8 @@ project:
     - name: Chris Barnes
       github: clbarnes
       affiliation: Gerbi
-    - name: Davis Bennett
-      github: d-v-b
-    - name: Sébastien Besson
-      orcid: "0000-0001-8783-1429"
-      github: sbesson
-      affiliation: Glencoe
-    - name: John Bogovic
-      github: bogovicj
-      affiliation: HHMI
-    - name: Jean-Marie Burel
-      orcid: "0000-0002-1789-1861"
-      affiliation: Dundee
-      github: jburel
 
     # C
-    - name: Forest Collmann
-      github: fcollman
-      affiliation: allenbrain
     - name: Tommaso Comparin
       github: tcompa
 
@@ -44,20 +105,11 @@ project:
       github: imagejan
       affiliation: FMI
 
-    # F
-    - name: David Feng
-      github: dyf
-      affiliation: allenneural
-
     # G
-    - name: Nathalie Gaudreault
-      affiliation: allencell
     - name: Guillaume Gay
       github: glyg
       orcid: "0000-0002-5444-5246"
       affiliation: francebioimaging
-    - name: Ilan Gold
-      github: ilan-gold
     - name: Xiao Gui
       github: xgui3783
     
@@ -100,28 +152,6 @@ project:
       affiliation: biovision
       orcid: 0000-0003-3023-170X
 
-    # M
-    - name: Jeremy Maitin-Shepard
-      github: jbms
-      affiliation: google
-      orcid: 0000-0001-8453-7961
-    - name: Luca Marconato
-      github: LucaMarconato
-      orcid: 0000-0003-3198-1326
-      affiliation: EMBL
-    - name: Matt McCormick
-      orcid: 0000-0001-9475-3756
-      github: thewtex
-      affiliation: fideus
-    - name: Josh Moore
-      github: joshmoore
-      affiliation: Gerbi
-      orcid: 0000-0003-4028-811X
-    - name: William Moore
-      github: will-moore
-      affiliation: Dundee
-      orcid: 0000-0002-7264-8338
-
     # N
     - name: Juan Nunez-Iglesias
       github: jni
@@ -156,37 +186,19 @@ project:
       orcid: "0000-0002-8168-7929"
 
     # S
-    - name: Stephan Saalfeld
-      github: axtimwalde
-      affiliation: HHMI
-      orcid: "0000-0002-4106-1761"
     - name: Virginia Scarlett
       github: virginiascarlett
       orcid: "0000-0002-4156-2849"
     - name: Doug Shepherd
       github: dpshepherd
       affiliation: ASU
-    - name: Johannes Soltwedel
-      github: jo-mueller
-      affiliation: Gerbi
-      orcid: "0000-0003-1273-2412"
-    - name: David Stansby
-      github: dstansby
-      affiliation: UCL
-      orcid: "0000-0002-1365-1908"
-    - name: Jason R. Swedlow
-      github: jrswedlow
-      orcid: "0000-0002-2198-1958"
 
     # T
     - name: Christian Tischer
       github: tischi
       affiliation: EMBL
       orcid: "0000-0003-4105-1990"
-    - name: Dan Toloudis
-      github: toloudis
-      orcid: "0000-0003-2620-1233"
-    
+
     # U
     - name: Virginie Uhlmann
       github: vuhlmann
