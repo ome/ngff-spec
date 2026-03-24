@@ -1,0 +1,23 @@
+{
+  "coordinateSystems": [
+    { "name": "in", "axes": [ {"name": "a"}, {"name": "b"}]},
+    { "name": "out_down", "axes": [ {"name": "x"}]},
+    { "name": "out_up", "axes": [ {"name": "z"}, {"name": "y"}, {"name": "x"} ]}
+  ],
+  "coordinateTransformations": [ 
+    { 
+      "name": "projection down",
+      "type": "mapAxis", 
+      "mapAxis": [1],
+      "input": "in",
+      "output": "out_down" 
+    },
+    { 
+      "name": "projection up",
+      "type": "mapAxis", 
+      "mapAxis": [1, 1, 0],
+      "input": "in",
+      "output": "out_up" 
+    }
+  ]
+}

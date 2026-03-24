@@ -1,0 +1,14 @@
+{
+  "coordinateSystems": [
+    { "name": "input", "axes": [{"name": "i"}] },
+    { "name": "output", "axes": [{"name": "x"}] }
+  ],
+  "coordinateTransformations": [{
+    "name": "a displacement field transform",
+    "type": "displacements",
+    "path": "i2xCoordinates",
+    "input": "input",
+    "output": "output",
+    "interpolation": "nearest"
+  }]
+}

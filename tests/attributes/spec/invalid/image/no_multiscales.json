@@ -1,0 +1,12 @@
+{
+  "ome": {
+    "version": "0.6.dev3",
+    "multiscales": []
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    },
+    "valid": false
+  }
+}

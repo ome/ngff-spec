@@ -1,0 +1,69 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev3",
+      "multiscales": [
+        {
+          "coordinateSystems": [
+            {
+              "name": "intrinsic",
+              "axes": [
+                {
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
+                }
+              ]
+            }
+          ],
+          "datasets": [
+            {
+              "path": "0",
+              "coordinateTransformations": [
+                {
+                  "scale": [
+                    1,
+                    1
+                  ],
+                  "type": "scale",
+                  "input": "0",
+                  "output": "intrinsic"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "omero": {
+        "channels": [
+          {
+            "active": true,
+            "coefficient": 1.0,
+            "color": 255,
+            "family": "linear",
+            "label": "1234",
+            "window": {
+              "end": 1765.0,
+              "max": 2555.0,
+              "min": 5.0,
+              "start": 0.0
+            }
+          }
+        ]
+      }
+    },
+    "_conformance": {
+      "schema": {
+        "id": "schemas/image.schema"
+      },
+      "valid": false
+    }
+  }
+}
