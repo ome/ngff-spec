@@ -24,7 +24,7 @@
         ],
         "datasets": [
           {
-            "path": "0",
+            "path": "s0",
             "coordinateTransformations": [
               {
                 "scale": [
@@ -33,8 +33,8 @@
                   1
                 ],
                 "type": "scale",
-                "input": "0",
-                "output": "intrinsic"
+                "input": {"path": "s0"},
+                "output": {"name": "intrinsic"}
               }
             ]
           }

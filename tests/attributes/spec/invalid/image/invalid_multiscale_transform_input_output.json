@@ -8,10 +8,6 @@
             "name": "intrinsic",
             "axes": [
               {
-                "name": "angle",
-                "type": "custom"
-              },
-              {
                 "name": "y",
                 "type": "space",
                 "unit": "micrometer"
@@ -26,17 +22,16 @@
         ],
         "datasets": [
           {
-            "path": "0",
+            "path": "s0",
             "coordinateTransformations": [
               {
                 "scale": [
                   1,
-                  1,
                   1
                 ],
-                "input": {"path": "0"},
-                "output": {"name": "intrinsic"},
-                "type": "scale"
+                "type": "scale",
+                "input": "s0",
+                "output": "intrinsic"
               }
             ]
           }
@@ -47,6 +42,7 @@
   "_conformance": {
     "schema": {
       "id": "schemas/image.schema"
-    }
+    },
+    "valid": false
   }
 }

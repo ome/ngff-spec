@@ -46,8 +46,8 @@
             "coordinateTransformations": [
               {
                 "type": "scale",
-                "output": "physical",
-                "input": "array",
+                "output": {"name": "physical"},
+                "input": {"path": "array"},
                 "scale": [1, 1],
                 "name": "array to physical"
               }
@@ -57,8 +57,8 @@
         "coordinateTransformations":[
           {
             "name": "rotation",
-            "input": "physical",
-            "output": "rotated",
+            "input": {"name": "physical"},
+            "output": {"name": "rotated"},
             "type": "rotation",
             "rotation": [
               [0, 1],

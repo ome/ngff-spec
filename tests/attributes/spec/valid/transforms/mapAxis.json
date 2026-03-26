@@ -46,8 +46,8 @@
             "coordinateTransformations": [
               {
                 "type": "sequence",
-                "output": "physical",
-                "input": "s0",
+                "output": {"name": "physical"},
+                "input": {"path": "s0"},
                 "name": "scale0_to_physical",
                 "transformations": [
                   {
@@ -67,8 +67,8 @@
             "coordinateTransformations": [
               {
                 "type": "sequence",
-                "output": "physical",
-                "input": "s1",
+                "output": {"name": "physical"},
+                "input": {"path": "s1"},
                 "name": "scale1_to_physical",
                 "transformations": [
                   {
@@ -88,8 +88,8 @@
             "coordinateTransformations": [
               {
                 "type": "sequence",
-                "output": "physical",
-                "input": "s2",
+                "output": {"name": "physical"},
+                "input": {"path": "s2"},
                 "name": "scale2_to_physical",
                 "transformations": [
                   {
@@ -109,8 +109,8 @@
           {
             "type": "mapAxis",
             "name": "physical-to-sheared",
-            "input": "physical",
-            "output": "sheared",
+            "input": {"name": "physical"},
+            "output": {"name": "sheared"},
             "mapAxis": [1, 0]
           }
         ]

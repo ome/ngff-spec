@@ -63,7 +63,7 @@
         ],
         "datasets": [
           {
-            "path": "0",
+            "path": "s0",
             "coordinateTransformations": [
               {
                 "scale": [
@@ -74,13 +74,13 @@
                   0.13
                 ],
                 "type": "scale",
-                "input": "0",
-                "output": "physical"
+                "input": {"path": "s0"},
+                "output": {"name": "physical"}
               }
             ]
           },
           {
-            "path": "1",
+            "path": "s1",
             "coordinateTransformations": [
               {
                 "scale": [
@@ -91,8 +91,8 @@
                   0.26
                 ],
                 "type": "scale",
-                "input": "1",
-                "output": "physical"
+                "input": {"path": "s1"},
+                "output": {"name": "physical"}
               }
             ]
           }
@@ -107,8 +107,8 @@
               21.58
             ],
             "type": "translation",
-            "input": "intrinsic",
-            "output": "world"
+            "input": {"name": "intrinsic"},
+            "output": {"name": "world"}
           }
         ],
         "name": "image_with_omero_metadata",

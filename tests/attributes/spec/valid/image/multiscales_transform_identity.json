@@ -29,8 +29,8 @@
 						"coordinateTransformations": [
 							{
 								"type": "identity",
-								"output": "physical",
-								"input": "array",
+								"output": {"name": "physical"},
+								"input": {"path": "array"},
 								"name": "transform-name"
 							}
 						]

@@ -66,7 +66,7 @@
         ],
         "datasets": [
           {
-            "path": "0",
+            "path": "s0",
             "coordinateTransformations": [
               {
                 "type": "scale",
@@ -77,8 +77,8 @@
                   0.5,
                   0.5
                 ],
-                "input": "0",
-                "output": "intrinsic"
+                "input": {"path": "s0"},
+                "output": {"name": "intrinsic"}
               }
             ]
           },
@@ -94,13 +94,13 @@
                   1.0,
                   1.0
                 ],
-                "input": "1",
-                "output": "intrinsic"
+                "input": {"path": "s1"},
+                "output": {"name": "intrinsic"}
               }
             ]
           },
           {
-            "path": "2",
+            "path": "s2",
             "coordinateTransformations": [
               {
                 "type": "scale",
@@ -111,8 +111,8 @@
                   2.0,
                   2.0
                 ],
-                "input": "2",
-                "output": "intrinsic"
+                "input": {"path": "s2"},
+                "output": {"name": "intrinsic"}
               }
             ]
           }
@@ -127,8 +127,8 @@
               1.0,
               1.0
             ],
-            "input": "world",
-            "output": "intrinsic"
+            "input": {"name": "world"},
+            "output": {"name": "intrinsic"}
           }
         ],
         "type": "gaussian",
