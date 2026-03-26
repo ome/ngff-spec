@@ -603,11 +603,17 @@ In the context of multiscales metadata, this could look like this:
       "coordinateSystems": [
         {
           "name": "intrinsic",
-          "axes": [{"name": "x", "type": "space", "unit": "micrometer"}, {"name": "y", "type": "space", "unit": "micrometer"}]
+          "axes": [
+            {"name": "y", "type": "space", "unit": "micrometer"},
+            {"name": "x", "type": "space", "unit": "micrometer"}
+          ]
         },
         {
           "name": "array",
-          "axes": [{"name": "x", "type": "space"}, {"name": "y", "type": "space"}]
+          "axes": [
+            {"name": "y", "type": "space"},
+            {"name": "x", "type": "space"}
+          ]
         }
       ],
       "datasets": [
