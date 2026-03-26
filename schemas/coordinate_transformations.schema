@@ -15,39 +15,15 @@
         "type": "object",
         "properties": {
           "input": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "path": {
-                    "type": "string"
-                  }
-                }
-              }
+            "allOf": [
+              {"$ref": "#/$defs/inputOutput"},
+              {"required": ["path"]}
             ]
           },
           "output": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "path": {
-                    "type": "string"
-                  }
-                }
-              }
+            "allOf": [
+              {"$ref": "#/$defs/inputOutput"},
+              {"required": ["name"]}
             ]
           }
         },
@@ -59,6 +35,13 @@
     ]
   },
   "$defs": {
+    "inputOutput": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "path": {"type": "string"}
+      }
+    },
     "coordinateTransformation": {
       "description": "OME-NGFF coordinate transformation.",
       "allOf": [
