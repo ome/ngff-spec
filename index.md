@@ -634,7 +634,7 @@ In the context of multiscales metadata, this could look like this:
           "type": "scale",
           "scale": [2.0, 2.0],
           "input": {"name": "intrinsic"},
-          "output": {"name": "pixel"}
+          "output": {"name": "array"}
         }
       ]
     }
@@ -642,8 +642,8 @@ In the context of multiscales metadata, this could look like this:
 }
 ```
 In this case, the `scale` transformation under `coordinateTransformations`
-defines the mapping from the "intrinsic" coordinate system to the unitless "pixel" coordinate system.
-Another transformation (e.g. in a `scene`) could then use the "pixel" coordinate system as an input or output to define transformations in pixel units.
+defines the mapping from the "intrinsic" coordinate system to the unitless "array" coordinate system.
+Another transformation (e.g. in a `scene`) could then use the "array" coordinate system as an input or output to define transformations in array units.
 :::
 
 
