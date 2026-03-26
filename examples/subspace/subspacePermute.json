@@ -47,8 +47,8 @@
               "coordinateTransformations": [
                 {
                   "type": "scale",
-                  "output": "array_coordinates",
-                  "input": "array",
+                  "output": {"name": "array_coordinates"},
+                  "input": {"path": "array"},
                   "name": "default-scale",
                   "scale": [1, 1]
                 }
@@ -58,8 +58,8 @@
           "coordinateTransformations": [
             {
               "type": "mapAxis",
-              "output": "physical",
-              "input": "array_coordinates",
+              "output": {"name": "physical"},
+              "input": {"name": "array_coordinates"},
               "name": "transform-name",
               "mapAxis": [1, 0]
             }

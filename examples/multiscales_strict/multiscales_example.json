@@ -28,8 +28,8 @@
                   // and the time unit (0.1 milliseconds), which is the same for each scale level
                   "type": "scale",
                   "scale": [0.1, 1.0, 0.5, 0.5, 0.5],
-                  "input": "s0",
-                  "output": "intrinsic"
+                  "input": {"path": "s0"},
+                  "output": {"name": "intrinsic"}
                 }
               ]
             },
@@ -41,8 +41,8 @@
                   // and the time unit (0.1 milliseconds), which is the same for each scale level
                   "type": "scale",
                   "scale": [0.1, 1.0, 1.0, 1.0, 1.0],
-                  "input": "s1",
-                  "output": "intrinsic"
+                  "input": {"path": "s1"},
+                  "output": {"name": "intrinsic"}
                 }
               ]
             },
@@ -54,8 +54,8 @@
                   // and the time unit (0.1 milliseconds), which is the same for each scale level
                   "type": "scale",
                   "scale": [0.1, 1.0, 2.0, 2.0, 2.0],
-                  "input": "s2",
-                  "output": "intrinsic"
+                  "input": {"path": "s2"},
+                  "output": {"name": "intrinsic"}
                 }
               ]
             }

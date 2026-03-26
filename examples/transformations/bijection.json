@@ -14,8 +14,8 @@
         "type" : "coordinates",
         "path" : "inverse_coordinates"
       },
-      "input": "src",
-      "output": "tgt"
+      "input": {"name": "src"},
+      "output": {"name": "tgt"}
     }
   ]
 }

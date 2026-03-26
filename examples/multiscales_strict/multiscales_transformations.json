@@ -45,8 +45,8 @@
                 {
                   "scale": [1, 1],
                   "type": "scale",
-                  "input": "s0",
-                  "output": "intrinsic"
+                  "input": {"path": "s0"},
+                  "output": {"name": "intrinsic"}
                 }
               ]
             }
@@ -55,8 +55,8 @@
             {
               "scale": [10, 10],
               "type": "scale",
-              "input": "intrinsic",
-              "output": "physical"
+              "input": {"name": "intrinsic"},
+              "output": {"name": "physical"}
             }
           ],
           "name": "image_with_coordinateTransformations",
