@@ -238,6 +238,12 @@ SHOULD ensure that they are in the same coordinate system (same name and locatio
 or can be transformed to the same coordinate system before doing analysis.
 See the [example below](spec:example:coordinate_transformation).
 
+```{hint}
+[Multiscale images](#multiscale-md) generally have an "intrinsic" coordinate system,
+which will generally be a representation of the image in its native physical coordinate system.
+It should be used for viewing and processing unless a use case dictates otherwise.
+```
+
 #### "axes" metadata
 
 `axes` describes the dimensions of a coordinate systems
@@ -526,11 +532,16 @@ Depending on which, different constraints apply to the transformations, as descr
   - The `input` to every one of these transformations MUST be the intrinsic coordinate system, referenced by the `name` field.
   - The `output` can be another coordinate system defined under `multiscales > coordinateSystems`, referrenced by the `name` field.
     It can also refer to a coordinate system in a child [labels](#labels-md) group, in which case both `name` and `path` fields MUST be provided.
-  
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more images
   MUST be stored in the attributes of a [`scene` object](#scene-md) in a [scene Zarr group](#scene-format).
   In this case, the `input` and `output` values are objects
   that refer to coordinate systems in the same zarr.json or in the metadata of multiscale image subgroups.
+
+| Context | `input` | `output` |
+|---------|---------|----------|
+| **multiscales > datasets** | `{ "path": "<dataset_path>" }` | `{ "name": "intrinsic" }`|
+| **multiscales > coordinateTransformations** | `{ "name": "intrinsic" }` | `{ "name": "output" }` <br> or <br> `{ "name": "intrinsic", "path": "labels/labels_path" }` |
+| **scene > coordinateTransformations** | `{ "name": "input", "path": "path_to/imageA" }` | `{ "name": "output", "path": "path_to/imageB" }` |
 
 This separation of transformations (inside `multiscales > datasets`, under `multiscales > coordinateTransformations` and under `scene > coordinateTransformations`) provides flexibility for different use cases while still maintaining a level of rigidity for implementations.
 
@@ -1286,10 +1297,16 @@ that maps Zarr array coordinates for this resolution level to the "intrinsic" co
 The transformation is defined according to [transformations metadata](#trafo-types-md).
 The transformation MUST take as input points in the array coordinate system
 corresponding to the Zarr array at location `path`.
-The value of `input` MUST equal the value of `path`, 
-implementations should always treat the value of `input` as if it were equal to the value of `path`.
-The value of the transformation’s `output` coordinate system MUST be the same for every dataset in a single multiscales.
-This coordinate system (the "intrinsic" coordinate system) will generally be a representation of the image in its native physical coordinate system.
+The values of `input` and `output` MUST be an object with the fields `name` and `path` that satisfy:
+- The `path` field of `input` MUST be the same as the `path` field of the dataset,
+  the `name` field of `input` can be omitted.
+  Implementations should always treat the value of `path` under the `input` field as if it were equal to the value of `path`.
+- The `name` field of `output` MUST be the `name` of a coordinate system.
+  It MUST be the same name for every resolution level in a single multiscales
+  The `path` field of `output` can be omitted.
+
+The coordinate system referenced by all `output` fields of the coordinate transformations (the "intrinsic" coordinate system)
+will generally be a representation of the image in its native physical coordinate system.
 It should be used for viewing and processing unless a use case dictates otherwise.
 
 The transformation MUST be one of the following:
