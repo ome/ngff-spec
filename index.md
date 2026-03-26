@@ -3,8 +3,8 @@ title: Next-generation file format specification
 short_title: OME-Zarr
 ---
 
-# 🚧 Dev: 0.6.dev3 🚧
-(ngff-spec:spec:0.6.dev3)=
+# 🚧 Dev: 0.6.dev4 🚧
+(ngff-spec:spec:0.6.dev4)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
@@ -24,7 +24,7 @@ All specifications are submitted to the <https://image.sc> community for review.
 
 ## Status of This Document
 
-The working title version of this specification is 0.6.dev3.
+The working title version of this specification is 0.6.dev4.
 Migration scripts will be provided between numbered versions.
 Data written with these latest changes (an "editor's draft") will not necessarily be supported.
 
@@ -184,14 +184,14 @@ The OME-Zarr Metadata is stored in the various `zarr.json` files throughout the 
 The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 
 The group `attributes` MUST contain a key `ome`. The value of the `ome` key MUST be a JSON
-object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](ngff-spec:spec:0.6.dev3).
+object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](ngff-spec:spec:0.6.dev4).
 
 ```jsonc
 {
   // ...
   "attributes": {
     "ome": {
-      "version": "0.6.dev3",
+      "version": "0.6.dev4",
       // ...
     }
   }
@@ -443,10 +443,12 @@ They:
 
 - MUST contain the field `type` (string).
 - MUST contain any other fields required by the given `type` (see table below).
-- MUST contain the field `output` (string),
-  unless part of a wrapper transform (, i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
-- MUST contain the field `input` (string),
-  unless part of a wrapper transform (, i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
+- MUST contain the field `output` (string), which is an object with fields `name` and `path`.
+  The `output` field MAY be omitted if the transformation is part of a wrapper transform
+  (i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
+- MUST contain the field `input` (string), which is an object with fields `name` and `path`.
+  The `input` field MAY be omitted if the transformation is part of a wrapper transform
+  (i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
 - MAY contain the field `name` (string).
   Its value MUST be unique across all `name` fields for all coordinate transformations in the same list.
 - Parameter values MUST be compatible with input and output space dimensionality (see details).
@@ -507,15 +509,23 @@ Conforming readers:
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
 
+
+**Constraints**
+
 Coordinate transformations can be stored in multiple places to reflect different use cases.
+Depending on which, different constraints apply to the transformations, as described below:
      
-- **Inside `multiscales > datasets`**: `coordinateTransformations` herein MUST be restricted
-  to a single `scale`, `identity` or `sequence` of a scale followed by a translation transformation.
+- **Inside `multiscales > datasets`**: `coordinateTransformations` herein MUST
+  - be restricted to a single `scale`, `identity` or `sequence` of a scale followed by a translation transformation.
+  - provide `path` in the `input` object and omit `name`.
+  - provide `name` in the `output` object and omit `path`.
   For more information, see [multiscales section below](#multiscales-md).
 - **Inside `multiscales > coordinateTransformations`**: Additional transformations for single multiscale images MAY be stored here.
-  The `coordinateTransformations` field MUST contain an array of valid [transformations](#trafo-types-md).
-  The input to every one of these transformations MUST be the intrinsic coordinate system.
-  The output can be another coordinate system defined under `multiscales > coordinateSystems`.
+  The following constraints apply to transformations under the `coordinateTransformations` field:
+  - The `coordinateTransformations` field MUST contain an array of valid [transformations](#trafo-types-md).
+  - The `input` to every one of these transformations MUST be the intrinsic coordinate system, referenced by the `name` field.
+  - The `output` can be another coordinate system defined under `multiscales > coordinateSystems`, referrenced by the `name` field.
+    It can also refer to a coordinate system in a child [labels](#labels-md) group, in which case both `name` and `path` fields MUST be provided.
   
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more images
   MUST be stored in the attributes of a [`scene` object](#scene-md) in a [scene Zarr group](#scene-format).
@@ -571,8 +581,8 @@ image by computing the inverse of this transformation.
 ```json
 {
   "type": "<a type that can be inverted in closed-form>",
-  "input": "moving image",
-  "output": "fixed image"
+  "input": {"name": "moving image"},
+  "output": {"name": "fixed image"}
 }
 ```
 
@@ -585,8 +595,8 @@ applying this transformation directly.
 ```json
 {
   "type": "<a type that can NOT be inverted in closed-form>",
-  "input": "fixed image",
-  "output": "moving image"
+  "input": {"name": "fixed image"},
+  "output": {"name": "moving image"}
 }
 ```
 
@@ -597,8 +607,8 @@ to do so by estimating the transformations' inverse if they choose to.
 ```json
 {
   "type": "<a type that can NOT be inverted in closed-form>",
-  "input": "moving image",
-  "output": "fixed image"
+  "input": {"name": "moving image"},
+  "output": {"name": "fixed image"}
 }
 ```
 :::
@@ -1298,9 +1308,33 @@ so that the the "intrinsic" coordinate system of the image avoids more complex t
 If applications require additional transformations,
 each `multiscales` object MAY contain the field `coordinateTransformations`,
 describing transformations that are applied to all resolution levels in the same manner.
-The value of `input` MUST equal the name of the "intrinsic" coordinate system.
-The value of `output` MUST be the name of the output coordinate System
-which is different from the "intrinsic" coordinate system.
+The values of both `input` and `output` fields MUST be an object with fields `name` and `path`.
+The value of `input` MUST be the "intrinsic" coordinate system.
+The value of `output` can be the name of an output coordinate System in the same multiscales group
+or the name of a coordinate system in a multiscales group in a child [labels](#labels-md) group
+If the referrenced coordinate system is in the same multiscales group, the `path` can be omitted.
+If the referrenced coordinate system is in a child labels group,
+the used transformation MUST be one of [`identity`](#identity-md), ['scale'](#scale-md) or ['translation'](#translation-md) transformations.
+
+:::{dropdown} Example
+
+In the case a `coordinateTransformation` under `multiscales > coordinateTransformations` is used to link
+to a coordinate system in a child labels group, the respective metadata would look like this:
+
+```json
+
+{
+  "coordinateTransformations": [
+    {
+      "type": "identity",
+      "input": { "name": "intrinsic" },
+      "output": { "name": "intrinsic", "path": "labels/label_image"}
+    }
+  ]
+}
+```
+In this example, a multiscales group containing labels is located at `labels/label_image` relative to the current multiscales group.
+:::
 
 Each `multiscales` object SHOULD contain the field `name`.
 
@@ -1389,6 +1423,10 @@ For example, pixels take the value 1 or 0 if the corresponding pixel in the orig
 Such an image is referred to in this specification as a "label image".
 
 The `labels` group is nested within an image group, at the same level of the Zarr hierarchy as the resolution levels for the original image.
+This image group MUST implement the [multiscales](#multiscales-md) specification.
+The image group MUST contain an additional coordinate transformation that links its "intrinsic" coordinate system to the intrinsic coordinate system of each label image in the `labels` group.
+This transformation MUST be one of [`identity`](#identity-md), ['scale'](#scale-md) or ['translation'](#translation-md) transformations.
+
 The `labels` group is not itself an image; it contains images.
 The pixels of the label images MUST be integer data types,
 i.e. one of [`uint8`, `int8`, `uint16`, `int16`, `uint32`, `int32`, `uint64`, `int64`].
@@ -1406,7 +1444,7 @@ For example:
 {
   "attributes": {
     "ome": {
-      "version": "0.6.dev3",
+      "version": "0.6.dev4",
       "labels": [
         "cell_space_segmentation"
       ]
