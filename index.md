@@ -280,61 +280,6 @@ Here, we refer to any method that obtains values at real-valued coordinates usin
 As such, label images may be interpolated using "nearest neighbor" to obtain labels at points along the continuum.
 ```
 
-#### Array coordinate systems
-
-The dimensions of an array do not have an interpretation
-until they are associated with a coordinate system via a coordinate transformation.
-Nevertheless, it can be useful to refer to the "raw" coordinates of the array.
-Some applications might prefer to define points or regions-of-interest in "pixel coordinates" rather than "physical coordinates," for example.
-Indicating that choice explicitly will be important for interoperability.
-This is possible by using **array coordinate systems**.
-
-Every array has a default coordinate system whose parameters need not be explicitly defined.
-The dimensionality of each array coordinate system equals the dimensionality of its corresponding Zarr array.
-Its name is the path to the array in the container,
-its axes have `"type": "array"`, are unitless, and have default names.
-The i-th axis has `"name": "dim_i"` (these are the same default names used by [xarray](https://docs.xarray.dev/en/stable/user-guide/terminology.html)).
-As with all coordinate systems, the dimension names must be unique and non-null.
-
-:::{dropdown} Example
-```json
-{
-  "arrayCoordinateSystem" : {
-    "name" : "myDataArray",
-    "axes" : [
-      {"name": "dim_0", "type": "array"},
-      {"name": "dim_1", "type": "array"},
-      {"name": "dim_2", "type": "array"}
-    ]
-  }
-}
-
-```
-
-For example, if 0/zarr.json contains:
-```json
-{
-    "zarr_format": 3,
-    "node_type": "array",
-    "shape": [4, 3, 5],
-    //...
-}
-```
-
-Then `dim_0` has length 4, `dim_1` has length 3, and `dim_2` has length 5.
-
-:::
-
-The axes and their order align with the shape of the corresponding Zarr array,
-and whose data depends on the byte order used to store chunks.
-As described in the [Zarr array metadata](https://zarr.readthedocs.io/en/stable/spec/v3.html#arrays),
-the last dimension of an array in "C" order are stored contiguously on disk or in-memory when directly loaded. 
-
-The name and axes names MAY be customized by including a `arrayCoordinateSystem` field
-in the user-defined attributes of the array whose value is a coordinate system object.
-The length of `axes` MUST be equal to the dimensionality.
-The value of `type` for each object in the axes array MUST equal `"array"`.
-
 #### Coordinate convention
 
 **The pixel/voxel center is the origin of the continuous coordinate system.**
@@ -602,6 +547,99 @@ to do so by estimating the transformations' inverse if they choose to.
 }
 ```
 :::
+
+**Transformations in pixel units**: Some applications might prefer to define points, regions-of-interest or transformation parameters
+in "pixel coordinates" rather than "physical coordinates".
+Because transformations are agnostic to whether they refer to pixel or physical coordinates,
+indicating that choice explicitly will be important for interoperability.
+This can be expressed in the metadata in multiple ways, including:
+- One can embed a transformation defined in pixel units into a `sequence` transformation
+  that includes the appropriate scale transformation and its inverse to convert to physical units (see example below).
+- One can define a unitless coordinate system and connect it to the "intrinsic" coordinate system
+  with a scale transformation that has the appropriate scale factors to convert to physical units.
+
+:::{dropdown} Example: Embedded expression
+
+In the context of [`scene`](#scene-md), one may want to express a transformation between two images in pixel units,
+even though the coordinate systems of the two images are in physical units.
+This can be achieved by embedding the pixel-unit transformation into a `sequence` transformation like this:
+
+```json
+{ "scene": 
+  {
+    "type": "sequence",
+    "input": {"name": "intrinsic", "path": "imageA"},
+    "output": {"name": "intrinsic", "path": "imageB"},
+    "transformations": [
+      {
+        "type": "scale",
+        "scale": [0.5, 0.5],
+      },
+      {
+        "type": "translation",
+        "translation": [10, 20],
+        "name": "translation in pixel units"
+      },
+      {
+        "type": "scale",
+        "scale": [2, 2],
+      }
+    ]
+  }
+}
+```
+:::
+
+:::{dropdown} Example: Unitless coordinate system
+
+Alternatively, users may choose to define a unitless coordinate system and connect it to the "intrinsic" coordinate system
+with a scale transformation that has the appropriate scale factors to convert to physical units.
+In the context of multiscales metadata, this could look like this:
+
+```json
+{
+  "multiscales": [
+    {
+      "coordinateSystems": [
+        {
+          "name": "intrinsic",
+          "axes": [{"name": "x", "type": "space", "unit": "micrometer"}, {"name": "y", "type": "space", "unit": "micrometer"}]
+        },
+        {
+          "name": "array",
+          "axes": [{"name": "x", "type": "space"}, {"name": "y", "type": "space"}]
+        }
+      ],
+      "datasets": [
+        {
+          "path": "s0",
+          "coordinateTransformations": [
+            {
+              "type": "scale",
+              "scale": [0.5, 0.5],
+              "input": "s0",
+              "output": "intrinsic"
+            }
+          ]
+        }
+      ],
+      "coordinateTransformations": [ 
+        {
+          "type": "scale",
+          "scale": [2.0, 2.0],
+          "input": {"name": "intrinsic"},
+          "output": {"name": "pixel"}
+        }
+      ]
+    }
+  ]
+}
+```
+In this case, the `scale` transformation under `coordinateTransformations`
+defines the mapping from the "intrinsic" coordinate system to the unitless "pixel" coordinate system.
+:::
+
+
 
 #### Matrix transformations
 (matrix-trafo-md)=
