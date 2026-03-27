@@ -1015,9 +1015,6 @@ the array data at referred to by `path` MUST define the following metadata field
   The second axis (`c`) holds the coordinate values for the vector field.  
   :::
 
-  Generally, if the input coordinate system has `N` axes, the coordinate system for the array at `path` MUST have `N+1` axes,
-  where the first `N` axes correspond to the input coordinate system and the last axis corresponds to the vector components.
-
 * `coordinateTransformations`: Defines how to map from the pixel coordinate system of the array into a physical coordinate system.
   It MUST contain a single transformation with the following properties:
   - `type`: The type of the transformation; MUST be one of [`identity`](#identity-md), [`scale`](#scale-md)
