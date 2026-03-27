@@ -523,8 +523,8 @@ Depending on which, different constraints apply to the transformations, as descr
      
 - **Inside `multiscales > datasets`**: `coordinateTransformations` herein MUST
   - be restricted to a single `scale`, `identity` or `sequence` of a scale followed by a translation transformation.
-  - provide `path` in the `input` object and omit `name`.
-  - provide `name` in the `output` object and omit `path`.
+  - in the `input` object provide `path` and omit `name`.
+  - in the `output` object provide `name` and omit `path`.
   For more information, see [multiscales section below](#multiscales-md).
 - **Inside `multiscales > coordinateTransformations`**: Additional transformations for single multiscale images MAY be stored here.
   The following constraints apply to transformations under the `coordinateTransformations` field:
