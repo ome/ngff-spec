@@ -530,7 +530,7 @@ Depending on which, different constraints apply to the transformations, as descr
   The following constraints apply to transformations under the `coordinateTransformations` field:
   - The `coordinateTransformations` field MUST contain an array of valid [transformations](#trafo-types-md).
   - The `input` to every one of these transformations MUST be the intrinsic coordinate system, referenced by the `name` field.
-  - The `output` can be another coordinate system defined under `multiscales > coordinateSystems`, referenced by the `name` field.
+  - The `output` MUST be another coordinate system defined under `multiscales > coordinateSystems`, referenced by the `name` field, or another coordinate system in a child [labels](#labels-md) group referenced by both `name` and `path`.
     It can also refer to a coordinate system in a child [labels](#labels-md) group, in which case both `name` and `path` fields MUST be provided.
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more images
   MUST be stored in the attributes of a [`scene` object](#scene-md) in a [scene Zarr group](#scene-format).
