@@ -1095,9 +1095,9 @@ The `c` axis holds the corresponding output coordinates.
 If the array in `coordinates` contains the data:
 ```
 [
-  [-9],  // Output coordinate for i=0
-  [9],   // Output coordinate for i=1
-  [0]    // Output coordinate for i=2
+  [-9],  // Output coordinate for index=0, i=0
+  [9],   // Output coordinate for index=1, i=1
+  [0]    // Output coordinate for index=2, i=2
 ]
 ```
 
@@ -1126,7 +1126,7 @@ A 1D example displacement field:
 ```
 
 where we assume input coordinate systems `input` and `output` are defined elsewhere.
-We furthermore assume that the input coordinate system `input` has one axis named `i` that is discrete and corresponds to pixel positions along the i-axis,
+We furthermore assume that the input coordinate system `input` has one axis named `i`,
 and that the output coordinate system `output` has one axis named `x` that is continuous and corresponds to physical positions along the x-axis.
 Example metadata under the attributes of the zarr array at path `displacements` above:
 
@@ -1160,9 +1160,9 @@ If the array in `displacements` contains the data:
 
 ```
 [
-  [-1],  // Displacement for x=0
-  [0],   // Displacement for x=1
-  [1]    // Displacement for x=2
+  [-1],  // Displacement for index=0, x=0
+  [0],   // Displacement for index=1, x=2
+  [1]    // Displacement for index=2, x=4
 ]
 ```
 
