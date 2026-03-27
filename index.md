@@ -1066,25 +1066,27 @@ to an output coordinate system `output` would have metadata such as:
 where we assume input coordinate systems `input` and `output` are defined elsewhere.
 We furthermore assume that the input coordinate system `input` has one axis named `i` that is discrete and corresponds to pixel positions along the i-axis,
 and that the output coordinate system `output` has one axis named `x` that is continuous and corresponds to physical positions along the x-axis.
-Example metadata for the array data at path `i2xCoordinates` above:
+Example metadata under the attributes of the zarr array at path `i2xCoordinates` above:
 
 ```json
 {
-  "coordinateSystems" : [
-    {
-      "name" : "a coordinate field transform",
-      "axes" : [
-        { "name": "i", "type": "space", "discrete": true },
-        { "name": "c", "type": "coordinate", "discrete": true }
-      ]
-    } 
-  ],
-  "coordinateTransformations" : [
-    {
-      "type" : "identity",
-      "output" : "a coordinate field transform"
-    }
-  ]
+  "ome": {
+    "coordinateSystems" : [
+      {
+        "name" : "a coordinate field transform",
+        "axes" : [
+          { "name": "i", "type": "space", "discrete": true },
+          { "name": "c", "type": "coordinate", "discrete": true }
+        ]
+      } 
+    ],
+    "coordinateTransformations" : [
+      {
+        "type" : "identity",
+        "output" : "a coordinate field transform"
+      }
+    ]
+  }
 }
 ```
 
@@ -1127,26 +1129,28 @@ A 1D example displacement field:
 where we assume input coordinate systems `input` and `output` are defined elsewhere.
 We furthermore assume that the input coordinate system `input` has one axis named `i` that is discrete and corresponds to pixel positions along the i-axis,
 and that the output coordinate system `output` has one axis named `x` that is continuous and corresponds to physical positions along the x-axis.
-Example metadata for the array data at path `displacements` above:
+Example metadata under the attributes of the zarr array at path `displacements` above:
 
 ```json
 {
-  "coordinateSystems" : [
-    {
-      "name" : "a displacement field transform",
-      "axes" : [
-        { "name": "x", "type": "space", "unit" : "nanometer" },
-        { "name": "d", "type": "displacement", "discrete": true }
-      ]
-    } 
-  ],
-  "coordinateTransformations" : [
-    {
-      "type" : "scale",
-      "scale" : [2, 1],
-      "output" : "a displacement field transform"
-    }
-  ]
+  "ome": {
+    "coordinateSystems" : [
+      {
+        "name" : "a displacement field transform",
+        "axes" : [
+          { "name": "x", "type": "space", "unit" : "nanometer" },
+          { "name": "d", "type": "displacement", "discrete": true }
+        ]
+      } 
+    ],
+    "coordinateTransformations" : [
+      {
+        "type" : "scale",
+        "scale" : [2, 1],
+        "output" : "a displacement field transform"
+      }
+    ]
+  }
 }
 ```
 
@@ -1198,7 +1202,8 @@ The metadata at location `displacementField` should have a coordinate system suc
 ```json
 "coordinateSystems" : [
   { "name" : "in", "axes" : [
-    {"name":"y"}, {"name":"x"},
+    {"name":"y"},
+    {"name":"x"},
     {"name":"d", "type":"displacement", "discrete":true} ]
   }
 ]
