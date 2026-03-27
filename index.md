@@ -953,7 +953,7 @@ and is invertible.
 (coordinates-displacements-md)=
 
 `coordinates` and `displacements` transformations store a vector field in an array,
-defining a mapping from an input coordinate system of dimensionality `N` to an output coordinate system of dimensionality `M`.
+defining a mapping from an input coordinate system to an output coordinate system.
 The array contains either coordinates (absolute positions)
 or displacements (relative shifts) for each point in the input space.
 
