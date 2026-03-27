@@ -1044,8 +1044,6 @@ to an output coordinate system `output` would have metadata such as:
 ```
 
 where we assume input coordinate systems `input` and `output` are defined elsewhere.
-We furthermore assume that the input coordinate system `input` has one axis named `i` that is discrete and corresponds to pixel positions along the i-axis,
-and that the output coordinate system `output` has one axis named `x` that is continuous and corresponds to physical positions along the x-axis.
 Example metadata under the attributes of the zarr array at path `coordinateTransformations/i2xCoordinates` above:
 
 ```json
@@ -1108,8 +1106,6 @@ A 1D example displacement field:
 ```
 
 where we assume input coordinate systems `input` and `output` are defined elsewhere.
-We furthermore assume that the input coordinate system `input` has one axis named `i`,
-and that the output coordinate system `output` has one axis named `x` that is continuous and corresponds to physical positions along the x-axis.
 Example metadata under the attributes of the zarr array at path `displacements` above:
 
 ```json
