@@ -1037,13 +1037,15 @@ The array at `path` MUST satisfy:
   - **Vector component mapping**: The `i`th value of the array along the `coordinate` or `displacement` axis refers to the `i`th output axis.
 
 ```{hint}
-Applying the transformation amounts to following the following steps:
-1. Look up the vector in the array corresponding to the input point's coordinates in the input coordinate system.
-2. If the input point does not correspond to a discrete point in the `coordinate` or `displacement` array,
+Applying the transformation to a point `x` in the input coordinate system amounts to following the following steps:
+1. Use the inverse of the transformation found in the vector field's metadata under `coordinateTransformations`
+  to map the input point `x` into the corresponding array coordinate `a`.
+2. Look up the vector in the array corresponding to that point's coordinates in the array's coordinate system.
+3. If the point (`a`) does not correspond to a discrete point in the `coordinate` or `displacement` array,
    interpolate the vector field to obtain a vector for the input point.
-3. Treat the result either as
+4. Treat the result either as
    - an absolute position (`coordinates`) or
-   - a displacement to add to the input point (`displacements`).
+   - a displacement to add to the input point `x` (`displacements`).
 ```
 
 :::{dropdown} Example 1: 1D coordinate transformation
