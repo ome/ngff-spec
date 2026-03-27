@@ -996,27 +996,6 @@ the array data at referred to by `path` MUST define the following metadata field
   - The additional axis should be the last axis (for contiguous memory layout in C-order).
   - The `name` of this coordinate system SHOULD be the same as the `name` of the corresponding coordinate transformation.
 
-  :::{dropdown} Example
-  A 1D example coordinate field stored under `"path": "coordinateTransformations/coordinates"`
-  would need to contain the following coordinate system definition in its `zarr.json`:
-
-  ```json
-  {
-    "coordinateSystems": [
-      {
-        "name": "a coordinate field transform",
-        "axes": [
-          { "name": "i", "type": "space", "discrete": true },
-          { "name": "c", "type": "coordinate", "discrete": true }
-        ]
-      }
-    ]
-  }
-  ```
-  The first axis (`i`) corresponds to the transform's input coordinate system.
-  The second axis (`c`) holds the coordinate values for the vector field.  
-  :::
-
 * `coordinateTransformations`: Defines how to map from the pixel coordinate system of the array into a physical coordinate system.
   It MUST contain a single transformation with the following properties:
   - `type`: The type of the transformation; MUST be one of [`identity`](#identity-md), [`scale`](#scale-md)
@@ -1057,7 +1036,7 @@ to an output coordinate system `output` would have metadata such as:
 {
     "name" : "a coordinate field transform",
     "type": "coordinates",
-    "path" : "i2xCoordinates",
+    "path" : "coordinateTransformations/i2xCoordinates",
     "input" : "input",
     "output" : "output",
     "interpolation" : "nearest"
@@ -1067,7 +1046,7 @@ to an output coordinate system `output` would have metadata such as:
 where we assume input coordinate systems `input` and `output` are defined elsewhere.
 We furthermore assume that the input coordinate system `input` has one axis named `i` that is discrete and corresponds to pixel positions along the i-axis,
 and that the output coordinate system `output` has one axis named `x` that is continuous and corresponds to physical positions along the x-axis.
-Example metadata under the attributes of the zarr array at path `i2xCoordinates` above:
+Example metadata under the attributes of the zarr array at path `coordinateTransformations/i2xCoordinates` above:
 
 ```json
 {
@@ -1091,7 +1070,8 @@ Example metadata under the attributes of the zarr array at path `i2xCoordinates`
 }
 ```
 
-Here, the axis `i` refers to the input positions along the `i`-axis, which equal array indices in this case as indicated by the `identity` transformation.
+Here, the axis `i` refers to the input positions along the `i`-axis,
+which equal array indices in this case as indicated by the `identity` transformation.
 The `c` axis holds the corresponding output coordinates.
 
 If the array in `coordinates` contains the data:
