@@ -1325,13 +1325,13 @@ so that the the "intrinsic" coordinate system of the image avoids more complex t
 If applications require additional transformations,
 each `multiscales` object MAY contain the field `coordinateTransformations`,
 describing transformations that are applied to all resolution levels in the same manner.
-The values of both `input` and `output` fields MUST be an object with fields `name` and `path`.
-The value of `input` MUST be the "intrinsic" coordinate system.
-The value of `output` can be the name of an output coordinate System in the same multiscales group
-or the name of a coordinate system in a multiscales group in a child [labels](#labels-md) group
-If the referenced coordinate system is in the same multiscales group, the `path` can be omitted.
-If the referenced coordinate system is in a child labels group,
-the used transformation MUST be one of [`identity`](#identity-md), ['scale'](#scale-md) or ['translation'](#translation-md) transformations.
+The values of both `input` and `output` fields MUST be an object with fields `name` and `path` that satisfy:
+- The value of `input` MUST be the "intrinsic" coordinate system, referenced by `name`.
+  The `path` field of `input` SHOULD be omitted.
+- The value of `output` can be a coordinate System in the same multiscales group (referenced by `name`).
+  In this case, the `path` field of `output` SHOULD be omitted.
+- The value of `output` can be a coordinate system in a multiscales group in a child [labels](#labels-md) group (referenced by `path` and `name`).
+  In this case, the used transformation MUST be one of [`identity`](#identity-md), ['scale'](#scale-md) or ['translation'](#translation-md) transformations.
 
 :::{dropdown} Example
 
