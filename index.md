@@ -996,8 +996,8 @@ the array data at referred to by `path` MUST define the following metadata field
   - The additional axis should be the last axis (for contiguous memory layout in C-order).
   - The `name` of this coordinate system SHOULD be the same as the `name` of the corresponding coordinate transformation.
 
-* `coordinateTransformations`: Defines how to map from the pixel coordinate system of the array into a physical coordinate system.
-  It MUST contain a single transformation with the following properties:
+* `coordinateTransformations`: Defines how to map from the coordinate system of the array into a physical coordinate system
+(e.g. the resolution at which the vector field is sampled). MUST contain a single transformation with the following properties:
   - `type`: The type of the transformation; MUST be one of [`identity`](#identity-md), [`scale`](#scale-md)
     or a [`sequence`](#sequence-md) of a [scale](#scale-md) followed by a [translation](#translation-md).
   - `output`: The name of the coordinate system defined in the `coordinateSystems` field of the array metadata.
