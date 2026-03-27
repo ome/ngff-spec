@@ -1303,7 +1303,7 @@ The values of `input` and `output` MUST be an object with the fields `name` and 
   Implementations should always treat the value of `path` under the `input` field as if it were equal to the value of `path`.
 - The `name` field of `output` MUST be the `name` of a coordinate system.
   It MUST be the same name for every resolution level in a single multiscales
-  The `path` field of `output` can be omitted.
+  The `path` field of `output` SHOULD be omitted.
 
 The coordinate system referenced by all `output` fields of the coordinate transformations (the "intrinsic" coordinate system)
 will generally be a representation of the image in its native physical coordinate system.
