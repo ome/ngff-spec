@@ -449,7 +449,7 @@ They:
 
 - MUST contain the field `type` (string).
 - MUST contain any other fields required by the given `type` (see table below).
-- MUST contain the field `output` (string), which is an object with fields `name` and `path`.
+- MUST contain the field `output`, which is an object with fields `name` and `path`.
   The `output` field MAY be omitted if the transformation is part of a wrapper transform
   (i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
 - MUST contain the field `input` (string), which is an object with fields `name` and `path`.
