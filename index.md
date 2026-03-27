@@ -1089,7 +1089,7 @@ Example metadata under the attributes of the zarr array at path `i2xCoordinates`
 }
 ```
 
-Here, the axis `i` refers to the input positions along the `i`-axis (i.e., pixel indices).
+Here, the axis `i` refers to the input positions along the `i`-axis, which equal array indices in this case as indicated by the `identity` transformation.
 The `c` axis holds the corresponding output coordinates.
 
 If the array in `coordinates` contains the data:
