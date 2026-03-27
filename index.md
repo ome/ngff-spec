@@ -604,10 +604,9 @@ to do so by estimating the transformations' inverse if they choose to.
 :::
 
 ```{hint}
-The exact values in a transformed image depend on the interpolation used when applying any transformation to the image
-and on the exact implementation of this transformation.
-Exact reproducibility of pixel values in a transformed image is not expected across different implementations
-and therefore also out of scope for the specified transformation types in this specification document.
+Exact reproducibility of pixel values for images transformed and resampled by 
+the transformation types here may differ across implementation and is therefore
+out of the scope of this this specification.
 ```
 
 #### Matrix transformations
