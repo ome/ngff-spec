@@ -952,7 +952,7 @@ and is invertible.
 ##### coordinates and displacements
 (coordinates-displacements-md)=
 
-`coordinates` and `displacements` transformations store a vector field in an array,
+`coordinates` and `displacements` transformations store a vector field of arbitrary sampling density in an array,
 defining a mapping from an input coordinate system to an output coordinate system.
 The array contains either coordinates (absolute positions)
 or displacements (relative shifts) for each point in the input space.
@@ -960,7 +960,9 @@ or displacements (relative shifts) for each point in the input space.
 **Array Structure**
 
 The array containing the coordinates or displacements MUST:
-- be a regular grid of vectors, where the grid points correspond to points in the input coordinate system
+- be a regular grid of vectors.
+  The vectors are stored in an array, the coordinates of which can be mapped
+  to the corresponding coordinates in the input coordinate system via a coordinate transformation (see details below).
 - have one dimension corresponding to every axis of the input coordinate system
 - have one additional dimension to hold components of the vector (either coordinates or displacements)
 
