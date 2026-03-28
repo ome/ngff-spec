@@ -562,21 +562,22 @@ to do so by estimating the transformations' inverse if they choose to.
 ```
 :::
 
-**Transformations in pixel units**: Some applications might prefer to define points, regions-of-interest or transformation parameters
-in "pixel coordinates" rather than "physical coordinates".
-Because transformations are agnostic to whether they refer to pixel or physical coordinates,
+**Transformations in array coordinate units**:
+Some applications might prefer to define points, regions-of-interest or transformation parameters
+in array coordinates rather than physical units.
+Because transformations are agnostic to whether they refer to array or physical coordinates,
 indicating that choice explicitly will be important for interoperability.
 This can be expressed in the metadata in multiple ways, including:
-- One can embed a transformation defined in pixel units into a `sequence` transformation
+- One can embed a transformation defined in array units into a `sequence` transformation
   that includes the appropriate scale transformation and its inverse to convert to physical units (see example below).
 - One can define a unitless coordinate system and connect it to the "intrinsic" coordinate system
   with a scale transformation that has the appropriate scale factors to convert to physical units.
 
 :::{dropdown} Example: Embedded expression
 
-In the context of [`scene`](#scene-md), one may want to express a transformation between two images in pixel units,
+In the context of [`scene`](#scene-md), one may want to express a transformation between two images in array units,
 even though the coordinate systems of the two images are in physical units.
-This can be achieved by embedding the pixel-unit transformation into a `sequence` transformation like this:
+This can be achieved by embedding the array-unit transformation into a `sequence` transformation like this:
 
 ```json
 { "scene": 
@@ -592,7 +593,7 @@ This can be achieved by embedding the pixel-unit transformation into a `sequence
       {
         "type": "translation",
         "translation": [10, 20],
-        "name": "translation in pixel units"
+        "name": "translation in array units"
       },
       {
         "type": "scale",
