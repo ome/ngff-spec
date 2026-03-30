@@ -1294,15 +1294,15 @@ Each object in `datasets` MUST contain the field `coordinateTransformations`,
 whose value is an array of objects that define a transformation
 that maps Zarr array coordinates for this resolution level to the "intrinsic" coordinate system.
 The transformation is defined according to [transformations metadata](#trafo-types-md).
-The transformation MUST take as input points in the array coordinate system
-corresponding to the Zarr array at location `path`.
-The values of `input` and `output` MUST be an object with the fields `name` and `path` that satisfy:
-- The `path` field of `input` MUST be the same as the `path` field of the dataset,
-  the `name` field of `input` can be omitted.
-  Implementations should always treat the value of `path` under the `input` field as if it were equal to the value of `path`.
-- The `name` field of `output` MUST be the `name` of a coordinate system.
-  It MUST be the same name for every resolution level in a single multiscales
-  The `path` field of `output` SHOULD be omitted.
+* **Input**: The transformation MUST take as `input` points in the array coordinate system
+  corresponding to dataset's `path` field.
+  - The `input` object MUST specify a `path` field matching the `path` field of the dataset.
+  - The `name` field under `input` SHOULD be omitted.
+  - Implementations SHOULD always treat the dataset's `path` field as if it were equal to the value of `path` under `input`.
+* **Output**: The `output` of the transformation MUST be the "intrinsic" coordinate system.
+  - The `name` field of `output` MUST be the `name` of a coordinate system.
+  - It MUST be the same value for every resolution level in a single multiscales
+  - The `path` field of `output` SHOULD be omitted.
 
 The coordinate system referenced by all `output` fields of the coordinate transformations (the "intrinsic" coordinate system)
 will be a representation of the image in its native physical coordinate system.
