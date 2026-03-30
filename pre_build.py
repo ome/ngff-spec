@@ -178,7 +178,7 @@ def render_authors_md():
     markdown_authors = """"""
     markdown_affiliations = """"""
 
-    orcid_icon = "https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg"
+    orcid_icon = "https://orcid.org/assets/vectors/orcid.logo.icon.svg"
     github_icon = "https://github.githubassets.com/favicons/favicon.svg"
 
     # create a lookup from affiliation id to a unique number for markdown superscript
