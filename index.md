@@ -239,8 +239,8 @@ or can be transformed to the same coordinate system before doing analysis.
 See the [example below](spec:example:coordinate_transformation).
 
 ```{hint}
-[Multiscale images](#multiscale-md) generally have an "intrinsic" coordinate system,
-which will generally be a representation of the image in its native physical coordinate system.
+[Multiscale images](#multiscale-md) have an "intrinsic" coordinate system,
+which will be a representation of the image in its native physical coordinate system.
 It should be used for viewing and processing unless a use case dictates otherwise.
 ```
 
@@ -1305,7 +1305,7 @@ The values of `input` and `output` MUST be an object with the fields `name` and 
   The `path` field of `output` SHOULD be omitted.
 
 The coordinate system referenced by all `output` fields of the coordinate transformations (the "intrinsic" coordinate system)
-will generally be a representation of the image in its native physical coordinate system.
+will be a representation of the image in its native physical coordinate system.
 It should be used for viewing and processing unless a use case dictates otherwise.
 
 The transformation MUST be one of the following:
