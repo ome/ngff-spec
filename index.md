@@ -1251,7 +1251,7 @@ whose value is an array containing coordinate system metadata
 (see [coordinate systems](#coordinate-systems-md)).
 The following conditions apply to all coordinate systems inside multiscales metadata:
 
-- The length of `axes` must be between 2 and 5  and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
+- The length of `axes` must be between 2 and 5 and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
 - `axes` MUST contain 2 or 3 entries of `type:space`
 - `axes` MAY contain one additional entry of `type:time`
 - `axes` MAY contain one additional entry of `type:channel` or a null / custom type.
