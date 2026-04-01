@@ -975,8 +975,11 @@ Metadata for these coordinate transforms have the following fields:
     Its value indicates the interpolation to use if transforming points not on the array's discrete grid. Well-defined values include:
     - `"nearest"` for nearest neighbor interpolation,
     - `"linear"` for linear interpolation (default)
-    - `"cubic"` for cubic interpolation, etc.
+    - `"bspline-cubic"` for cubic interpolation, etc.
+    
     Consumers SHOULD clearly communicate to users if a different interpolation method is used.
+    See also {cite:t}`thevenaz2000image` for more details on interpolation methods.
+
 
 
 ```{hint}
