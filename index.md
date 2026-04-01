@@ -604,7 +604,7 @@ This can be achieved by embedding the transformation into a `sequence` transform
 }
 ```
 
-This example assumes that the coordinate system named `"intrisinc"` in both referenced images is in physical units,
+This example assumes that the coordinate system named `"intrinsic"` in both referenced images is in physical units,
 and is linked to the lowest resolution level (e.g., `s0`) of the multiscale image with a `scale` transformation that has the scale factors `[0.5, 0.5]`.
 In this case, the the first `scale` transformation in this example converts the input coordinates from physical to dimensionless units.
 The `translation` transformation is applied in dimensionless units,
