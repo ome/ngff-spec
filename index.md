@@ -575,9 +575,9 @@ This can be expressed in the metadata in multiple ways, including:
 
 :::{dropdown} Example: Embedded expression
 
-In the context of [`scene`](#scene-md), one may want to express a transformation between two images in array units,
+In the context of [`scene`](#scene-md), one may want to express a transformation between two images in dimensionless units,
 even though the coordinate systems of the two images are in physical units.
-This can be achieved by embedding the array-unit transformation into a `sequence` transformation like this:
+This can be achieved by embedding the transformation into a `sequence` transformation like this:
 
 ```json
 { "scene": 
@@ -588,21 +588,27 @@ This can be achieved by embedding the array-unit transformation into a `sequence
     "transformations": [
       {
         "type": "scale",
-        "scale": [0.5, 0.5],
+        "scale": [2, 2],
       },
       {
         "type": "translation",
         "translation": [10, 20],
-        "name": "translation in array units"
+        "name": "translation in dimensionless units"
       },
       {
         "type": "scale",
-        "scale": [2, 2],
+        "scale": [0.5, 0.5],
       }
     ]
   }
 }
 ```
+
+This example assumes that the coordinate system named `"intrisinc"` in both referenced images is in physical units,
+and is linked to the lowest resolution level (e.g., `s0`) of the multiscale image with a `scale` transformation that has the scale factors `[0.5, 0.5]`.
+In this case, the the first `scale` transformation in this example converts the input coordinates from physical to dimensionless units.
+The `translation` transformation is applied in dimensionless units,
+and finally the second `scale` transformation converts the coordinates back to physical units.
 :::
 
 :::{dropdown} Example: Unitless coordinate system
