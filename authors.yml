@@ -144,6 +144,7 @@ project:
     # O/Ö
     - name: Bugra Özdemir
       github: bugraoezdemir
+      orcid: 0000-0001-9823-0581
     
     # P
     - name: Giovanni Palla
