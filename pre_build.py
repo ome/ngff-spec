@@ -172,34 +172,14 @@ def render_authors_md():
     with open('authors.yml', 'r') as f:
         data = yaml.safe_load(f)
     authors = data['project']['authors']
-    affiliations = data['project']['affiliations']
-    affiliations = {entry["id"]: {k: v for k, v in entry.items() if k != "id"} for entry in affiliations}
 
     markdown_authors = """"""
-    markdown_affiliations = """"""
 
     orcid_icon = "https://orcid.org/assets/vectors/orcid.logo.icon.svg"
     github_icon = "https://github.githubassets.com/favicons/favicon.svg"
 
-    # create a lookup from affiliation id to a unique number for markdown superscript
-    affiliation_lookup = {}
-
-    affiliation_id_counter = 1
     for idx, author in enumerate(authors):
         name = author['name']
-
-        # if "affiliation" in author:
-        #     affiliation_id = author['affiliation']
-        #     aff = affiliations[affiliation_id]
-
-        #     if affiliation_id not in affiliation_lookup:
-        #         affiliation_lookup[affiliation_id] = affiliation_id_counter
-        #         institution_name = aff['institution']
-        #         markdown_affiliations += f"$^{{{affiliation_id_counter}}}${institution_name}, "
-
-        #         affiliation_id_counter += 1
-
-        #     name += f"$^{{{affiliation_lookup[affiliation_id]}}}$"
 
         if "orcid" in author:
             name += f" [<img src=\"{orcid_icon}\" alt=\"ORCID iD\" height=12 width=12 style=\"vertical-align: middle;\"/>](https://orcid.org/{author['orcid']})"
@@ -215,8 +195,6 @@ def render_authors_md():
 
     with open ("_authors.md", "w") as f:
         f.write(markdown_authors)
-        f.write("\n\n")
-        f.write(markdown_affiliations)
 
 
 build_json_examples()
