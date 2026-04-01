@@ -188,18 +188,18 @@ def render_authors_md():
     for idx, author in enumerate(authors):
         name = author['name']
 
-        if "affiliation" in author:
-            affiliation_id = author['affiliation']
-            aff = affiliations[affiliation_id]
+        # if "affiliation" in author:
+        #     affiliation_id = author['affiliation']
+        #     aff = affiliations[affiliation_id]
 
-            if affiliation_id not in affiliation_lookup:
-                affiliation_lookup[affiliation_id] = affiliation_id_counter
-                institution_name = aff['institution']
-                markdown_affiliations += f"$^{{{affiliation_id_counter}}}${institution_name}, "
+        #     if affiliation_id not in affiliation_lookup:
+        #         affiliation_lookup[affiliation_id] = affiliation_id_counter
+        #         institution_name = aff['institution']
+        #         markdown_affiliations += f"$^{{{affiliation_id_counter}}}${institution_name}, "
 
-                affiliation_id_counter += 1
+        #         affiliation_id_counter += 1
 
-            name += f"$^{{{affiliation_lookup[affiliation_id]}}}$"
+        #     name += f"$^{{{affiliation_lookup[affiliation_id]}}}$"
 
         if "orcid" in author:
             name += f" [<img src=\"{orcid_icon}\" alt=\"ORCID iD\" height=12 width=12 style=\"vertical-align: middle;\"/>](https://orcid.org/{author['orcid']})"
