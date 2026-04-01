@@ -565,7 +565,7 @@ to do so by estimating the transformations' inverse if they choose to.
 **Transformations in array coordinate units**:
 Some applications might prefer to define points, regions-of-interest or transformation parameters
 in array coordinates (also referred to as pixel coordinates) rather than physical units.
-Because transformations are agnostic to whether they refer to array or physical coordinates,
+Because transformations are agnostic to whether they operate on array or physical coordinates,
 indicating that choice explicitly will be important for interoperability.
 This can be expressed in the metadata in multiple ways, including:
 - One can embed a transformation defined in array units into a `sequence` transformation
