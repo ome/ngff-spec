@@ -161,12 +161,12 @@ def build_footer():
     from datetime import datetime
     year = datetime.now().year
     footer_content = f"""
-    <div>
-        Copyright © 2020-{year}
-        <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>®</sup>.
-        OME trademark rules apply.
-    </div>
-    """
+<div>
+    Copyright @copy; 2020-{year}
+    <a href="https://www.openmicroscopy.org/"><abbr title="Open Microscopy Environment">OME</abbr></a><sup>@reg;</sup>.
+    OME trademark rules apply.
+</div>
+"""
     with open('footer.md', 'w') as footer_file:
         footer_file.write(footer_content)
 
