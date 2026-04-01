@@ -83,7 +83,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │   ├── zarr.json         # All image arrays must be up to 5-dimensional
     │   │                     # with the axis of type time before type channel, before spatial axes.
     │   │
-    │   └─ ...                # Chunks are stored conforming to the Zarr array specification and 
+    │   └─ ...                # Chunks are stored conforming to the Zarr array specification and
     │                         # metadata as specified in the array's `zarr.json`.
     │
     └── labels
@@ -132,7 +132,7 @@ A well group SHOULD NOT be present if there are no images in the well.
     │   │   ├── 0             # First field of view of well A1
     │   │   │   │
     │   │   │   ├── zarr.json # Implements "multiscales", "omero"
-    │   │   │   ├── s0        # Resolution levels          
+    │   │   │   ├── s0        # Resolution levels
     │   │   │   ├── ...
     │   │   │   └── labels    # Labels (optional)
     │   │   └── ...           # Other fields of view
@@ -201,10 +201,10 @@ object that MUST contain a `version` key, the value of which MUST be a string sp
 ### "coordinateSystems" metadata
 (coordinate-systems-md)=
 
-A `coordinateSystem` is a JSON object with a `name` field and a `axes` field.
+A coordinate system is a JSON object with a `name` field and a `axes` field.
 Every coordinate system:
 - MUST contain the field `name`.
-  The value MUST be a non-empty string that is unique among all entries under `coordinateSystems`.
+  The value MUST be a non-empty string that is unique among all entries in a `coordinateSystems` array.
 - MUST contain the field `axes`, whose value is an array of valid `axes` (see below).
 The elements of `axes` correspond to the index of each array dimension and coordinates for points in that coordinate system.
 For the below example, the `x` dimension is the last dimension.
@@ -230,7 +230,7 @@ Coordinate Systems metadata example
 The axes of a coordinate system (see below) give information
 about the types, units, and other properties of the coordinate system's dimensions.
 Axis names may contain semantically meaningful information, but can be arbitrary.
-As a result, two coordinate systems that have identical axes in the same order 
+As a result, two coordinate systems that have identical axes in the same order
 may not be "the same" in the sense that measurements at the same point
 refer to different physical entities and therefore should not be analyzed jointly.
 Tasks that require images, annotations, regions of interest, etc.,
@@ -328,7 +328,7 @@ Then `dim_0` has length 4, `dim_1` has length 3, and `dim_2` has length 5.
 The axes and their order align with the shape of the corresponding Zarr array,
 and whose data depends on the byte order used to store chunks.
 As described in the [Zarr array metadata](https://zarr.readthedocs.io/en/stable/spec/v3.html#arrays),
-the last dimension of an array in "C" order are stored contiguously on disk or in-memory when directly loaded. 
+the last dimension of an array in "C" order are stored contiguously on disk or in-memory when directly loaded.
 
 The name and axes names MAY be customized by including a `arrayCoordinateSystem` field
 in the user-defined attributes of the array whose value is a coordinate system object.
@@ -467,7 +467,7 @@ The following transformations are supported:
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"input_axes": List[number]`, <br> and `"output_axes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
-(e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation). 
+(e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
 
 :::{dropdown} Example
 (spec:example:coordinate_transformation_scale)=
@@ -478,7 +478,7 @@ Implementations SHOULD prefer to store transformations as a sequence of less exp
     { "name": "in", "axes": [{"name": "j"}, {"name": "i"}] },
     { "name": "out", "axes": [{"name": "y"}, {"name": "x"}] }
   ],
-  "coordinateTransformations": [ 
+  "coordinateTransformations": [
     {
       "type": "scale",
       "scale": [2, 3.12],
@@ -508,7 +508,7 @@ Conforming readers:
 - SHOULD be able to apply transformations to images;
 
 Coordinate transformations can be stored in multiple places to reflect different use cases.
-     
+
 - **Inside `multiscales > datasets`**: `coordinateTransformations` herein MUST be restricted
   to a single `scale`, `identity` or `sequence` of a scale followed by a translation transformation.
   For more information, see [multiscales section below](#multiscales-md).
@@ -516,7 +516,7 @@ Coordinate transformations can be stored in multiple places to reflect different
   The `coordinateTransformations` field MUST contain an array of valid [transformations](#trafo-types-md).
   The input to every one of these transformations MUST be the intrinsic coordinate system.
   The output can be another coordinate system defined under `multiscales > coordinateSystems`.
-  
+
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more images
   MUST be stored in the attributes of a [`scene` object](#scene-md) in a [scene Zarr group](#scene-format).
   In this case, the `input` and `output` values are objects
@@ -547,9 +547,9 @@ where a coordinate is the location/value of that point along its corresponding a
 The indexes of axis dimensions correspond to indexes into transformation parameter arrays (see examples).
 
 **Image rendering**: When rendering transformed images and interpolating,
-implementations may need the "inverse" transformation - from the fixed 
-image's to the source image's coordinate system. This transformation may 
-not explicitly exist, but might be the require computing the inverse 
+implementations may need the "inverse" transformation - from the fixed
+image's to the source image's coordinate system. This transformation may
+not explicitly exist, but might be the require computing the inverse
 (in closed form) of an explicitly specified forward transformation.
 
 Inverse transformations used for image rendering may be specified
@@ -562,8 +562,8 @@ that the requested operation is unsupported.
 
 :::{dropdown} Example
 
-Implementations SHOULD be able to compute and apply the inverse of some coordinate 
-transformations when they are computable in closed-form (as the 
+Implementations SHOULD be able to compute and apply the inverse of some coordinate
+transformations when they are computable in closed-form (as the
 [Transformation types](#trafo-types-md) section below indicates).
 Implementations should be able to render the moving image into the fixed
 image by computing the inverse of this transformation.
@@ -576,10 +576,10 @@ image by computing the inverse of this transformation.
 }
 ```
 
-Software libraries that perform image registration often return the transformation 
-from fixed image coordinates to moving image coordinates, because this "inverse" 
+Software libraries that perform image registration often return the transformation
+from fixed image coordinates to moving image coordinates, because this "inverse"
 transformation is most often required when rendering the transformed moving image.
-Implementations should be able to render the moving image into the fixed image by 
+Implementations should be able to render the moving image into the fixed image by
 applying this transformation directly.
 
 ```json
@@ -590,7 +590,7 @@ applying this transformation directly.
 }
 ```
 
-Implementations are not expected to be able to to render the moving image 
+Implementations are not expected to be able to to render the moving image
 into the fixed image given this transformation. They may attempt
 to do so by estimating the transformations' inverse if they choose to.
 
@@ -623,7 +623,7 @@ When stored as a 2D json array, the inner array contains rows (e.g. `[[1,2,3], [
 #### Transformation types
 (trafo-types-md)=
 
-Input and output dimensionality may be determined by the coordinate system referred to by the `input` and `output` fields, respectively. 
+Input and output dimensionality may be determined by the coordinate system referred to by the `input` and `output` fields, respectively.
 If the value of `input` is a path to an array, its shape gives the input dimension,
 otherwise it is given by the length of `axes` for the coordinate system with the name of the `input`.
 If the value of `output` is an array, its shape gives the output dimension,
@@ -734,7 +734,7 @@ The array MUST have length `N`.
 defines the function:
 
 ```
-x = i + 9 
+x = i + 9
 y = j - 1.42
 ```
 :::
@@ -1087,7 +1087,7 @@ then this metadata defines the following function to map
 the `i` axis (`input` coordinate system) to the `x` axis (`output` coordinate system):
 
 ```
-x = 
+x =
     if ( i < 0.5 )                      -9
     else if ( i >= 0.5 and i < 1.5 )     9
     else if ( i >= 1.5 )                 0
@@ -1321,18 +1321,18 @@ It is stored in a multiple resolution representation.
 Each `multiscales` object MUST contain the field `coordinateSystems`,
 whose value is an array containing coordinate system metadata
 (see [coordinate systems](#coordinate-systems-md)).
+The following conditions apply to all coordinate systems inside multiscales metadata:
 
-The following MUST hold for all coordinate systems inside multiscales metadata.
-The length of `axes` must be between 2 and 5
-and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
-The `axes` MUST contain 2 or 3 entries of `type:space`
-and MAY contain one additional entry of `type:time`
-and MAY contain one additional entry of `type:channel` or a null / custom type.
-In addition, the entries MUST be ordered by `type` where the `time` axis must come first (if present),
-followed by the  `channel` or custom axis (if present) and the axes of type `space`.
-If there are three spatial axes where two correspond to the image plane (`yx`)
-and images are stacked along the other (anisotropic) axis (`z`),
-the spatial axes SHOULD be ordered as `zyx`.
+- The length of `axes` must be between 2 and 5 and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
+- `axes` MUST contain 2 or 3 entries of `type:space`
+- `axes` MAY contain one additional entry of `type:time`
+- `axes` MAY contain one additional entry of `type:channel` or a null / custom type.
+- `axes` entries MUST be ordered by `type` where the `time` axis must come first (if present),
+  followed by the  `channel` or custom axis (if present) and the axes of type `space`.
+- If there are three spatial axes where two correspond to the image plane (`yx`)
+  and images are stacked along the other (anisotropic) axis (`z`),
+  the spatial axes SHOULD be ordered as `zyx`.
+
 Each `multiscales` object MUST contain the field `datasets`,
 which is an array of objects describing the arrays storing the individual resolution levels.
 Each object in `datasets` MUST contain the field `path`,
@@ -1348,7 +1348,7 @@ that maps Zarr array coordinates for this resolution level to the "intrinsic" co
 The transformation is defined according to [transformations metadata](#trafo-types-md).
 The transformation MUST take as input points in the array coordinate system
 corresponding to the Zarr array at location `path`.
-The value of `input` MUST equal the value of `path`, 
+The value of `input` MUST equal the value of `path`,
 implementations should always treat the value of `input` as if it were equal to the value of `path`.
 The value of the transformation’s `output` coordinate system MUST be the same for every dataset in a single multiscales.
 This coordinate system (the "intrinsic" coordinate system) will generally be a representation of the image in its native physical coordinate system.
@@ -1371,8 +1371,9 @@ If applications require additional transformations,
 each `multiscales` object MAY contain the field `coordinateTransformations`,
 describing transformations that are applied to all resolution levels in the same manner.
 The value of `input` MUST equal the name of the "intrinsic" coordinate system.
-The value of `output` MUST be the name of the output coordinate System
-which is different from the "intrinsic" coordinate system.
+The value of `output` MUST be the name of a coordinate system
+which is different from the "intrinsic" coordinate system
+and which is defined in the `coordinateSystems` field of the `multiscales` metadata.
 
 Each `multiscales` object SHOULD contain the field `name`.
 
@@ -1517,7 +1518,7 @@ denoting arbitrary metadata associated with that label.
 Label-value objects within the `properties` array do not need to have the same keys.
 
 The value of the `source` key MUST be a JSON object containing information about the original image from which the label image derives.
-This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.  
+This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.
 The default value is `../../` since most labeled images are stored in a "labels" group that is nested within the original image group.
 
 
@@ -1624,10 +1625,10 @@ whose value MUST be an array of JSON objects specifying all fields of views for 
 Each image object MUST contain a `path` key
 whose value MUST be a string specifying the path to the field of view.
 The `path` MUST be case-sensitive, and MUST NOT be a duplicate of any other `path` in the `images` list.
-The `path` MUST follow [Zarr node name naming conventions](https://github.com/zarr-developers/zarr-specs/blob/main/docs/v3/core/index.rst#node-names) including the recommended limitations of characters to ensure consistency across different storage systems and programming languages. 
-Specifically: The `path` MUST NOT consist only of periods (like `.` or `..`) or start with the reserved prefix `__`; 
-The `path` MUST NOT be an empty string and MUST NOT contain `/` characters; 
-The `path` MUST only use characters in the sets `a-z`, `A-Z`, `0-9`, `-`, `_`, `.`. 
+The `path` MUST follow [Zarr node name naming conventions](https://github.com/zarr-developers/zarr-specs/blob/main/docs/v3/core/index.rst#node-names) including the recommended limitations of characters to ensure consistency across different storage systems and programming languages.
+Specifically: The `path` MUST NOT consist only of periods (like `.` or `..`) or start with the reserved prefix `__`;
+The `path` MUST NOT be an empty string and MUST NOT contain `/` characters;
+The `path` MUST only use characters in the sets `a-z`, `A-Z`, `0-9`, `-`, `_`, `.`.
 If multiple acquisitions were performed in the plate,
 it MUST contain an `acquisition` key whose value MUST be an integer identifying the acquisition
 which MUST match one of the acquisition JSON objects defined in the [plate metadata](#plate-md).
@@ -1803,6 +1804,24 @@ but they should be updated in due course.
 (implementations-md)=
 
 See [Tools](https://ngff.openmicroscopy.org/tools/index.html).
+
+## License
+
+This specification is derived from the [Community Specification Template](https://www.w3.org/People/Schepers/unoffical_template.html) provided by W3C,
+under [the following terms](https://www.w3.org/copyright/software-license-2023/):
+
+> By obtaining and/or copying this work, you (the licensee) agree that you have read, understood, and will comply with the following terms and conditions:
+> Permission to copy, modify, and distribute this work, with or without modification, for any purpose and without fee or royalty is hereby granted, provided that you include the following on ALL copies of the work or portions thereof, including modifications:
+> 
+> The full text of this NOTICE in a location viewable to users of the redistributed or derivative work.
+> Any pre-existing intellectual property disclaimers, notices, or terms and conditions. If none exist, the W3C Software and Document Short Notice should be included.
+> Notice of any changes or modifications, through a copyright statement on the new code or document such as:
+> "This document includes material copied from or derived from Community Specification Template. Copyright &copy; 2025 W3C&reg; (MIT, ERCIM, Keio, Beihang)."
+
+
+### Notice of Modifications:
+This specification includes material copied from or derived from the Community Specification Template.
+Copyright &copy; 2025 W3C&reg; (MIT, ERCIM, Keio, Beihang).
 
 ## Other resources
 
