@@ -170,7 +170,7 @@ project:
       orcid: 0000-0002-4156-2849
     - name: Doug Shepherd
       github: dpshepherd
-
+      orcid: 0000-0001-9087-0832
     # T
     - name: Christian Tischer
       github: tischi
@@ -192,6 +192,7 @@ project:
     # W
     - name: Alan Watson
       github: alanmwatson
+      orcid: 0000-0003-0632-8296
     - name: Jonas Windhager
       github: jwindhager
       orcid: 0000-0002-2111-5291
