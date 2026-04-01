@@ -81,6 +81,7 @@ project:
     # C
     - name: Tommaso Comparin
       github: tcompa
+      orcid: 0000-0001-6853-5931
 
     # D
     - name: Lachlan Deakin
