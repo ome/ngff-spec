@@ -1452,11 +1452,15 @@ This new image is composed of integer values corresponding to certain labels wit
 For example, pixels take the value 1 or 0 if the corresponding pixel in the original image represents cellular space or intercellular space, respectively.
 Such an image is referred to in this specification as a "label image".
 
-The `labels` group is nested within an image group, at the same level of the Zarr hierarchy as the resolution levels for the original image.
-This image group MUST implement the [multiscales](#multiscales-md) specification.
-The image group MUST contain an additional coordinate transformation that links its "intrinsic" coordinate system to the intrinsic coordinate system of each label image in the `labels` group.
-This transformation MUST be one of [`identity`](#identity-md), ['scale'](#scale-md), a ['translation'](#translation-md)
-or a ['sequence'](#sequence-md) of a scale and a translation transformation.
+The `labels` group is nested within an image group,
+at the same level of the Zarr hierarchy as the resolution levels for the original image.
+The following requirements for the parent image group apply:
+- This image group MUST implement the [multiscales](#multiscales-md) specification.
+- The image group MAY contain an additional coordinate transformation
+  that links its "intrinsic" coordinate system to the "intrinsic" coordinate system of each label image in the `labels` group.
+  If no such transformation is provided, the "intrinsic" coordinate system of the image group is understood to be the same as the "intrinsic" coordinate system of each label image in the `labels` group.
+- This transformation, if specified, MUST be one of [`identity`](#identity-md), ['scale'](#scale-md), a ['translation'](#translation-md)
+  or a ['sequence'](#sequence-md) of a scale and a translation transformation.
 
 The `labels` group is not itself an image; it contains images.
 The pixels of the label images MUST be integer data types,
