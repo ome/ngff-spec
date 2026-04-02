@@ -1373,7 +1373,8 @@ It SHOULD contain the field `metadata`,
 which contains a object with additional information about the downscaling method.
 
 
-:::{dropdown} Example
+
+:::{dropdown} Example: Complete multiscales metadata
 
 A complete example of json-file for a 5D (TCZYX) multiscales with 3 resolution levels could look like this:
 ```{literalinclude} examples/multiscales_strict/multiscales_example.json
