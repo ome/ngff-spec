@@ -1289,7 +1289,7 @@ Each object provides the following fields:
 It will be a representation of the image in its **native physical coordinate system** and
 can be used for viewing and processing unless a use case dictates otherwise.
 
-In terms of metadata, the coordinate system refered to as the "intrinsic" coordinate system, is the coordinate system that is referenced by all multiscale coordinate transformations under `datasets` as their `output` (see below).
+In terms of metadata, the coordinate system referred to as the "intrinsic" coordinate system, is the coordinate system that is referenced by all multiscale coordinate transformations under `datasets` as their `output` (see below).
 ```
 
 **`datasets`**
