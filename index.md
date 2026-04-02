@@ -1462,7 +1462,7 @@ The following requirements for the parent image group apply:
 - This image group MUST implement the [multiscales](#multiscales-md) specification.
 - The image group MAY contain an additional coordinate transformation
   that links its "intrinsic" coordinate system to the "intrinsic" coordinate system of each label image in the `labels` group.
-  If no such transformation is provided, the "intrinsic" coordinate system of the image group is understood to be the same as the "intrinsic" coordinate system of each label image in the `labels` group.
+  If no such transformation is provided, the "intrinsic" coordinate system of the image group is usually understood to be the same as the "intrinsic" coordinate system of each label image in the `labels` group.
 - This transformation, if specified, MUST be one of [`identity`](#identity-md), ['scale'](#scale-md), a ['translation'](#translation-md)
   or a ['sequence'](#sequence-md) of a scale and a translation transformation.
 
