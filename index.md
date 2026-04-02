@@ -1365,13 +1365,16 @@ to a coordinate system in a child labels group, the respective metadata would lo
 In this example, a multiscales group containing labels is located at `labels/label_image` relative to the current multiscales group.
 :::
 
-Each `multiscales` object SHOULD contain the field `name`.
+**`name`**
+: Each `multiscales` object SHOULD contain the field `name`.
 
-Each `multiscales` object SHOULD contain the field `type`,
-which gives the type of downscaling method used to generate the multiscale image pyramid.
-It SHOULD contain the field `metadata`,
-which contains a object with additional information about the downscaling method.
+**``**type``
+: Each `multiscales` object SHOULD contain the field `type`,
+  which gives the type of downscaling method used to generate the multiscale image pyramid.
 
+**`metadata`**
+: Each `multiscales` object SHOULD contain the field `metadata`,
+  which contains a object with additional information about the downscaling method.
 
 
 :::{dropdown} Example: Complete multiscales metadata
