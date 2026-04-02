@@ -1468,22 +1468,6 @@ The OME-Zarr Metadata in the `zarr.json` file associated with the `labels` group
 whose value is a JSON array of paths to the labeled multiscale image(s).
 All label images SHOULD be listed within this metadata file.
 
-:::{dropdown} Example
-For example:
-```json
-{
-  "attributes": {
-    "ome": {
-      "version": "0.6.dev4",
-      "labels": [
-        "cell_space_segmentation"
-      ]
-    }
-  }
-}
-```
-:::
-
 The `zarr.json` file for the label image MUST implement the multiscales specification.
 Within the `multiscales` object, the JSON array associated with the `datasets` key MUST have the same number of entries (scale levels) as the original unlabeled image.
 
@@ -1516,12 +1500,61 @@ The value of the `source` key MUST be a JSON object containing information about
 This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.
 The default value is `../../` since most labeled images are stored in a "labels" group that is nested within the original image group.
 
+:::{dropdown} Example: Reference to label image
 
-:::{dropdown} Example
-Here is an example of a simple `image-label` object for a label image in which 0s and 1s represent intercellular and cellular space, respectively:
+This is an example of multiscales metadata for an image group that contains a `labels` group under the path `labels/` that contains one label image under the subgroup `cell_segmentation`:
+```
+image.zarr                # Multiscale image group
+│
+├── zarr.json             # Multiscale metadata, which MAY contain a coordinate transformation 
+│                         # linking the "intrinsic" coordinate system of the image to the
+│                         # "intrinsic" coordinate system of the label image in the `labels` group.
+│
+├── s0                    # Mulitscale level 0
+│   ...                   # which is a folder containing chunk files which compose the array.
+│
+└── labels
+    │
+    ├── zarr.json         # Subgroup containing `labels` metadata.
+    │
+    └── cell_segmentation # Instance of a label image
+        │
+        ├── zarr.json     # Multiscales metadata with extra `label-image` field describing display information and source image.
+        ├── s0
+        ...
+```
+In the `zarr.json` under the image.zarr group, an explicit `identity` transform indicates that
+the coordinate system named `"physical"` in the multiscales metadata of the original image is the same as
+the coordinate system named `"physical"` in the multiscales metadata of the label image:
+
+```{literalinclude} examples/multiscales_strict/multiscale_with_reference_to_label.json
+:language: json
+```
+
+The `zarr.json` under the `labels` group contains a JSON object with the key `labels`, for example:
+
+```json
+{
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev4",
+      "labels": [
+        "cell_segmentation"
+      ]
+    }
+  }
+}
+```
+
+In the `zarr.json` under the `cell_segmentation` multiscales image group,
+a coordinate system named `"physical"` serves as the "intrinsic" coordinate system for the label image.
+The `image-label` field contains information about the source image and display colors for the label image,
+i.e., a label image in which 0s and 1s represent intercellular and cellular space, respectively:
+
 ```{literalinclude} examples/label_strict/colors_properties.json
 :language: json
 ```
+
 In this case, the pixels consisting of a 0 in the Zarr array will be displayed as 50% blue and 50% opacity.
 Pixels with a 1 in the Zarr array, which correspond to cellular space, will be displayed as 50% green and 50% opacity.
 :::
