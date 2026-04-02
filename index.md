@@ -238,12 +238,6 @@ SHOULD ensure that they are in the same coordinate system (same name and locatio
 or can be transformed to the same coordinate system before doing analysis.
 See the [example below](spec:example:coordinate_transformation).
 
-```{hint}
-[Multiscale images](#multiscale-md) have an "intrinsic" coordinate system,
-which will be a representation of the image in its native physical coordinate system.
-It should be used for viewing and processing unless a use case dictates otherwise.
-```
-
 #### "axes" metadata
 
 `axes` describes the dimensions of a coordinate systems
@@ -1265,6 +1259,16 @@ or volumetric data with optional time or channel axes.
 It is stored in a multiple resolution representation.
 
 `multiscales` contains an array of objects where each entry describes a multiscale image.
+Each object provides the following fields:
+
+| | Field | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `coordinateSystems` | JSON array of objects | yes | [Coordinate system metadata](coordinate-systems-md) for the multiscale image. |
+| `datasets` | JSON array of objects | yes | Metadata about arrays storing the individual resolution levels. |
+| `coordinateTransformations` | JSON array of objects | no | Metadata about transformations that are applied to all resolution levels in the same manner. |
+| `name` | string | no | Name of the multiscale image. |
+| `type` | string | no | Downsampling method used to generate the multiscale image. |
+| `metadata` | JSON object | no | Additional metadata about the downscaling method. | 
 
 Each `multiscales` object MUST contain the field `coordinateSystems`,
 whose value is an array containing coordinate system metadata
