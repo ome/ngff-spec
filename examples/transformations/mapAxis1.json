@@ -16,8 +16,8 @@
       "name": "permutation",
       "type": "mapAxis", 
       "mapAxis": [1, 0],
-      "input": "in",
-      "output": "out2" 
+      "input": {"name": "in"},
+      "output": {"name": "out2"} 
     }
   ]
 }

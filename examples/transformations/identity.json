@@ -4,6 +4,6 @@
     { "name": "out", "axes": [ {"name": "y"}, {"name": "x"} ]}
   ],
   "coordinateTransformations": [ 
-    { "type": "identity", "input": "in", "output": "out" }
+    { "type": "identity", "input": {"name": "in"}, "output": {"name": "out"} }
   ]
 }

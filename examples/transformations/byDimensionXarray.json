@@ -18,8 +18,8 @@
   "coordinateTransformations": [
     {
       "type": "byDimension",
-      "input": "array",
-      "output": "physical",
+      "input": {"name": "array"},
+      "output": {"name": "physical"},
       "transformations": [
         {
           "type": "coordinates",

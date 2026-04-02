@@ -1,0 +1,40 @@
+{
+  "ome": {
+    "version": "0.6.dev4",
+    "multiscales": [
+      {
+        "name": "Image",
+        "datasets": [
+          {
+            "path": "s0",
+            "coordinateTransformations": [
+              {
+                "type": "scale",
+                "scale": [0.5, 0.5, 1],
+                "input": {"path": "s0"},
+                "output": {"name": "physical"}
+              }
+            ]
+          }
+        ],
+        "coordinateSystems": [
+          {
+            "name": "physical",
+            "axes": [
+              {"name": "z", "unit": "micrometer"},
+              {"name": "y", "unit": "micrometer"},
+              {"name": "x", "unit": "micrometer"}
+            ]
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "type": "identity",
+            "input": {"path": "labels/cell_segmentation","name": "physical"},
+            "output": {"name": "physical"}
+          }
+         ]
+      }
+    ]
+  }
+}

@@ -3,8 +3,8 @@ title: Next-generation file format specification
 short_title: OME-Zarr
 ---
 
-# 🚧 Dev: 0.6.dev3 🚧
-(ngff-spec:spec:0.6.dev3)=
+# 🚧 Dev: 0.6.dev4 🚧
+(ngff-spec:spec:0.6.dev4)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
@@ -24,7 +24,7 @@ All specifications are submitted to the <https://image.sc> community for review.
 
 ## Status of This Document
 
-The working title version of this specification is 0.6.dev3.
+The working title version of this specification is 0.6.dev4.
 Migration scripts will be provided between numbered versions.
 Data written with these latest changes (an "editor's draft") will not necessarily be supported.
 
@@ -184,14 +184,14 @@ The OME-Zarr Metadata is stored in the various `zarr.json` files throughout the 
 The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 
 The group `attributes` MUST contain a key `ome`. The value of the `ome` key MUST be a JSON
-object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](ngff-spec:spec:0.6.dev3).
+object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](ngff-spec:spec:0.6.dev4).
 
 ```jsonc
 {
   // ...
   "attributes": {
     "ome": {
-      "version": "0.6.dev3",
+      "version": "0.6.dev4",
       // ...
     }
   }
@@ -443,10 +443,12 @@ They:
 
 - MUST contain the field `type` (string).
 - MUST contain any other fields required by the given `type` (see table below).
-- MUST contain the field `output` (string),
-  unless part of a wrapper transform (, i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
-- MUST contain the field `input` (string),
-  unless part of a wrapper transform (, i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
+- MUST contain the field `output`, which is an object with fields `name` and `path`.
+  The `output` field MAY be omitted if the transformation is part of a wrapper transform
+  (i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
+- MUST contain the field `input`, which is an object with fields `name` and `path`.
+  The `input` field MAY be omitted if the transformation is part of a wrapper transform
+  (i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
 - MAY contain the field `name` (string).
   Its value MUST be unique across all `name` fields for all coordinate transformations in the same list.
 - Parameter values MUST be compatible with input and output space dimensionality (see details).
@@ -507,20 +509,32 @@ Conforming readers:
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
 
-Coordinate transformations can be stored in multiple places to reflect different use cases.
 
-- **Inside `multiscales > datasets`**: `coordinateTransformations` herein MUST be restricted
-  to a single `scale`, `identity` or `sequence` of a scale followed by a translation transformation.
+**Constraints**
+
+Coordinate transformations can be stored in multiple places to reflect different use cases.
+Depending on which, different constraints apply to the transformations, as described below:
+     
+- **Inside `multiscales > datasets`**: `coordinateTransformations` herein MUST
+  - be restricted to a single `scale`, `identity` or `sequence` of a scale followed by a translation transformation.
+  - in the `input` object provide `path` and omit `name`.
+  - in the `output` object provide `name` and omit `path`.
   For more information, see [multiscales section below](#multiscales-md).
 - **Inside `multiscales > coordinateTransformations`**: Additional transformations for single multiscale images MAY be stored here.
-  The `coordinateTransformations` field MUST contain an array of valid [transformations](#trafo-types-md).
-  The input to every one of these transformations MUST be the intrinsic coordinate system.
-  The output can be another coordinate system defined under `multiscales > coordinateSystems`.
-
+  The following constraints apply to transformations under the `coordinateTransformations` field:
+  - The `coordinateTransformations` field MUST contain an array of valid [transformations](#trafo-types-md).
+  - The `input` to every one of these transformations MUST be the same coordinate system, referenced by the `name` field.
+  - The `output` MUST be another coordinate system defined under `multiscales > coordinateSystems`, referenced by the `name` field, or another coordinate system in a child [labels](#labels-md) group referenced by both `name` and `path`.
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more images
   MUST be stored in the attributes of a [`scene` object](#scene-md) in a [scene Zarr group](#scene-format).
   In this case, the `input` and `output` values are objects
   that refer to coordinate systems in the same zarr.json or in the metadata of multiscale image subgroups.
+
+| Context | `input` | `output` |
+|---------|---------|----------|
+| **multiscales > datasets** | `{ "path": "<dataset_path>" }` | `{ "name": "physical" }`|
+| **multiscales > coordinateTransformations** | `{ "name": "physical" }` | `{ "name": "output" }` <br> or <br> `{ "name": "physical", "path": "labels/labels_path" }` |
+| **scene > coordinateTransformations** | `{ "name": "physical", "path": "path_to/imageA" }` | `{ "name": "physical", "path": "path_to/imageB" }` |
 
 This separation of transformations (inside `multiscales > datasets`, under `multiscales > coordinateTransformations` and under `scene > coordinateTransformations`) provides flexibility for different use cases while still maintaining a level of rigidity for implementations.
 
@@ -571,8 +585,8 @@ image by computing the inverse of this transformation.
 ```json
 {
   "type": "<a type that can be inverted in closed-form>",
-  "input": "moving image",
-  "output": "fixed image"
+  "input": {"name": "moving image"},
+  "output": {"name": "fixed image"}
 }
 ```
 
@@ -585,8 +599,8 @@ applying this transformation directly.
 ```json
 {
   "type": "<a type that can NOT be inverted in closed-form>",
-  "input": "fixed image",
-  "output": "moving image"
+  "input": {"name": "fixed image"},
+  "output": {"name": "moving image"}
 }
 ```
 
@@ -597,8 +611,8 @@ to do so by estimating the transformations' inverse if they choose to.
 ```json
 {
   "type": "<a type that can NOT be inverted in closed-form>",
-  "input": "moving image",
-  "output": "fixed image"
+  "input": {"name": "moving image"},
+  "output": {"name": "fixed image"}
 }
 ```
 :::
@@ -1245,73 +1259,126 @@ or volumetric data with optional time or channel axes.
 It is stored in a multiple resolution representation.
 
 `multiscales` contains an array of objects where each entry describes a multiscale image.
+Each object provides the following fields:
 
-Each `multiscales` object MUST contain the field `coordinateSystems`,
-whose value is an array containing coordinate system metadata
-(see [coordinate systems](#coordinate-systems-md)).
-The following conditions apply to all coordinate systems inside multiscales metadata:
+| | Field | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `coordinateSystems` | JSON array of objects | yes | [Coordinate system metadata](coordinate-systems-md) for the multiscale image. |
+| `datasets` | JSON array of objects | yes | Metadata about arrays storing the individual resolution levels. |
+| `coordinateTransformations` | JSON array of objects | no | Metadata about transformations that are applied to all resolution levels in the same manner. |
+| `name` | string | no | Name of the multiscale image. |
+| `type` | string | no | Downsampling method used to generate the multiscale image. |
+| `metadata` | JSON object | no | Additional metadata about the downscaling method. | 
 
-- The length of `axes` must be between 2 and 5 and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
-- `axes` MUST contain 2 or 3 entries of `type:space`
-- `axes` MAY contain one additional entry of `type:time`
-- `axes` MAY contain one additional entry of `type:channel` or a null / custom type.
-- `axes` entries MUST be ordered by `type` where the `time` axis must come first (if present),
-  followed by the  `channel` or custom axis (if present) and the axes of type `space`.
-- If there are three spatial axes where two correspond to the image plane (`yx`)
-  and images are stacked along the other (anisotropic) axis (`z`),
-  the spatial axes SHOULD be ordered as `zyx`.
+**`coordinateSystems`**
+: The `coordinateSystems` field is a JSON array containing [coordinate system metadata](#coordinate-systems-md)
+  The following conditions apply to all coordinate systems inside multiscales metadata:
 
-Each `multiscales` object MUST contain the field `datasets`,
-which is an array of objects describing the arrays storing the individual resolution levels.
-Each object in `datasets` MUST contain the field `path`,
-whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
-The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
-Every Zarr array referred to by a `path` MUST have the same number of dimensions and datatype,
-and MUST NOT have more than 5 dimensions.
-The number of dimensions and order MUST correspond to number and order of `axes`.
+  - The length of `axes` must be between 2 and 5 and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
+  - `axes` MUST contain 2 or 3 entries of `type:space`
+  - `axes` MAY contain one additional entry of `type:time`
+  - `axes` MAY contain one additional entry of `type:channel` or a null / custom type.
+  - `axes` entries MUST be ordered by `type` where the `time` axis must come first (if present),
+    followed by the  `channel` or custom axis (if present) and the axes of type `space`.
+  - If there are three spatial axes where two correspond to the image plane (`yx`)
+    and images are stacked along the other (anisotropic) axis (`z`),
+    the spatial axes SHOULD be ordered as `zyx`.
 
-Each object in `datasets` MUST contain the field `coordinateTransformations`,
-whose value is an array of objects that define a transformation
-that maps Zarr array coordinates for this resolution level to the "intrinsic" coordinate system.
-The transformation is defined according to [transformations metadata](#trafo-types-md).
-The transformation MUST take as input points in the array coordinate system
-corresponding to the Zarr array at location `path`.
-The value of `input` MUST equal the value of `path`,
-implementations should always treat the value of `input` as if it were equal to the value of `path`.
-The value of the transformation’s `output` coordinate system MUST be the same for every dataset in a single multiscales.
-This coordinate system (the "intrinsic" coordinate system) will generally be a representation of the image in its native physical coordinate system.
-It should be used for viewing and processing unless a use case dictates otherwise.
+```{hint}
+[Multiscale images](#multiscale-md) have an "intrinsic" coordinate system.
+It will be a representation of the image in its **native physical coordinate system** and
+can be used for viewing and processing unless a use case dictates otherwise.
 
-The transformation MUST be one of the following:
+In terms of metadata, the coordinate system referred to as the "intrinsic" coordinate system in this document,
+is the coordinate system that is referenced by all multiscale coordinate transformations under `datasets` as their `output` (see below).
+```
 
-* A single scale or identity transformation
-* A sequence transformation containing one scale and one translation transformation.
+**`datasets`**
+: The `datasets` field is a JSON array of objects describing the arrays storing the individual resolution levels.
+  The following constraints apply:
+  - Each object in `datasets` MUST contain the field `path`,
+    whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
+  - The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
+  - Every Zarr array referred to by a `path` MUST have the same number of dimensions and datatype,
+    and MUST NOT have more than 5 dimensions.
+  - The number of dimensions and order MUST correspond to number and order of `axes`.
 
-In these cases, the scale transformation specifies the pixel size in physical units or time duration.
-If scaling information is not available or applicable for one of the axes,
-the value MUST express the scaling factor between the current resolution
-and the first resolution for the given axis,
-defaulting to 1.0 if there is no downsampling along the axis.
-This is strongly recommended
-so that the the "intrinsic" coordinate system of the image avoids more complex transformations.
+  Each object in `datasets` MUST contain the field `coordinateTransformations`,
+  whose value is an array of objects that define a transformation
+  that maps Zarr array coordinates for this resolution level to the "intrinsic" coordinate system.
+  The transformation is defined according to [transformations metadata](#trafo-types-md).
+  * **Input**: The transformation MUST take as `input` points in the array coordinate system
+    corresponding to dataset's `path` field.
+    - The `input` object MUST specify a `path` field matching the `path` field of the dataset.
+    - The `name` field under `input` SHOULD be omitted.
+    - Implementations SHOULD always treat the dataset's `path` field as if it were equal to the value of `path` under `input`.
+  * **Output**: The `output` of the transformation MUST be the "intrinsic" coordinate system.
+    - The `name` field of `output` MUST be the `name` of a coordinate system.
+    - It MUST be the same value for every resolution level in a single multiscales
+    - The `path` field of `output` SHOULD be omitted.
 
-If applications require additional transformations,
-each `multiscales` object MAY contain the field `coordinateTransformations`,
-describing transformations that are applied to all resolution levels in the same manner.
-The value of `input` MUST equal the name of the "intrinsic" coordinate system.
-The value of `output` MUST be the name of a coordinate system
-which is different from the "intrinsic" coordinate system
-and which is defined in the `coordinateSystems` field of the `multiscales` metadata.
+  The coordinate system referenced by all `output` fields of the coordinate transformations (the "intrinsic" coordinate system)
+  will be a representation of the image in its native physical coordinate system.
+  It should be used for viewing and processing unless a use case dictates otherwise.
 
-Each `multiscales` object SHOULD contain the field `name`.
+  The transformation MUST be one of the following:
 
-Each `multiscales` object SHOULD contain the field `type`,
-which gives the type of downscaling method used to generate the multiscale image pyramid.
-It SHOULD contain the field `metadata`,
-which contains a object with additional information about the downscaling method.
+  * A single scale or identity transformation
+  * A sequence transformation containing one scale and one translation transformation.
+
+  In these cases, the scale transformation specifies the pixel size in physical units or time duration.
+  If scaling information is not available or applicable for one of the axes,
+  the value MUST express the scaling factor between the current resolution
+  and the first resolution for the given axis,
+  defaulting to 1.0 if there is no downsampling along the axis.
+  This is strongly recommended
+  so that the the "intrinsic" coordinate system of the image avoids more complex transformations.
+
+**`coordinateTransformations`**
+: If applications require additional transformations,
+  each `multiscales` object MAY contain the field `coordinateTransformations`,
+  describing transformations that are applied to all resolution levels in the same manner.
+  The values of both `input` and `output` fields MUST be an object with fields `name` and `path` that satisfy:
+  - The value of `input` MUST be the "intrinsic" coordinate system, referenced by `name`.
+    The `path` field of `input` SHOULD be omitted.
+  - The value of `output` can be a coordinate System in the same multiscales group (referenced by `name`).
+    In this case, the `path` field of `output` SHOULD be omitted.
+  - The value of `output` can be a coordinate system in a multiscales group in a child [labels](#labels-md) group (referenced by `path` and `name`).
+    In this case, the used transformation MUST be one of [`identity`](#identity-md), ['scale'](#scale-md) or ['translation'](#translation-md) transformations.
+
+:::{dropdown} Example: Additional coordinate transformation
+
+In the case a `coordinateTransformation` under `multiscales > coordinateTransformations` is used to link
+to a coordinate system in a child labels group, the respective metadata would look like this:
+
+```json
+
+{
+  "coordinateTransformations": [
+    {
+      "type": "identity",
+      "input": { "name": "intrinsic" },
+      "output": { "name": "intrinsic", "path": "labels/label_image"}
+    }
+  ]
+}
+```
+In this example, a multiscales group containing labels is located at `labels/label_image` relative to the current multiscales group.
+:::
+
+**`name`**
+: Each `multiscales` object SHOULD contain the field `name`.
+
+**``**type``
+: Each `multiscales` object SHOULD contain the field `type`,
+  which gives the type of downscaling method used to generate the multiscale image pyramid.
+
+**`metadata`**
+: Each `multiscales` object SHOULD contain the field `metadata`,
+  which contains a object with additional information about the downscaling method.
 
 
-:::{dropdown} Example
+:::{dropdown} Example: Complete multiscales metadata
 
 A complete example of json-file for a 5D (TCZYX) multiscales with 3 resolution levels could look like this:
 ```{literalinclude} examples/multiscales_strict/multiscales_example.json
@@ -1389,7 +1456,16 @@ This new image is composed of integer values corresponding to certain labels wit
 For example, pixels take the value 1 or 0 if the corresponding pixel in the original image represents cellular space or intercellular space, respectively.
 Such an image is referred to in this specification as a "label image".
 
-The `labels` group is nested within an image group, at the same level of the Zarr hierarchy as the resolution levels for the original image.
+The `labels` group is nested within an image group,
+at the same level of the Zarr hierarchy as the resolution levels for the original image.
+The following requirements for the parent image group apply:
+- This image group MUST implement the [multiscales](#multiscales-md) specification.
+- The image group MAY contain an additional coordinate transformation
+  that links its "intrinsic" coordinate system to the "intrinsic" coordinate system of each label image in the `labels` group.
+  If no such transformation is provided, the "intrinsic" coordinate system of the image group is usually understood to be the same as the "intrinsic" coordinate system of each label image in the `labels` group.
+- This transformation, if specified, MUST be one of [`identity`](#identity-md), ['scale'](#scale-md), a ['translation'](#translation-md)
+  or a ['sequence'](#sequence-md) of a scale and a translation transformation.
+
 The `labels` group is not itself an image; it contains images.
 The pixels of the label images MUST be integer data types,
 i.e. one of [`uint8`, `int8`, `uint16`, `int16`, `uint32`, `int32`, `uint64`, `int64`].
@@ -1400,22 +1476,6 @@ Names of the images in the `labels` group are arbitrary.
 The OME-Zarr Metadata in the `zarr.json` file associated with the `labels` group MUST contain a JSON object with the key `labels`,
 whose value is a JSON array of paths to the labeled multiscale image(s).
 All label images SHOULD be listed within this metadata file.
-
-:::{dropdown} Example
-For example:
-```json
-{
-  "attributes": {
-    "ome": {
-      "version": "0.6.dev3",
-      "labels": [
-        "cell_space_segmentation"
-      ]
-    }
-  }
-}
-```
-:::
 
 The `zarr.json` file for the label image MUST implement the multiscales specification.
 Within the `multiscales` object, the JSON array associated with the `datasets` key MUST have the same number of entries (scale levels) as the original unlabeled image.
@@ -1449,12 +1509,61 @@ The value of the `source` key MUST be a JSON object containing information about
 This object MAY include a key `image`, whose value MUST be a string specifying the relative path to a Zarr image group.
 The default value is `../../` since most labeled images are stored in a "labels" group that is nested within the original image group.
 
+:::{dropdown} Example: Reference to label image
 
-:::{dropdown} Example
-Here is an example of a simple `image-label` object for a label image in which 0s and 1s represent intercellular and cellular space, respectively:
+This is an example of multiscales metadata for an image group that contains a `labels` group under the path `labels/` that contains one label image under the subgroup `cell_segmentation`:
+```
+image.zarr                # Multiscale image group
+│
+├── zarr.json             # Multiscale metadata, which MAY contain a coordinate transformation 
+│                         # linking the "intrinsic" coordinate system of the image to the
+│                         # "intrinsic" coordinate system of the label image in the `labels` group.
+│
+├── s0                    # Mulitscale level 0
+│   ...                   # which is a folder containing chunk files which compose the array.
+│
+└── labels
+    │
+    ├── zarr.json         # Subgroup containing `labels` metadata.
+    │
+    └── cell_segmentation # Instance of a label image
+        │
+        ├── zarr.json     # Multiscales metadata with extra `label-image` field describing display information and source image.
+        ├── s0
+        ...
+```
+In the `zarr.json` under the image.zarr group, an explicit `identity` transform indicates that
+the coordinate system named `"physical"` in the multiscales metadata of the original image is the same as
+the coordinate system named `"physical"` in the multiscales metadata of the label image:
+
+```{literalinclude} examples/multiscales_strict/multiscale_with_reference_to_label.json
+:language: json
+```
+
+The `zarr.json` under the `labels` group contains a JSON object with the key `labels`, for example:
+
+```json
+{
+  "attributes": {
+    "ome": {
+      "version": "0.6.dev4",
+      "labels": [
+        "cell_segmentation"
+      ]
+    }
+  }
+}
+```
+
+In the `zarr.json` under the `cell_segmentation` multiscales image group,
+a coordinate system named `"physical"` serves as the "intrinsic" coordinate system for the label image.
+The `image-label` field contains information about the source image and display colors for the label image,
+i.e., a label image in which 0s and 1s represent intercellular and cellular space, respectively:
+
 ```{literalinclude} examples/label_strict/colors_properties.json
 :language: json
 ```
+
 In this case, the pixels consisting of a 0 in the Zarr array will be displayed as 50% blue and 50% opacity.
 Pixels with a 1 in the Zarr array, which correspond to cellular space, will be displayed as 50% green and 50% opacity.
 :::
