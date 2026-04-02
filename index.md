@@ -523,7 +523,7 @@ Depending on which, different constraints apply to the transformations, as descr
 - **Inside `multiscales > coordinateTransformations`**: Additional transformations for single multiscale images MAY be stored here.
   The following constraints apply to transformations under the `coordinateTransformations` field:
   - The `coordinateTransformations` field MUST contain an array of valid [transformations](#trafo-types-md).
-  - The `input` to every one of these transformations MUST be the intrinsic coordinate system, referenced by the `name` field.
+  - The `input` to every one of these transformations MUST be the same coordinate system, referenced by the `name` field.
   - The `output` MUST be another coordinate system defined under `multiscales > coordinateSystems`, referenced by the `name` field, or another coordinate system in a child [labels](#labels-md) group referenced by both `name` and `path`.
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more images
   MUST be stored in the attributes of a [`scene` object](#scene-md) in a [scene Zarr group](#scene-format).
@@ -532,9 +532,9 @@ Depending on which, different constraints apply to the transformations, as descr
 
 | Context | `input` | `output` |
 |---------|---------|----------|
-| **multiscales > datasets** | `{ "path": "<dataset_path>" }` | `{ "name": "intrinsic" }`|
-| **multiscales > coordinateTransformations** | `{ "name": "intrinsic" }` | `{ "name": "output" }` <br> or <br> `{ "name": "intrinsic", "path": "labels/labels_path" }` |
-| **scene > coordinateTransformations** | `{ "name": "input", "path": "path_to/imageA" }` | `{ "name": "output", "path": "path_to/imageB" }` |
+| **multiscales > datasets** | `{ "path": "<dataset_path>" }` | `{ "name": "physical" }`|
+| **multiscales > coordinateTransformations** | `{ "name": "physical" }` | `{ "name": "output" }` <br> or <br> `{ "name": "physical", "path": "labels/labels_path" }` |
+| **scene > coordinateTransformations** | `{ "name": "physical", "path": "path_to/imageA" }` | `{ "name": "physical", "path": "path_to/imageB" }` |
 
 This separation of transformations (inside `multiscales > datasets`, under `multiscales > coordinateTransformations` and under `scene > coordinateTransformations`) provides flexibility for different use cases while still maintaining a level of rigidity for implementations.
 
