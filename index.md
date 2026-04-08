@@ -530,6 +530,9 @@ Depending on which, different constraints apply to the transformations, as descr
   In this case, the `input` and `output` values are objects
   that refer to coordinate systems in the same zarr.json or in the metadata of multiscale image subgroups.
 
+In any context, the values given for `name` and `path` provide an unambiguous reference to a named coordinate system.
+If the `path` field is null or omitted, this is to be interpreted as referring to a named coordinate system in the same `zarr.json` file.
+
 | Context | `input` | `output` |
 |---------|---------|----------|
 | **multiscales > datasets** | `{ "path": "<dataset_path>" }` | `{ "name": "physical" }`|
