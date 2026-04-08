@@ -275,9 +275,9 @@ In contrast, discrete axes (`"discrete" : true`) may be indexed only by integers
 Axes representing a channel, coordinate, or displacement are usually discrete.
 
 ```{note}
-The most common methods for interpolation are "nearest neighbor", "linear", "cubic", and "windowed sinc".
+The most common methods for interpolation are "nearest", "linear", "bspline-cubic", and "windowed sinc" (see {cite:t}`thevenaz2000image`, section 8).
 Here, we refer to any method that obtains values at real-valued coordinates using discrete samples as an "interpolator".
-As such, label images may be interpolated using "nearest neighbor" to obtain labels at points along the continuum.
+As such, label images may be interpolated using "nearest" to obtain labels at points along the continuum.
 ```
 
 #### Array coordinate systems
@@ -981,9 +981,9 @@ Metadata for these coordinate transforms have the following fields:
     Its value indicates the interpolation to use if transforming points not on the array's discrete grid.
     
     The interpolation methods listed in this specification document refer to the methods described in {cite:t}`thevenaz2000image` and are not exhaustive.
-    - `"nearest"` for nearest neighbor interpolation (see {cite:t}`thevenaz2000image`, section 8.1),
-    - `"linear"` for linear interpolation (default, see {cite:t}`thevenaz2000image`, section 8.2),
-    - `"bspline-cubic"` for cubic interpolation (see {cite:t}`thevenaz2000image`, section 8.3 on "cubic B-splines).
+    - `nearest` for nearest neighbor interpolation (see {cite:t}`thevenaz2000image`, section 8.1),
+    - `linear` for linear interpolation (default, see {cite:t}`thevenaz2000image`, section 8.2),
+    - `bspline-cubic` for cubic interpolation (see {cite:t}`thevenaz2000image`, section 8.3 on "cubic B-splines).
     
     Consumers SHOULD clearly communicate to users if a different interpolation method is used.
 
