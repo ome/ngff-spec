@@ -603,7 +603,7 @@ to do so by estimating the transformations' inverse if they choose to.
 ```
 :::
 
-```{hint}
+```{note}
 Exact reproducibility of pixel values for images transformed and resampled by 
 the transformation types here may differ across implementation and is therefore
 out of the scope of this this specification.
@@ -956,6 +956,11 @@ defining a mapping from an input coordinate system to an output coordinate syste
 The array contains either coordinates (absolute positions)
 or displacements (relative shifts) for each point in the input space.
 
+```{hint}
+The `coordinates` and `displacements` transformations are not invertible in general,
+but implementations MAY approximate their inverses.
+```
+
 **Array Structure**
 
 The array containing the coordinates or displacements MUST:
@@ -964,6 +969,7 @@ The array containing the coordinates or displacements MUST:
   to the corresponding coordinates in the input coordinate system via a coordinate transformation (see details below).
 - have one dimension corresponding to every axis of the input coordinate system
 - have one additional dimension to hold components of the vector (either coordinates or displacements)
+- only be used to represent transformations between coordinate systems that are defined in smooth, regularly sampled coordinate arrays.
 
 Metadata for these coordinate transforms have the following fields:
 
@@ -972,19 +978,28 @@ Metadata for these coordinate transforms have the following fields:
 
 **interpolation**
 :   The interpolation attributes MAY be provided.
-    Its value indicates the interpolation to use if transforming points not on the array's discrete grid. Well-defined values include:
-    - `"nearest"` for nearest neighbor interpolation,
-    - `"linear"` for linear interpolation (default)
-    - `"bspline-cubic"` for cubic interpolation, etc.
+    Its value indicates the interpolation to use if transforming points not on the array's discrete grid.
+    
+    The interpolation methods listed in this specification document refer to the methods described in {cite:t}`thevenaz2000image` and are not exhaustive.
+    - `"nearest"` for nearest neighbor interpolation (see {cite:t}`thevenaz2000image`, section 8.1),
+    - `"linear"` for linear interpolation (default, see {cite:t}`thevenaz2000image`, section 8.2),
+    - `"bspline-cubic"` for cubic interpolation (see {cite:t}`thevenaz2000image`, section 8.3 on "cubic B-splines).
     
     Consumers SHOULD clearly communicate to users if a different interpolation method is used.
-    See also {cite:t}`thevenaz2000image` for more details on interpolation methods.
-
-
 
 ```{hint}
-The `coordinates` and `displacements` transformations are not invertible in general,
-but implementations MAY approximate their inverses.
+The `interpolation` field refers to the method that is used to interpolate the `coordinate` or `displacement` array,
+*not* the method used to interpolate the image when applying the transformation to an image.
+The `interpolation` field, if provided, is not normative in the sense that usage of a different method is invalid under the spec.
+Implementations may prefer to use faster methods for rendering (i.e., `linear` or `nearest`) but this may lead to pathological cases:
+- If `nearest` interpolation is used for a `coordinates` transformation,
+  the transformed image collapses into a single point at the nearest coordinate in the coordinate field.
+- If `nearest` interpolation is used for a `displacements` transformation,
+  the transformed image is piecewise constant with discontinuities at the boundaries between nearest neighbor regions.
+
+While choosing the specified interpolation methods can help to avoid these pathologies,
+implementations of the specified interpolation methods may still differ in their results.
+An exact reproducibility of pixel values for images transformed and resampled by this transformation is therefore out of the scope of this specification.
 ```
 
 **Array metadata**
@@ -1198,17 +1213,6 @@ x_displacement = displacementField[y][x][1]
 I.e. the y-displacement is first, because the y-axis is the first element of the input and output coordinate systems.
 
 :::
-
-```{warning}
-The `interpolation` field refers to the method that is used to interpolate the `coordinate` or `displacement` array,
-*not* the method used to interpolate the image when applying the transformation to an image.
-The `interpolation` field, if provided, is not normative in the sense that usage of a different method is invalid under the spec.
-Implementations may prefer to use faster methods for rendering (i.e., `linear` or `nearest`) but this may lead to pathological cases:
-- If `nearest` interpolation is used for a `coordinates` transformation,
-  the transformed image collapses into a single point at the nearest coordinate in the coordinate field.
-- If `nearest` interpolation is used for a `displacements` transformation,
-  the transformed image is piecewise constant with discontinuities at the boundaries between nearest neighbor regions.
-```
 
 ##### byDimension
 (byDimension-md)=
