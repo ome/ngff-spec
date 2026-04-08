@@ -7,8 +7,8 @@
     {
       "type": "scale",
       "scale": [2, 3.12],
-      "input": "in",
-      "output": "out"
+      "input": {"name": "in"},
+      "output": {"name": "out"}
     }
   ]
 }

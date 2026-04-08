@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6.dev3",
+    "version": "0.6.dev4",
     "multiscales": [
       {
         "datasets": [
@@ -13,8 +13,8 @@
                   1,
                   1
                 ],
-                "input": "path/to/0",
-                "output": "intrinsic"
+                "input": {"path": "path/to/0"},
+                "output": {"name": "intrinsic"}
               }
             ]
           }

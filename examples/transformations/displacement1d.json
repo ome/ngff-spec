@@ -7,8 +7,8 @@
     "name": "a displacement field transform",
     "type": "displacements",
     "path": "i2xCoordinates",
-    "input": "input",
-    "output": "output",
+    "input": {"name": "input"},
+    "output": {"name": "output"},
     "interpolation": "nearest"
   }]
 }
