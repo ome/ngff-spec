@@ -24,7 +24,9 @@ GENERIC_SCHEMA = schema_store[
 XFAIL_ID_PATTERNS = [re.compile(p) for p in [".*well_path_has_column_before_row.*"]]
 """Regex patterns for test IDs where JSON Schema validation gets the wrong answer.
 
-JSON Schema is not capable of expressing every rule described in the OME-Zarr specification.
+This is necessary because JSON Schema is not capable of expressing every rule described in the OME-Zarr specification.
+This should only be possible where a test case is `"valid": false`,
+and is only necessary to xfail the `Suite.validate` (not `Suite.maybe_validate`) case.
 """
 
 print(schema_store)
