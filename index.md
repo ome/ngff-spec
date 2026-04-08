@@ -606,7 +606,7 @@ to do so by estimating the transformations' inverse if they choose to.
 ```{note}
 Exact reproducibility of pixel values for images transformed and resampled by 
 the transformation types here may differ across implementation and is therefore
-out of the scope of this this specification.
+out of the scope of this specification.
 ```
 
 #### Matrix transformations
@@ -1005,7 +1005,7 @@ An exact reproducibility of pixel values for images transformed and resampled by
 **Array metadata**
 
 For both `coordinates` and `displacements`,
-the array data at referred to by `path` MUST define the following metadata fields:
+the array data referred to by `path` MUST define the following metadata fields:
 
 * `coordinateSystems`: MUST contain a [coordinate system](#coordinatesystems-metadata) with the following properties:
   - Include all axes of the input coordinate system (in the same order).
