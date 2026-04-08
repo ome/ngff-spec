@@ -60,6 +60,7 @@
             }
           ],
           "name": "image_with_coordinateTransformations",
+          "uuid": "e3a3177d-2097-4c23-bc1b-9d0e5b934fc3",
           "type": "foo",
           "metadata": {
             "key": "value"
