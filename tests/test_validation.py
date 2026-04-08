@@ -1,6 +1,7 @@
 import json
 import glob
 import os
+import re
 
 from dataclasses import dataclass
 from typing import List
@@ -20,25 +21,35 @@ GENERIC_SCHEMA = schema_store[
     "https://ngff.openmicroscopy.org/0.5/schemas/ome_zarr.schema"
 ]
 
+XFAIL_ID_PATTERNS = [re.compile(p) for p in [".*well_path_has_column_before_row.*"]]
+"""Regex patterns for test IDs where JSON Schema validation gets the wrong answer.
+
+JSON Schema is not capable of expressing every rule described in the OME-Zarr specification.
+"""
+
 print(schema_store)
 
 
 @dataclass
 class Suite:
+    id: str
     schema: dict
     data: dict
     valid: bool = True
 
-    def validate(self, validator) -> None:
+    def validate(self, validator: Validator) -> None:
         if not self.valid:
             with pytest.raises(ValidationError):
                 validator.validate(self.data)
         else:
             validator.validate(self.data)
 
-    def maybe_validate(self, validator) -> None:
+    def maybe_validate(self, validator: Validator) -> None:
         if self.valid:
             validator.validate(self.data)
+
+    def should_xfail(self) -> bool:
+        return any(r.search(self.id) is not None for r in XFAIL_ID_PATTERNS)
 
 
 def pytest_generate_tests(metafunc):
@@ -58,7 +69,7 @@ def pytest_generate_tests(metafunc):
         and whether or not the block is considered valid.
     """
     if "suite" in metafunc.fixturenames:
-        suites: List[Schema] = []
+        suites: List[Suite] = []
         ids: List[str] = []
 
         # Validation
@@ -69,8 +80,12 @@ def pytest_generate_tests(metafunc):
             with open(schema["id"]) as f:
                 schema = json.load(f)
             for test in suite["tests"]:
-                ids.append("validate_" + str(test["formerly"]).split("/")[-1][0:-5])
-                suites.append(Suite(schema, test["data"], test["valid"]))
+                former_fname = str(test["formerly"]).split("/")[-1]
+                if former_fname.lower().endswith(".json"):
+                    former_fname = former_fname[:-5]
+                test_id = "validate_" + former_fname
+                ids.append(test_id)
+                suites.append(Suite(test_id, schema, test["data"], test["valid"]))
 
         # Examples
         for config_filename in glob.glob("examples/*/.config.json"):
@@ -88,8 +103,9 @@ def pytest_generate_tests(metafunc):
                     )
                     data = json.loads(data)
                     data = data["attributes"]  # Only validate the attributes object
-                ids.append("example_" + str(filename).split("/")[-1][0:-5])
-                suites.append(Suite(schema, data, True))  # Assume true
+                eg_id = "example_" + str(filename).split("/")[-1][0:-5]
+                ids.append(eg_id)
+                suites.append(Suite(eg_id, schema, data, True))  # Assume true
 
         metafunc.parametrize("suite", suites, ids=ids, indirect=True)
 
@@ -99,13 +115,15 @@ def suite(request):
     return request.param
 
 
-def test_run(suite):
+def test_run(suite: Suite):
+    if suite.should_xfail():
+        pytest.xfail("JSON Schema cannot express this invalid case")
     resolver = RefResolver.from_schema(suite.schema, store=schema_store)
     validator = Validator(suite.schema, resolver=resolver)
     suite.validate(validator)
 
 
-def test_generic_run(suite):
+def test_generic_run(suite: Suite):
     resolver = RefResolver.from_schema(GENERIC_SCHEMA, store=schema_store)
     validator = Validator(GENERIC_SCHEMA, resolver=resolver)
     suite.maybe_validate(validator)
