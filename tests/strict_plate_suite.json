@@ -12,18 +12,18 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "name": "test plate",
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -41,17 +41,17 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -76,18 +76,18 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "name": "test plate",
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -111,18 +111,18 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "name": "test plate",
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -146,18 +146,18 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "name": "test plate",
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }

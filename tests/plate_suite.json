@@ -12,17 +12,17 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -45,17 +45,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -73,7 +73,7 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "wells": [
@@ -96,7 +96,7 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [],
@@ -120,20 +120,20 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               },
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -198,20 +198,20 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               },
-              {
-                "name": "A"
-              }
-            ],
-            "rows": [
               {
                 "name": "1"
               }
             ],
+            "rows": [
+              {
+                "name": "A"
+              }
+            ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -229,12 +229,12 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ]
           }
@@ -250,12 +250,12 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": {}
@@ -265,22 +265,19 @@
       "valid": false
     },
     {
-      "formerly": "plate/duplicate_rows",
+      "formerly": "plate/duplicate_wells",
       "data": {
         "ome": {
           "version": "0.5",
           "plate": {
             "columns": [
               {
-                "name": "A"
-              },
-              {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
@@ -336,7 +333,7 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
@@ -346,7 +343,7 @@
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -364,12 +361,12 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
@@ -391,17 +388,17 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "columnIndex": 0
               }
             ]
@@ -418,17 +415,17 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0
               }
             ]
@@ -445,12 +442,12 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
@@ -472,17 +469,17 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "plate/1/A",
+                "path": "plate/A/1",
                 "rowIndex": 0
               }
             ]
@@ -527,7 +524,7 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
@@ -537,7 +534,7 @@
             ],
             "wells": [
               {
-                "path": "A/A1",
+                "path": "A1/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -560,17 +557,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -593,17 +590,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -626,17 +623,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -660,17 +657,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -694,17 +691,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -728,17 +725,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -762,17 +759,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -796,17 +793,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -830,17 +827,17 @@
             ],
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -858,18 +855,18 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "field_count": 0,
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "1/A",
+                "path": "A/1",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
@@ -887,17 +884,17 @@
           "plate": {
             "columns": [
               {
-                "name": "A"
+                "name": "1"
               }
             ],
             "rows": [
               {
-                "name": "1"
+                "name": "A"
               }
             ],
             "wells": [
               {
-                "path": "A/1",
+                "path": "1/A",
                 "rowIndex": 0,
                 "columnIndex": 0
               }
