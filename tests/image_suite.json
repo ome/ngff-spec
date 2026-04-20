@@ -34,7 +34,11 @@
                   "path": "0",
                   "coordinateTransformations": [
                     {
-                      "scale": [0.13, 0.13],
+                      "scale": [
+                        1.0,
+                        0.13,
+                        0.13
+                      ],
                       "type": "scale"
                     }
                   ]
