@@ -443,8 +443,8 @@ Implementations SHOULD prefer to store transformations as a sequence of less exp
     {
       "type": "scale",
       "scale": [2, 3.12],
-      "input": "in",
-      "output": "out"
+      "input": {"name": "in"},
+      "output": {"name": "out"}
     }
   ]
 }
@@ -661,8 +661,8 @@ In the context of multiscales metadata, this could look like this:
             {
               "type": "scale",
               "scale": [0.5, 0.5],
-              "input": "s0",
-              "output": "intrinsic"
+              "input": {"path": "s0"},
+              "output": {"name": "intrinsic"}
             }
           ]
         }
@@ -683,8 +683,6 @@ In this case, the `scale` transformation under `coordinateTransformations`
 defines the mapping from the "intrinsic" coordinate system to the unitless "array" coordinate system.
 Another transformation (e.g. in a `scene`) could then use the "array" coordinate system as an input or output to define transformations in array units.
 :::
-
-
 
 #### Matrix transformations
 (matrix-trafo-md)=
@@ -1092,8 +1090,8 @@ For example, in 1D:
     "name" : "a coordinate field transform",
     "type": "coordinates",
     "path" : "i2xCoordinates",
-    "input" : "i",
-    "output" : "x",
+    "input" : {"name": "i"},
+    "output" : {"name": "x"},
     "interpolation" : "nearest"
 }
 ```
@@ -1138,8 +1136,8 @@ A 1D example displacement field:
   "name" : "a displacement field transform",
   "type": "displacements",
   "path" : "displacements",
-  "input" : "i",
-  "output" : "x",
+  "input" : {"name": "i"},
+  "output" : {"name": "x"},
   "interpolation" : "linear"
 }
 ```
@@ -1192,8 +1190,8 @@ the other two dimensions MUST be axes that are identical to the axes of the `in`
 "coordinateTransformations" : [
   {
     "type": "displacements",
-    "input" : "in",
-    "output" : "out",
+    "input" : {"name": "in"},
+    "output" : {"name": "out"},
     "path" : "displacementField"
   }
 ]
