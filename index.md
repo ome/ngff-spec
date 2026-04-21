@@ -275,9 +275,9 @@ In contrast, discrete axes (`"discrete" : true`) may be indexed only by integers
 Axes representing a channel, coordinate, or displacement are usually discrete.
 
 ```{note}
-The most common methods for interpolation are "nearest neighbor", "linear", "cubic", and "windowed sinc".
+The most common methods for interpolation are "nearest", "linear", "bspline-cubic", and "windowed sinc" (see {cite:t}`thevenaz2000image`, section 8).
 Here, we refer to any method that obtains values at real-valued coordinates using discrete samples as an "interpolator".
-As such, label images may be interpolated using "nearest neighbor" to obtain labels at points along the continuum.
+As such, label images may be interpolated using "nearest" to obtain labels at points along the continuum.
 ```
 
 #### Coordinate convention
@@ -420,8 +420,8 @@ The following transformations are supported:
 | [`affine`](#affine-md) | one of:<br>`"affine":List[List[number]]`,<br>`"path":str` | 2D affine transformation matrix stored either with JSON (`affine`) or as a Zarr array at a location in this container (`path`). |
 | [`rotation`](#rotation-md) | one of:<br>`"rotation":List[List[number]]`,<br>`"path":str` | 2D rotation transformation matrix stored as an array stored either with json (`rotation`) or as a Zarr array at a location in this container (`path`).|
 | [`sequence`](#sequence-md) | `"transformations":List[Transformation]` | sequence of transformations. Applying the sequence applies the composition of all transforms in the list, in order. |
-| [`displacements`](#coordinates-displacements-md) | `"path":str` | Displacement field transformation located at `path`. |
-| [`coordinates`](#coordinates-displacements-md) | `"path":str` | Coordinate field transformation located at `path`. |
+| [`displacements`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Displacement field transformation located at `path`. |
+| [`coordinates`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Coordinate field transformation located at `path`. |
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"input_axes": List[number]`, <br> and `"output_axes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
@@ -462,7 +462,7 @@ i.e., the mapping from the first input axis to the first output axis is determin
 Conforming readers:
 - MUST parse `identity`, `scale`, `translation` transformations;
 - SHOULD parse `mapAxis`, `affine`, `rotation` transformations;
-- SHOULD display an informative warning if encountering transformations that cannot be parsed or displayed by a viewer;
+- SHOULD display an informative warning if encountering transformations that cannot be parsed or displayed by a consumer;
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
 
@@ -561,6 +561,12 @@ to do so by estimating the transformations' inverse if they choose to.
 }
 ```
 :::
+
+```{note}
+Exact reproducibility of pixel values for images transformed and resampled by 
+the transformation types here may differ across implementation and is therefore
+out of the scope of this specification.
+```
 
 **Transformations in array coordinate units**:
 Some applications might prefer to define points, regions-of-interest or transformation parameters
@@ -1011,100 +1017,155 @@ and is invertible.
 ##### coordinates and displacements
 (coordinates-displacements-md)=
 
-`coordinates` and `displacements` transformations store coordinates or displacements in an array
-and interpret them as a vector field that defines a transformation.
-The arrays must have a dimension corresponding to every axis of the input coordinate system
-and one additional dimension to hold components of the vector.
-Applying the transformation amounts to looking up the appropriate vector in the array,
-interpolating if necessary,
-and treating it either as a position directly (`coordinates`)
-or a displacement of the input point (`displacements`).
+`coordinates` and `displacements` transformations store a vector field of arbitrary sampling density in an array,
+defining a mapping from an input coordinate system to an output coordinate system.
+The array contains either coordinates (absolute positions)
+or displacements (relative shifts) for each point in the input space.
 
-These transformation types refer to an array at location specified by the `path` parameter.
-The input and output coordinate systems for these transformations (`input` / `output` coordinate systems)
-constrain the array size and the coordinate system metadata for the array (field `coordinateSystem`).
-
-* If the input coordinate system has `N` axes,
-  the array at location path MUST have `N+1` dimensions
-* The field coordinate system MUST contain an axis identical to every axis
-  of its input coordinate system in the same order.
-* The field coordinate system MUST contain an axis with type `coordinate` or `displacement`, respectively,
-  for transformations of type `coordinates` or `displacements`.
-    * This SHOULD be the last axis (contiguous on disk when c-order).
-* If the output coordinate system has `M` axes,
-  the length of the array along the `coordinate`/`displacement` dimension MUST be of length `M`.
-
-The `i`th value of the array along the `coordinate` or `displacement` axis refers to the coordinate or displacement
-of the `i`th output axis. See the example below.
-
-`coordinates` and `displacements` transformations are not invertible in general,
+```{hint}
+The `coordinates` and `displacements` transformations are not invertible in general,
 but implementations MAY approximate their inverses.
+```
+
+**Array Structure**
+
+The array containing the coordinates or displacements MUST:
+- be a regular grid of vectors.
+  The vectors are stored in an array, the coordinates of which can be mapped
+  to the corresponding coordinates in the input coordinate system via a coordinate transformation (see details below).
+- have one dimension corresponding to every axis of the input coordinate system
+- have one additional dimension to hold components of the vector (either coordinates or displacements)
+- only be used to represent transformations between coordinate systems that are defined in smooth, regularly sampled coordinate arrays.
+
 Metadata for these coordinate transforms have the following fields:
 
 **path**
 :  The location of the coordinate array in this (or another) container.
 
+**interpolation**
+:   The interpolation attributes MAY be provided.
+    Its value indicates the interpolation to use if transforming points not on the array's discrete grid.
+    
+    The interpolation methods listed in this specification document refer to the methods described in {cite:t}`thevenaz2000image` and are not exhaustive.
+    - `nearest` for nearest neighbor interpolation (see {cite:t}`thevenaz2000image`, section 8.1),
+    - `linear` for linear interpolation (default, see {cite:t}`thevenaz2000image`, section 8.2),
+    - `bspline-cubic` for cubic interpolation (see {cite:t}`thevenaz2000image`, section 8.3 on "cubic B-splines).
+    
+    Consumers SHOULD clearly communicate to users if a different interpolation method is used.
+
+```{hint}
+The `interpolation` field refers to the method that is used to interpolate the `coordinate` or `displacement` array,
+*not* the method used to interpolate the image when applying the transformation to an image.
+The `interpolation` field, if provided, is not normative in the sense that usage of a different method is invalid under the spec.
+Implementations may prefer to use faster methods for rendering (i.e., `linear` or `nearest`) but this may lead to pathological cases:
+- If `nearest` interpolation is used for a `coordinates` transformation,
+  the transformed image collapses into a single point at the nearest coordinate in the coordinate field.
+- If `nearest` interpolation is used for a `displacements` transformation,
+  the transformed image is piecewise constant with discontinuities at the boundaries between nearest neighbor regions.
+
+While choosing the specified interpolation methods can help to avoid these pathologies,
+implementations of the specified interpolation methods may still differ in their results.
+An exact reproducibility of pixel values for images transformed and resampled by this transformation is therefore out of the scope of this specification.
+```
+
+**Array metadata**
 
 For both `coordinates` and `displacements`,
-the array data at referred to by `path` MUST define coordinate system
-and coordinate transform metadata:
+the array data referred to by `path` MUST define the following metadata fields:
 
-* Every axis name in the `coordinateTransform`'s `input`
-  MUST appear in the coordinate system.
-* The array dimension corresponding to the `coordinate` or `displacement` axis
-  MUST have length equal to the number of dimensions of the `coordinateTransform` `output`
-* If the input coordinate system `N` axes,
-  then the array data at `path` MUST have `(N + 1)` dimensions.
-* SHOULD have a `name` identical to the `name` of the corresponding `coordinateTransform`.
+* `coordinateSystems`: MUST contain a [coordinate system](#coordinatesystems-metadata) with the following properties:
+  - Include all axes of the input coordinate system (in the same order).
+  - Include one additional axis of `"type": "coordinate"` (for coordinates transformations) or `"type": "displacement"` (for displacements transformations).
+  - The additional axis should be the last axis (for contiguous memory layout in C-order).
+  - The `name` of this coordinate system SHOULD be the same as the `name` of the corresponding coordinate transformation.
 
-For `coordinates`:
+* `coordinateTransformations`: Defines how to map from the coordinate system of the array into a physical coordinate system
+(e.g. the resolution at which the vector field is sampled). MUST contain a single transformation with the following properties:
+  - `type`: The type of the transformation; MUST be one of [`identity`](#identity-md), [`scale`](#scale-md)
+    or a [`sequence`](#sequence-md) of a [scale](#scale-md) followed by a [translation](#translation-md).
+  - `output`: The name of the coordinate system defined in the `coordinateSystems` field of the array metadata.
+  
+  *Note*: The `input` field is omitted, as it is implicitly the pixel coordinate system of the array
+    (defined by the first `N` axes of the array's `coordinateSystem`).
 
-* `coordinateSystem` metadata MUST have exactly one axis with `"type" : "coordinate"`
-* the shape of the array along the "coordinate" axis must be exactly `N`
+**Constraints**
 
-For `displacements`:
+The array at `path` MUST satisfy:
 
-* `coordinateSystem` metadata MUST have exactly one axis with `"type" : "displacement"`
-* the shape of the array along the "displacement" axis must be exactly `N`
-* input and output coordinate systems MUST have an equal number of dimensions.
+  - **Dimensionality**: If the input coordinate system has `N` axes, the array at location `path` MUST have `N+1` dimensions.
+  - **Vector dimension length**: 
+    - For `coordinates` transformations, the length of the array along the `coordinate` dimension (last axis) MUST equal `M`,
+      the number of axes in the output coordinate system.
+    - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
+      the number of axes in the input (and output) coordinate system. `displacements` require `M=N`.
+  - **Vector component mapping**: The `i`th value of the array along the `coordinate` or `displacement` axis refers to the `i`th output axis.
 
-:::{dropdown} Example 1
-For example, in 1D:
+```{hint}
+Applying the transformation to a point `x` in the input coordinate system amounts to following the following steps:
+1. Use the inverse of the transformation found in the vector field's metadata under `coordinateTransformations`
+  to map the input point `x` into the corresponding array coordinate `a`.
+2. Look up the vector in the array corresponding to that point's coordinates in the array's coordinate system.
+3. If the point (`a`) does not correspond to a discrete point in the `coordinate` or `displacement` array,
+   interpolate the vector field to obtain a vector for the input point.
+4. Treat the result either as
+   - an absolute position (`coordinates`) or
+   - a displacement to add to the input point `x` (`displacements`).
+```
+
+:::{dropdown} Example 1: 1D coordinate transformation
+For example, in 1D, a coordinate field transformation mapping from an input coordinate system `input`
+to an output coordinate system `output` would have metadata such as:
 ```json
 {
     "name" : "a coordinate field transform",
     "type": "coordinates",
-    "path" : "i2xCoordinates",
-    "input" : "i",
-    "output" : "x",
+    "path" : "coordinateTransformations/i2xCoordinates",
+    "input" : "input",
+    "output" : "output",
     "interpolation" : "nearest"
 }
 ```
 
-where we assume input spaces `i` and `x` are defined elsewhere.
-Example metadata for the array data at path `coordinates` above:
+where we assume input coordinate systems `input` and `output` are defined elsewhere.
+Example metadata under the attributes of the zarr array at path `coordinateTransformations/i2xCoordinates` above:
 
 ```json
 {
-  "coordinateSystems" : [
-    {
-      "name" : "a coordinate field transform",
-      "axes" : [
-        { "name": "i", "type": "space", "discrete": true },
-        { "name": "c", "type": "coordinate", "discrete": true }
-      ]
-    }
-  ],
-  "coordinateTransformations" : [
-    {
-      "type" : "identity",
-      "output" : "a coordinate field transform"
-    }
-  ]
+  "ome": {
+    "coordinateSystems" : [
+      {
+        "name" : "a coordinate field transform",
+        "axes" : [
+          { "name": "i", "type": "space", "discrete": true },
+          { "name": "c", "type": "coordinate", "discrete": true }
+        ]
+      } 
+    ],
+    "coordinateTransformations" : [
+      {
+        "type" : "identity",
+        "output" : "a coordinate field transform"
+      }
+    ]
+  }
 }
 ```
 
-If the array in `coordinates` contains the data: `[-9, 9, 0]`, then this metadata defines the function:
+Here, the axis `i` refers to the input positions along the `i`-axis,
+which equal array indices in this case as indicated by the `identity` transformation.
+The `c` axis holds the corresponding output coordinates.
+
+If the array in `coordinates` contains the data:
+```
+[
+  [-9],  // Output coordinate for index=0, i=0
+  [9],   // Output coordinate for index=1, i=1
+  [0]    // Output coordinate for index=2, i=2
+]
+```
+
+then this metadata defines the following function to map
+the `i` axis (`input` coordinate system) to the `x` axis (`output` coordinate system):
 
 ```
 x =
@@ -1114,44 +1175,58 @@ x =
 ```
 :::
 
-:::{dropdown} Example 2
+:::{dropdown} Example 2: 1D displacement transformation
 A 1D example displacement field:
 ```json
 {
   "name" : "a displacement field transform",
   "type": "displacements",
   "path" : "displacements",
-  "input" : "i",
-  "output" : "x",
+  "input" : "input",
+  "output" : "output",
   "interpolation" : "linear"
 }
 ```
 
-where we assume input spaces `i` and `x` are defined elsewhere.
-Example metadata for the array data at path `displacements` above:
+where we assume input coordinate systems `input` and `output` are defined elsewhere.
+Example metadata under the attributes of the zarr array at path `displacements` above:
 
 ```json
 {
-  "coordinateSystems" : [
-    {
-      "name" : "a displacement field transform",
-      "axes" : [
-        { "name": "x", "type": "space", "unit" : "nanometer" },
-        { "name": "d", "type": "displacement", "discrete": true }
-      ]
-    }
-  ],
-  "coordinateTransformations" : [
-    {
-      "type" : "scale",
-      "scale" : [2, 1],
-      "output" : "a displacement field transform"
-    }
-  ]
+  "ome": {
+    "coordinateSystems" : [
+      {
+        "name" : "a displacement field transform",
+        "axes" : [
+          { "name": "x", "type": "space", "unit" : "nanometer" },
+          { "name": "d", "type": "displacement", "discrete": true }
+        ]
+      } 
+    ],
+    "coordinateTransformations" : [
+      {
+        "type" : "scale",
+        "scale" : [2, 1],
+        "output" : "a displacement field transform"
+      }
+    ]
+  }
 }
 ```
 
-If the array in `displacements` contains the data: `[-1, 0, 1]`,
+Since the input and output coordinate system may be defined in physical units,
+a scale transformation is needed to map the displacement vectors into the same physical units as the input point.
+
+If the array in `displacements` contains the data:
+
+```
+[
+  [-1],  // Displacement for index=0, x=0
+  [0],   // Displacement for index=1, x=2
+  [1]    // Displacement for index=2, x=4
+]
+```
+
 this transformation maps the point `[1.0]` to the point `[0.5]`.
 A scale transformation maps the array coordinates to the `x` axis.
 Using the inverse of the scale transform, we see that we need the position `0.5` in array coordinates.
@@ -1161,7 +1236,7 @@ That value gives us the displacement of the input point,
 hence the output is `1.0 + (-0.5) = 0.5`.
 :::
 
-:::{dropdown} Example 3
+:::{dropdown} Example 3: 2D displacement transformation
 
 In this example, the array located at `displacementField` MUST have three dimensions.
 One dimension MUST correspond to an axis with `type : displacement` (in this example, the last dimension),
@@ -1187,7 +1262,8 @@ The metadata at location `displacementField` should have a coordinate system suc
 ```json
 "coordinateSystems" : [
   { "name" : "in", "axes" : [
-    {"name":"y"}, {"name":"x"},
+    {"name":"y"},
+    {"name":"x"},
     {"name":"d", "type":"displacement", "discrete":true} ]
   }
 ]
