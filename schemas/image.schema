@@ -38,6 +38,10 @@
           "name": {
             "type": "string"
           },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
           "datasets": {
             "type": "array",
             "minItems": 1,

@@ -7,6 +7,7 @@
       "multiscales": [
         {
           "name": "example",
+          "uuid": "5a1443a1-5af7-48ec-9115-7272af5c41f2",
           "coordinateSystems": [
               {
                 "name": "intrinsic",

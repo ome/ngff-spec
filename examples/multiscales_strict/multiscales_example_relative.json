@@ -1,8 +1,8 @@
 {
   "multiscales": [
     {
-      "version": "0.6.dev3",
       "name": "example",
+      "uuid": "4b954a85-63f2-48e0-8fb8-f2d436109869",
       "coordinateSystems" : [
         {
           "name" : "world",
