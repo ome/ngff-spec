@@ -8,6 +8,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.6.dev3] - 2026-03-26
+
+### Changed
+
+- BREAKING CHANGE: Unified `input` and `output` fields in all transformation metadata to be an object of `{"name": string, "path": string}` instead of allowing both string and object forms. This change was made to ensure consistency across all transformations and to simplify the specification.
+
 ## [0.6.dev3] - 2026-03-13
 
 ### Changed

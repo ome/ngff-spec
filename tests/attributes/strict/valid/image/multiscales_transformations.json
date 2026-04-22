@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6.dev3",
+    "version": "0.6.dev4",
     "multiscales": [
       {
         "coordinateSystems": [
@@ -37,7 +37,7 @@
         ],
         "datasets": [
           {
-            "path": "0",
+            "path": "s0",
             "coordinateTransformations": [
               {
                 "scale": [
@@ -45,8 +45,8 @@
                   1
                 ],
                 "type": "scale",
-                "input": "0",
-                "output": "physical"
+                "input": {"path": "s0"},
+                "output": {"name": "physical"}
               }
             ]
           }
@@ -58,8 +58,8 @@
               10
             ],
             "type": "scale",
-            "input": "physical",
-            "output": "world"
+            "input": {"name": "physical"},
+            "output": {"name": "world"}
           }
         ],
         "name": "image_with_coordinateTransformations",

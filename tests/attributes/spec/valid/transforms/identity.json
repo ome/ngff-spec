@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6.dev3",
+    "version": "0.6.dev4",
     "multiscales": [
       {
         "name": "multiscales",
@@ -29,8 +29,8 @@
             "coordinateTransformations": [
               {
                 "type": "identity",
-                "output": "physical",
-                "input": "array",
+                "output": {"name": "physical"},
+                "input": {"path": "array"},
                 "name": "transform-name"
               }
             ]
@@ -43,6 +43,6 @@
     "schema": {
     "id": "schemas/image.schema"
     },
-    "description": "Tests for the image JSON schema: "
+    "description": "Tests for the image JSON schema: identity transformation"
   }
 }

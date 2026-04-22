@@ -7,8 +7,8 @@
     {
       "type": "rotation",
       "rotation": [[0, -1], [1, 0]],
-      "input" : "ji",
-      "output" : "yx"
+      "input" : {"name": "ji"},
+      "output" : {"name": "yx"}
     }
   ]
 }
