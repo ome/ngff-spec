@@ -16,8 +16,8 @@
       "name": "projection up",
       "type": "mapAxis", 
       "mapAxis": [1, 1, 0],
-      "input": "in",
-      "output": "out_up" 
+      "input": {"name": "in"},
+      "output": {"name": "out_up"} 
     }
   ]
 }

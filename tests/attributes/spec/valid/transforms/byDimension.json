@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6.dev3",
+    "version": "0.6.dev4",
     "multiscales": [
       {
         "name": "multiscales",
@@ -44,8 +44,8 @@
             "coordinateTransformations": [
               {
                 "type": "identity",
-                "output": "array_coordinates",
-                "input": "s0",
+                "output": {"name": "array_coordinates"},
+                "input": {"path": "s0"},
                 "name": "transform-name"
               }
             ]
@@ -54,8 +54,8 @@
         "coordinateTransformations": [
           {
             "type": "byDimension",
-            "input": "array_coordinates",
-            "output": "physical",
+            "input": {"name": "array_coordinates"},
+            "output": {"name": "physical"},
             "transformations": [
               {
                 "transformation": {

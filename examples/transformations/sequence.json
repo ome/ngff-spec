@@ -6,8 +6,8 @@
   "coordinateTransformations": [ 
     {
       "type": "sequence",
-      "input": "in",
-      "output": "out",
+      "input": {"name": "in"},
+      "output": {"name": "out"},
       "transformations": [
         {
             "type": "translation",
