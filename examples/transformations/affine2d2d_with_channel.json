@@ -25,8 +25,8 @@
         [0, 1, 2, 3],
         [0, 4, 5, 6]
       ],
-      "input": "cji",
-      "output": "cyx"
+      "input": {"name": "cji"},
+      "output": {"name": "cyx"}
     }
   ]
 }
