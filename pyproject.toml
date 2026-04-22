@@ -20,7 +20,7 @@ testing = [
 ]
 
 [tool.codespell]
-ignore-words-list = "Comparin"
+ignore-regex = '\bComparin\b'
 
 [tool.hatch.version]
 path = "_version.py"
