@@ -1159,7 +1159,7 @@ Example metadata under the attributes of the zarr array at path `coordinateTrans
     "coordinateTransformations" : [
       {
         "type" : "identity",
-        "output" : "a coordinate field transform"
+        "output" : {"name": "a coordinate field transform"}
       }
     ]
   }
@@ -1222,7 +1222,7 @@ Example metadata under the attributes of the zarr array at path `displacements` 
       {
         "type" : "scale",
         "scale" : [2, 1],
-        "output" : "a displacement field transform"
+        "output" : {"name": "a displacement field transform"}
       }
     ]
   }
