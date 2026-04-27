@@ -32,7 +32,7 @@ project:
       github: thewtex
 
     # RFC5 REVIEWERS
-    - name: Dan Toloudis
+    - name: Daniel Toloudis
       github: toloudis
       orcid: 0000-0003-2620-1233
 
@@ -105,7 +105,7 @@ project:
     # H
     - name: Yaroslav O. Halchenko
       github: yarikoptic
-      orcid: 0000-0003-3456-2493
+      orcid: 0000-0001-7482-1299
     - name: Matthew Hartley
       github: matthewh-ebi
       orcid: 0000-0001-6178-2884
@@ -205,6 +205,7 @@ project:
     # Z
     - name: Yurii Zubov
       github: yuriyzubov
+      orcid: 0000-0003-1988-8081
 
     - name: Dženan Zukić
       github: dzenanz
