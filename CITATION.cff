@@ -13,8 +13,155 @@ abstract: >-
   institutional, and global data management and analysis tasks.
 title: Next-generation file format specification
 authors:
-  - family-names: NGFF-community
-    given-names: ''
+  - family-names: Moore
+    given-names: Josh
+    orcid: 0000-0003-4028-811X
+  - family-names: Bogovic
+    given-names: John
+    orcid: 0000-0002-4829-9457
+  - family-names: Soltwedel
+    given-names: Johannes
+    orcid: 0000-0003-1273-2412
+  - family-names: Marconato
+    given-names: Luca
+    orcid: 0000-0003-3198-1326
+  - family-names: Bennett
+    given-names: Davis
+  - family-names: Moore
+    given-names: William
+    orcid: 0000-0002-7264-8338
+  - family-names: McCormick
+    given-names: Matt
+    orcid: 0000-0001-9475-3756
+  - family-names: Toloudis
+    given-names: Daniel
+    orcid: 0000-0003-2620-1233
+  - family-names: Collmann
+    given-names: Forest
+  - family-names: Gaudreault
+    given-names: Nathalie
+    orcid: 0000-0002-9220-5366
+  - family-names: Feng
+    given-names: David
+  - family-names: Burel
+    given-names: Jean-Marie
+    orcid: 0000-0002-1789-1861
+  - family-names: Swedlow
+    given-names: Jason R.
+    orcid: 0000-0002-2198-1958
+  - family-names: Gold
+    given-names: Ilan
+  - family-names: Maitin-Shepard
+    given-names: Jeremy
+    orcid: 0000-0001-8453-7961
+  - family-names: Stansby
+    given-names: David
+    orcid: 0000-0002-1365-1908
+  - family-names: Besson
+    given-names: Sébastien
+    orcid: 0000-0001-8783-1429
+  - family-names: Allan
+    given-names: Chris
+    orcid: 0000-0002-8151-4059
+  - family-names: Barnes
+    given-names: Chris
+    orcid: 0000-0002-1296-7310
+  - family-names: Comparin
+    given-names: Tommaso
+    orcid: 0000-0001-6853-5931
+  - family-names: Deakin
+    given-names: Lachlan
+    orcid: 0000-0003-2026-759X
+  - family-names: Dunster
+    given-names: Gideon
+    orcid: 0000-0001-9050-0225
+  - family-names: Eglinger
+    given-names: Jan
+    orcid: 0000-0001-7234-1435
+  - family-names: Gay
+    given-names: Guillaume
+    orcid: 0000-0002-5444-5246
+  - family-names: Gui
+    given-names: Xiao
+  - family-names: Halchenko
+    given-names: Yaroslav O.
+    orcid: 0000-0001-7482-1299
+  - family-names: Hartley
+    given-names: Matthew
+    orcid: 0000-0001-6178-2884
+  - family-names: Hniopek
+    given-names: Julian
+    orcid: 0000-0002-8652-8812
+  - family-names: Innerberger
+    given-names: Michael
+    orcid: 0000-0002-7001-8682
+  - family-names: Kittisopikul
+    given-names: Mark
+    orcid: 0000-0002-9558-6248
+  - family-names: Lambert
+    given-names: Talley
+    orcid: 0000-0002-2409-0181
+  - family-names: Linkert
+    given-names: Melissa
+  - family-names: Liu
+    given-names: Ziwen
+    orcid: 0000-0001-7482-1299
+  - family-names: Lüthi
+    given-names: Joel
+    orcid: 0000-0003-3023-170X
+  - family-names: Nunez-Iglesias
+    given-names: Juan
+    orcid: 0000-0002-7239-5828
+  - family-names: Özdemir
+    given-names: Bugra
+    orcid: 0000-0001-9823-0581
+  - family-names: Palla
+    given-names: Giovanni
+    orcid: 0000-0002-8004-4462
+  - family-names: Pape
+    given-names: Constantin
+    orcid: 0000-0001-6562-7187
+  - family-names: Perlman
+    given-names: Eric
+    orcid: 0000-0001-5542-1302
+  - family-names: Rhode
+    given-names: Sebastian
+  - family-names: Rzepka
+    given-names: Norman
+    orcid: 0000-0002-8168-7929
+  - family-names: Scarlett
+    given-names: Virginia
+    orcid: 0000-0002-4156-2849
+  - family-names: Shepherd
+    given-names: Doug
+    orcid: 0000-0001-9087-0832
+  - family-names: Tischer
+    given-names: Christian
+    orcid: 0000-0003-4105-1990
+  - family-names: Uhlmann
+    given-names: Virginie
+    orcid: 0000-0002-2859-9241
+  - family-names: Vierdag
+    given-names: Wouter-Michiel
+    orcid: 0000-0003-1666-5421
+  - family-names: Virshup
+    given-names: Isaac
+    orcid: 0000-0002-1710-8945
+  - family-names: Watson
+    given-names: Alan
+    orcid: 0000-0003-0632-8296
+  - family-names: Windhager
+    given-names: Jonas
+    orcid: 0000-0002-2111-5291
+  - family-names: Yamauchi
+    given-names: Kevin
+    orcid: 0000-0002-7818-1388
+  - family-names: Zubov
+    given-names: Yurii
+    orcid: 0000-0003-1988-8081
+  - family-names: Zukić
+    given-names: Dženan
+    orcid: 0000-0002-9546-9703
 identifiers:
   - type: doi
     value: 10.1038/s41592-021-01326-w
