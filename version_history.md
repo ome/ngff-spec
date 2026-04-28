@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - BREAKING CHANGE: Unified `input` and `output` fields in all transformation metadata to be an object of `{"name": string, "path": string}` instead of allowing both string and object forms. This change was made to ensure consistency across all transformations and to simplify the specification.
+- BREAKING CHANGE: Replaced `arrayCoordinateSystems` with explanation of how to properly express dimensionless transforms.
+- style: Improved readability of multiscales section and `coordinates`/`displacements` transformations.
 
 ## [0.6.dev3] - 2026-03-13
 
