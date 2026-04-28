@@ -69,6 +69,9 @@ project:
 
     # ngff-spec repo contributors
     # A
+    - name: Marvin Albert
+      github: m-albert
+      orcid: 0000-0003-2536-2545
     - name: Chris Allan
       github: chris-allan
       orcid: 0000-0002-8151-4059
