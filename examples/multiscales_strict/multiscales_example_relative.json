@@ -39,22 +39,42 @@
         },
         {
           "path": "s1",
-          "coordinateTransformations": [{
-            // the second scale level (downscaled by a factor of 2 relative to "s0" in zyx)
-            "type": "scale",
-            "scale": [1, 1, 2, 2, 2],
-            "input" : {"path": "s1"},
-            "output" : {"name": "intrinsic"}
-          }]
+          "coordinateTransformations": [
+             {
+              // the second scale level (downscaled by a factor of 2 relative to "s0" in zyx)
+              "type": "sequence",
+              "input" : {"path": "s1"},
+              "output" : {"name": "intrinsic"},
+              "transformations": [
+                {
+                  "type": "scale",
+                  "scale": [1, 1, 2, 2, 2]
+                },
+                {
+                  "type": "translation",
+                  "translation": [0, 0, 0.5, 0.5, 0.5]
+                }
+              ]
+            }
+          ]
         },
         {
           "path": "s2",
           "coordinateTransformations": [{
             // the third scale level (downscaled by a factor of 4 relative to "s0" in zyx)
-            "type": "scale",
-            "scale": [1, 1, 4, 4, 4],
+            "type": "sequence",
             "input" : {"path": "s2"},
-            "output" : {"name": "intrinsic"}
+            "output" : {"name": "intrinsic"},
+            "transformations": [
+              {
+                "type": "scale",
+                "scale": [1, 1, 4, 4, 4]
+              },
+              {
+                "type": "translation",
+                "translation": [0, 0, 1.5, 1.5, 1.5]
+              }
+             ]
           }]
         }
       ],
