@@ -417,7 +417,7 @@ The following transformations are supported:
 |------|--------|-------------|
 | [`identity`](#identity-md) | | The identity transformation is the do-nothing transformation and is typically not explicitly defined. |
 | [`mapAxis`](#mapaxis-md) | `"mapAxis":List[number]` | an axis permutation as a transpose array of integer indices that refer to the ordering of the axes in the respective coordinate system. |
-| [`newAxis`](#newaxis-md) | | a transformation that adds a new axis of length 1 to the input coordinate system. |
+| [`newAxis`](#newaxis-md) | | Project coordinates into a higher dimensionality. |
 | [`translation`](#translation-md) | <br>`"translation":List[number]` | Translation vector, stored either as an array of numbers (`"translation"`) or as a Zarr array at a location in this container (`path`). |
 | [`scale`](#scale-md) | <br>`"scale":List[number]` | Scale vector, stored either as an array of numbers (`scale`) or as a Zarr array at a location in this container (`path`). |
 | [`affine`](#affine-md) | one of:<br>`"affine":List[List[number]]`,<br>`"path":str` | 2D affine transformation matrix stored either with JSON (`affine`) or as a Zarr array at a location in this container (`path`). |
@@ -798,14 +798,22 @@ z = b
 ##### newAxis
 (newAxis-md)=
 
-`newAxis` transformations broadcast the input coordinates from `N` dimensions to `N+1` dimensions
-by adding a new axis at the first position.
+`newAxis` transformations projects input coordinates from `N` dimensions to `N+1` dimensions
+by prepending the coordinate vector with the value 0.
 
 :::{dropdown} Example
 
 ```{literalinclude} examples/transformations/newAxis.json
 :language: json
 ```
+
+defines the function
+```
+z = 0
+y = i
+x = j
+```
+:::
 
 ##### translation
 (translation-md)=

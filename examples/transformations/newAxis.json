@@ -1,6 +1,6 @@
 {
   "coordinateSystems": [
-    { "name": "in", "axes": [ {"name": "y"}, {"name": "x"} ]},
+    { "name": "in", "axes": [ {"name": "i"}, {"name": "j"} ]},
     { "name": "out", "axes": [ {"name": "z"}, {"name": "y"}, {"name": "x"} ]}
   ],
   "coordinateTransformations": [ 
