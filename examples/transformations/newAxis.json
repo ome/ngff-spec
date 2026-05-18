@@ -1,0 +1,14 @@
+{
+  "coordinateSystems": [
+    { "name": "in", "axes": [ {"name": "y"}, {"name": "x"} ]},
+    { "name": "out", "axes": [ {"name": "z"}, {"name": "y"}, {"name": "x"} ]}
+  ],
+  "coordinateTransformations": [ 
+    { 
+      "name": "broadcast",
+      "type": "newAxis", 
+      "input": {"name": "in"},
+      "output": {"name": "out"} 
+    }
+  ]
+}
