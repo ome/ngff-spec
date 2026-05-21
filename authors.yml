@@ -1,0 +1,216 @@
+version: 1
+project:
+
+  authors:
+    # Core: RFC process/editors
+    # RFC5 AUTHORS
+    - name: Josh Moore
+      github: joshmoore
+      orcid: 0000-0003-4028-811X
+
+    - name: John Bogovic
+      github: bogovicj
+      orcid: 0000-0002-4829-9457
+
+    - name: Johannes Soltwedel
+      github: jo-mueller
+      orcid: 0000-0003-1273-2412
+
+    - name: Luca Marconato
+      github: LucaMarconato
+      orcid: 0000-0003-3198-1326
+
+    - name: Davis Bennett
+      github: d-v-b
+
+    - name: William Moore
+      github: will-moore
+      orcid: 0000-0002-7264-8338
+
+    - name: Matt McCormick
+      orcid: 0000-0001-9475-3756
+      github: thewtex
+
+    # RFC5 REVIEWERS
+    - name: Daniel Toloudis
+      github: toloudis
+      orcid: 0000-0003-2620-1233
+
+    - name: Forest Collmann
+      github: fcollman
+
+    - name: Nathalie Gaudreault
+      orcid: 0000-0002-9220-5366
+
+    - name: David Feng
+      github: dyf
+
+    - name: Jean-Marie Burel
+      orcid: 0000-0002-1789-1861
+      github: jburel
+
+    - name: Jason R. Swedlow
+      github: jrswedlow
+      orcid: 0000-0002-2198-1958
+
+    # RFC5 commenters
+    - name: Ilan Gold
+      github: ilan-gold
+      orcid: 0000-0002-5823-1026
+    - name: Jeremy Maitin-Shepard
+      github: jbms
+      orcid: 0000-0001-8453-7961
+    - name: David Stansby
+      github: dstansby
+      orcid: 0000-0002-1365-1908
+
+    - name: Sébastien Besson
+      orcid: 0000-0001-8783-1429
+      github: sbesson
+
+    # ngff-spec repo contributors
+    # A
+    - name: Marvin Albert
+      github: m-albert
+      orcid: 0000-0003-2536-2545
+    - name: Chris Allan
+      github: chris-allan
+      orcid: 0000-0002-8151-4059
+
+    # B
+    - name: Chris Barnes
+      github: clbarnes
+      orcid: 0000-0002-1296-7310
+
+    # C
+    - name: Tommaso Comparin
+      github: tcompa
+      orcid: 0000-0001-6853-5931
+
+    # D
+    - name: Lachlan Deakin
+      github: lDeakin
+      orcid: 0000-0003-2026-759X
+    - name: Gideon Dunster
+      orcid: 0000-0001-9050-0225
+
+    # E
+    - name: Jan Eglinger
+      github: imagejan
+      orcid: 0000-0001-7234-1435
+
+    # G
+    - name: Guillaume Gay
+      github: glyg
+      orcid: 0000-0002-5444-5246
+    - name: Xiao Gui
+      github: xgui3783
+    
+    # H
+    - name: Yaroslav O. Halchenko
+      github: yarikoptic
+      orcid: 0000-0001-7482-1299
+    - name: Matthew Hartley
+      github: matthewh-ebi
+      orcid: 0000-0001-6178-2884
+    - name: Julian Hniopek
+      github: julianhn
+      orcid: 0000-0002-8652-8812
+
+    # I
+    - name: Michael Innerberger
+      github: minnerbe
+      orcid: 0000-0002-7001-8682
+
+    # K
+    - name: Mark Kittisopikul
+      github: mkitti
+      orcid: 0000-0002-9558-6248
+    
+    # L
+    - name: Talley Lambert
+      github: tlambert03
+      orcid: 0000-0002-2409-0181
+    - name: Melissa Linkert
+      github: melissalinkert
+    - name: Ziwen Liu
+      github: ziw-liu
+      orcid: 0000-0001-7482-1299
+    - name: Joel Lüthi
+      github: jluethi
+      orcid: 0000-0003-3023-170X
+
+    # N
+    - name: Juan Nunez-Iglesias
+      github: jni
+      orcid: 0000-0002-7239-5828
+    
+    # O/Ö
+    - name: Bugra Özdemir
+      github: bugraoezdemir
+      orcid: 0000-0001-9823-0581
+    
+    # P
+    - name: Giovanni Palla
+      github: giovp
+      orcid: 0000-0002-8004-4462
+    - name: Constantin Pape
+      github: constantinpape
+      orcid: 0000-0001-6562-7187
+    - name: Eric Perlman
+      github: perlman
+      orcid: 0000-0001-5542-1302
+    
+    # R
+    - name: Sebastian Rhode
+      github: sebi06
+    - name: Norman Rzepka
+      github: normanrz
+      orcid: 0000-0002-8168-7929
+
+    # S
+    - name: Virginia Scarlett
+      github: virginiascarlett
+      orcid: 0000-0002-4156-2849
+    - name: Doug Shepherd
+      github: dpshepherd
+      orcid: 0000-0001-9087-0832
+    # T
+    - name: Christian Tischer
+      github: tischi
+      orcid: 0000-0003-4105-1990
+
+    # U
+    - name: Virginie Uhlmann
+      github: vuhlmann
+      orcid: 0000-0002-2859-9241
+
+    # V
+    - name: Wouter-Michiel Vierdag
+      github: melonora
+      orcid: 0000-0003-1666-5421
+    - name: Isaac Virshup
+      github: ivirshup
+      orcid: 0000-0002-1710-8945
+    
+    # W
+    - name: Alan Watson
+      github: alanmwatson
+      orcid: 0000-0003-0632-8296
+    - name: Jonas Windhager
+      github: jwindhager
+      orcid: 0000-0002-2111-5291
+
+    # Y
+    - name: Kevin Yamauchi
+      github: kevinyamauchi
+      orcid: 0000-0002-7818-1388
+
+    # Z
+    - name: Yurii Zubov
+      github: yuriyzubov
+      orcid: 0000-0003-1988-8081
+
+    - name: Dženan Zukić
+      github: dzenanz
+      orcid: 0000-0002-9546-9703

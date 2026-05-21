@@ -1,8 +1,7 @@
 version: 1
+extends: ./authors.yml
 project:
   title: Next-generation file format specification
-  authors:
-    - name: NGFF-community
   github: ome/ngff-spec
   bibliography:
     - references.bib
