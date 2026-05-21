@@ -68,13 +68,8 @@ Initial proposal for RFC-5: Transforms. [See proposal text](https://ngff.openmic
 
 ### Changed
 
-- use Zarr v3 in OME-Zarr, see [RFC-2](https://ngff.openmicroscopy.org/rfc/2).
-
-## [0.4.1] - 2023-02-09
-
-### Changed
-
-- expand on "labels" description
+- Use Zarr v3 in OME-Zarr, see [RFC-2](https://ngff.openmicroscopy.org/rfc/2).
+- Expand on "labels" description and clarify only integer data types are supported
 
 ## [0.4.1] - 2022-09-26
 
