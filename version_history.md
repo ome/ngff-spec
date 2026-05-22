@@ -24,13 +24,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- use Zarr v3 in OME-Zarr, see [RFC-2](https://ngff.openmicroscopy.org/rfc/2).
-
-## [0.4.1] - 2023-02-09
-
-### Changed
-
-- expand on "labels" description
+- Use Zarr v3 in OME-Zarr, see [RFC-2](https://ngff.openmicroscopy.org/rfc/2).
+- Expand on "labels" description and clarify only integer data types are supported
 
 ## [0.4.1] - 2022-09-26
 
