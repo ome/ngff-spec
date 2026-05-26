@@ -6,7 +6,14 @@
   "coordinateTransformations": [{
     "name": "a displacement field transform",
     "type": "displacements",
-    "path": "i2xCoordinates",
+    "path": "coordinateTransformations/i2xCoordinates",
+    "indexTransformation": {
+      "type": "scale",
+      "scale": [
+        2,
+        1
+      ]
+    },
     "input": {"name": "input"},
     "output": {"name": "output"},
     "interpolation": "nearest"

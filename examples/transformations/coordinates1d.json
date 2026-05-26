@@ -6,7 +6,10 @@
   "coordinateTransformations": [{
     "name": "a coordinate field transform",
     "type": "coordinates",
-    "path": "i2xCoordinates",
+    "path": "coordinateTransformations/i2xCoordinates",
+    "indexTransformation": {
+      "type": "identity"
+    },
     "input": {"name": "input"},
     "output": {"name": "output"},
     "interpolation": "nearest"

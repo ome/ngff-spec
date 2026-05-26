@@ -166,7 +166,7 @@
           "items": {
             "type": "number"
           }
-        }        
+        }
       },
       "required": [
         "translation"
@@ -305,6 +305,30 @@
         "transformations"
       ]
     },
+    "scaleThenTranslation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sequence"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "transformations": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/scale"
+                },
+                {
+                  "$ref": "#/$defs/translation"
+                }
+              ],
+              "items": false
+            }
+          }
+        }
+      ]
+    },
     "byDimension": {
       "type": "object",
       "title": "By Dimension Transformation",
@@ -356,6 +380,20 @@
           "type": "string",
           "description": "Path to the zarr array containing the displacement field."
         },
+        "indexTransformation": {
+          "description": "Transformation to convert displacement field array indices to input coordinates.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/identity"
+            },
+            {
+              "$ref": "#/$defs/scale"
+            },
+            {
+              "$ref": "#/$defs/scaleThenTranslation"
+            }
+          ]
+        },
         "interpolation": {
           "type": "string",
           "enum": ["nearest", "linear", "cubic"],
@@ -364,7 +402,8 @@
         }
       },
       "required": [
-        "path"
+        "path",
+        "indexTransformation"
       ]
     },
     "coordinates": {
@@ -377,6 +416,23 @@
           "type": "string",
           "description": "Path to the zarr array containing the coordinate field."
         },
+        "indexTransformation": {
+          "description": "Transformation to convert coordinate field array indices to input coordinates.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/identity"
+            },
+            {
+              "$ref": "#/$defs/scale"
+            },
+            {
+              "$ref": "#/$defs/translation"
+            },
+            {
+              "$ref": "#/$defs/sequence"
+            }
+          ]
+        },
         "interpolation": {
           "type": "string",
           "enum": ["nearest", "linear", "cubic"],
@@ -385,7 +441,8 @@
         }
       },
       "required": [
-        "path"
+        "path",
+        "indexTransformation"
       ]
     }
   }
