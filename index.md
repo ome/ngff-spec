@@ -1518,7 +1518,7 @@ In this example, a multiscales group containing labels is located at `labels/lab
 **`name`**
 : Each `multiscales` object SHOULD contain the field `name`.
 
-**``**type``
+**`type`**
 : Each `multiscales` object SHOULD contain the field `type`,
   which gives the type of downscaling method used to generate the multiscale image pyramid.
 
