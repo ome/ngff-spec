@@ -313,11 +313,11 @@ The following conventions apply in this specification:
 For a more formal and in-depth definition,
 see chapter 4 and figure 4.1 of the [ITK Software Guide](https://itk.org/ItkSoftwareGuide.pdf).
 
-### bioformats2raw.layout
+### "bioformats2raw.layout" metadata (transitional)
 
 (bf2raw)=
 
-[=Transitional=] `"bioformats2raw.layout` metadata identifies a group which implicitly describes a series of images.
+[=Transitional=] `bioformats2raw.layout` metadata identifies a group which implicitly describes a series of images.
 The need for the collection stems from the common "multi-image file" scenario in microscopy.
 Parsers like Bio-Formats define a strict, stable ordering of the images in a single container that can be used to refer to them by other tools.
 
