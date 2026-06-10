@@ -428,7 +428,9 @@ The following transformations are supported:
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"input_axes": List[number]`, <br> and `"output_axes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
-The parameter values (i.e., `scale` for a [scale transformatiion](#scale-md)) MUST be compatible with input and output space dimensionality (see details). The `input` and `output` fields are objects structured as follows:
+The parameter values (i.e., `scale` for a [scale transformatiion](#scale-md)) MUST be compatible with input and output space dimensionality (see details). 
+
+The `input` and `output` fields are objects structured as follows:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -438,37 +440,6 @@ The parameter values (i.e., `scale` for a [scale transformatiion](#scale-md)) MU
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
 (e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
-
-:::{dropdown} Example
-(spec:example:coordinate_transformation_scale)=
-
-```json
-{
-  "coordinateSystems": [
-    { "name": "in", "axes": [{"name": "j"}, {"name": "i"}] },
-    { "name": "out", "axes": [{"name": "y"}, {"name": "x"}] }
-  ],
-  "coordinateTransformations": [
-    {
-      "type": "scale",
-      "scale": [2, 3.12],
-      "input": {"name": "in"},
-      "output": {"name": "out"}
-    }
-  ]
-}
-
-```
-
-For example, the scale transformation above defines the function:
-
-```
-x = 3.12 * i
-y = 2 * j
-```
-
-i.e., the mapping from the first input axis to the first output axis is determined by the first scale parameter.
-:::
 
 Conforming readers:
 - MUST parse `identity`, `scale`, `translation` transformations;
