@@ -403,19 +403,15 @@ Coordinate transforms are in the "forward" direction.
 This means they represent functions from *points* in the input space to *points* in the output space
 (see [example below](#spec:example:coordinate_transformation_scale)).
 
-They:
+A transform is a JSON object with the following fields:
 
-- MUST contain the field `type` (string).
-- MUST contain any other fields required by the given `type` (see table below).
-- MUST contain the field `output`, which is an object with fields `name` and `path`.
-  The `output` field MAY be omitted if the transformation is part of a wrapper transform
-  (i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
-- MUST contain the field `input`, which is an object with fields `name` and `path`.
-  The `input` field MAY be omitted if the transformation is part of a wrapper transform
-  (i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
-- MAY contain the field `name` (string).
-  Its value MUST be unique across all `name` fields for all coordinate transformations in the same list.
-- Parameter values MUST be compatible with input and output space dimensionality (see details).
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | yes | The type of the transformation, which determines the required and optional fields for that transformation. |
+| `name` | string | no | A unique name for this transformation. |
+| `input` | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The input coordinate system for this transformation. |
+| `output` | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The output coordinate system for this transformation. |
+
 The following transformations are supported:
 
 | Type | Fields | Description |
@@ -431,6 +427,14 @@ The following transformations are supported:
 | [`coordinates`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Coordinate field transformation located at `path`. |
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"input_axes": List[number]`, <br> and `"output_axes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
+
+The parameter values (i.e., `scale` for a [scale transformatiion](#scale-md)) MUST be compatible with input and output space dimensionality (see details). The `input` and `output` fields are objects structured as follows:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | no | The name of the coordinate system. Required context-dependent ([see details](#coord-trafo-constraints)). |
+| `path` | string | no | The path to a zarr group, if the coordinate system is defined in a different Zarr group. Required context-dependent ([see details](#coord-trafo-constraints)). |
+
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
 (e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
@@ -475,6 +479,7 @@ Conforming readers:
 
 
 **Constraints**
+(coord-trafo-constraints)=
 
 Coordinate transformations can be stored in multiple places to reflect different use cases.
 Depending on which, different constraints apply to the transformations, as described below:
