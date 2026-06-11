@@ -25,6 +25,7 @@ logger = logging.getLogger("ome_zarr_conformance")
 here = Path(__file__).resolve().parent.parent
 tests_dir = here / "tests"
 
+Status = Literal["pass", "fail", "error"]
 
 @dataclass
 class CommandOutput:
@@ -39,7 +40,7 @@ class CommandOutput:
 @dataclass
 class TestResult:
     test_name: str
-    status: Literal["pass", "fail", "error"]
+    status: Status
     message: str | None
     stderr: str
     return_code: int
@@ -167,6 +168,52 @@ def run_all_tests(
                 yield res
 
 
+def colour(s: str, num: int, is_bright=False, is_background=False) -> str:
+    match (is_bright, is_background):
+        case (False, False):
+            pref = "3"
+        case (False, True):
+            pref = "4"
+        case (True, False):
+            pref = "9"
+        case (True, True):
+            pref = "10"
+    return f"\x1b[{pref}{num}m{s}\x1b[0m"
+
+
+class Colourer:
+    def __init__(self) -> None:
+        self.is_term = sys.stdout.isatty()
+
+    def _colour(self, s: str, num: int, is_bright=False, is_background=False) -> str:
+        if not self.is_term:
+            return s
+        return colour(s, num, is_bright, is_background)
+
+    def r(self, s: str) -> str:
+        return self._colour(s, 1)
+
+    def g(self, s: str) -> str:
+        return self._colour(s, 2)
+
+    def y(self, s: str) -> str:
+        return self._colour(s, 3)
+
+    def m(self, s: str) -> str:
+        return self._colour(s, 5)
+
+    def status(self, s: Status) -> str:
+        match s:
+            case "pass":
+                return self.g(s)
+            case "fail":
+                return self.r(s)
+            case "error":
+                return self.m(s)
+            case other:
+                raise ValueError(f"Unknown status '{other}'")
+
+
 def main(raw_args=None):
     parser = ArgumentParser(
         description=(
@@ -279,20 +326,25 @@ def main(raw_args=None):
     test_paths = ((test_path_to_name(p, dpath), p) for p in dpath.rglob(rglob))
     cases = dict(sorted((n, p) for n, p in test_paths if req.include(n)))
 
+    c = Colourer()
+
     for res in run_all_tests(
         dingus_args,
         cases,
     ):
-        row = [
-            res.test_name,
-            res.status,
-        ]
         if res.status == "pass":
             passes += 1
         elif res.status == "fail":
             failures += 1
         elif res.status == "error":
             errors += 1
+
+        row = [
+            res.test_name,
+            c.status(res.status),
+        ]
+        if res.message:
+            row.append(" ".join(res.message.split()))
 
         print("\t".join(row))
 
