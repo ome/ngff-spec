@@ -1978,6 +1978,14 @@ A transformation from instrument3 to instrument1 can be obtained
 by composing the two transformations above.
 :::
 
+```{hint} Which coordinate system to display?
+Writers of [`scene`](#scene-md) metadata can signal to viewers which coordinate system use for visualization.
+If a coordinate system is defined under the `coordinateSystems` field of the `scene` metadata, then viewer SHOULD treat the first coordinate system in that list as the default coordinate system for display.
+If no coordinate system is defined therein, but only in the respective linked multiscale groups,
+the first coordinate system in the list of parsed coordinate systems MAY be used as the default coordinate system for display.
+
+```
+
 ## Specification naming style
 (naming-style)=
 
