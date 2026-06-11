@@ -205,7 +205,7 @@ def main(raw_args=None):
         "--exclude-strict",
         "-S",
         action="store_true",
-        help="exclude strict tests",
+        help="DEPRECATED: exclude strict tests",
     )
     parser.add_argument(
         "--exclude-invalid",
@@ -241,7 +241,12 @@ def main(raw_args=None):
         3: logging.DEBUG,
     }.get(args.verbose, logging.DEBUG)
     logging.basicConfig(level=lvl)
-    logging.debug("Got args: %s", args)
+    logger.debug("Got args: %s", args)
+
+    if args.exclude_strict:
+        logger.warning(
+            "Strict test cases are deprecated; -S/--exclude-strict argument is implicit and will soon be removed."
+        )
 
     if dingus_args is None:
         print(
