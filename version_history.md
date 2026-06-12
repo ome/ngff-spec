@@ -8,6 +8,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## {0.6rc0} - 2026-06-12
+
+### Changed
+- Displacements and cordinate transformations are now required
+to store the vector field as a normal multiscale group with the same metadata as other multiscales. Decided at EMBL Hackathon 06/2026 by RFC5 developers.
+
 ## [0.6.dev4] - 2026-04-22
 
 ### Changed

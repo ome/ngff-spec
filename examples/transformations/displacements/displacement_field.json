@@ -1,0 +1,32 @@
+{
+  "ome": {
+    "version": "0.6",
+    "name": "the_dfield",
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "name": "physical",
+            "axes": [
+              {"name": "c", "type": "displacement", "discrete": true},
+              {"name":"y", "type": "space", "unit": "micrometer"},
+              {"name":"x", "type": "space", "unit": "micrometer"}
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "s0",
+            "coordinateTransformations": [
+              {
+                "type": "scale",
+                "input" : {"path": "s0"},
+                "output" : {"name": "physical"},
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
