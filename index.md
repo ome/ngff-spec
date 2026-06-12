@@ -1979,10 +1979,16 @@ by composing the two transformations above.
 :::
 
 ```{hint} Which coordinate system to display?
-Writers of [`scene`](#scene-md) metadata can signal to viewers which coordinate system use for visualization.
-If a coordinate system is defined under the `coordinateSystems` field of the `scene` metadata, then viewer SHOULD treat the first coordinate system in that list as the default coordinate system for display.
+When reading [`scene`](#scene-md) metadata,
+some applications may want to choose a coordinate system as a default reference,
+e.g. for immediate display.
+If they do so, it is RECOMMENDED that the scene's first entry under the `coordinateSystems` field is used as the default, if present.
+ Likewise, when writing scene metadata, if there is a coordinate system that acts as a common reference for other coordinate systems within the scene or its child multiscales, it is RECOMMENDED that this coordinate system be stored as the first coordinateSystems entry in the scene.
+
 If no coordinate system is defined therein, but only in the respective linked multiscale groups,
-the first coordinate system in the list of parsed coordinate systems MAY be used as the default coordinate system for display.
+viewers may want to expose a choice for the user to select a coordinate system for display when opening the dataset for the first time.
+
+ 
 
 ```
 
