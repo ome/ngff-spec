@@ -1474,6 +1474,12 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
   * A single scale or identity transformation
   * A sequence transformation containing one scale and one translation transformation.
 
+  ```{note}
+  These transformations are expected to consistently align the datasets across all scales in the intrinsic coordinate system.
+  E.g. for the most common downsampling methods such as classical binning,
+  including translations of (pixel-size-at-resolution-N - pixel-size-at-resolution-0) / 2 for each axis is required for correct multi-scale alignment.
+  ```
+
   In these cases, the scale transformation specifies the pixel size in physical units or time duration.
   If scaling information is not available or applicable for one of the axes,
   the value MUST express the scaling factor between the current resolution
