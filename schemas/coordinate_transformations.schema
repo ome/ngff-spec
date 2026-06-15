@@ -68,6 +68,9 @@
               "$ref": "#/$defs/mapAxis"
             },
             {
+              "$ref": "#/$defs/newAxis"
+            },
+            {
               "$ref": "#/$defs/scale"
             },
             {
@@ -132,6 +135,57 @@
       "required": [
         "mapAxis"
       ]
+    },
+    "newAxis": {
+      "type": "object",
+      "title": "newAxis transformation",
+      "description": "Add or drop axes from a coordinate vector.",
+      "properties": {
+        "type": {
+          "const": "newAxis"
+        },
+        "newAxis": {
+          "type": "array",
+          "items": {
+            "description": "The type of operation to be performed on the coordinate vector",
+            "oneOf": [
+              {
+                "properties": {
+                  "insert" : {
+                    "type": "array",
+                    "description": "The indeces at which to insert zeros into the coordinate vector",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 4
+                    },
+                    "minItems": 1,
+                    "maxItems": 3
+                  }
+                },
+                "required": ["insert"]
+              },
+              {
+                "properties": {
+                  "remove" : {
+                    "type": "array",
+                    "description": "The dimension indeces which to remove from the coordinate vector",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 4
+                    },
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "maxItems": 3
+                  }
+                },
+                "required": ["remove"]
+              }
+            ]
+          }
+        }
+      }
     },
     "scale": {
       "type": "object",

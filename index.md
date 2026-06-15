@@ -422,7 +422,7 @@ The following transformations are supported:
 |------|--------|-------------|
 | [`identity`](#identity-md) | | The identity transformation is the do-nothing transformation and is typically not explicitly defined. |
 | [`mapAxis`](#mapaxis-md) | `"mapAxis":List[number]` | an axis permutation as a transpose array of integer indices that refer to the ordering of the axes in the respective coordinate system. |
-| [`newAxis`](#newaxis-md) | | Map coordinates between from an input coordinate system to an output coordinate system with one more dimension. |
+| [`newAxis`](#newaxis-md) | | Map coordinates between from an input coordinate system to an output coordinate system with a different dimensionality. |
 | [`translation`](#translation-md) | <br>`"translation":List[number]` | Translation vector, stored either as an array of numbers (`"translation"`) or as a Zarr array at a location in this container (`path`). |
 | [`scale`](#scale-md) | <br>`"scale":List[number]` | Scale vector, stored either as an array of numbers (`scale`) or as a Zarr array at a location in this container (`path`). |
 | [`affine`](#affine-md) | one of:<br>`"affine":List[List[number]]`,<br>`"path":str` | 2D affine transformation matrix stored either with JSON (`affine`) or as a Zarr array at a location in this container (`path`). |
@@ -803,10 +803,24 @@ z = b
 ##### newAxis
 (newAxis-md)=
 
-`newAxis` transformations projects input coordinates from `N` dimensions to `N+1` dimensions
-by prepending the coordinate vector with the value 0.
+`newAxis` transformations projects input coordinates from `N` dimensions to `M` dimensions.
+by adding or dropping dimensions at specified indeces of the coordinate vector.
 
-:::{dropdown} Example
+**newAxis**
+: JSON array of add/drop operations to be performed on the coordinate vector.
+  Value can be an object with either the fields `insert` or `remove`, respectively.
+  The value of the field is an array of integers, which indicate at which position of the coordinate vector
+  a dimension is added or removed.
+  In case of addition of new dimensions via an `insert` operation,
+  the value zero is added sequentially for each specified integer in th `insert` value array.
+  In case of removal of dimensions via a `remove` operation,
+  the specified dimensions are removed from the coordinate vector and the passed values MUST be unique.
+
+:::{dropdown} Example: Adding multiple dimensions
+
+In this example, the output coordinate system `out` contains two more axes (`c` and `z`)
+than the input coordinate system `in`.
+This is reflected by the following `newAxis` transformation:
 
 ```{literalinclude} examples/transformations/newAxis.json
 :language: json
@@ -814,10 +828,29 @@ by prepending the coordinate vector with the value 0.
 
 defines the function
 ```
+c = 0
 z = 0
 y = i
 x = j
 ```
+:::
+
+:::{dropdown} Example: Adding and dropping dimensions
+In this example, the output coordinate system `out` contains one axes more (`z`) and one axis less (`c`)
+than the input coordinate system `in`.
+This is reflected by the following `newAxis` transformation:
+
+```{literalinclude} examples/transformations/newAxis2.json
+:language: json
+```
+which defines the function
+
+```
+c = 0
+y = i
+x = j
+```
+
 :::
 
 ##### translation
