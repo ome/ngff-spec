@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-- Added `newAxis` transform to add or drop dimensions at specified indeces of the coordinate vector.
+- Added `newAxis` transform to add or drop dimensions at specified indices of the coordinate vector.
 
 ## [0.6.dev4] - 2026-04-22
 

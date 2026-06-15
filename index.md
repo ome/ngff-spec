@@ -804,7 +804,7 @@ z = b
 (newAxis-md)=
 
 `newAxis` transformations projects input coordinates from `N` dimensions to `M` dimensions.
-by adding or dropping dimensions at specified indeces of the coordinate vector.
+by adding or dropping dimensions at specified indices of the coordinate vector.
 
 **newAxis**
 : JSON array of add/drop operations to be performed on the coordinate vector.

@@ -153,7 +153,7 @@
                 "properties": {
                   "insert" : {
                     "type": "array",
-                    "description": "The indeces at which to insert zeros into the coordinate vector",
+                    "description": "The indices at which to insert zeros into the coordinate vector",
                     "items": {
                       "type": "integer",
                       "minimum": 0,
@@ -169,7 +169,7 @@
                 "properties": {
                   "remove" : {
                     "type": "array",
-                    "description": "The dimension indeces which to remove from the coordinate vector",
+                    "description": "The dimension indices which to remove from the coordinate vector",
                     "items": {
                       "type": "integer",
                       "minimum": 0,
