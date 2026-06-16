@@ -1095,10 +1095,9 @@ The multiscale group at `path` MUST satisfy:
   - **Vector dimension length**: 
     - For `coordinates` transformations, the length of the array along the `coordinate` dimension (last axis) MUST equal `M`,
       the number of axes in the output coordinate system.
-      The coordinate dimension SHOULD be stored as the channel axis (`"name": "c"`) of the multiscale image group and have `"type": "coordinate"`.
     - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
       the number of axes in the input (and output) coordinate system. `displacements` require `M=N`.
-      The displacement dimension SHOULD be stored as the channel axis (`"name": "c"`) of the multiscale image group and have `"type": "displacement"`.
+    - The axis ordering of the displacements/coordinates array MUST satisfy the constraints of [multiscale image groups](#multiscales-md). In that array, the array dimension corresponding to the coordinate/displacement axis MUST be inserted after a time axis (if present) and before the spatial axes. The axis MUST specify ``type: "displacement"`` or ``type: "coordinate"`` in the multiscale image's [axes metadata](#axes-md).
   - **Vector component mapping**: The `i`th value of the array along the `coordinate` or `displacement` axis refers to the `i`th output axis.
 
 ```{hint}
