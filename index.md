@@ -1097,7 +1097,7 @@ The multiscale group at `path` MUST satisfy:
       the number of axes in the output coordinate system.
     - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
       the number of axes in the input (and output) coordinate system. `displacements` require `M=N`.
-    - The axis ordering of the displacements/coordinates array MUST satisfy the constraints of [multiscale image groups](#multiscales-md). In that array, the array dimension corresponding to the coordinate/displacement axis MUST be inserted after a time axis (if present) and before the spatial axes. The axis MUST specify ``type: "displacement"`` or ``type: "coordinate"`` in the multiscale image's [axes metadata](#axes-md).
+    - The axis ordering of the displacements/coordinates array MUST satisfy the constraints of [multiscale image groups](#multiscales-md). In that array, the array dimension corresponding to the coordinate/displacement axis MUST be inserted after a time axis (if present) and before the spatial axes and MUST not coincide with a channel or custom axis in the input coordinate system. The axis MUST specify ``type: "displacement"`` or ``type: "coordinate"`` in the multiscale image's [axes metadata](#axes-md).
   - **Vector component mapping**: The `i`th value of the array along the `coordinate` or `displacement` axis refers to the `i`th output axis.
 
 ```{hint}
