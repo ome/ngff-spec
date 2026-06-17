@@ -15,38 +15,36 @@
                 "description": "Coordinate systems to combine with transforms to define spatial relationships"
             },
             "coordinateTransformations": {
-              "$comment": "Merge general coordinate transformations with constraints for scene metadata",
-              "allOf": [
-                {
-                  "$ref": "coordinate_transformations.schema",
-                  "description": "General coordinate transformations defining spatial relationships between coordinate systems"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "allOf": [
-                      {
-                        "properties": {
-                          "input": {
-                            "allOf": [
-                              {"$ref": "coordinate_transformations.schema#/$defs/inputOutput"},
-                              {"required": ["name"]}
-                            ]
-                          },
-                          "output": {
-                            "allOf": [
-                              {"$ref": "coordinate_transformations.schema#/$defs/inputOutput"},
-                              {"required": ["name"]}
-                            ]
-                          }
-                        }
-                      }
-                    ]
+              "$comment": "Coordinate transformations defining spatial relationships between coordinate systems",
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "coordinate_transformations.schema#/$defs/coordinateTransformation"
                   },
-                  "description": "Constrained input/output for coordinate transformations in scene metadata"
-                }
-              ]
-                
+                  {
+                    "type": "object",
+                    "properties": {
+                      "input": {
+                        "allOf": [
+                          {"$ref": "coordinate_transformations.schema#/$defs/inputOutput"},
+                          {"required": ["name"]}
+                        ]
+                      },
+                      "output": {
+                        "allOf": [
+                          {"$ref": "coordinate_transformations.schema#/$defs/inputOutput"},
+                          {"required": ["name"]}
+                        ]
+                      }
+                    },
+                    "required": ["input", "output"]
+                  }
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true,
+              "description": "Coordinate transformations defining spatial relationships between coordinate systems with scene-specific constraints"
             },
             "arrayCoordinateSystem": {
               "type": "object",

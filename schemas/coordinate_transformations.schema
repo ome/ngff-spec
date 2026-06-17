@@ -3,43 +3,22 @@
   "$id": "https://ngff.openmicroscopy.org/0.6.dev4/schemas/coordinate_transformations.schema",
   "title": "Coordinate Transformations",
   "description": "OME-Zarr Coordinate transforms.",
-  "type": "array",
-  "uniqueItems": true,
-  "minItems": 1,
-  "items": {
-    "allOf": [
-      {
-        "$ref": "#/$defs/coordinateTransformation"
-      },
-      {
-        "type": "object",
-        "properties": {
-          "input": {
-            "allOf": [
-              {"$ref": "#/$defs/inputOutput"},
-              {"required": ["path"]}
-            ]
-          },
-          "output": {
-            "allOf": [
-              {"$ref": "#/$defs/inputOutput"},
-              {"required": ["name"]}
-            ]
-          }
-        },
-        "required": [
-          "input",
-          "output"
-        ]
-      }
-    ]
-  },
+  "$ref": "#/$defs/coordinateTransformations",
   "$defs": {
     "inputOutput": {
       "type": "object",
       "properties": {
         "name": {"type": "string"},
         "path": {"type": "string"}
+      }
+    },
+    "coordinateTransformations": {
+      "description": "JSON array of multiple OME-ZARR transformations",
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/coordinateTransformation"
       }
     },
     "coordinateTransformation": {
