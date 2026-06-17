@@ -422,7 +422,7 @@ The following transformations are supported:
 |------|--------|-------------|
 | [`identity`](#identity-md) | | The identity transformation is the do-nothing transformation and is typically not explicitly defined. |
 | [`mapAxis`](#mapaxis-md) | `"mapAxis":List[number]` | an axis permutation as a transpose array of integer indices that refer to the ordering of the axes in the respective coordinate system. |
-| [`newAxis`](#newaxis-md) | | Map coordinates between from an input coordinate system to an output coordinate system with a different dimensionality. |
+| [`projectAxis`](#projectAxis-md) | | Map coordinates between from an input coordinate system to an output coordinate system with a different dimensionality. |
 | [`translation`](#translation-md) | <br>`"translation":List[number]` | Translation vector, stored either as an array of numbers (`"translation"`) or as a Zarr array at a location in this container (`path`). |
 | [`scale`](#scale-md) | <br>`"scale":List[number]` | Scale vector, stored either as an array of numbers (`scale`) or as a Zarr array at a location in this container (`path`). |
 | [`affine`](#affine-md) | one of:<br>`"affine":List[List[number]]`,<br>`"path":str` | 2D affine transformation matrix stored either with JSON (`affine`) or as a Zarr array at a location in this container (`path`). |
@@ -800,13 +800,13 @@ z = b
 :::
 
 
-##### newAxis
-(newAxis-md)=
+##### projectAxis
+(projectAxis-md)=
 
-`newAxis` transformations projects input coordinates from `N` dimensions to `M` dimensions.
+`projectAxis` transformations projects input coordinates from `N` dimensions to `M` dimensions.
 by adding or dropping dimensions at specified indices of the coordinate vector.
 
-**newAxis**
+**projectAxis**
 : JSON array of add/drop operations to be performed on the coordinate vector.
   Value can be an object with either the fields `insert` or `remove`, respectively.
   The value of the field is an array of integers, which indicate at which position of the coordinate vector
@@ -820,9 +820,9 @@ by adding or dropping dimensions at specified indices of the coordinate vector.
 
 In this example, the output coordinate system `out` contains two more axes (`c` and `z`)
 than the input coordinate system `in`.
-This is reflected by the following `newAxis` transformation:
+This is reflected by the following `projectAxis` transformation:
 
-```{literalinclude} examples/transformations/newAxis.json
+```{literalinclude} examples/transformations/projectAxis.json
 :language: json
 ```
 
@@ -838,9 +838,9 @@ x = j
 :::{dropdown} Example: Adding and dropping dimensions
 In this example, the output coordinate system `out` contains one axes more (`z`) and one axis less (`c`)
 than the input coordinate system `in`.
-This is reflected by the following `newAxis` transformation:
+This is reflected by the following `projectAxis` transformation:
 
-```{literalinclude} examples/transformations/newAxis2.json
+```{literalinclude} examples/transformations/projectAxis2.json
 :language: json
 ```
 which defines the function
