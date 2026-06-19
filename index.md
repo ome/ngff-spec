@@ -467,18 +467,18 @@ i.e., the mapping from the first input axis to the first output axis is determin
 :::
 
 Conforming readers:
-- MUST parse `identity`, `scale`, `translation` transformations;
-- SHOULD parse `mapAxis`, `affine`, `rotation` transformations;
+
+- MUST parse `identity`, `scale`, `translation` transformations, as well as `sequence`s of them;
+- SHOULD parse `mapAxis`, `affine`, `rotation` transformations, as well as `byDimension`s of all transforms supported by the reader;
 - SHOULD display an informative warning if encountering transformations that cannot be parsed or displayed by a consumer;
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
-
 
 **Constraints**
 
 Coordinate transformations can be stored in multiple places to reflect different use cases.
 Depending on which, different constraints apply to the transformations, as described below:
-     
+
 - **Inside `multiscales > datasets`**: `coordinateTransformations` herein MUST
   - be restricted to a single `scale`, `identity` or `sequence` of a scale followed by a translation transformation.
   - in the `input` object provide `path` and omit `name`.
@@ -585,7 +585,7 @@ to do so by estimating the transformations' inverse if they choose to.
 :::
 
 ```{note}
-Exact reproducibility of pixel values for images transformed and resampled by 
+Exact reproducibility of pixel values for images transformed and resampled by
 the transformation types here may differ across implementation and is therefore
 out of the scope of this specification.
 ```
@@ -608,7 +608,7 @@ even though the coordinate systems of the two images are in physical units.
 This can be achieved by embedding the transformation into a `sequence` transformation like this:
 
 ```json
-{ "scene": 
+{ "scene":
   {
     "type": "sequence",
     "input": {"name": "intrinsic", "path": "imageA"},
@@ -678,7 +678,7 @@ In the context of multiscales metadata, this could look like this:
           ]
         }
       ],
-      "coordinateTransformations": [ 
+      "coordinateTransformations": [
         {
           "type": "scale",
           "scale": [2.0, 2.0],
@@ -1065,12 +1065,12 @@ Metadata for these coordinate transforms have the following fields:
 **interpolation**
 :   The interpolation attributes MAY be provided.
     Its value indicates the interpolation to use if transforming points not on the array's discrete grid.
-    
+
     The interpolation methods listed in this specification document refer to the methods described in {cite:t}`thevenaz2000image` and are not exhaustive.
     - `nearest` for nearest neighbor interpolation (see {cite:t}`thevenaz2000image`, section 8.1),
     - `linear` for linear interpolation (default, see {cite:t}`thevenaz2000image`, section 8.2),
     - `bspline-cubic` for cubic interpolation (see {cite:t}`thevenaz2000image`, section 8.3 on "cubic B-splines).
-    
+
     Consumers SHOULD clearly communicate to users if a different interpolation method is used.
 
 ```{hint}
@@ -1104,7 +1104,7 @@ the array data referred to by `path` MUST define the following metadata fields:
   - `type`: The type of the transformation; MUST be one of [`identity`](#identity-md), [`scale`](#scale-md)
     or a [`sequence`](#sequence-md) of a [scale](#scale-md) followed by a [translation](#translation-md).
   - `output`: The name of the coordinate system defined in the `coordinateSystems` field of the array metadata.
-  
+
   *Note*: The `input` field is omitted, as it is implicitly the pixel coordinate system of the array
     (defined by the first `N` axes of the array's `coordinateSystem`).
 
@@ -1113,7 +1113,7 @@ the array data referred to by `path` MUST define the following metadata fields:
 The array at `path` MUST satisfy:
 
   - **Dimensionality**: If the input coordinate system has `N` axes, the array at location `path` MUST have `N+1` dimensions.
-  - **Vector dimension length**: 
+  - **Vector dimension length**:
     - For `coordinates` transformations, the length of the array along the `coordinate` dimension (last axis) MUST equal `M`,
       the number of axes in the output coordinate system.
     - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
@@ -1159,7 +1159,7 @@ Example metadata under the attributes of the zarr array at path `coordinateTrans
           { "name": "i", "type": "space", "discrete": true },
           { "name": "c", "type": "coordinate", "discrete": true }
         ]
-      } 
+      }
     ],
     "coordinateTransformations" : [
       {
@@ -1221,7 +1221,7 @@ Example metadata under the attributes of the zarr array at path `displacements` 
           { "name": "x", "type": "space", "unit" : "nanometer" },
           { "name": "d", "type": "displacement", "discrete": true }
         ]
-      } 
+      }
     ],
     "coordinateTransformations" : [
       {
@@ -1416,7 +1416,7 @@ Each object provides the following fields:
 | `coordinateTransformations` | JSON array of objects | no | Metadata about transformations that are applied to all resolution levels in the same manner. |
 | `name` | string | no | Name of the multiscale image. |
 | `type` | string | no | Downsampling method used to generate the multiscale image. |
-| `metadata` | JSON object | no | Additional metadata about the downscaling method. | 
+| `metadata` | JSON object | no | Additional metadata about the downscaling method. |
 
 **`coordinateSystems`**
 : The `coordinateSystems` field is a JSON array containing [coordinate system metadata](#coordinate-systems-md)
@@ -1663,7 +1663,7 @@ This is an example of multiscales metadata for an image group that contains a `l
 ```
 image.zarr                # Multiscale image group
 │
-├── zarr.json             # Multiscale metadata, which MAY contain a coordinate transformation 
+├── zarr.json             # Multiscale metadata, which MAY contain a coordinate transformation
 │                         # linking the "intrinsic" coordinate system of the image to the
 │                         # "intrinsic" coordinate system of the label image in the `labels` group.
 │
@@ -1997,7 +1997,7 @@ under [the following terms](https://www.w3.org/copyright/software-license-2023/)
 
 > By obtaining and/or copying this work, you (the licensee) agree that you have read, understood, and will comply with the following terms and conditions:
 > Permission to copy, modify, and distribute this work, with or without modification, for any purpose and without fee or royalty is hereby granted, provided that you include the following on ALL copies of the work or portions thereof, including modifications:
-> 
+>
 > The full text of this NOTICE in a location viewable to users of the redistributed or derivative work.
 > Any pre-existing intellectual property disclaimers, notices, or terms and conditions. If none exist, the W3C Software and Document Short Notice should be included.
 > Notice of any changes or modifications, through a copyright statement on the new code or document such as:
