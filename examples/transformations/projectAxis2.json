@@ -8,8 +8,8 @@
       "name": "up-project",
       "type": "newAxis", 
       "newAxis": [
-        {"remove": [0]},
-        {"insert": [0]}
+        {"remove": 0},
+        {"insert": 0}
       ],
       "input": {"name": "in"},
       "output": {"name": "out"} 

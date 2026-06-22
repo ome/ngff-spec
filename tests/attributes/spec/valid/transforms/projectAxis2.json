@@ -9,17 +9,6 @@
             "name": "world",
             "axes": [
               {
-                "type": "channel",
-                "name": "c",
-                "discrete": true
-              },
-              {
-                "type": "space",
-                "name": "z",
-                "unit": "micrometer",
-                "discrete": false
-              },
-              {
                 "type": "space",
                 "name": "y",
                 "unit": "micrometer",
@@ -36,6 +25,17 @@
           {
             "name": "physical",
             "axes": [
+              {
+                "type": "channel",
+                "name": "c",
+                "discrete": true
+              },
+              {
+                "type": "space",
+                "name": "z",
+                "unit": "micrometer",
+                "discrete": false
+              },
               {
                 "type": "space",
                 "name": "y",
@@ -118,12 +118,13 @@
         ],
         "coordinateTransformations": [
           {
-            "type": "newAxis",
+            "type": "projectAxis",
             "name": "physical-to-world",
             "input": {"name": "physical"},
             "output": {"name": "world"},
-            "newAxis": [
-              {"remove": [0, 1, 2, 3, 4]}
+            "projectAxis": [
+              {"remove": 0},
+              {"remove": 0}
             ]
           }
         ]
@@ -134,7 +135,7 @@
       "schema": {
       "id": "schemas/image.schema"
       },
-      "description": "Tests for a JSON document with a newAxis transformation",
-      "valid": false
+      "description": "Tests for a JSON document with a projectAxis transformation",
+      "valid": true
   }
 }

@@ -809,12 +809,14 @@ by adding or dropping dimensions at specified indices of the coordinate vector.
 **projectAxis**
 : JSON array of add/drop operations to be performed on the coordinate vector.
   Value can be an object with either the fields `insert` or `remove`, respectively.
-  The value of the field is an array of integers, which indicate at which position of the coordinate vector
+  The value of the field is a single integer, which indicates at which position of the coordinate vector
   a dimension is added or removed.
   In case of addition of new dimensions via an `insert` operation,
-  the value zero is added sequentially for each specified integer in th `insert` value array.
+  the value zero is added to the coordinate vector at the position specified by the `insert` field.
   In case of removal of dimensions via a `remove` operation,
-  the specified dimensions are removed from the coordinate vector and the passed values MUST be unique.
+  the specified dimension is removed from the coordinate vector and the passed values MUST be unique.
+  The operations listed under the `projectAxis` field are applied in order,
+  meaning that the indices of the coordinate vector are updated after each operation.
 
 :::{dropdown} Example: Adding multiple dimensions
 
@@ -846,7 +848,7 @@ This is reflected by the following `projectAxis` transformation:
 which defines the function
 
 ```
-c = 0
+z = 0
 y = i
 x = j
 ```

@@ -123,7 +123,7 @@
             "input": {"name": "physical"},
             "output": {"name": "world"},
             "newAxis": [
-              {"insert": [0, 0]}
+              {"insert": 5}
             ]
           }
         ]
@@ -135,6 +135,6 @@
       "id": "schemas/image.schema"
       },
       "description": "Tests for a JSON document with a newAxis transformation",
-      "valid": true
+      "valid": false
   }
 }
