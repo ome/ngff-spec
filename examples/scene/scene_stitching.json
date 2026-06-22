@@ -8,7 +8,7 @@
         "coordinateTransformations": [
           {
             "type": "translation",
-            "output": "world",
+            "output": {"name":  "world"},
             "input": {"path": "tile_0", "name": "physical"},
             "translation": [
               0,
@@ -18,7 +18,7 @@
           },
           {
             "type": "translation",
-            "output": "world",
+            "output": {"name":  "world"},
             "input": {"path": "tile_1", "name": "physical"},
             "translation": [
               0,
@@ -28,7 +28,7 @@
           },
           {
             "type": "translation",
-            "output": "world",
+            "output": {"name":  "world"},
             "input": {"path": "tile_2", "name": "physical"},
             "translation": [
               276,
@@ -38,7 +38,7 @@
           },
           {
             "type": "translation",
-            "output": "world",
+            "output": {"name":  "world"},
             "input": {"path": "tile_3", "name": "physical"},
             "translation": [
               276,
