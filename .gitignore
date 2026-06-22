@@ -11,6 +11,7 @@ _bikeshed
 footer.md
 examples.md
 schemas.md
+_authors.md
 examples/**/*.md
 schemas/**/*.md
 schemas/**/*.html

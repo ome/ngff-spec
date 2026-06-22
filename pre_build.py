@@ -165,6 +165,41 @@ def build_footer():
     with open('footer.md', 'w') as footer_file:
         footer_file.write(footer_content)
 
+def render_authors_md():
+    from jinja2 import Template
+    import yaml
+    # Load authors data
+    with open('authors.yml', 'r') as f:
+        data = yaml.safe_load(f)
+    authors = data['project']['authors']
+
+    markdown_authors = """"""
+
+    # The invertocat icon was downloaded from https://brand.github.com/foundations/logo
+    # and colored in grey according to the guidelines under the "Color" section.
+    orcid_icon = "https://orcid.org/assets/vectors/orcid.logo.icon.svg"
+    github_icon = "icons/invertocat.svg"
+
+    for idx, author in enumerate(authors):
+        name = author['name']
+
+        if "orcid" in author:
+            name += f" [<img src=\"{orcid_icon}\" alt=\"ORCID iD\" height=12 width=12 style=\"vertical-align: middle;\"/>](https://orcid.org/{author['orcid']})"
+
+        if "github" in author:
+            name += f" [<img src=\"{github_icon}\" alt=\"GitHub\" height=12 width=12 style=\"vertical-align: middle;\"/>](https://github.com/{author['github']})"
+
+
+        if idx == len(authors) - 1:
+            markdown_authors += name
+        else:
+            markdown_authors += name + ", "
+
+    with open ("_authors.md", "w") as f:
+        f.write(markdown_authors)
+
+
 build_json_examples()
 build_json_schemas()
 build_footer()
+render_authors_md()
