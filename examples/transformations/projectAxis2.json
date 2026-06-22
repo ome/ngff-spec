@@ -6,8 +6,8 @@
   "coordinateTransformations": [ 
     { 
       "name": "up-project",
-      "type": "newAxis", 
-      "newAxis": [
+      "type": "projectAxis", 
+      "projectAxis": [
         {"remove": 0},
         {"insert": 0}
       ],
