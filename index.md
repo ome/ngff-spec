@@ -1123,10 +1123,8 @@ The transformation references a displacement vector field located at `coordinate
 ```
 
 This multiscales (containing the vector field) MUST have three dimensions,
-i.e., `x` and `y` as mandated by the input coordinate system and an additional channel dimension `d` to hold the x- and y-displacements.
-The metadata for the multiscale group at location `coordinateTransformations/displacementField` would look as follows;
-The channel dimension corresponds to an axis with `type : displacement`,
-the other two dimensions MUST be axes that are identical to the axes of the input coordinate system (`"name": "physical"`) to which the transformation is applied.
+i.e., `x` and `y` as mandated by the input coordinate system and an additional dimension `c` to hold the x- and y-displacements.
+The metadata for the multiscale group at location `coordinateTransformations/displacementField` would look as follows:
 
 ```{literalinclude} examples/transformations/displacements/displacement_field.json
 :language: json
