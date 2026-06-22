@@ -1102,11 +1102,14 @@ The multiscale group at `path` MUST satisfy:
   - **Vector component mapping**: The `i`th value of the array along the `coordinate` or `displacement` axis refers to the `i`th output axis.
 
 ```{hint}
-Applying the transformation to a point `x` in the input coordinate system amounts to following the following steps:
-1. Use the inverse of the transformation found in the vector field's metadata under `coordinateTransformations`
-  to map the input point `x` into the corresponding array coordinate `a`.
+Applying the transformation to a point `x` in physical coordinates in the input coordinate system amounts to following the following steps:
+1. The displacement vector field contains a mapping from its array coordinate system into the coordinate system,
+  which coincides with the input coordinate system of the transformation.
+  Hence, the coordinates of the input point `x` need to be mapped into the array coordinate system of the vector field to look up the corresponding vector in the array.
+  The inverse of the transformation found in the vector field's metadata under `coordinateTransformations`
+  is used to map the input point `x` into the corresponding array coordinate `x_a`.
 2. Look up the vector in the array corresponding to that point's coordinates in the array's coordinate system.
-3. If the point (`a`) does not correspond to a discrete point in the `coordinate` or `displacement` array,
+3. If the point (`x_a`) does not correspond to a discrete point in the `coordinate` or `displacement` array,
    interpolate the vector field to obtain a vector for the input point.
 4. Treat the result either as
    - an absolute position (`coordinates`) or
@@ -1130,14 +1133,28 @@ The metadata for the multiscale group at location `coordinateTransformations/dis
 :language: json
 ```
 
-Indexing into this array using c-order, for spatial positions `y` and `x`, the y- and x-displacements would be given by:
+Indexing into this array using c-order, for indices `i` and `j`, the y- and x-displacements would be given by:
 
 ```
-y_displacement = displacementField[0][y][x]
-x_displacement = displacementField[1][y][x]
+y_displacement = displacementField[0][i][j]
+x_displacement = displacementField[1][i][j]
 ```
 
 I.e. the y-displacement is first, because the y-axis is the first element of the input and output coordinate systems.
+
+**Looking up vectors in the displacement field**
+
+| Point type | Input Point `x` (physical) | Array Coordinate `x_a` | Vector (displacement) | Type |
+| --- | --- | --- | --- | --- |
+| Data point | (0.0, 0.0) | (0, 0) | (1.0, 2.0) | Discrete point in array |
+| Data point | (2.0, 0.0) | (1, 0) | (0.5, 1.2) | Discrete point in array |
+| Queried point | (2.0, 0.0) | (1, 0) | (0.5, 1.2) | No interpolation needed |
+| Queried point | (1.0, 0.0) | (0.5, 0) | (0.75, 1.6) | Interpolated from neighbors |
+
+This table illustrates how an input point `x` in the input coordinate system is first mapped to array coordinates `x_a`,
+using the inverse transformation of the scale transformation in the metadata of the displacement field's multiscale group.
+If `x_a` corresponds to a discrete point in the displacement array, the vector is looked up directly.
+Otherwise, the vector field is interpolated to obtain a displacement value for that point.
 
 :::
 
