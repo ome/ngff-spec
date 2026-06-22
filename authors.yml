@@ -81,6 +81,9 @@ project:
     - name: Chris Barnes
       github: clbarnes
       orcid: 0000-0002-1296-7310
+    - name: Benedikt T. Best
+      github: btbest
+      orcid: 0000-0001-6965-1117
 
     # C
     - name: Tommaso Comparin
@@ -105,7 +108,7 @@ project:
       orcid: 0000-0002-5444-5246
     - name: Xiao Gui
       github: xgui3783
-    
+
     # H
     - name: Yaroslav O. Halchenko
       github: yarikoptic
@@ -126,7 +129,7 @@ project:
     - name: Mark Kittisopikul
       github: mkitti
       orcid: 0000-0002-9558-6248
-    
+
     # L
     - name: Talley Lambert
       github: tlambert03
@@ -144,12 +147,12 @@ project:
     - name: Juan Nunez-Iglesias
       github: jni
       orcid: 0000-0002-7239-5828
-    
+
     # O/Ö
     - name: Bugra Özdemir
       github: bugraoezdemir
       orcid: 0000-0001-9823-0581
-    
+
     # P
     - name: Giovanni Palla
       github: giovp
@@ -160,7 +163,7 @@ project:
     - name: Eric Perlman
       github: perlman
       orcid: 0000-0001-5542-1302
-    
+
     # R
     - name: Sebastian Rhode
       github: sebi06
@@ -192,7 +195,7 @@ project:
     - name: Isaac Virshup
       github: ivirshup
       orcid: 0000-0002-1710-8945
-    
+
     # W
     - name: Alan Watson
       github: alanmwatson
