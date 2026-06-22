@@ -1,5 +1,5 @@
 {
-  "ome": "0.6",
+  "ome": "0.6.dev4",
   "name": "some_image",
   "multiscales": [
     {

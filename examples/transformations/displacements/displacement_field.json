@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6",
+    "version": "0.6.dev4",
     "name": "the_dfield",
     "multiscales": [
       {
@@ -20,8 +20,9 @@
             "coordinateTransformations": [
               {
                 "type": "scale",
+                "scale": [2.0, 2.0],
                 "input" : {"path": "s0"},
-                "output" : {"name": "physical"},
+                "output" : {"name": "physical"}
               }
             ]
           }
