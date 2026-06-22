@@ -118,11 +118,11 @@
         ],
         "coordinateTransformations": [
           {
-            "type": "newAxis",
+            "type": "projectAxis",
             "name": "physical-to-world",
             "input": {"name": "physical"},
             "output": {"name": "world"},
-            "newAxis": [
+            "projectAxis": [
               {"remove": 5}
             ]
           }
@@ -134,7 +134,7 @@
       "schema": {
       "id": "schemas/image.schema"
       },
-      "description": "Tests for a JSON document with a newAxis transformation",
+      "description": "Tests for a JSON document with a projectAxis transformation",
       "valid": false
   }
 }
