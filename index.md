@@ -1136,8 +1136,9 @@ The metadata for the multiscale group at location `coordinateTransformations/dis
 Indexing into this array using c-order, for indices `i` and `j`, the y- and x-displacements would be given by:
 
 ```
-y_displacement = displacementField[0][i][j]
-x_displacement = displacementField[1][i][j]
+displacement = displacementField[:][i][j]
+y_displacement = displacement[0]
+x_displacement = displacement[1]
 ```
 
 I.e. the y-displacement is first, because the y-axis is the first element of the input and output coordinate systems.
