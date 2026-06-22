@@ -68,6 +68,32 @@ project:
       orcid: 0000-0001-8783-1429
       github: sbesson
 
+    # RFC8
+    # RFC8 authors
+    - name: Norman Rzepka
+      github: normanrz
+      orcid: 0000-0002-8168-7929
+
+    - name: Eric Perlman
+      github: perlman
+      orcid: 0000-0001-5542-1302
+
+    - name: Joel Lüthi
+      github: jluethi
+      orcid: 0000-0003-3023-170X
+
+    - name: Lorenzo Cerrone
+      github: lorenzocerrone
+      orcid: 0000-0001-7337-2313
+
+    - name: Christian Tischer
+      github: tischi
+      orcid: 0000-0003-4105-1990
+
+    - name: Matthew Hartley
+      github: matthewh-ebi
+      orcid: 0000-0001-6178-2884
+
     # ngff-spec repo contributors
     # A
     - name: Marvin Albert
@@ -113,9 +139,6 @@ project:
     - name: Yaroslav O. Halchenko
       github: yarikoptic
       orcid: 0000-0001-7482-1299
-    - name: Matthew Hartley
-      github: matthewh-ebi
-      orcid: 0000-0001-6178-2884
     - name: Julian Hniopek
       github: julianhn
       orcid: 0000-0002-8652-8812
@@ -139,9 +162,6 @@ project:
     - name: Ziwen Liu
       github: ziw-liu
       orcid: 0000-0001-7482-1299
-    - name: Joel Lüthi
-      github: jluethi
-      orcid: 0000-0003-3023-170X
 
     # N
     - name: Juan Nunez-Iglesias
@@ -160,16 +180,10 @@ project:
     - name: Constantin Pape
       github: constantinpape
       orcid: 0000-0001-6562-7187
-    - name: Eric Perlman
-      github: perlman
-      orcid: 0000-0001-5542-1302
-
+    
     # R
     - name: Sebastian Rhode
       github: sebi06
-    - name: Norman Rzepka
-      github: normanrz
-      orcid: 0000-0002-8168-7929
 
     # S
     - name: Virginia Scarlett
@@ -179,9 +193,6 @@ project:
       github: dpshepherd
       orcid: 0000-0001-9087-0832
     # T
-    - name: Christian Tischer
-      github: tischi
-      orcid: 0000-0003-4105-1990
 
     # U
     - name: Virginie Uhlmann
