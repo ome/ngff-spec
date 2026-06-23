@@ -120,6 +120,8 @@ project:
     - name: Lachlan Deakin
       github: lDeakin
       orcid: 0000-0003-2026-759X
+    - name: Assa Diabira
+      github: assadiab
     - name: Gideon Dunster
       orcid: 0000-0001-9050-0225
 
