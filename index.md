@@ -1333,6 +1333,12 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
   * A single scale or identity transformation
   * A sequence transformation containing one scale and one translation transformation.
 
+  ```{note}
+  These transformations are expected to consistently align the datasets across all scales in the intrinsic coordinate system.
+  For the most common downsampling methods such as classical binning,
+  translations should be (pixel-size-at-resolution-N - pixel-size-at-resolution-0) / 2 for correct multi-scale alignment.
+  ```
+
   In these cases, the scale transformation specifies the pixel size in physical units or time duration.
   If scaling information is not available or applicable for one of the axes,
   the value MUST express the scaling factor between the current resolution
@@ -1836,6 +1842,20 @@ which are defined in the `multiscales` attributes of the respective image groups
 A transformation from instrument3 to instrument1 can be obtained
 by composing the two transformations above.
 :::
+
+```{hint} Which coordinate system to display?
+When reading [`scene`](#scene-md) metadata,
+some applications may want to choose a coordinate system as a default reference,
+e.g. for immediate display.
+If they do so, it is RECOMMENDED that the scene's first entry under the `coordinateSystems` field is used as the default, if present.
+ Likewise, when writing scene metadata, if there is a coordinate system that acts as a common reference for other coordinate systems within the scene or its child multiscales, it is RECOMMENDED that this coordinate system be stored as the first coordinateSystems entry in the scene.
+
+If no coordinate system is defined therein, but only in the respective linked multiscale groups,
+viewers may want to expose a choice for the user to select a coordinate system for display when opening the dataset for the first time.
+
+ 
+
+```
 
 ## Specification naming style
 (naming-style)=
