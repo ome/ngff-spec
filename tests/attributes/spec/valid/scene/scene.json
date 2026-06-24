@@ -1,0 +1,71 @@
+{
+  "ome": {
+    "version": "0.6.dev4",
+    "scene": {
+      "coordinateTransformations": [
+        {
+          "input": {"path": "4995115_cropped_400_100_400_400_rot10.zarr", "name": "rotated"},
+          "output": {"name": "translated_x50"},
+          "name": "translate_tile_to_stitched_position",
+          "type": "translation",
+          "translation": [
+            0,
+            0,
+            30.608878192215265,
+            11.21775638443053
+          ]
+        },
+        {
+          "input": {"path": "4995115_cropped_700_700_400_400_rot45.zarr", "name": "rotated"},
+          "output": {"name": "translated_x50"},
+          "name": "translate_tile_to_stitched_position",
+          "type": "translation",
+          "translation": [
+            0,
+            0,
+            91.8266345766458,
+            41.8266345766458
+          ]
+        },
+        {
+          "input": {"name": "translated_x50"},
+          "output": {"path": "4995115_full.zarr", "name": "physical"},
+          "name": "translate_tile_to_stitched_position",
+          "type": "translation",
+          "translation": [
+            0,
+            0,
+            0,
+            50
+          ]
+        }
+      ],
+      "coordinateSystems": [
+        {
+          "name": "translated_x50",
+          "axes": [
+            {
+              "name": "c",
+              "type": "channel"
+            },
+            {
+              "name": "z",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "name": "x",
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
