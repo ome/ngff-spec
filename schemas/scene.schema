@@ -48,41 +48,12 @@
                         "additionalProperties": false,
                         "description": "Must reference a coordinate system defined in the same metadata document (path empty)"
                       }
-                    },
-                    "required": ["input", "output"]
-                  }
-                ]
-              } 
-            },
-            "arrayCoordinateSystem": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Name of coordinate space"
-                },
-                "axes": {
-                  "allOf": [
-                    {
-                      "$ref": "axes.schema"
-                    },
-                    {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "type": {
-                            "const": "array"
-                          }
-                        }
-                      }
-                    }
-                  ]
+                    ]
+                  },
+                  "description": "Constrained input/output for coordinate transformations in scene metadata"
                 }
-              },
-              "required": [
-                "axes"
               ]
+                
             }
           },
           "type": "object",
