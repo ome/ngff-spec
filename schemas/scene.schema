@@ -48,12 +48,11 @@
                         "additionalProperties": false,
                         "description": "Must reference a coordinate system defined in the same metadata document (path empty) or in a subgroup (path provided)"
                       }
-                    ]
-                  },
-                  "description": "Constrained input/output for coordinate transformations in scene metadata"
-                }
-              ]
-                
+                    },
+                    "required": ["input", "output"]
+                  }
+                ]
+              }
             }
           },
           "type": "object",
