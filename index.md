@@ -1979,6 +1979,20 @@ A transformation from instrument3 to instrument1 can be obtained
 by composing the two transformations above.
 :::
 
+```{hint} Which coordinate system to display?
+When reading [`scene`](#scene-md) metadata,
+some applications may want to choose a coordinate system as a default reference,
+e.g. for immediate display.
+If they do so, it is RECOMMENDED that the scene's first entry under the `coordinateSystems` field is used as the default, if present.
+ Likewise, when writing scene metadata, if there is a coordinate system that acts as a common reference for other coordinate systems within the scene or its child multiscales, it is RECOMMENDED that this coordinate system be stored as the first coordinateSystems entry in the scene.
+
+If no coordinate system is defined therein, but only in the respective linked multiscale groups,
+viewers may want to expose a choice for the user to select a coordinate system for display when opening the dataset for the first time.
+
+ 
+
+```
+
 ## Specification naming style
 (naming-style)=
 
