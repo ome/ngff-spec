@@ -47,36 +47,6 @@
                 }
               ]
                 
-            },
-            "arrayCoordinateSystem": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Name of coordinate space"
-                },
-                "axes": {
-                  "allOf": [
-                    {
-                      "$ref": "axes.schema"
-                    },
-                    {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "type": {
-                            "const": "array"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "axes"
-              ]
             }
           },
           "type": "object",
