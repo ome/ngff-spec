@@ -119,14 +119,20 @@
         "mapAxis": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 4
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4
+              },
+              {
+                "type": "null"
+              }
+            ]            
           },
-          "minItems": 2,
           "maxItems": 5,
           "uniqueItems": true,
-          "description": "An array of integers representing the new axis order as zero-based indices of the input axes."
+          "description": "An array of integers or nulls representing the new axis order as zero-based indices of the input axes."
         }
       },
       "required": [

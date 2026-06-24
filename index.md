@@ -741,18 +741,20 @@ y = j
 ##### mapAxis
 (mapAxis-md)=
 
-`mapAxis` transformations describe axis permutations as a transpose vector of integers.
+`mapAxis` transformations describe axis permutations, adding or dropping of axes as a vector of integers or nulls.
 Transformations MUST include a `mapAxis` field
-whose value is an array of integers that specifies the new ordering in terms of indices of the old order.
-The length of the array MUST equal the number of dimensions in both the input and output coordinate systems.
+whose value is an array of unique integers or nulls that specifies the new ordering in terms of indices of the old order.
 Each integer in the array MUST be a valid zero-based index into the input coordinate system's axes
 (i.e., between 0 and N-1 for an N-dimensional input).
-Each index MUST appear exactly once in the array.
 The value at position `i` in the array indicates which input axis becomes the `i`-th output axis.
-`mapAxis` transforms are invertible.
+`mapAxis` transforms are invertible if the array contains no nulls
+and its length corresponds to the number of dimensions in both the input and output coordinate systems.
+
+If the value `null` is used in a `mapAxis` transformation,
+this corresponds to adding the value zero in the coordinate vector at the position of the null.
 
 **mapAxis**
-: The axis permutation stored as a JSON array of integers.
+: The axis permutation stored as a JSON array of integers or nulls.
 
 
 :::{dropdown} Example 1
@@ -792,9 +794,9 @@ x = b
 and the `projection_up` transformation defines the function:
 
 ```
-x = a
-y = b
-z = b
+x = b
+y = a
+z = 0
 ```
 :::
 
