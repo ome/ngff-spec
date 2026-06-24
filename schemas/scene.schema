@@ -26,7 +26,7 @@
                   },
                   {
                     "type": "object",
-                    "description": "Transformations between two coordinate systems referenced by name in the same metadata document",
+                    "description": "Transformations between two referenced coordinate systems",
                     "properties": {
                       "input": {
                         "type": "object",
@@ -36,7 +36,7 @@
                         },
                         "required": ["name"],
                         "additionalProperties": false,
-                        "description": "Must reference a coordinate system defined in the same metadata document (path empty)"
+                        "description": "Must reference a coordinate system defined in the same metadata document (path empty) or in a subgroup (path provided)"
                       },
                       "output": {
                         "type": "object",
@@ -46,7 +46,7 @@
                         },
                         "required": ["name"],
                         "additionalProperties": false,
-                        "description": "Must reference a coordinate system defined in the same metadata document (path empty)"
+                        "description": "Must reference a coordinate system defined in the same metadata document (path empty) or in a subgroup (path provided)"
                       }
                     ]
                   },
