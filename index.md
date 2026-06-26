@@ -407,13 +407,14 @@ A transform is a JSON object with the following fields:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `type` | string | yes | The type of the transformation, which determines the required and optional fields for that transformation. |
+| [`type`](transform-type-md)= | string | yes | The type of the transformation, which determines the required and optional fields for that transformation. Possible values |
 | `name` | string | no | A unique name for this transformation. |
-| `input` | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The input coordinate system for this transformation. |
-| `output` | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The output coordinate system for this transformation. |
+| [`input`](#input-output-md) | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The input coordinate system for this transformation. |
+| [`output`](#input-output-md) | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The output coordinate system for this transformation. |
 
 The following transformations are supported:
 
+(transform-type-md)=
 | Type | Fields | Description |
 |------|--------|-------------|
 | [`identity`](#identity-md) | | The identity transformation is the do-nothing transformation and is typically not explicitly defined. |
@@ -432,11 +433,11 @@ The parameter values (i.e., `scale` for a [scale transformatiion](#scale-md)) MU
 
 The `input` and `output` fields are objects structured as follows:
 
+(input-output-md)=
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `name` | string | no | The name of the coordinate system. Required context-dependent ([see details](#coord-trafo-constraints)). |
 | `path` | string | no | The path to a zarr group, if the coordinate system is defined in a different Zarr group. Required context-dependent ([see details](#coord-trafo-constraints)). |
-
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
 (e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
