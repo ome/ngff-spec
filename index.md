@@ -806,14 +806,14 @@ z = b
 `projectAxis` transformations projects input coordinates from `N` dimensions to `M` dimensions.
 by adding or dropping dimensions at specified indices of the coordinate vector.
 
-**create_outputs**
+**created_outputs**
 : JSON array of integers that indicate the index of the output coordinate vector at which new dimensions are added.
   The value added to the coordinate vector defaults to zero.
-  The values in the `create_outputs` array MUST be unique.
+  The values in the `created_outputs` array MUST be unique.
 
-**drop_inputs**
+**dropped_inputs**
 : JSON array of integers that indicate the index of the input coordinate vector at which dimensions are dropped.
-  The values in the `drop_inputs` array MUST be unique.
+  The values in the `dropped_inputs` array MUST be unique.
 
 :::{dropdown} Example: Adding multiple dimensions
 

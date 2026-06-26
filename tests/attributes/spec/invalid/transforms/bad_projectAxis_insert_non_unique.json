@@ -122,7 +122,7 @@
             "name": "physical-to-world",
             "input": {"name": "physical"},
             "output": {"name": "world"},
-            "create_outputs": [3, 3]
+            "created_outputs": [3, 3]
           }
         ]
       }

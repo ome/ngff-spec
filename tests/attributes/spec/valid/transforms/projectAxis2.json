@@ -122,8 +122,8 @@
             "name": "physical-to-world",
             "input": {"name": "physical"},
             "output": {"name": "world"},
-            "create_outputs": [0],
-            "drop_inputs": [0]
+            "created_outputs": [0],
+            "dropped_inputs": [0]
           }
         ]
       }

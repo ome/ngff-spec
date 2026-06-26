@@ -7,7 +7,7 @@
     { 
       "name": "up-project",
       "type": "projectAxis", 
-      "create_outputs": [0, 1],
+      "created_outputs": [0, 1],
       "input": {"name": "in"},
       "output": {"name": "out"} 
     }
