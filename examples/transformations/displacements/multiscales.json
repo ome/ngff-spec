@@ -1,0 +1,45 @@
+{
+  "ome": "0.6.dev4",
+  "name": "some_image",
+  "multiscales": [
+    {
+      "coordinateSystems": [
+        {
+          "name": "physical",
+          "axes": [
+            {"name": "y", "type": "space", "unit": "micrometer"},
+            {"name":"x", "type": "space", "unit": "micrometer"}
+            ]
+          },
+        {
+          "name": "output",
+          "axes": [
+            {"name": "y", "type": "space", "unit": "micrometer"},
+            {"name":"x", "type": "space", "unit": "micrometer"}
+          ]
+        }
+      ],
+      "datasets": [
+        {
+          "path": "s0",
+          "coordinateTransformations": [
+            {
+              "type": "scale",
+              "input": {"path": "s0"},
+              "output": {"name": "physical"},
+              "scale": [2.0, 2.0]
+            }
+          ]
+        }
+      ],
+      "coordinateTransformations" : [
+        {
+          "type": "displacements",
+          "input" : {"name": "physical"},
+          "output" : {"name": "output"},
+          "path" : "coordinateTransformations/displacementField"
+        }
+      ]
+    }
+  ]
+}
