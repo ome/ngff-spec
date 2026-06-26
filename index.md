@@ -407,7 +407,7 @@ A transform is a JSON object with the following fields:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| [`type`](#transform-type-md) | string | yes | The type of the transformation, which determines the required and optional fields for that transformation. Possible values |
+| [`type`](#transform-type-md) | string | yes | The type of the transformation, which determines the required and optional fields for that transformation. |
 | `name` | string | no | A unique name for this transformation. |
 | [`input`](#input-output-md) | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The input coordinate system for this transformation. |
 | [`output`](#input-output-md) | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The output coordinate system for this transformation. |
