@@ -6,11 +6,8 @@
   "coordinateTransformations": [ 
     { 
       "name": "up-project",
-      "type": "newAxis", 
-      "newAxis": [
-        {"insert": 0},
-        {"insert": 0}
-      ],
+      "type": "projectAxis", 
+      "create_outputs": [0, 1],
       "input": {"name": "in"},
       "output": {"name": "out"} 
     }

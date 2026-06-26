@@ -10,6 +10,12 @@
             "axes": [
               {
                 "type": "space",
+                "name": "z",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
                 "name": "y",
                 "unit": "micrometer",
                 "discrete": false
@@ -29,12 +35,6 @@
                 "type": "channel",
                 "name": "c",
                 "discrete": true
-              },
-              {
-                "type": "space",
-                "name": "z",
-                "unit": "micrometer",
-                "discrete": false
               },
               {
                 "type": "space",
@@ -63,11 +63,11 @@
                 "transformations": [
                   {
                     "type": "scale",
-                    "scale": [1, 1]
+                    "scale": [1, 1, 1]
                   },
                   {
                     "type": "translation",
-                    "translation": [0, 0]
+                    "translation": [0, 0, 0]
                   }
                 ]
               }
@@ -84,11 +84,11 @@
                 "transformations": [
                   {
                     "type": "scale",
-                    "scale": [2, 2]
+                    "scale": [1, 2, 2]
                   },
                   {
                     "type": "translation",
-                    "translation": [0.7071, 0.7071]
+                    "translation": [0, 0.7071, 0.7071]
                   }
                 ]
               }
@@ -105,11 +105,11 @@
                 "transformations": [
                   {
                     "type": "scale",
-                    "scale": [4, 4]
+                    "scale": [1, 4, 4]
                   },
                   {
                     "type": "translation",
-                    "translation": [2.1213, 2.1213]
+                    "translation": [0, 2.1213, 2.1213]
                   }
                 ]
               }
@@ -122,10 +122,8 @@
             "name": "physical-to-world",
             "input": {"name": "physical"},
             "output": {"name": "world"},
-            "projectAxis": [
-              {"remove": 0},
-              {"remove": 0}
-            ]
+            "create_outputs": [0],
+            "drop_inputs": [0]
           }
         ]
       }

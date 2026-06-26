@@ -121,8 +121,7 @@
             "type": "projectAxis",
             "name": "physical-to-world",
             "input": {"name": "physical"},
-            "output": {"name": "world"},
-            "drop_inputs": [5]
+            "output": {"name": "world"}
           }
         ]
       }

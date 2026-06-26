@@ -806,17 +806,14 @@ z = b
 `projectAxis` transformations projects input coordinates from `N` dimensions to `M` dimensions.
 by adding or dropping dimensions at specified indices of the coordinate vector.
 
-**projectAxis**
-: JSON array of add/drop operations to be performed on the coordinate vector.
-  Value can be an object with either the fields `insert` or `remove`, respectively.
-  The value of the field is a single integer, which indicates at which position of the coordinate vector
-  a dimension is added or removed.
-  In case of addition of new dimensions via an `insert` operation,
-  the value zero is added to the coordinate vector at the position specified by the `insert` field.
-  In case of removal of dimensions via a `remove` operation,
-  the specified dimension is removed from the coordinate vector and the passed values MUST be unique.
-  The operations listed under the `projectAxis` field are applied in order,
-  meaning that the indices of the coordinate vector are updated after each operation.
+**create_outputs**
+: JSON array of integers that indicate the index of the output coordinate vector at which new dimensions are added.
+  The value added to the coordinate vector defaults to zero.
+  The values in the `create_outputs` array MUST be unique.
+
+**drop_inputs**
+: JSON array of integers that indicate the index of the input coordinate vector at which dimensions are dropped.
+  The values in the `drop_inputs` array MUST be unique.
 
 :::{dropdown} Example: Adding multiple dimensions
 
@@ -852,8 +849,15 @@ z = 0
 y = i
 x = j
 ```
-
 :::
+
+```{hint}
+`projectAxis` transformations are not invertible in general if a dimension is dropped.
+If, however, the dropped dimension is of `"discrete": "true"` type,
+the transformation MAY be applied along the dropped dimension by iterating over all possible values of the dropped dimension.
+This is useful for example when projecting a 3D CYX image to a 2D YX image by dropping the channel-axis.
+```
+
 
 ##### translation
 (translation-md)=
