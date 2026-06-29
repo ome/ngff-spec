@@ -461,15 +461,17 @@ Depending on which, different constraints apply to the transformations, as descr
   - in the `input` object provide `path` and omit `name`.
   - in the `output` object provide `name` and omit `path`.
   For more information, see [multiscales section below](#multiscales-md).
+
 - **Inside `multiscales > coordinateTransformations`**: Additional transformations for single multiscale images MAY be stored here.
-  The following constraints apply to transformations under the `coordinateTransformations` field:
-  - The `coordinateTransformations` field MUST contain an array of valid [transformations](#trafo-types-md).
-  - The `input` to every one of these transformations MUST be the same coordinate system, referenced by the `name` field.
-  - The `output` MUST be another coordinate system defined under `multiscales > coordinateSystems`, referenced by the `name` field, or another coordinate system in a child [labels](#labels-md) group referenced by both `name` and `path`.
-- **Inside `scene > coordinateTransformations`**: Transformations between two or more images
-  MUST be stored in the attributes of a [`scene` object](#scene-md) in a [scene Zarr group](#scene-format).
-  In this case, the `input` and `output` values are objects
-  that refer to coordinate systems in the same zarr.json or in the metadata of multiscale image subgroups.
+  - One of `input` or `output` MUST reference the "intrinsic" coordinate system by `name` (`path` MAY be omitted or null).
+  - The other MAY reference a named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or in a child [labels](#labels-md) group (by `name` and `path`).
+  - When referencing a child labels group, the transformation MUST be [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
+
+- **Inside `scene > coordinateTransformations`**: Transformations between two or more images.
+  - Both `input` and `output` MUST contain `name`.
+  - `path` is required when referencing a coordinate system in a multiscale image subgroup;
+    it MAY be omitted or null when referencing a coordinate system defined in the scene's own `coordinateSystems`.
+  
 
 In any context, the values given for `name` and `path` provide an unambiguous reference to a named coordinate system.
 If the `path` field is null or omitted, this is to be interpreted as referring to a named coordinate system in the same `zarr.json` file.
@@ -1321,13 +1323,12 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
 : If applications require additional transformations,
   each `multiscales` object MAY contain the field `coordinateTransformations`,
   describing transformations that are applied to all resolution levels in the same manner.
-  The values of both `input` and `output` fields MUST be an object with fields `name` and `path` that satisfy:
-  - The value of `input` MUST be the "intrinsic" coordinate system, referenced by `name`.
-    The `path` field of `input` SHOULD be omitted.
-  - The value of `output` can be a coordinate System in the same multiscales group (referenced by `name`).
-    In this case, the `path` field of `output` SHOULD be omitted.
-  - The value of `output` can be a coordinate system in a multiscales group in a child [labels](#labels-md) group (referenced by `path` and `name`).
-    In this case, the used transformation MUST be one of [`identity`](#identity-md), ['scale'](#scale-md) or ['translation'](#translation-md) transformations.
+  The following constraints apply:
+  - One of `input` or `output` MUST reference the "intrinsic" coordinate system by `name` (`path` MAY be omitted or null).
+  - The other of `input` or `output` MAY reference either:
+    - A named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or
+    - A named coordinate system in a child [labels](#labels-md) group (by `name` and `path`).
+  - When referencing a coordinate system in a child labels group, the transformation MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
 
 :::{dropdown} Example: Additional coordinate transformation
 
