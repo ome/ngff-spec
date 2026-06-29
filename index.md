@@ -464,7 +464,7 @@ Depending on which, different constraints apply to the transformations, as descr
 
 - **Inside `multiscales > coordinateTransformations`**: Additional transformations for single multiscale images MAY be stored here.
   - One of `input` or `output` MUST reference the "intrinsic" coordinate system by `name` (`path` MAY be omitted or null).
-  - The other MAY reference a named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or in a child [labels](#labels-md) group (by `name` and `path`).
+  - The other MUST reference a named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or in a child [labels](#labels-md) group (by `name` and `path`).
   - When referencing a child labels group, the transformation MUST be [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
 
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more images.
@@ -1325,7 +1325,7 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
   describing transformations that are applied to all resolution levels in the same manner.
   The following constraints apply:
   - One of `input` or `output` MUST reference the "intrinsic" coordinate system by `name` (`path` MAY be omitted or null).
-  - The other of `input` or `output` MAY reference either:
+  - The other of `input` or `output` MUST reference either:
     - A named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or
     - A named coordinate system in a child [labels](#labels-md) group (by `name` and `path`).
   - When referencing a coordinate system in a child labels group, the transformation MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
