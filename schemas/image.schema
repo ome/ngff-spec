@@ -187,7 +187,7 @@
                         "name": {"type": "string"}
                       },
                       "required": ["name"],
-                      "description": "Referece to named coordinate system in the same metadata document (path empty) or in a child labels group (path to the labels group)"
+                      "description": "Reference to named coordinate system in the same metadata document (path empty) or in a child labels group (path to the labels group)"
                     },
                     "output": {
                       "type": "object",
@@ -195,7 +195,7 @@
                         "name": {"type": "string"}
                       },
                       "required": ["name"],
-                      "description": "Referece to named coordinate system in the same metadata document (path empty) or in a child labels group (path to the labels group)"
+                      "description": "Reference to named coordinate system in the same metadata document (path empty) or in a child labels group (path to the labels group)"
                     }
                   },
                   "required": ["input", "output"]
