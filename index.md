@@ -517,9 +517,9 @@ In these cases, the `input` and `output` fields MAY be omitted or null.
 **Graph connectedness**: The coordinate systems defined in the [multiscales metadata](#multiscales-md)
 and the [`scene` metadata](#scene-md) combined with the coordinate transformations form a transformations graph.
 In this graph, coordinate systems represent nodes and coordinate transformations represent edges.
-The graph MUST be fully connected in the sense that any two coordinate systems in the metadata
-MUST be connected by a sequence of edges represented by coordinate transformations.
-Coordinate systems that are connected by a non-invertible transformation count as connected in this sense, even though graph traversal may not be closed-form computable in every direction.
+The graph MUST be connected (but need not be complete):
+any two coordinate systems in the metadata MUST be linked by a path of one or more coordinate transformations
+(i.e. a single transformation, or a chain through intermediate coordinate systems).
 
 Coordinate transformations are functions of *points* in the input space to *points* in the output space.
 We call this the "forward" direction.
