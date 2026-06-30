@@ -152,7 +152,7 @@
               "items": {
                 "type": "integer",
                 "minimum": 0,
-                "maximum": 0
+                "maximum": 4
               },
               "maxItems": 3,
               "uniqueItems": true,
