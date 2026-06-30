@@ -6,13 +6,13 @@
       "coordinateSystems" : [
         {
           "name" : "world",
-          "axes": {
-            "t": {"type": "time", "unit": "millisecond"},
-            "c": {"type": "channel"},
-            "z": {"type": "space", "unit": "micrometer"},
-            "y": {"type": "space", "unit": "micrometer"},
-            "x": {"type": "space", "unit": "micrometer"}
-          }
+          "axes": [
+            {"name": "t", "type": "time", "unit": "millisecond"},
+            {"name": "c", "type": "channel"},
+            {"name": "z", "type": "space", "unit": "micrometer"},
+            {"name": "y", "type": "space", "unit": "micrometer"},
+            {"name": "x", "type": "space", "unit": "micrometer"}
+          ]
         },
         {
           "name" : "intrinsic",
