@@ -36,7 +36,8 @@ project:
       github: toloudis
       orcid: 0000-0003-2620-1233
 
-    - name: Forest Collmann
+    - name: Forrest Collman
+      orcid: 0000-0002-0280-7022
       github: fcollman
 
     - name: Nathalie Gaudreault
@@ -68,6 +69,32 @@ project:
       orcid: 0000-0001-8783-1429
       github: sbesson
 
+    # RFC8
+    # RFC8 authors
+    - name: Norman Rzepka
+      github: normanrz
+      orcid: 0000-0002-8168-7929
+
+    - name: Eric Perlman
+      github: perlman
+      orcid: 0000-0001-5542-1302
+
+    - name: Joel Lüthi
+      github: jluethi
+      orcid: 0000-0003-3023-170X
+
+    - name: Lorenzo Cerrone
+      github: lorenzocerrone
+      orcid: 0000-0001-7337-2313
+
+    - name: Christian Tischer
+      github: tischi
+      orcid: 0000-0003-4105-1990
+
+    - name: Matthew Hartley
+      github: matthewh-ebi
+      orcid: 0000-0001-6178-2884
+
     # ngff-spec repo contributors
     # A
     - name: Marvin Albert
@@ -81,6 +108,9 @@ project:
     - name: Chris Barnes
       github: clbarnes
       orcid: 0000-0002-1296-7310
+    - name: Benedikt T. Best
+      github: btbest
+      orcid: 0000-0001-6965-1117
 
     # C
     - name: Tommaso Comparin
@@ -91,6 +121,8 @@ project:
     - name: Lachlan Deakin
       github: lDeakin
       orcid: 0000-0003-2026-759X
+    - name: Assa Diabira
+      github: assadiab
     - name: Gideon Dunster
       orcid: 0000-0001-9050-0225
 
@@ -105,14 +137,11 @@ project:
       orcid: 0000-0002-5444-5246
     - name: Xiao Gui
       github: xgui3783
-    
+
     # H
     - name: Yaroslav O. Halchenko
       github: yarikoptic
       orcid: 0000-0001-7482-1299
-    - name: Matthew Hartley
-      github: matthewh-ebi
-      orcid: 0000-0001-6178-2884
     - name: Julian Hniopek
       github: julianhn
       orcid: 0000-0002-8652-8812
@@ -126,7 +155,7 @@ project:
     - name: Mark Kittisopikul
       github: mkitti
       orcid: 0000-0002-9558-6248
-    
+
     # L
     - name: Talley Lambert
       github: tlambert03
@@ -136,20 +165,17 @@ project:
     - name: Ziwen Liu
       github: ziw-liu
       orcid: 0000-0001-7482-1299
-    - name: Joel Lüthi
-      github: jluethi
-      orcid: 0000-0003-3023-170X
 
     # N
     - name: Juan Nunez-Iglesias
       github: jni
       orcid: 0000-0002-7239-5828
-    
+
     # O/Ö
     - name: Bugra Özdemir
       github: bugraoezdemir
       orcid: 0000-0001-9823-0581
-    
+
     # P
     - name: Giovanni Palla
       github: giovp
@@ -157,16 +183,10 @@ project:
     - name: Constantin Pape
       github: constantinpape
       orcid: 0000-0001-6562-7187
-    - name: Eric Perlman
-      github: perlman
-      orcid: 0000-0001-5542-1302
     
     # R
     - name: Sebastian Rhode
       github: sebi06
-    - name: Norman Rzepka
-      github: normanrz
-      orcid: 0000-0002-8168-7929
 
     # S
     - name: Virginia Scarlett
@@ -176,9 +196,6 @@ project:
       github: dpshepherd
       orcid: 0000-0001-9087-0832
     # T
-    - name: Christian Tischer
-      github: tischi
-      orcid: 0000-0003-4105-1990
 
     # U
     - name: Virginie Uhlmann
@@ -192,7 +209,7 @@ project:
     - name: Isaac Virshup
       github: ivirshup
       orcid: 0000-0002-1710-8945
-    
+
     # W
     - name: Alan Watson
       github: alanmwatson
