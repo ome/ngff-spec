@@ -422,7 +422,7 @@ The following transformations are supported:
 |------|--------|-------------|
 | [`identity`](#identity-md) | | The identity transformation is the do-nothing transformation and is typically not explicitly defined. |
 | [`mapAxis`](#mapaxis-md) | `"mapAxis":List[number]` | an axis permutation as a transpose array of integer indices that refer to the ordering of the axes in the respective coordinate system. |
-| [`projectAxis`](#projectAxis-md) | | Map coordinates between from an input coordinate system to an output coordinate system with a different dimensionality. |
+| [`projectAxis`](#projectAxis-md) | | Map coordinates from an input coordinate system to an output coordinate system with a different dimensionality. |
 | [`translation`](#translation-md) | <br>`"translation":List[number]` | Translation vector, stored either as an array of numbers (`"translation"`) or as a Zarr array at a location in this container (`path`). |
 | [`scale`](#scale-md) | <br>`"scale":List[number]` | Scale vector, stored either as an array of numbers (`scale`) or as a Zarr array at a location in this container (`path`). |
 | [`affine`](#affine-md) | one of:<br>`"affine":List[List[number]]`,<br>`"path":str` | 2D affine transformation matrix stored either with JSON (`affine`) or as a Zarr array at a location in this container (`path`). |
@@ -803,7 +803,7 @@ z = b
 ##### projectAxis
 (projectAxis-md)=
 
-`projectAxis` transformations projects input coordinates from `N` dimensions to `M` dimensions.
+`projectAxis` transformations project input coordinates from `N` dimensions to `M` dimensions.
 by adding or dropping dimensions at specified indices of the coordinate vector.
 
 **createdOutputs**
