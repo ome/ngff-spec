@@ -8,6 +8,9 @@
     "ome": {
       "type": "object",
       "properties": {
+        "version": {
+          "$ref": "https://ngff.openmicroscopy.org/0.6.dev4/schemas/_version.schema"
+        },
         "scene":{
           "properties": {
             "coordinateSystems": {
@@ -59,7 +62,7 @@
           "required": ["coordinateTransformations"]
         }
       },
-    "required": ["scene"]
+    "required": ["scene", "version"]
     }
   },
   "required": ["ome"]
