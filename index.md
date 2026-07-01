@@ -467,12 +467,12 @@ i.e., the mapping from the first input axis to the first output axis is determin
 :::
 
 Conforming readers:
-- MUST parse `identity`, `scale`, `translation` transformations;
-- SHOULD parse `mapAxis`, `affine`, `rotation` transformations;
+
+- MUST parse `identity`, `scale`, `translation` transformations, as well as `sequence`s of them;
+- SHOULD parse `mapAxis`, `affine`, `rotation` transformations, as well as `byDimension`s of all transforms supported by the reader;
 - SHOULD display an informative warning if encountering transformations that cannot be parsed or displayed by a consumer;
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
-
 
 **Constraints**
 
@@ -775,27 +775,6 @@ x = j
 y = i
 ```
 
-:::
-
-:::{dropdown} Example 2
-
-```{literalinclude} examples/transformations/mapAxis2.json
-:language: json
-```
-
-The `projection_down` transformation defines the function:
-
-```
-x = b
-```
-
-and the `projection_up` transformation defines the function:
-
-```
-x = a
-y = b
-z = b
-```
 :::
 
 ##### translation

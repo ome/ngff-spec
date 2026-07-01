@@ -3,17 +3,17 @@
     {
       "name": "cji",
       "axes": [
-        {"name": "k", "discrete": true},
-        {"name": "j", "discrete": false},
-        {"name": "i", "discrete": false}
+        {"name": "k", "discrete": true, "type": "space"},
+        {"name": "j", "discrete": false, "type": "space"},
+        {"name": "i", "discrete": false, "type": "space"}
       ]
     },
     {
       "name": "cyx",
       "axes": [
-        {"name": "c", "discrete": true},
-        {"name": "y", "discrete": false},
-        {"name": "x", "discrete": false}
+        {"name": "c", "discrete": true, "type": "space"},
+        {"name": "y", "discrete": false, "type": "space"},
+        {"name": "x", "discrete": false, "type": "space"}
       ]
     }
   ],
