@@ -467,8 +467,8 @@ Depending on which, different constraints apply to the transformations, as descr
   - The other MUST reference a named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or in a child [labels](#labels-md) group (by `name` and `path`).
   - When referencing a child labels group, the transformation MUST be [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
 
-- **Inside `scene > coordinateTransformations`**: Transformations between two or more images.
-  - Both `input` and `output` MUST contain `name`.
+- **Inside `scene > coordinateTransformations`**: Transformations between two or more multiscales.
+  - Both `input` and `output` MUST specify a coordinate system `name`.
   - `path` is required when referencing a coordinate system in a multiscale image subgroup;
     it MAY be omitted or null when referencing a coordinate system defined in the scene's own `coordinateSystems`.
   
