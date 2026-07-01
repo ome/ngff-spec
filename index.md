@@ -520,6 +520,7 @@ In this graph, coordinate systems represent nodes and coordinate transformations
 The graph MUST be connected (but need not be complete):
 any two coordinate systems in the metadata MUST be linked by a path of one or more coordinate transformations
 (i.e. a single transformation, or a chain through intermediate coordinate systems).
+Non-invertible transformations count as connected even if traversal is not computable in both directions.
 
 Coordinate transformations are functions of *points* in the input space to *points* in the output space.
 We call this the "forward" direction.
