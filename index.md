@@ -777,27 +777,6 @@ y = i
 
 :::
 
-:::{dropdown} Example 2
-
-```{literalinclude} examples/transformations/mapAxis2.json
-:language: json
-```
-
-The `projection_down` transformation defines the function:
-
-```
-x = b
-```
-
-and the `projection_up` transformation defines the function:
-
-```
-x = a
-y = b
-z = b
-```
-:::
-
 ##### translation
 (translation-md)=
 
