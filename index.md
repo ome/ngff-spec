@@ -803,7 +803,7 @@ z = b
 ##### projectAxis
 (projectAxis-md)=
 
-`projectAxis` transformations project input coordinates from `N` dimensions to `M` dimensions.
+`projectAxis` transformations project input coordinates from `N` dimensions to `M` dimensions
 by adding or dropping dimensions at specified indices of the coordinate vector.
 
 **createdOutputs**
