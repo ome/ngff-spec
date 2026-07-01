@@ -61,14 +61,14 @@
 						"transformations": [
 							{
 								"type": "scale",
-								"input_axes": ["x"],
-								"output_axes": ["x"],
+								"inputAxes": ["x"],
+								"outputAxes": ["x"],
 								"scale": [2]
 							},
 							{
 								"type": "translation",
-								"input_axes": ["y"],
-								"output_axes": ["y"],
+								"inputAxes": ["y"],
+								"outputAxes": ["y"],
 								"translation": [-10]
 							}
 						],

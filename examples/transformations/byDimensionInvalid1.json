@@ -20,16 +20,16 @@
             "type": "translation",
             "translation": [-1.0]
           },
-          "input_axes": [1],
-          "output_axes": [2]
+          "inputAxes": [1],
+          "outputAxes": [2]
         },
         {
           "transformation": {
             "type": "scale",
             "scale": [2.0]
           },
-          "input_axes": [0],
-          "output_axes": [2]
+          "inputAxes": [0],
+          "outputAxes": [2]
         }
       ]
     }

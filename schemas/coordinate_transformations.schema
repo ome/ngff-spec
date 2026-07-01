@@ -319,14 +319,14 @@
               "transformation": {
                 "$ref": "#/$defs/coordinateTransformation"
               },
-              "input_axes": {
+              "inputAxes": {
                 "type": "array",
                 "items": {
                   "type": "number"
                 },
                 "description": "Names of the input axes for this transformation."
               },
-              "output_axes": {
+              "outputAxes": {
                 "type": "array",
                 "items": {
                   "type": "number"
@@ -336,8 +336,8 @@
             },
             "required": [
               "transformation",
-              "input_axes",
-              "output_axes"
+              "inputAxes",
+              "outputAxes"
             ]
           }
         }

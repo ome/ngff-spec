@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   Decided at EMBL Hackathon 06/2026 by RFC5 developers.
 - Additional requirements for displacement or coordinate axis `"type"` and `discrete` fields (now required).
 - General wording improvements in the spec document for clarity and consistency.
+- Changed the `input_axes` and `output_axes` fields in the `byDimension` transform to camelCase (`inputAxes` and `outputAxes`)
 
 ### Removed
 
