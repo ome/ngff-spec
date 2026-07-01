@@ -1036,6 +1036,9 @@ The array containing the coordinates or displacements MUST:
   to the corresponding coordinates in the input coordinate system via a coordinate transformation (see details below).
 - have one dimension corresponding to every axis of the input coordinate system
 - have one additional dimension to hold components of the vector (either coordinates or displacements)
+- specify `"type": "displacement"` or `"type": "coordinate"` depending on the type of transformation and
+ `"discrete": true` in the multiscale image's [axes metadata](#axes-md)
+ for the dimension corresponding to the coordinate or displacement vector.
 - only be used to represent transformations between coordinate systems that are defined in smooth, regularly sampled coordinate arrays.
 
 Metadata for these coordinate transforms have the following fields:
