@@ -4,7 +4,7 @@ short_title: OME-Zarr
 authors: " "
 ---
 
-# 🚧 Dev: 0.6rc0 🚧
+# Version 0.6rc0
 (ngff-spec:spec:0.6rc0)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
@@ -18,9 +18,8 @@ authors: " "
 ## Abstract
 
 ```{warning}
-This is **not** the released version of the ngff-specification.
-It is a work-in-progress document.
-Upon release, this warning will be removed and the version number in the document updated.
+This is the release candidate for version 0.6rc0 of the ngff-specification.
+Upon release of 0.6, this warning will be removed and the version number in the document updated.
 
 ```
 
