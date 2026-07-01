@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - BREAKING CHANGE: Unified `input` and `output` fields in all transformation metadata to be an object of `{"name": string, "path": string}` instead of allowing both string and object forms. This change was made to ensure consistency across all transformations and to simplify the specification.
 - BREAKING CHANGE: Replaced `arrayCoordinateSystems` with explanation of how to properly express dimensionless transforms.
+- BREAKING CHANGE: `input_axes` and `output_axes` in `byDimension` transformations are now written in camelCase (`inputAxes` and `outputAxes`) to be consistent with other transformations.
 - Displacements and coordinate transformations are now required to store the vector field as a normal multiscale group with the same metadata as other multiscales.
   Decided at EMBL Hackathon 06/2026 by RFC5 developers.
 - Additional requirements for displacement or coordinate axis `"type"` and `discrete` fields (now required).
