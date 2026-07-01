@@ -1326,7 +1326,7 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
   The following constraints apply:
   - One of `input` or `output` MUST reference the "intrinsic" coordinate system by `name` (`path` MAY be omitted or null).
   - The other of `input` or `output` MUST reference either:
-    - A named coordinate system in the same multiscale (by `name`, `path` MAY be omitted or null), or
+    - A named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or
     - A named coordinate system in a child [labels](#labels-md) group (by `name` and `path`).
   - When referencing a coordinate system in a child labels group, the transformation MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
 
