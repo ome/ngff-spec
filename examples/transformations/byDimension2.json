@@ -29,16 +29,16 @@
             "type": "translation",
             "translation": [ 0.5, 1.5 ]
           },
-          "input_axes": [ 3, 2 ],
-          "output_axes": [ 1, 2 ]
+          "inputAxes": [ 3, 2 ],
+          "outputAxes": [ 1, 2 ]
         },
         {
           "transformation": {
             "type": "scale",
             "scale": [ 2 ]
           },
-          "input_axes": [ 1 ],
-          "output_axes": [ 0 ]
+          "inputAxes": [ 1 ],
+          "outputAxes": [ 0 ]
         }
       ]
     }
