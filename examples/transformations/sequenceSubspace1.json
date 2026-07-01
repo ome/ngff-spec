@@ -1,7 +1,13 @@
 {
   "coordinateSystems" : [
-    { "name" : "in", "axes" : [ {"name" : "i"}, {"name" : "j"} ] },
-    { "name" : "out", "axes" : [ {"name" : "x"}, {"name" : "y"} ] }
+    {
+      "name" : "in",
+      "axes" : [ {"name" : "i", "type": "space"}, {"name" : "j", "type": "space"} ]
+    },
+    {
+      "name" : "out",
+      "axes" : [ {"name" : "x", "type": "space"}, {"name" : "y", "type": "space"} ]
+    }
   ],
   "coordinateTransformations" : [
     {

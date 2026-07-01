@@ -165,6 +165,9 @@ project:
     - name: Ziwen Liu
       github: ziw-liu
       orcid: 0000-0001-7482-1299
+    - name: Tiago Lubiana
+      orrcid: 0000-0003-2473-2313
+      github: lubianat
 
     # N
     - name: Juan Nunez-Iglesias
