@@ -430,7 +430,7 @@ The following transformations are supported:
 | [`displacements`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Displacement field transformation located at `path`. |
 | [`coordinates`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Coordinate field transformation located at `path`. |
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
-| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"input_axes": List[number]`, <br> and `"output_axes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
+| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
 (e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
@@ -1146,14 +1146,14 @@ using lower dimensional transformations on subsets of dimensions.
 
 **transformations**
 : MUST be an array of objects where each object MUST contain
-  the fields `input_axes`, `output_axes` and `transformation`.
-  The values of `input_axes` and `output_axes` are arrays of integers.
+  the fields `inputAxes`, `outputAxes` and `transformation`.
+  The values of `inputAxes` and `outputAxes` are arrays of integers.
   The integer values in these arrays correspond to the axis indices in the `byDimension`'s or its parent's
   `input` and `output` coordinate systems, respectively.
   The value of `transformation` is a valid transformation object.
   Every axis index in the parent byDimension's `output` coordinate system
-  MUST appear in exactly one child transformation's `output_axes` array.
-  The `input_axes` and `output_axes` arrays of each item
+  MUST appear in exactly one child transformation's `outputAxes` array.
+  The `inputAxes` and `outputAxes` arrays of each item
   MUST have the same length as that transformation's parameter arrays.
 
 :::{dropdown} Example 1
@@ -1182,7 +1182,7 @@ This is an **invalid** `byDimension` transform:
 :language: json
 ```
 
-It is invalid because the `output_axes` arrays of both transformations refer to the index of an axis that doesn't exist.
+It is invalid because the `outputAxes` arrays of both transformations refer to the index of an axis that doesn't exist.
 The coordinate system has two axes (indices `0` and `1`), but the transformations refers to index `2`.
 
 :::
@@ -1195,7 +1195,7 @@ Another **invalid** `byDimension` transform:
 :language: json
 ```
 
-This transformation is invalid because the output axis `x` appears in more than one transformation in the `transformations` array.
+This transformation is invalid because the output axis `[1]` appears in more than one transformation in the `transformations` array.
 :::
 
 ##### bijection

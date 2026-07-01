@@ -14,16 +14,16 @@
             "type": "coordinates",
             "path": "/xCoordinates"
           },
-          "input_axes" : [0],
-          "output_axes" : [0]
+          "inputAxes" : [0],
+          "outputAxes" : [0]
         },
         {
           "transformation": {
             "type": "coordinates",
             "path": "/yCoordinates"
           },
-          "input_axes" : [1],
-          "output_axes" : [1]
+          "inputAxes" : [1],
+          "outputAxes" : [1]
         }
       ]
     }
