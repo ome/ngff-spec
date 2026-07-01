@@ -29,12 +29,12 @@
               "name": "array_coordinates",
               "axes": [
                 {
-                  "type": "array",
+                  "type": "space",
                   "name": "dim_0",
                   "discrete": true
                 },
                 {
-                  "type": "array",
+                  "type": "space",
                   "name": "dim_1",
                   "discrete": true
                 }

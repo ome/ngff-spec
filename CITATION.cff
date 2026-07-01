@@ -36,8 +36,9 @@ authors:
   - family-names: Toloudis
     given-names: Daniel
     orcid: 0000-0003-2620-1233
-  - family-names: Collmann
-    given-names: Forest
+  - family-names: Collman
+    given-names: Forrest
+    orcid: 0000-0002-0280-7022
   - family-names: Gaudreault
     given-names: Nathalie
     orcid: 0000-0002-9220-5366
@@ -61,6 +62,24 @@ authors:
   - family-names: Besson
     given-names: Sébastien
     orcid: 0000-0001-8783-1429
+  - family-names: Rzepka
+    given-names: Norman
+    orcid: 0000-0002-8168-7929
+  - family-names: Perlman
+    given-names: Eric
+    orcid: 0000-0001-5542-1302
+  - family-names: Lüthi
+    given-names: Joel
+    orcid: 0000-0003-3023-170X
+  - family-names: Cerrone
+    given-names: Lorenzo
+    orcid: 0000-0001-7337-2313
+  - family-names: Tischer
+    given-names: Christian
+    orcid: 0000-0003-4105-1990
+  - family-names: Hartley
+    given-names: Matthew
+    orcid: 0000-0001-6178-2884
   - family-names: Albert
     given-names: Marvin
     orcid: 0000-0003-2536-2545
@@ -95,9 +114,6 @@ authors:
   - family-names: Halchenko
     given-names: Yaroslav O.
     orcid: 0000-0001-7482-1299
-  - family-names: Hartley
-    given-names: Matthew
-    orcid: 0000-0001-6178-2884
   - family-names: Hniopek
     given-names: Julian
     orcid: 0000-0002-8652-8812
@@ -115,9 +131,8 @@ authors:
   - family-names: Liu
     given-names: Ziwen
     orcid: 0000-0001-7482-1299
-  - family-names: Lüthi
-    given-names: Joel
-    orcid: 0000-0003-3023-170X
+  - family-names: Lubiana
+    given-names: Tiago
   - family-names: Nunez-Iglesias
     given-names: Juan
     orcid: 0000-0002-7239-5828
@@ -130,23 +145,14 @@ authors:
   - family-names: Pape
     given-names: Constantin
     orcid: 0000-0001-6562-7187
-  - family-names: Perlman
-    given-names: Eric
-    orcid: 0000-0001-5542-1302
   - family-names: Rhode
     given-names: Sebastian
-  - family-names: Rzepka
-    given-names: Norman
-    orcid: 0000-0002-8168-7929
   - family-names: Scarlett
     given-names: Virginia
     orcid: 0000-0002-4156-2849
   - family-names: Shepherd
     given-names: Doug
     orcid: 0000-0001-9087-0832
-  - family-names: Tischer
-    given-names: Christian
-    orcid: 0000-0003-4105-1990
   - family-names: Uhlmann
     given-names: Virginie
     orcid: 0000-0002-2859-9241

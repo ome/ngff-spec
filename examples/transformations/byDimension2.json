@@ -3,18 +3,18 @@
     {
       "name": "in",
       "axes": [
-        { "name": "l", "type": "array" },
-        { "name": "j", "type": "array" },
-        { "name": "k", "type": "array" },
-        { "name": "i", "type": "array" }
+        { "name": "l", "type": "space" },
+        { "name": "j", "type": "space" },
+        { "name": "k", "type": "space" },
+        { "name": "i", "type": "space" }
       ]
     },
     {
       "name": "out",
       "axes": [
-        { "name": "z", "type": "array" },
-        { "name": "y", "type": "array" },
-        { "name": "x", "type": "array" }
+        { "name": "z", "type": "space" },
+        { "name": "y", "type": "space" },
+        { "name": "x", "type": "space" }
       ]
     }
   ],

@@ -1,6 +1,6 @@
 {
   "coordinateSystems": [
-    { "name": "in", "axes": [ {"name": "i", "type": "array"}, {"name": "j", "type": "array"} ]},
+    { "name": "in", "axes": [ {"name": "i", "type": "space"}, {"name": "j", "type": "space"} ]},
     { "name": "out", "axes": [ {"name": "x", "type": "space"}, {"name": "y", "type": "space"} ]}
   ],
   "coordinateTransformations": [ 
@@ -10,16 +10,20 @@
       "output": {"name": "out"},
       "transformations": [
         {
+          "transformation": {
             "type": "coordinates",
-            "path": "/xCoordinates",
-            "input_axes" : ["i"],
-            "output_axes" : ["x"]
+            "path": "/xCoordinates"
+          },
+          "input_axes" : [0],
+          "output_axes" : [0]
         },
         {
+          "transformation": {
             "type": "coordinates",
-            "path": "/yCoordinates",
-            "input_axes" : ["j"],
-            "output_axes" : ["y"]
+            "path": "/yCoordinates"
+          },
+          "input_axes" : [1],
+          "output_axes" : [1]
         }
       ]
     }
