@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Displacements and coordinate transformations are now required
 to store the vector field as a normal multiscale group with the same metadata as other multiscales. Decided at EMBL Hackathon 06/2026 by RFC5 developers.
+- Additional requirements for displacement or coordinate axis `"type"` and `discrete` fields (now required).
 
 ### Added
 
