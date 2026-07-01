@@ -443,12 +443,12 @@ Implementations SHOULD prefer to store transformations as a sequence of less exp
 (e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
 
 Conforming readers:
-- MUST parse `identity`, `scale`, `translation` transformations;
-- SHOULD parse `mapAxis`, `affine`, `rotation` transformations;
+
+- MUST parse `identity`, `scale`, `translation` transformations, as well as `sequence`s of them;
+- SHOULD parse `mapAxis`, `affine`, `rotation` transformations, as well as `byDimension`s of all transforms supported by the reader;
 - SHOULD display an informative warning if encountering transformations that cannot be parsed or displayed by a consumer;
 - SHOULD be able to apply transformations to points;
 - SHOULD be able to apply transformations to images;
-
 
 **Constraints**
 (coord-trafo-constraints)=

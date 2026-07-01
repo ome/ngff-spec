@@ -3,17 +3,17 @@
     {
       "name": "in",
       "axes": [
-        {"name": "k", "discrete": true},
-        {"name": "j", "discrete": false},
-        {"name": "i", "discrete": false}
+        {"name": "k", "type": "channel", "discrete": true},
+        {"name": "j", "type": "space", "discrete": false},
+        {"name": "i", "type": "space", "discrete": false}
       ]
     },
     {
       "name": "out",
       "axes": [
-        {"name": "c", "discrete": true},
-        {"name": "y", "discrete": false},
-        {"name": "x", "discrete": false}
+        {"name": "c", "type": "channel", "discrete": true},
+        {"name": "y", "type": "space", "discrete": false},
+        {"name": "x", "type": "space", "discrete": false}
       ]
     }
   ],

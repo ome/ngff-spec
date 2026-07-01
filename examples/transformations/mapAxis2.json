@@ -1,8 +1,17 @@
 {
   "coordinateSystems": [
-    { "name": "in", "axes": [ {"name": "a"}, {"name": "b"}]},
-    { "name": "out_down", "axes": [ {"name": "x"}]},
-    { "name": "out_up", "axes": [ {"name": "z"}, {"name": "y"}, {"name": "x"} ]}
+    {
+      "name": "in",
+      "axes": [ {"name": "a", "type": "space"}, {"name": "b", "type": "space"} ]
+    },
+    {
+      "name": "out_down",
+      "axes": [ {"name": "x", "type": "space"} ]
+    },
+    {
+      "name": "out_up",
+      "axes": [ {"name": "z", "type": "space"}, {"name": "y", "type": "space"}, {"name": "x", "type": "space"} ]
+    }
   ],
   "coordinateTransformations": [ 
     { 

@@ -10,8 +10,8 @@
     {
       "name": "array",
       "axes": [
-        { "name": "dim_0", "type": "array" },
-        { "name": "dim_1", "type": "array" }
+        { "name": "dim_0", "type": "space" },
+        { "name": "dim_1", "type": "space" }
       ]
     }
   ],
