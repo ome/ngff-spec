@@ -531,7 +531,7 @@ The indexes of axis dimensions correspond to indexes into transformation paramet
 **Image rendering**: When rendering transformed images and interpolating,
 implementations may need the "inverse" transformation - from the fixed
 image's to the source image's coordinate system. This transformation may
-not explicitly exist, but might be the require computing the inverse
+not explicitly exist, but might require computing the inverse
 (in closed form) of an explicitly specified forward transformation.
 
 Inverse transformations used for image rendering may be specified
