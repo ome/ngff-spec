@@ -178,63 +178,27 @@
                   "description": "Parameters of any possible transform"
                 },
                 {
-                  "oneOf": [
-                    {
+                  "type": "object",
+                  "description": "Transformations between two named coordinate systems same metadata document or in a child labels group",
+                  "properties": {
+                    "input": {
                       "type": "object",
-                      "description": "Transformations between two coordinate systems referenced by name in the same metadata document",
                       "properties": {
-                        "input": {
-                          "type": "object",
-                          "properties": {
-                            "name": {"type": "string"}
-                          },
-                          "required": ["name"],
-                          "additionalProperties": false,
-                          "description": "Must reference a coordinate system defined in the same metadata document (path empty)"
-                        },
-                        "output": {
-                          "type": "object",
-                          "properties": {
-                            "name": {"type": "string"}
-                          },
-                          "required": ["name"],
-                          "additionalProperties": false,
-                          "description": "Must reference a coordinate system defined in the same metadata document (path empty)"
-                        }
+                        "name": {"type": "string"}
                       },
-                      "required": ["input", "output"]
+                      "required": ["name"],
+                      "description": "Reference to named coordinate system in the same metadata document (path empty) or in a child labels group (path to the labels group)"
                     },
-                    {
+                    "output": {
                       "type": "object",
-                      "description": "Transformations pointing from a coordinate system in the same metadata document to a coordinate system defined externally by a path to a multiscale dataset",
                       "properties": {
-                        "input": {
-                          "type": "object",
-                          "properties": {
-                            "name": {"type": "string"}
-                          },
-                          "required": ["name"],
-                          "additionalProperties": false
-                        },
-                        "output": {
-                          "type": "object",
-                          "properties": {
-                            "name": {"type": "string"},
-                            "path": {
-                              "type": "string",
-                              "description": "Allows only relative, downward paths to prevent referencing external metadata documents",
-                              "not": {
-                                "pattern": "^(\\.\\./|/)"
-                              }
-                            }
-                          },
-                          "required": ["name", "path"],
-                          "additionalProperties": false
-                        }
+                        "name": {"type": "string"}
                       },
-                      "required": ["input", "output"]
+                      "required": ["name"],
+                      "description": "Reference to named coordinate system in the same metadata document (path empty) or in a child labels group (path to the labels group)"
                     }
-                  ]
+                  },
+                  "required": ["input", "output"]
                 }
               ]
             }
