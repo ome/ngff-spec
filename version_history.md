@@ -33,7 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Removed `version` field from `multiscales` metadata in the image schema (`schemas/image.schema`) since it is already required at `ome > version`
 - Removed `version` field from `plate`, `well` and `labels` metadata in the spec document since it is already required at `ome > version`.
 
-## [0.6rc0] - 2026-04-22
+## [0.6.dev4] - 2026-04-22
 
 ### Changed
 
