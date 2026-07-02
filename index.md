@@ -403,21 +403,18 @@ Coordinate transforms are in the "forward" direction.
 This means they represent functions from *points* in the input space to *points* in the output space
 (see [example below](#spec:example:coordinate_transformation_scale)).
 
-They:
+A transform is a JSON object with the following fields:
 
-- MUST contain the field `type` (string).
-- MUST contain any other fields required by the given `type` (see table below).
-- MUST contain the field `output`, which is an object with fields `name` and `path`.
-  The `output` field MAY be omitted if the transformation is part of a wrapper transform
-  (i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
-- MUST contain the field `input`, which is an object with fields `name` and `path`.
-  The `input` field MAY be omitted if the transformation is part of a wrapper transform
-  (i.e., [`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md), see details).
-- MAY contain the field `name` (string).
-  Its value MUST be unique across all `name` fields for all coordinate transformations in the same list.
-- Parameter values MUST be compatible with input and output space dimensionality (see details).
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| [`type`](#transform-type-md) | string | yes | The type of the transformation, which determines the required and optional fields for that transformation. |
+| `name` | string | no | A unique name for this transformation. |
+| [`input`](#input-output-md) | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The input coordinate system for this transformation. |
+| [`output`](#input-output-md) | object | yes, unless part of a wrapper transform ([`sequence`](#sequence-md), [`bijection`](#bijection-md), [`byDimension`](#bydimension-md)) | The output coordinate system for this transformation. |
+
 The following transformations are supported:
 
+(transform-type-md)=
 | Type | Fields | Description |
 |------|--------|-------------|
 | [`identity`](#identity-md) | | The identity transformation is the do-nothing transformation and is typically not explicitly defined. |
@@ -433,39 +430,18 @@ The following transformations are supported:
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
+The parameter values (e.g., `scale` for a [scale transformatiion](#scale-md)) MUST be compatible with input and output space dimensionality (see details). 
+
+The `input` and `output` fields are objects structured as follows:
+
+(input-output-md)=
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | no | The name of the coordinate system. Required context-dependent ([see details](#coord-trafo-constraints)). |
+| `path` | string | no | The path to a zarr group, if the coordinate system is defined in a different Zarr group. Required context-dependent ([see details](#coord-trafo-constraints)). |
+
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
 (e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
-
-:::{dropdown} Example
-(spec:example:coordinate_transformation_scale)=
-
-```json
-{
-  "coordinateSystems": [
-    { "name": "in", "axes": [{"name": "j"}, {"name": "i"}] },
-    { "name": "out", "axes": [{"name": "y"}, {"name": "x"}] }
-  ],
-  "coordinateTransformations": [
-    {
-      "type": "scale",
-      "scale": [2, 3.12],
-      "input": {"name": "in"},
-      "output": {"name": "out"}
-    }
-  ]
-}
-
-```
-
-For example, the scale transformation above defines the function:
-
-```
-x = 3.12 * i
-y = 2 * j
-```
-
-i.e., the mapping from the first input axis to the first output axis is determined by the first scale parameter.
-:::
 
 Conforming readers:
 
@@ -476,6 +452,7 @@ Conforming readers:
 - SHOULD be able to apply transformations to images;
 
 **Constraints**
+(coord-trafo-constraints)=
 
 Coordinate transformations can be stored in multiple places to reflect different use cases.
 Depending on which, different constraints apply to the transformations, as described below:
@@ -485,15 +462,17 @@ Depending on which, different constraints apply to the transformations, as descr
   - in the `input` object provide `path` and omit `name`.
   - in the `output` object provide `name` and omit `path`.
   For more information, see [multiscales section below](#multiscales-md).
+
 - **Inside `multiscales > coordinateTransformations`**: Additional transformations for single multiscale images MAY be stored here.
-  The following constraints apply to transformations under the `coordinateTransformations` field:
-  - The `coordinateTransformations` field MUST contain an array of valid [transformations](#trafo-types-md).
-  - The `input` to every one of these transformations MUST be the same coordinate system, referenced by the `name` field.
-  - The `output` MUST be another coordinate system defined under `multiscales > coordinateSystems`, referenced by the `name` field, or another coordinate system in a child [labels](#labels-md) group referenced by both `name` and `path`.
-- **Inside `scene > coordinateTransformations`**: Transformations between two or more images
-  MUST be stored in the attributes of a [`scene` object](#scene-md) in a [scene Zarr group](#scene-format).
-  In this case, the `input` and `output` values are objects
-  that refer to coordinate systems in the same zarr.json or in the metadata of multiscale image subgroups.
+  - One of `input` or `output` MUST reference the "intrinsic" coordinate system by `name` (`path` MAY be omitted or null).
+  - The other MUST reference a named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or in a child [labels](#labels-md) group (by `name` and `path`).
+  - When referencing a child labels group, the transformation MUST be [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
+
+- **Inside `scene > coordinateTransformations`**: Transformations between two or more multiscales.
+  - Both `input` and `output` MUST specify a coordinate system `name`.
+  - `path` is required when referencing a coordinate system in a multiscale image subgroup;
+    it MAY be omitted or null when referencing a coordinate system defined in the scene's own `coordinateSystems`.
+  
 
 In any context, the values given for `name` and `path` provide an unambiguous reference to a named coordinate system.
 If the `path` field is null or omitted, this is to be interpreted as referring to a named coordinate system in the same `zarr.json` file.
@@ -507,13 +486,6 @@ If the `path` field is null or omitted, this is to be interpreted as referring t
 This separation of transformations (inside `multiscales > datasets`, under `multiscales > coordinateTransformations` and under `scene > coordinateTransformations`) provides flexibility for different use cases while still maintaining a level of rigidity for implementations.
 
 #### Additional details
-
-**Omitting `input`/`output`**: Coordinate transformations MUST specify their input and output coordinate systems
-using the `input` and `output` fields.
-These fields MUST correspond to the name of a coordinate system or the path to a multiscales group.
-Exceptions are if the coordinate transformation is wrapped in another transformation,
-e.g. as part of a `sequence`, `byDimension` or `bijection`.
-In these cases, the `input` and `output` fields MAY be omitted or null.
 
 **Graph connectedness**: The coordinate systems defined in the [multiscales metadata](#multiscales-md)
 and the [`scene` metadata](#scene-md) combined with the coordinate transformations form a transformations graph.
@@ -1394,13 +1366,12 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
 : If applications require additional transformations,
   each `multiscales` object MAY contain the field `coordinateTransformations`,
   describing transformations that are applied to all resolution levels in the same manner.
-  The values of both `input` and `output` fields MUST be an object with fields `name` and `path` that satisfy:
-  - The value of `input` MUST be the "intrinsic" coordinate system, referenced by `name`.
-    The `path` field of `input` SHOULD be omitted.
-  - The value of `output` can be a coordinate System in the same multiscales group (referenced by `name`).
-    In this case, the `path` field of `output` SHOULD be omitted.
-  - The value of `output` can be a coordinate system in a multiscales group in a child [labels](#labels-md) group (referenced by `path` and `name`).
-    In this case, the used transformation MUST be one of [`identity`](#identity-md), ['scale'](#scale-md) or ['translation'](#translation-md) transformations.
+  The following constraints apply:
+  - One of `input` or `output` MUST reference the "intrinsic" coordinate system by `name` (`path` MAY be omitted or null).
+  - The other of `input` or `output` MUST reference either:
+    - A named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or
+    - A named coordinate system in a child [labels](#labels-md) group (by `name` and `path`).
+  - When referencing a coordinate system in a child labels group, the transformation MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
 
 :::{dropdown} Example: Additional coordinate transformation
 
