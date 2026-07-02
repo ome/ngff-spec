@@ -1,0 +1,138 @@
+{
+  "ome": {
+    "version": "0.6.dev4",
+    "multiscales": [
+      {
+        "name": "multiscales",
+        "coordinateSystems": [
+          {
+            "name": "world",
+            "axes": [
+              {
+                "type": "channel",
+                "name": "c",
+                "discrete": true
+              },
+              {
+                "type": "space",
+                "name": "z",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
+                "name": "y",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
+                "name": "x",
+                "unit": "micrometer",
+                "discrete": false
+              }
+            ]
+          },
+          {
+            "name": "physical",
+            "axes": [
+              {
+                "type": "space",
+                "name": "y",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
+                "name": "x",
+                "unit": "micrometer",
+                "discrete": false
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "s0",
+            "coordinateTransformations": [
+              {
+                "type": "sequence",
+                "output": {"name": "physical"},
+                "input": {"path": "s0"},
+                "name": "scale0_to_physical",
+                "transformations": [
+                  {
+                    "type": "scale",
+                    "scale": [1, 1]
+                  },
+                  {
+                    "type": "translation",
+                    "translation": [0, 0]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "path": "s1",
+            "coordinateTransformations": [
+              {
+                "type": "sequence",
+                "output": {"name": "physical"},
+                "input": {"path": "s1"},
+                "name": "scale1_to_physical",
+                "transformations": [
+                  {
+                    "type": "scale",
+                    "scale": [2, 2]
+                  },
+                  {
+                    "type": "translation",
+                    "translation": [0.7071, 0.7071]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "path": "s2",
+            "coordinateTransformations": [
+              {
+                "type": "sequence",
+                "output": {"name": "physical"},
+                "input": {"path": "s2"},
+                "name": "scale2_to_physical",
+                "transformations": [
+                  {
+                    "type": "scale",
+                    "scale": [4, 4]
+                  },
+                  {
+                    "type": "translation",
+                    "translation": [2.1213, 2.1213]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "type": "projectAxis",
+            "name": "physical-to-world",
+            "input": {"name": "physical"},
+            "output": {"name": "world"},
+            "createdOutputs": [3, 3]
+          }
+        ]
+      }
+    ]
+  },
+    "_conformance": {
+      "schema": {
+      "id": "schemas/image.schema"
+      },
+      "description": "Tests for a JSON document with a projectAxis transformation",
+      "valid": false
+  }
+}

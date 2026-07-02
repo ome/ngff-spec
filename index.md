@@ -420,6 +420,7 @@ The following transformations are supported:
 |------|--------|-------------|
 | [`identity`](#identity-md) | | The identity transformation is the do-nothing transformation and is typically not explicitly defined. |
 | [`mapAxis`](#mapaxis-md) | `"mapAxis":List[number]` | an axis permutation as a transpose array of integer indices that refer to the ordering of the axes in the respective coordinate system. |
+| [`projectAxis`](#projectAxis-md) | `"droppedInputs":List[number]`<br>`"createdOutputs":List[number]` | Map coordinates from an input coordinate system to an output coordinate system with a different dimensionality. |
 | [`translation`](#translation-md) | <br>`"translation":List[number]` | Translation vector, stored either as an array of numbers (`"translation"`) or as a Zarr array at a location in this container (`path`). |
 | [`scale`](#scale-md) | <br>`"scale":List[number]` | Scale vector, stored either as an array of numbers (`scale`) or as a Zarr array at a location in this container (`path`). |
 | [`affine`](#affine-md) | one of:<br>`"affine":List[List[number]]`,<br>`"path":str` | 2D affine transformation matrix stored either with JSON (`affine`) or as a Zarr array at a location in this container (`path`). |
@@ -750,6 +751,65 @@ y = i
 ```
 
 :::
+
+##### projectAxis
+(projectAxis-md)=
+
+`projectAxis` transformations project input coordinates from `N` dimensions to `M` dimensions
+by adding or dropping dimensions at specified indices of the coordinate vector.
+
+**createdOutputs**
+: JSON array of integers that indicate the index of the output coordinate vector at which new dimensions are added.
+  The value added to the coordinate vector defaults to zero.
+  The values in the `createdOutputs` array MUST be unique.
+
+**droppedInputs**
+: JSON array of integers that indicate the index of the input coordinate vector at which dimensions are dropped.
+  The values in the `droppedInputs` array MUST be unique.
+
+:::{dropdown} Example: Adding multiple dimensions
+
+In this example, the output coordinate system `out` contains two more axes (`c` and `z`)
+than the input coordinate system `in`.
+This is reflected by the following `projectAxis` transformation:
+
+```{literalinclude} examples/transformations/projectAxis.json
+:language: json
+```
+
+defines the function
+```
+c = 0
+z = 0
+y = i
+x = j
+```
+:::
+
+:::{dropdown} Example: Adding and dropping dimensions
+In this example, the output coordinate system `out` contains one axes more (`z`) and one axis less (`c`)
+than the input coordinate system `in`.
+This is reflected by the following `projectAxis` transformation:
+
+```{literalinclude} examples/transformations/projectAxis2.json
+:language: json
+```
+which defines the function
+
+```
+z = 0
+y = i
+x = j
+```
+:::
+
+```{hint}
+`projectAxis` transformations are not invertible in general if a dimension is dropped.
+If, however, the dropped dimension is of `"discrete": "true"` type,
+the transformation MAY be applied along the dropped dimension by iterating over all possible values of the dropped dimension.
+This is useful for example when projecting a 3D CYX image to a 2D YX image by dropping the channel-axis.
+```
+
 
 ##### translation
 (translation-md)=
