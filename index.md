@@ -4,8 +4,8 @@ short_title: OME-Zarr
 authors: " "
 ---
 
-# 🚧 Dev: 0.6.dev4 🚧
-(ngff-spec:spec:0.6.dev4)=
+# Version 0.6rc0
+(ngff-spec:spec:0.6rc0)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
@@ -18,9 +18,8 @@ authors: " "
 ## Abstract
 
 ```{warning}
-This is **not** the released version of the ngff-specification.
-It is a work-in-progress document.
-Upon release, this warning will be removed and the version number in the document updated.
+This is the release candidate for version 0.6rc0 of the ngff-specification.
+Upon release of 0.6, this warning will be removed and the version number in the document updated.
 
 ```
 
@@ -29,7 +28,7 @@ All specifications are submitted to the <https://image.sc> community for review.
 
 ## Status of This Document
 
-The working title version of this specification is 0.6.dev4.
+The working title version of this specification is 0.6rc0.
 Migration scripts will be provided between numbered versions.
 Data written with these latest changes (an "editor's draft") will not necessarily be supported.
 
@@ -189,14 +188,14 @@ The OME-Zarr Metadata is stored in the various `zarr.json` files throughout the 
 The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 
 The group `attributes` MUST contain a key `ome`. The value of the `ome` key MUST be a JSON
-object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](#ngff-spec:spec:0.6.dev4).
+object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](#ngff-spec:spec:0.6rc0).
 
 ```jsonc
 {
   // ...
   "attributes": {
     "ome": {
-      "version": "0.6.dev4",
+      "version": "0.6rc0",
       // ...
     }
   }
@@ -1574,7 +1573,7 @@ The `zarr.json` under the `labels` group contains a JSON object with the key `la
 {
   "attributes": {
     "ome": {
-      "version": "0.6.dev4",
+      "version": "0.6rc0",
       "labels": [
         "cell_segmentation"
       ]

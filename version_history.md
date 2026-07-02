@@ -8,18 +8,31 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## 0.6 - 2026-06-24
-
-### Changed
-- Displacements and coordinate transformations are now required
-to store the vector field as a normal multiscale group with the same metadata as other multiscales. Decided at EMBL Hackathon 06/2026 by RFC5 developers.
-- Additional requirements for displacement or coordinate axis `"type"` and `discrete` fields (now required).
-- Changed the `input_axes` and `output_axes` fields in the `byDimension` transform to camelCase (`inputAxes` and `outputAxes`)
+## 0.6rc0 - 2026-07-01
 
 ### Added
 
+- [RFC5](https://ngff.openmicroscopy.org/rfc/5/index.html) adopted: Transformations, coordinate systems and `scene` metadata.
 - Added `projectAxis` transform to add or drop dimensions at specified indices of the coordinate vector.
 - Added suggestion on which coordinate system to use for display in the spec document.
+- New `projectAxis` transformation to add or drop dimensions explicitly.
+
+### Changed
+- BREAKING CHANGE: Unified `input` and `output` fields in all transformation metadata to be an object of `{"name": string, "path": string}` instead of allowing both string and object forms.
+  This change was made to ensure consistency across all transformations and to simplify the specification.
+- BREAKING CHANGE: Replaced `arrayCoordinateSystems` with explanation of how to properly express dimensionless transforms.
+- BREAKING CHANGE: `input_axes` and `output_axes` in `byDimension` transformations are now written in camelCase
+  (`inputAxes` and `outputAxes`) to be consistent with other transformations.
+- Displacements and coordinate transformations are now required to store the vector field
+  as a normal multiscale group with the same metadata as other multiscales.
+  Decided at EMBL Hackathon 06/2026 by RFC5 developers.
+- Additional requirements for displacement or coordinate axis `"type"` and `discrete` fields (now required).
+- General wording improvements in the spec document for clarity and consistency.
+
+### Removed
+
+- Removed `version` field from `multiscales` metadata in the image schema (`schemas/image.schema`) since it is already required at `ome > version`
+- Removed `version` field from `plate`, `well` and `labels` metadata in the spec document since it is already required at `ome > version`.
 
 ## [0.6.dev4] - 2026-04-22
 

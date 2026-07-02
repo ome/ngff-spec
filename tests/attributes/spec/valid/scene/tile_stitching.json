@@ -1,6 +1,6 @@
 {
     "ome": {
-        "version": "0.6.dev4",
+        "version": "0.6rc0",
         "scene":{
             "coordinateTransformations": [
             {
