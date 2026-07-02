@@ -18,6 +18,7 @@ to store the vector field as a normal multiscale group with the same metadata as
 
 ### Added
 
+- Added `projectAxis` transform to add or drop dimensions at specified indices of the coordinate vector.
 - Added suggestion on which coordinate system to use for display in the spec document.
 
 ## [0.6.dev4] - 2026-04-22
