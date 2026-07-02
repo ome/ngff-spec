@@ -431,7 +431,7 @@ The following transformations are supported:
 | [`displacements`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Displacement field transformation located at `path`. |
 | [`coordinates`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Coordinate field transformation located at `path`. |
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
-| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"input_axes": List[number]`, <br> and `"output_axes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
+| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 Implementations SHOULD prefer to store transformations as a sequence of less expressive transformations where possible
 (e.g., sequence[translation, rotation], instead of affine transformation with translation/rotation).
@@ -518,9 +518,10 @@ In these cases, the `input` and `output` fields MAY be omitted or null.
 **Graph connectedness**: The coordinate systems defined in the [multiscales metadata](#multiscales-md)
 and the [`scene` metadata](#scene-md) combined with the coordinate transformations form a transformations graph.
 In this graph, coordinate systems represent nodes and coordinate transformations represent edges.
-The graph MUST be fully connected in the sense that any two coordinate systems in the metadata
-MUST be connected by a sequence of edges represented by coordinate transformations.
-Coordinate systems that are connected by a non-invertible transformation count as connected in this sense, even though graph traversal may not be closed-form computable in every direction.
+The graph MUST be connected (but need not be complete):
+any two coordinate systems in the metadata MUST be linked by a path of one or more coordinate transformations
+(i.e. a single transformation, or a chain through intermediate coordinate systems).
+Non-invertible transformations count as connected even if traversal is not computable in both directions.
 
 Coordinate transformations are functions of *points* in the input space to *points* in the output space.
 We call this the "forward" direction.
@@ -531,7 +532,7 @@ The indexes of axis dimensions correspond to indexes into transformation paramet
 **Image rendering**: When rendering transformed images and interpolating,
 implementations may need the "inverse" transformation - from the fixed
 image's to the source image's coordinate system. This transformation may
-not explicitly exist, but might be the require computing the inverse
+not explicitly exist, but might require computing the inverse
 (in closed form) of an explicitly specified forward transformation.
 
 Inverse transformations used for image rendering may be specified
@@ -1209,14 +1210,14 @@ using lower dimensional transformations on subsets of dimensions.
 
 **transformations**
 : MUST be an array of objects where each object MUST contain
-  the fields `input_axes`, `output_axes` and `transformation`.
-  The values of `input_axes` and `output_axes` are arrays of integers.
+  the fields `inputAxes`, `outputAxes` and `transformation`.
+  The values of `inputAxes` and `outputAxes` are arrays of integers.
   The integer values in these arrays correspond to the axis indices in the `byDimension`'s or its parent's
   `input` and `output` coordinate systems, respectively.
   The value of `transformation` is a valid transformation object.
   Every axis index in the parent byDimension's `output` coordinate system
-  MUST appear in exactly one child transformation's `output_axes` array.
-  The `input_axes` and `output_axes` arrays of each item
+  MUST appear in exactly one child transformation's `outputAxes` array.
+  The `inputAxes` and `outputAxes` arrays of each item
   MUST have the same length as that transformation's parameter arrays.
 
 :::{dropdown} Example 1
@@ -1245,7 +1246,7 @@ This is an **invalid** `byDimension` transform:
 :language: json
 ```
 
-It is invalid because the `output_axes` arrays of both transformations refer to the index of an axis that doesn't exist.
+It is invalid because the `outputAxes` arrays of both transformations refer to the index of an axis that doesn't exist.
 The coordinate system has two axes (indices `0` and `1`), but the transformations refers to index `2`.
 
 :::
@@ -1258,7 +1259,7 @@ Another **invalid** `byDimension` transform:
 :language: json
 ```
 
-This transformation is invalid because the output axis `x` appears in more than one transformation in the `transformations` array.
+This transformation is invalid because the output axis `[1]` appears in more than one transformation in the `transformations` array.
 :::
 
 ##### bijection
