@@ -572,7 +572,7 @@ indicating that choice explicitly will be important for interoperability.
 This can be expressed in the metadata in multiple ways, including:
 - One can embed a transformation defined in array units into a `sequence` transformation
   that includes the appropriate scale transformation and its inverse to convert to physical units (see example below).
-- One can define a unitless coordinate system and connect it to the "intrinsic" coordinate system
+- One can define a unitless coordinate system and connect it to the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system
   with a scale transformation that has the appropriate scale factors to convert to physical units.
 
 :::{dropdown} Example: Embedded expression
@@ -615,7 +615,7 @@ and finally the second `scale` transformation converts the coordinates back to p
 
 :::{dropdown} Example: Unitless coordinate system
 
-Alternatively, users may choose to define a unitless coordinate system and connect it to the "intrinsic" coordinate system
+Alternatively, users may choose to define a unitless coordinate system and connect it to the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system
 with a scale transformation that has the appropriate scale factors to convert to physical units.
 In the context of multiscales metadata, this could look like this:
 
@@ -665,7 +665,7 @@ In the context of multiscales metadata, this could look like this:
 }
 ```
 In this case, the `scale` transformation under `coordinateTransformations`
-defines the mapping from the "intrinsic" coordinate system to the unitless "array" coordinate system.
+defines the mapping from the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system to the unitless "array" coordinate system.
 Another transformation (e.g. in a `scene`) could then use the "array" coordinate system as an input or output to define transformations in array units.
 :::
 
@@ -1524,7 +1524,7 @@ The `zarr.json` under the `labels` group contains a JSON object with the key `la
 ```
 
 In the `zarr.json` under the `cell_segmentation` multiscales image group,
-a coordinate system named `"physical"` serves as the "intrinsic" coordinate system for the label image.
+a coordinate system named `"physical"` serves as the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system for the label image.
 The `image-label` field contains information about the source image and display colors for the label image,
 i.e., a label image in which 0s and 1s represent intercellular and cellular space, respectively:
 
