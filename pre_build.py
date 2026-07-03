@@ -178,7 +178,7 @@ def render_authors_md():
     # The invertocat icon was downloaded from https://brand.github.com/foundations/logo
     # and colored in grey according to the guidelines under the "Color" section.
     orcid_icon = "https://orcid.org/assets/vectors/orcid.logo.icon.svg"
-
+    github_icon = "https://github.githubassets.com/favicons/favicon.svg"
     for idx, author in enumerate(authors):
         name = author['name']
 
