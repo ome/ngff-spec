@@ -186,7 +186,7 @@ def render_authors_md():
             name += f" [<img src=\"{orcid_icon}\" alt=\"ORCID iD\" height=12 width=12 style=\"vertical-align: middle;\"/>](https://orcid.org/{author['orcid']})"
 
         if "github" in author:
-            name += f" [<img src=icons/invertocat.svg alt=\"GitHub\" height=12 width=12 style=\"vertical-align: middle;\"/>](https://github.com/{author['github']})"
+            name += f" [<img src=\"{github_icon}\" alt=\"GitHub\" height=12 width=12 style=\"vertical-align: middle;\"/>](https://github.com/{author['github']})"
 
 
         if idx == len(authors) - 1:
