@@ -298,9 +298,8 @@ The following conventions apply in this specification:
   the discrete coordinate system for that array defines the following array of points:
   ```
   [
-    [(0, 0), (0, 1)],
-    [(1, 0), (1, 1)],
-    [(2, 0), (3, 1)],
+    [(0, 0), (0, 1), (0, 2)],
+    [(1, 0), (1, 1), (1, 2)],
   ]
   ```
 - A "pixel"/"voxel" is the continuous region (rectangle/box) that corresponds to a single sample in the discrete array,
