@@ -804,7 +804,7 @@ x = j
 
 ```{hint}
 `projectAxis` transformations are not invertible in general if a dimension is dropped.
-If, however, the dropped dimension is of `"discrete": "true"` type,
+If, however, the dropped dimension is of `"discrete": true` type,
 the transformation MAY be applied along the dropped dimension by iterating over all possible values of the dropped dimension.
 This is useful for example when projecting a 3D CYX image to a 2D YX image by dropping the channel-axis.
 ```
