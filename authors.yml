@@ -137,6 +137,9 @@ project:
       orcid: 0000-0002-5444-5246
     - name: Xiao Gui
       github: xgui3783
+    - name: Kabilar Gunalan
+      github: kabilar
+      orcid: 0000-0001-6964-4865
 
     # H
     - name: Yaroslav O. Halchenko
