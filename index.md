@@ -1085,7 +1085,7 @@ Metadata for these coordinate transforms have the following fields:
     The interpolation methods listed in this specification document refer to the methods described in {cite:t}`thevenaz2000image` and are not exhaustive.
     - `nearest` for nearest neighbor interpolation (see {cite:t}`thevenaz2000image`, section 8.1),
     - `linear` for linear interpolation (default, see {cite:t}`thevenaz2000image`, section 8.2),
-    - `bspline-cubic` for cubic interpolation (see {cite:t}`thevenaz2000image`, section 8.3 on "cubic B-splines).
+    - `bspline-cubic` for cubic interpolation (see {cite:t}`thevenaz2000image`, section 8.3 on "cubic B-splines").
 
     Consumers SHOULD clearly communicate to users if a different interpolation method is used.
 
