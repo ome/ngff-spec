@@ -46,7 +46,7 @@ are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc
 Implementations may be expected (MUST) or encouraged (SHOULD) to support the reading of the data,
 but writing will usually be optional (MAY).
 Examples of transitional metadata include custom additions by implementations that are later submitted as a formal specification.
-(See [bioformats2raw](bf2raw))
+(See [bioformats2raw](#bf2raw-md))
 </p>
 
 Some of the JSON examples in this document include comments.
