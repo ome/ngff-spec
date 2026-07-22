@@ -1440,9 +1440,7 @@ can be found under the `omero` key in the group-level metadata (i.e., under `"om
 "channels": [                         // Array matching the c dimension size
     {
         "active": true,
-        "coefficient": 1,
         "color": "0000FF",
-        "family": "linear",
         "inverted": false,
         "label": "LaminB1",
         "window": {
@@ -1471,8 +1469,6 @@ Each object in `channels` is optional and MAY contain the following fields:
 - `color` (string) String of 6 hexadecimal digits specifying the color of the channel in RGB format.
 - `label` (string) Channel name.
 - `active` (boolean) Indicates whether the channel should be displayed.
-- `coefficient`: (float) Value to multiply the pixel values of the channel by when rendering.
-- `family`: (string) Used transfer function family for rendering the channel, e.g. "linear", "log", "gamma".
 - `window` (dictionary) Values describing the windowing of the channel.
   If provided, `start` and `end` values MUST be specified.
   All values can be floating-point numbers, but will likely be integers for integer pixel types.

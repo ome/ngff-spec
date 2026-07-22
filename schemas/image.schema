@@ -244,12 +244,6 @@
               "label": {
                 "type": "string"
               },
-              "coefficient": {
-                "type": "number"
-              },
-              "family": {
-                "type": "string"
-              },
               "color": {
                 "type": "string"
               },
