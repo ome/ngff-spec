@@ -1,6 +1,6 @@
 {
 	"ome": {
-		"version": "0.6.dev3",
+		"version": "0.6rc0",
 		"multiscales": [
 			{
 				"name": "multiscales",
@@ -58,8 +58,8 @@
 						"coordinateTransformations": [
 							{
 								"type": "sequence",
-								"input": "array",
-								"output": "physical",
+								"input": {"path": "array"},
+								"output": {"name": "physical"},
 								"transformations": [
 									{
 										"type": "scale",
@@ -82,8 +82,8 @@
 				"coordinateTransformations": [
 					{
 						"type": "sequence",
-						"input": "physical",
-						"output": "output",
+						"input": {"name": "physical"},
+						"output": {"name": "output"},
 						"transformations": [
 							{
 								"type": "rotation",
@@ -121,16 +121,16 @@
 											"type": "scale",
 											"scale": [2]
 										},
-										"output_axes": [0],
-										"input_axes": [0]
+										"outputAxes": [0],
+										"inputAxes": [0]
 									},
 									{
 										"transformation": {
 											"type": "translation",
 											"translation": [-10]
 										},
-										"output_axes": [1],
-										"input_axes": [1]
+										"outputAxes": [1],
+										"inputAxes": [1]
 									}
 								],
 								"name": "transform-name"

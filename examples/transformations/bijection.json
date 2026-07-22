@@ -1,7 +1,13 @@
 {
   "coordinateSystems" : [
-    { "name": "src", "axes": [{"name": "j"}, {"name": "i"}] },
-    { "name": "tgt", "axes": [{"name": "y"}, {"name": "x"}] }
+    {
+      "name": "src",
+      "axes": [{"name": "j", "type": "space"}, {"name": "i", "type": "space"}]
+    },
+    {
+      "name": "tgt",
+      "axes": [{"name": "y", "type": "space"}, {"name": "x", "type": "space"}]
+    }
   ],
   "coordinateTransformations" : [ 
     {
@@ -14,8 +20,8 @@
         "type" : "coordinates",
         "path" : "inverse_coordinates"
       },
-      "input": "src",
-      "output": "tgt"
+      "input": {"name": "src"},
+      "output": {"name": "tgt"}
     }
   ]
 }

@@ -42,13 +42,6 @@ This should look like this, for example:
       id: jdoe
       orcid: xxxx-xxxx-xxxx-xxxx
       github: jdoe
-      affiliations:
-        - id: key
-          institution: ICSLDJ University
-          city: Doeburg
-          ror: https://ror.org/....
-    - name: Jane Doe
-      affiliations: key
 ```
 
 For more information see [myst documentation on author formatting](https://mystmd.org/guide/frontmatter#frontmatter-authors).

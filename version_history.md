@@ -8,13 +8,41 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## 0.6rc0 - 2026-07-01
+
+### Added
+
+- [RFC5](https://ngff.openmicroscopy.org/rfc/5/index.html) adopted: Transformations, coordinate systems and `scene` metadata.
+- Added `projectAxis` transform to add or drop dimensions at specified indices of the coordinate vector.
+- Added suggestion on which coordinate system to use for display in the spec document.
+- New `projectAxis` transformation to add or drop dimensions explicitly.
+
+### Changed
+- BREAKING CHANGE: Unified `input` and `output` fields in all transformation metadata to be an object of `{"name": string, "path": string}` instead of allowing both string and object forms.
+  This change was made to ensure consistency across all transformations and to simplify the specification.
+- BREAKING CHANGE: Replaced `arrayCoordinateSystems` with explanation of how to properly express dimensionless transforms.
+- BREAKING CHANGE: `input_axes` and `output_axes` in `byDimension` transformations are now written in camelCase
+  (`inputAxes` and `outputAxes`) to be consistent with other transformations.
+- Displacements and coordinate transformations are now required to store the vector field
+  as a normal multiscale group with the same metadata as other multiscales.
+  Decided at EMBL Hackathon 06/2026 by RFC5 developers.
+- Additional requirements for displacement or coordinate axis `"type"` and `discrete` fields (now required).
+- General wording improvements in the spec document for clarity and consistency.
+
+### Removed
+
+- Removed `version` field from `multiscales` metadata in the image schema (`schemas/image.schema`) since it is already required at `ome > version`
+- Removed `version` field from `plate`, `well` and `labels` metadata in the spec document since it is already required at `ome > version`.
+
+## [0.6.dev4] - 2026-04-22
 
 ### Changed
 
-- Changed the constraints for valid `path` values in `wells` for HCS plates to allow some non-alphanumeric characters.
+- BREAKING CHANGE: Unified `input` and `output` fields in all transformation metadata to be an object of `{"name": string, "path": string}` instead of allowing both string and object forms. This change was made to ensure consistency across all transformations and to simplify the specification.
+- BREAKING CHANGE: Replaced `arrayCoordinateSystems` with explanation of how to properly express dimensionless transforms.
+- style: Improved readability of multiscales section and `coordinates`/`displacements` transformations.
 
-## [0.6.dev3] - 2025-01-27
+## [0.6.dev3] - 2026-03-13
 
 ### Changed
 
@@ -26,7 +54,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - For detailed set of changes see [complete overview](https://ngff.openmicroscopy.org/rfc/5/responses/2/index.html)
 - Updated version keys from `0.6.dev2` to `0.6.dev3` everywhere
 - style: Homogeneous use of backticks in spec document
-- spec: Released requirements for `omero` metadata in the spec document and in schemas.
+- specification: Changed the constraints for valid `path` values in `wells` for HCS plates to allow some non-alphanumeric characters.
+- specification: Corrected that `version` field is not required under plate/well/labels metadata. 
+- specification: Constrained datatype of multiscales datasets to be the same across all resolutions
+- specification: Clarified that `name` field in `axes` metadata is required to be a non-empty string.
+- style: Adopted JSON terminology for "object" and "array" in the spec document.
 
 ### Removed
 
@@ -62,13 +94,8 @@ Initial proposal for RFC-5: Transforms. [See proposal text](https://ngff.openmic
 
 ### Changed
 
-- use Zarr v3 in OME-Zarr, see [RFC-2](https://ngff.openmicroscopy.org/rfc/2).
-
-## [0.4.1] - 2023-02-09
-
-### Changed
-
-- expand on "labels" description
+- Use Zarr v3 in OME-Zarr, see [RFC-2](https://ngff.openmicroscopy.org/rfc/2).
+- Expand on "labels" description and clarify only integer data types are supported
 
 ## [0.4.1] - 2022-09-26
 

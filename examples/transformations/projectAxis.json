@@ -1,0 +1,15 @@
+{
+  "coordinateSystems": [
+    { "name": "in", "axes": [ {"name": "i"}, {"name": "j"} ]},
+    { "name": "out", "axes": [ {"name": "c"}, {"name": "z"}, {"name": "y"}, {"name": "x"} ]}
+  ],
+  "coordinateTransformations": [ 
+    { 
+      "name": "up-project",
+      "type": "projectAxis", 
+      "createdOutputs": [0, 1],
+      "input": {"name": "in"},
+      "output": {"name": "out"} 
+    }
+  ]
+}

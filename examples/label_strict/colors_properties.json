@@ -3,7 +3,34 @@
   "node_type": "group",
   "attributes": {
     "ome": {
-      "version": "0.6.dev3",
+      "version": "0.6rc0",
+      "multiscales": [
+        {
+          "coordinateSystems": [
+            {
+              "name": "physical",
+              "axes": [
+                {"name": "z", "type": "space", "unit": "micrometer"},
+                {"name": "y", "type": "space", "unit": "micrometer"},
+                {"name": "x", "type": "space", "unit": "micrometer"}
+              ]
+            }
+          ],
+          "datasets": [
+            {
+              "path": "s0",
+              "coordinateTransformations": [
+                {
+                  "type": "scale",
+                  "scale": [0.5, 0.5, 1],
+                  "input": {"path": "s0"},
+                  "output": {"name": "physical"}
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "image-label": {
         "colors": [
           {

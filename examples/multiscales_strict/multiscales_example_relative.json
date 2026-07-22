@@ -1,18 +1,18 @@
 {
   "multiscales": [
     {
-      "version": "0.6.dev3",
+      "version": "0.6rc0",
       "name": "example",
       "coordinateSystems" : [
         {
           "name" : "world",
-          "axes": {
-            "t": {"type": "time", "unit": "millisecond"},
-            "c": {"type": "channel"},
-            "z": {"type": "space", "unit": "micrometer"},
-            "y": {"type": "space", "unit": "micrometer"},
-            "x": {"type": "space", "unit": "micrometer"}
-          }
+          "axes": [
+            {"name": "t", "type": "time", "unit": "millisecond"},
+            {"name": "c", "type": "channel"},
+            {"name": "z", "type": "space", "unit": "micrometer"},
+            {"name": "y", "type": "space", "unit": "micrometer"},
+            {"name": "x", "type": "space", "unit": "micrometer"}
+          ]
         },
         {
           "name" : "intrinsic",
@@ -33,28 +33,48 @@
           "coordinateTransformations": [{
             "type": "scale",
             "scale": [1, 1, 1, 1, 1],
-            "input": "s0",
-            "output": "intrinsic"
+            "input": {"path": "s0"},
+            "output": {"name": "intrinsic"}
           }]
         },
         {
           "path": "s1",
-          "coordinateTransformations": [{
-            // the second scale level (downscaled by a factor of 2 relative to "s0" in zyx)
-            "type": "scale",
-            "scale": [1, 1, 2, 2, 2],
-            "input" : "s1",
-            "output" : "intrinsic"
-          }]
+          "coordinateTransformations": [
+             {
+              // the second scale level (downscaled by a factor of 2 relative to "s0" in zyx)
+              "type": "sequence",
+              "input" : {"path": "s1"},
+              "output" : {"name": "intrinsic"},
+              "transformations": [
+                {
+                  "type": "scale",
+                  "scale": [1, 1, 2, 2, 2]
+                },
+                {
+                  "type": "translation",
+                  "translation": [0, 0, 0.5, 0.5, 0.5]
+                }
+              ]
+            }
+          ]
         },
         {
           "path": "s2",
           "coordinateTransformations": [{
             // the third scale level (downscaled by a factor of 4 relative to "s0" in zyx)
-            "type": "scale",
-            "scale": [1, 1, 4, 4, 4],
-            "input" : "s2",
-            "output" : "intrinsic"
+            "type": "sequence",
+            "input" : {"path": "s2"},
+            "output" : {"name": "intrinsic"},
+            "transformations": [
+              {
+                "type": "scale",
+                "scale": [1, 1, 4, 4, 4]
+              },
+              {
+                "type": "translation",
+                "translation": [0, 0, 1.5, 1.5, 1.5]
+              }
+             ]
           }]
         }
       ],
@@ -63,8 +83,8 @@
           "name": "additional_translation",
           "type": "translation",
           "translation": [0, 0, 10, 20, 30],
-          "input": "intrinsic",
-          "output": "world"
+          "input": {"name": "intrinsic"},
+          "output": {"name": "world"}
         }
       ]
     }
