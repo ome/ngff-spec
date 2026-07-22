@@ -1458,9 +1458,6 @@ can be found under the `omero` key in the group-level metadata (i.e., under `"om
 }
 ```
 
-See the [OMERO WebGateway documentation](https://omero.readthedocs.io/en/stable/developers/Web/WebGateway.html#imgdata)
-for more information.
-
 The `omero` metadata is optional, but if present it MUST contain the field `channels`,
 which is an array of objects describing the channels of the image.
 The `channels` array length SHOULD correspond to the size of the respective channels axis, if present.
