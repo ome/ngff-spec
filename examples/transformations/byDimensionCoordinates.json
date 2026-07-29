@@ -11,21 +11,25 @@
   ],
   "coordinateTransformations" : [
     {
-      "type" : "sequence",
+      "type" : "byDimension",
       "input" : {"name" : "in"},
       "output" : {"name" : "out"},
       "transformations" : [
         {
-            "type" : "coordinates",
-            "path" : "/coordinates",
-            "inputAxes" : ["i"],
-            "outputAxes" : ["x"]
+            "transformation" : {
+              "type" : "coordinates",
+              "path" : "/coordinates"
+            },
+            "inputAxes" : [0],
+            "outputAxes" : [0]
         },
         {
-            "type" : "scale",
-            "scale" : [2.0],
-            "inputAxes" : ["j"],
-            "outputAxes" : ["y"]
+            "transformation" : {
+              "type" : "scale",
+              "scale" : [2.0]
+            },
+            "inputAxes" : [1],
+            "outputAxes" : [1]
         }
       ]
     }
