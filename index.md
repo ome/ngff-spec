@@ -46,7 +46,7 @@ are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc
 Implementations may be expected (MUST) or encouraged (SHOULD) to support the reading of the data,
 but writing will usually be optional (MAY).
 Examples of transitional metadata include custom additions by implementations that are later submitted as a formal specification.
-(See [bioformats2raw](bf2raw))
+(See [bioformats2raw](#bf2raw-md))
 </p>
 
 Some of the JSON examples in this document include comments.
@@ -80,7 +80,7 @@ Note that the number of dimensions is variable between 2 and 5 and that axis nam
     │
     ├── s0                    # Each multiscale level is stored as a separate Zarr array,
     │   ...                   # which is a folder containing chunk files which compose the array.
-    ├── n                     # The name of the array is arbitrary with the ordering defined by
+    ├── n                     # The name of the array is arbitrary with the ordering defined
     │   │                     # by the "multiscales" metadata, but is often a sequence starting at 0.
     │   │                     # All arrays must have the same datatype and number of dimensions.
     │   │
@@ -205,7 +205,7 @@ object that MUST contain a `version` key, the value of which MUST be a string sp
 ### "coordinateSystems" metadata
 (coordinate-systems-md)=
 
-A coordinate system is a JSON object with a `name` field and a `axes` field.
+A coordinate system is a JSON object with a `name` field and an `axes` field.
 Every coordinate system:
 - MUST contain the field `name`.
   The value MUST be a non-empty string that is unique among all entries in a `coordinateSystems` array.
@@ -429,7 +429,7 @@ The following transformations are supported:
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
-The parameter values (e.g., `scale` for a [scale transformatiion](#scale-md)) MUST be compatible with input and output space dimensionality (see details). 
+The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details). 
 
 The `input` and `output` fields are objects structured as follows:
 
@@ -508,8 +508,8 @@ not explicitly exist, but might require computing the inverse
 
 Inverse transformations used for image rendering may be specified
 by specifying the inverse transform directly - with the `input` referring
-to the the fixed image's coordinate system and the `output` referring to
-the the source image's coordinate system.  If an operation is requested
+to the fixed image's coordinate system and the `output` referring to
+the source image's coordinate system.  If an operation is requested
 that requires the inverse of a transformation that can not be inverted in
 closed-form, implementations MAY estimate an inverse, or MAY output a warning
 that the requested operation is unsupported.
@@ -544,7 +544,7 @@ applying this transformation directly.
 }
 ```
 
-Implementations are not expected to be able to to render the moving image
+Implementations are not expected to be able to render the moving image
 into the fixed image given this transformation. They may attempt
 to do so by estimating the transformations' inverse if they choose to.
 
@@ -607,7 +607,7 @@ This can be achieved by embedding the transformation into a `sequence` transform
 
 This example assumes that the coordinate system named `"intrinsic"` in both referenced images is in physical units,
 and is linked to the lowest resolution level (e.g., `s0`) of the multiscale image with a `scale` transformation that has the scale factors `[0.5, 0.5]`.
-In this case, the the first `scale` transformation in this example converts the input coordinates from physical to dimensionless units.
+In this case, the first `scale` transformation in this example converts the input coordinates from physical to dimensionless units.
 The `translation` transformation is applied in dimensionless units,
 and finally the second `scale` transformation converts the coordinates back to physical units.
 :::
@@ -803,7 +803,7 @@ x = j
 
 ```{hint}
 `projectAxis` transformations are not invertible in general if a dimension is dropped.
-If, however, the dropped dimension is of `"discrete": "true"` type,
+If, however, the dropped dimension is of `"discrete": true` type,
 the transformation MAY be applied along the dropped dimension by iterating over all possible values of the dropped dimension.
 This is useful for example when projecting a 3D CYX image to a 2D YX image by dropping the channel-axis.
 ```
@@ -815,7 +815,7 @@ This is useful for example when projecting a 3D CYX image to a 2D YX image by dr
 `translation` transformations are special cases of affine transformations.
 When possible, a translation transformation should be preferred to its equivalent affine.
 Input and output dimensionality MUST be identical
-and MUST equal the the length of the `translation` array (N).
+and MUST equal the length of the `translation` array (N).
 `translation` transformations are invertible.
 
 **translation**
@@ -842,7 +842,7 @@ y = j - 1.42
 `scale` transformations are special cases of affine transformations.
 When possible, a scale transformation SHOULD be preferred to its equivalent affine.
 Input and output dimensionality MUST be identical
-and MUST equal the the length of the `scale` array (N).
+and MUST equal the length of the `scale` array (N).
 Values in the `scale` array SHOULD be non-zero;
 in that case, `scale` transformations are invertible.
 
@@ -1084,7 +1084,7 @@ Metadata for these coordinate transforms have the following fields:
     The interpolation methods listed in this specification document refer to the methods described in {cite:t}`thevenaz2000image` and are not exhaustive.
     - `nearest` for nearest neighbor interpolation (see {cite:t}`thevenaz2000image`, section 8.1),
     - `linear` for linear interpolation (default, see {cite:t}`thevenaz2000image`, section 8.2),
-    - `bspline-cubic` for cubic interpolation (see {cite:t}`thevenaz2000image`, section 8.3 on "cubic B-splines).
+    - `bspline-cubic` for cubic interpolation (see {cite:t}`thevenaz2000image`, section 8.3 on "cubic B-splines").
 
     Consumers SHOULD clearly communicate to users if a different interpolation method is used.
 
@@ -1359,7 +1359,7 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
   and the first resolution for the given axis,
   defaulting to 1.0 if there is no downsampling along the axis.
   This is strongly recommended
-  so that the the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system of the image avoids more complex transformations.
+  so that the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system of the image avoids more complex transformations.
 
 **`coordinateTransformations`**
 : If applications require additional transformations,

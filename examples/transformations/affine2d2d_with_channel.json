@@ -3,7 +3,7 @@
     {
       "name": "cji",
       "axes": [
-        {"name": "k", "discrete": true, "type": "space"},
+        {"name": "c", "discrete": true, "type": "channel"},
         {"name": "j", "discrete": false, "type": "space"},
         {"name": "i", "discrete": false, "type": "space"}
       ]
@@ -11,7 +11,7 @@
     {
       "name": "cyx",
       "axes": [
-        {"name": "c", "discrete": true, "type": "space"},
+        {"name": "c", "discrete": true, "type": "channel"},
         {"name": "y", "discrete": false, "type": "space"},
         {"name": "x", "discrete": false, "type": "space"}
       ]
