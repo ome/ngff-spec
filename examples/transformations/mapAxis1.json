@@ -13,20 +13,20 @@
       "axes": [ {"name": "y", "type": "space"}, {"name": "x", "type": "space"} ]
     }
   ],
-  "coordinateTransformations": [ 
-    { 
+  "coordinateTransformations": [
+    {
       "name": "equivalent to identity",
-      "type": "mapAxis", 
+      "type": "mapAxis",
       "mapAxis": [0, 1],
-      "input": "in",
-      "output": "out1" 
+      "input": {"name": "in"},
+      "output": {"name": "out1"}
     },
-    { 
+    {
       "name": "permutation",
-      "type": "mapAxis", 
+      "type": "mapAxis",
       "mapAxis": [1, 0],
       "input": {"name": "in"},
-      "output": {"name": "out2"} 
+      "output": {"name": "out2"}
     }
   ]
 }
