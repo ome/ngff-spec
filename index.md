@@ -429,7 +429,7 @@ The following transformations are supported:
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
-The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details). 
+The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details).
 
 The `input` and `output` fields are objects structured as follows:
 
@@ -471,7 +471,7 @@ Depending on which, different constraints apply to the transformations, as descr
   - Both `input` and `output` MUST specify a coordinate system `name`.
   - `path` is required when referencing a coordinate system in a multiscale image subgroup;
     it MAY be omitted or null when referencing a coordinate system defined in the scene's own `coordinateSystems`.
-  
+
 
 In any context, the values given for `name` and `path` provide an unambiguous reference to a named coordinate system.
 If the `path` field is null or omitted, this is to be interpreted as referring to a named coordinate system in the same `zarr.json` file.
@@ -1107,7 +1107,7 @@ An exact reproducibility of pixel values for images transformed and resampled by
 
 The multiscale group at `path` MUST satisfy:
   - **Dimensionality**: If the input coordinate system has `N` axes, the multiscale image at location `path` MUST have `N+1` dimensions.
-  - **Vector dimension length**: 
+  - **Vector dimension length**:
     - For `coordinates` transformations, the length of the array along the `coordinate` dimension (last axis) MUST equal `M`,
       the number of axes in the output coordinate system.
     - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
@@ -1407,7 +1407,7 @@ In this example, a multiscales group containing labels is located at `labels/lab
 :::{dropdown} Example: Complete multiscales metadata
 
 A complete example of json-file for a 5D (TCZYX) multiscales with 3 resolution levels could look like this:
-```{literalinclude} examples/multiscales_strict/multiscales_example.json
+```{literalinclude} examples/multiscales/multiscales_example.json
 :language: json
 ```
 :::
@@ -1566,7 +1566,7 @@ In the `zarr.json` under the image.zarr group, an explicit `identity` transform 
 the coordinate system named `"physical"` in the multiscales metadata of the original image is the same as
 the coordinate system named `"physical"` in the multiscales metadata of the label image:
 
-```{literalinclude} examples/multiscales_strict/multiscale_reference_to_label.json
+```{literalinclude} examples/multiscales/multiscale_reference_to_label.json
 :language: json
 ```
 
@@ -1590,7 +1590,7 @@ a coordinate system named `"physical"` serves as the "[intrinsic](#spec:hint:mul
 The `image-label` field contains information about the source image and display colors for the label image,
 i.e., a label image in which 0s and 1s represent intercellular and cellular space, respectively:
 
-```{literalinclude} examples/label_strict/colors_properties.json
+```{literalinclude} examples/label/colors_properties.json
 :language: json
 ```
 
@@ -1669,14 +1669,14 @@ The `rowIndex`, `columnIndex`, and `path` MUST all refer to the same row/column 
 For example the following JSON object defines a plate with two acquisitions and 6 wells (2 rows and 3 columns),
 containing up to 2 fields of view per acquisition.
 
-```{literalinclude} examples/plate_strict/plate_6wells.json
+```{literalinclude} examples/plate/plate_6wells.json
 :language: json
 ```
 
 The following JSON object defines a sparse plate with one acquisition and 2 wells in a 96 well plate,
 containing one field of view per acquisition.
 
-```{literalinclude} examples/plate_strict/plate_2wells.json
+```{literalinclude} examples/plate/plate_2wells.json
 :language: json
 ```
 :::
@@ -1705,14 +1705,14 @@ For example the following JSON object defines a well with four fields of view.
 The first two fields of view were part of the first acquisition
 while the last two fields of view were part of the second acquisition.
 
-```{literalinclude} examples/well_strict/well_4fields.json
+```{literalinclude} examples/well/well_4fields.json
 :language: json
 ```
 
 The following JSON object defines a well with two fields of view in a plate with four acquisitions.
 The first field is part of the first acquisition, and the second field is part of the last acquisition.
 
-```{literalinclude} examples/well_strict/well_2fields.json
+```{literalinclude} examples/well/well_2fields.json
 :language: json
 ```
 :::
@@ -1870,7 +1870,7 @@ If they do so, it is RECOMMENDED that the scene's first entry under the `coordin
 If no coordinate system is defined therein, but only in the respective linked multiscale groups,
 viewers may want to expose a choice for the user to select a coordinate system for display when opening the dataset for the first time.
 
- 
+
 
 ```
 
