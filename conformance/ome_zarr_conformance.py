@@ -98,14 +98,12 @@ class TestResult:
 
 @dataclass
 class Conformance:
-    strict: bool
     valid: bool
     description: bool | None
 
     @classmethod
     def from_jso(cls, jso: dict[str, Any]) -> Self:
         return cls(
-            strict=jso.get("strict", False),
             valid=jso.get("valid", True),
             description=jso.get("description"),
         )
@@ -130,14 +128,11 @@ class Requested:
         self,
         exclude_patterns: list[re.Pattern] | None = None,
         include_patterns: list[re.Pattern] | None = None,
-        exclude_strict=False,
         exclude_invalid=False,
     ) -> None:
         self.exclude_patterns = exclude_patterns or []
         self.include_patterns = include_patterns or []
 
-        if exclude_strict:
-            self.exclude_patterns.append(re.compile(r"^strict/"))
         if exclude_invalid:
             self.exclude_patterns.append(re.compile(r"^\w+/invalid/"))
 
@@ -159,7 +154,9 @@ def run_test(dingus_cmd: list[str], fpath: Path, test_name: str) -> TestResult:
     test_logger = logger.getChild(test_name)
 
     strictness, validity, *_ = test_name.split("/")
-    if strictness not in ("strict", "spec"):
+    # previously there were "strict" tests which treated schema SHOULDs as MUSTs;
+    # these have since been removed
+    if strictness != "spec":
         raise RuntimeError(f"cannot determine strictness from name: {test_name}")
 
     if validity == "invalid":
@@ -322,7 +319,6 @@ def main(raw_args=None):
     req = Requested(
         exclude_patterns=args.exclude_pattern,
         include_patterns=args.include_pattern,
-        exclude_strict=bool(args.exclude_strict),
         exclude_invalid=bool(args.exclude_invalid),
     )
 

@@ -87,14 +87,11 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
 """
 
     for schema_file in schema_files:
-        if 'strict' in schema_file:
-            continue  # skip strict schemas
-
         print(f'Processing {schema_file}...')
         output_path_md = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".md")
         output_path_html = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".html")
         os.makedirs(os.path.dirname(output_path_md), exist_ok=True)
-        os.makedirs(os.path.dirname(output_path_html), exist_ok=True)        
+        os.makedirs(os.path.dirname(output_path_html), exist_ok=True)
 
         # Generate the documentation
         try:
