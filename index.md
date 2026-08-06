@@ -23,7 +23,7 @@ authors:
 
 The conventions and specifications defined in this document are designed to
 enable next-generation file formats to represent the same bioimaging data
-that can be represented in \[OME-TIFF](http://www.openmicroscopy.org/ome-files/)
+that can be represented in [OME-TIFF](http://www.openmicroscopy.org/ome-files/)
 and beyond.
 
 ## Document conventions
@@ -32,13 +32,13 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be interpreted as described in
 [RFC 2119](https://tools.ietf.org/html/rfc2119).
 
-<p>
-<dfn>Transitional</dfn> metadata is added to the specification with the
+(version0.5:transitional)=
+
+_Transitional_ metadata is added to the specification with the
 intention of removing it in the future. Implementations may be expected (MUST) or
 encouraged (SHOULD) to support the reading of the data, but writing will usually
 be optional (MAY). Examples of transitional metadata include custom additions by
 implementations that are later submitted as a formal specification. (See [[#bf2raw]])
-</p>
 
 Some of the JSON examples in this document include comments. However, these are only for
 clarity purposes and comments MUST NOT be included in JSON objects.
@@ -192,7 +192,7 @@ The "dimension_names" attribute MUST be included in the `zarr.json` of the Zarr 
 ### "bioformats2raw.layout" (transitional)
 (version0.5:bf2raw)=
 
-[=Transitional=] "bioformats2raw.layout" metadata identifies a group which implicitly describes a series of images.
+[Transitional](#version0.5:transitional) "bioformats2raw.layout" metadata identifies a group which implicitly describes a series of images.
 The need for the collection stems from the common "multi-image file" scenario in microscopy. Parsers like Bio-Formats
 define a strict, stable ordering of the images in a single container that can be used to refer to them by other tools.
 
@@ -344,7 +344,8 @@ if not datasets:
 ### "omero" metadata (transitional)
 (version0.5:omero-md)=
 
-[=Transitional=] information specific to the channels of an image and how to render it
+
+[Transitional](#version0.5:transitional) information specific to the channels of an image and how to render it
 can be found under the "omero" key in the group-level metadata:
 
 ```json
