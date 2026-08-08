@@ -4,8 +4,8 @@ short_title: OME-Zarr
 authors: " "
 ---
 
-# Version 0.6rc0
-(ngff-spec:spec:0.6rc0)=
+# Version 0.9dev1
+(ngff-spec:spec:0.9dev1)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
@@ -18,9 +18,8 @@ authors: " "
 ## Abstract
 
 ```{warning}
-This is the release candidate for version 0.6rc0 of the ngff-specification.
-Upon release of 0.6, this warning will be removed and the version number in the document updated.
-
+This is a development version of the specification. It includes RFC-3 and RFC-4
+which have not yet been accepted.
 ```
 
 This document contains next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.
@@ -28,9 +27,9 @@ All specifications are submitted to the <https://image.sc> community for review.
 
 ## Status of This Document
 
-The working title version of this specification is 0.6rc0.
+The working title version of this specification is 0.9dev1.
 Migration scripts will be provided between numbered versions.
-Data written with these latest changes (an "editor's draft") will not necessarily be supported.
+Data written with these latest changes will not necessarily be supported.
 
 The conventions and specifications defined in this document
 are designed to enable next-generation file formats to represent
@@ -66,7 +65,7 @@ but could equally be stored on a web server to be accessed via HTTP or in object
 ### Images
 
 The following layout describes the expected Zarr hierarchy for images with multiple levels of resolutions and optionally associated labels.
-Note that the number of dimensions is variable between 2 and 5 and that axis names are arbitrary, see [multiscales metadata](#multiscales-md) for details.
+Note that the number of dimensions is variable and that axis names are arbitrary, see [multiscales metadata](#multiscales-md) for details.
 
 ```text
 ├── 123.zarr                  # One OME-Zarr image (id=123).
@@ -429,7 +428,7 @@ The following transformations are supported:
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
-The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details). 
+The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details).
 
 The `input` and `output` fields are objects structured as follows:
 
@@ -471,7 +470,7 @@ Depending on which, different constraints apply to the transformations, as descr
   - Both `input` and `output` MUST specify a coordinate system `name`.
   - `path` is required when referencing a coordinate system in a multiscale image subgroup;
     it MAY be omitted or null when referencing a coordinate system defined in the scene's own `coordinateSystems`.
-  
+
 
 In any context, the values given for `name` and `path` provide an unambiguous reference to a named coordinate system.
 If the `path` field is null or omitted, this is to be interpreted as referring to a named coordinate system in the same `zarr.json` file.
@@ -1107,7 +1106,7 @@ An exact reproducibility of pixel values for images transformed and resampled by
 
 The multiscale group at `path` MUST satisfy:
   - **Dimensionality**: If the input coordinate system has `N` axes, the multiscale image at location `path` MUST have `N+1` dimensions.
-  - **Vector dimension length**: 
+  - **Vector dimension length**:
     - For `coordinates` transformations, the length of the array along the `coordinate` dimension (last axis) MUST equal `M`,
       the number of axes in the output coordinate system.
     - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
@@ -1275,9 +1274,9 @@ the input and output of the `forward` and `inverse` transformations are understo
 (multiscales-md)=
 
 Metadata about an image can be found under the `multiscales` key in the group-level OME-Zarr Metadata.
-Here, "image" refers to 2 to 5 dimensional data representing image
-or volumetric data with optional time or channel axes.
-It is stored in a multiple resolution representation.
+Here, "image" refers to data stored in a Zarr Array representing image,
+volumetric, time lapse, or similar data. It MAY be stored in multiple
+resolutions.
 
 `multiscales` contains an array of objects where each entry describes a multiscale image.
 Each object provides the following fields:
@@ -1295,15 +1294,26 @@ Each object provides the following fields:
 : The `coordinateSystems` field is a JSON array containing [coordinate system metadata](#coordinate-systems-md)
   The following conditions apply to all coordinate systems inside multiscales metadata:
 
-  - The length of `axes` must be between 2 and 5 and MUST be equal to the dimensionality of the Zarr arrays storing the image data (see `datasets:path`).
-  - `axes` MUST contain 2 or 3 entries of `type:space`
-  - `axes` MAY contain one additional entry of `type:time`
-  - `axes` MAY contain one additional entry of `type:channel` or a null / custom type.
-  - `axes` entries MUST be ordered by `type` where the `time` axis must come first (if present),
-    followed by the  `channel` or custom axis (if present) and the axes of type `space`.
-  - If there are three spatial axes where two correspond to the image plane (`yx`)
-    and images are stacked along the other (anisotropic) axis (`z`),
-    the spatial axes SHOULD be ordered as `zyx`.
+0. The length of the axis names MUST match the number of axes of the array.
+1. *If* a dataset contains exactly 2 spatial dimensions, those dimensions
+   SHOULD be named `y` and `x`, except where rule 4 applies.
+2. *If* a dataset contains exactly 3 spatial dimensions, those dimensions
+   SHOULD be named 'z', 'y', and 'x', except where rule 4 applies.
+3. *If* a dataset contains exactly 1 time dimension, it should be named `t`.
+4. When image data axes map straightforwardly to axes with common names in
+   the relevant field of practice, those axes SHOULD be named according to
+   such conventions. For example, spatial frequency axes resulting from a
+   Fourier transformation of `z', 'y', and 'x' SHOULD be named 'w', 'v', and
+   `u`, respectively. Similarly, a temporal frequency axis resulting from
+   a Fourier transformation of the `t` axis SHOULD be named `w` or `ω`.
+5. Axis names MUST NOT be repeated within a dataset, and SHOULD NOT be
+   different only by upper/lower-case. For example, the same dataset SHOULD
+   NOT have both an `X` and an `x` axis.
+6. The order of the axes MUST match their ordering within the data if
+   applicable. For example, if the axes are ordered as `DZYX`, where `D` is a
+   field of displacement vectors, then the vectors must be ordered as `ZYX`
+   within the array.
+
 
 ```{hint}
 (spec:hint:multiscales-intrinsic-coordinate-system)=
@@ -1320,8 +1330,7 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
   - Each object in `datasets` MUST contain the field `path`,
     whose value is a string containing the path to the Zarr array for this resolution relative to the current Zarr group.
   - The `path`s MUST be ordered from largest (i.e. highest resolution) to smallest.
-  - Every Zarr array referred to by a `path` MUST have the same number of dimensions and datatype,
-    and MUST NOT have more than 5 dimensions.
+  - Every Zarr array referred to by a `path` MUST have the same number of dimensions and datatype.
   - The number of dimensions and order MUST correspond to number and order of `axes`.
 
   Each object in `datasets` MUST contain the field `coordinateTransformations`,
@@ -1870,7 +1879,7 @@ If they do so, it is RECOMMENDED that the scene's first entry under the `coordin
 If no coordinate system is defined therein, but only in the respective linked multiscale groups,
 viewers may want to expose a choice for the user to select a coordinate system for display when opening the dataset for the first time.
 
- 
+
 
 ```
 
