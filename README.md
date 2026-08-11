@@ -9,6 +9,11 @@ as well as [json schemas](./schemas) to validate written ome-zarr image data.
 
 The built documentation including contribution hints can be found **[here](https://ngff-spec.readthedocs.io/en/latest/)**.
 
+## Development
+
+Use [`just`](https://github.com/casey/just) for common development tasks like building, linting, testing.
+Run `just` to see a list of commands.
+
 ## Conformance tests
 
 Conformance can be tested at several levels.
