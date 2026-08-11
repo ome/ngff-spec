@@ -16,4 +16,4 @@ lint: spell
 
 # Run schema tests.
 test:
-    uv run tox
+    uv run pytest -v
