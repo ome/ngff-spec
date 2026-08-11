@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v9.0.0
-      - run: uv run pytest -v
+      - run: uv run --extra testing pytest -v

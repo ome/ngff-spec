@@ -9,11 +9,11 @@ build:
 # Check spelling in the source files;
 # configured in pyproject.toml.
 spell:
-    uv run codespell
+    uv run --extra testing codespell
 
 # Run all lint commands.
 lint: spell
 
 # Run schema tests.
 test:
-    uv run pytest -v
+    uv run --extra testing pytest -v
