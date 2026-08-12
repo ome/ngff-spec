@@ -332,7 +332,7 @@ In this example, a multiscales group containing labels is located at `labels/lab
 
 **`metadata`**
 : Each `multiscales` object SHOULD contain the field `metadata`,
-  which contains a object with additional information about the downscaling method.
+  which contains an object with additional information about the downscaling method.
 
 
 :::{dropdown} Example: Complete multiscales metadata
@@ -1131,7 +1131,7 @@ The matrix MUST be stored as a 2D array either as json or in a Zarr array.
 `rotation` transformations are invertible.
 
 **path**
-: The path to an array containing the affine parameters.
+: The path to an array containing the rotation parameters.
 The array at this path MUST be 2D whose shape MUST be `N x N`.
 
 **rotation**
@@ -1465,7 +1465,7 @@ which is an array of objects describing the channels of the image.
 Each object in `channels` MUST contain the field `color`,
 which is a string of 6 hexadecimal digits specifying the color of the channel in RGB format.
 Each object in `channels` MUST contain the field `window`,
-which is a object describing the windowing of the channel.
+which is an object describing the windowing of the channel.
 The field `window` MUST contain the fields `min` and `max`,
 which are the minimum and maximum values of the window, respectively.
 It MUST also contain the fields `start` and `end`,
