@@ -1282,14 +1282,14 @@ It is stored in a multiple resolution representation.
 `multiscales` contains an array of objects where each entry describes a multiscale image.
 Each object provides the following fields:
 
-| | Field | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `coordinateSystems` || JSON array of objects | yes | [Coordinate system metadata](#coordinate-systems-md) for the multiscale image. |
-| `datasets` || JSON array of objects | yes | Metadata about arrays storing the individual resolution levels. |
-| `coordinateTransformations` || JSON array of objects | no | Metadata about transformations that are applied to all resolution levels in the same manner. |
-| `name` || string | no | Name of the multiscale image. |
-| `type` || string | no | Downsampling method used to generate the multiscale image. |
-| `metadata` || JSON object | no | Additional metadata about the downscaling method. |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `coordinateSystems` | JSON array of objects | yes | [Coordinate system metadata](#coordinate-systems-md) for the multiscale image. |
+| `datasets` | JSON array of objects | yes | Metadata about arrays storing the individual resolution levels. |
+| `coordinateTransformations` | JSON array of objects | no | Metadata about transformations that are applied to all resolution levels in the same manner. |
+| `name` | string | no | Name of the multiscale image. |
+| `type` | string | no | Downsampling method used to generate the multiscale image. |
+| `metadata` | JSON object | no | Additional metadata about the downscaling method. |
 
 **`coordinateSystems`**
 : The `coordinateSystems` field is a JSON array containing [coordinate system metadata](#coordinate-systems-md)
