@@ -17,6 +17,7 @@ schemas/**/*.md
 schemas/**/*.html
 schemas/**/*.css
 schemas/**/*.js
+examples/_build
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
