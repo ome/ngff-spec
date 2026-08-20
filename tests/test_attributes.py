@@ -13,7 +13,7 @@ attrs_dir = here / "attributes"
 
 schema_store = {}
 version = None
-for schema_path in schema_dir.glob("*.schema*"):
+for schema_path in schema_dir.glob("*.schema"):
     schema = json.loads(schema_path.read_text())
     schema_store[schema["$id"]] = schema
     if schema_path.stem == "_version":
