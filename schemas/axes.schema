@@ -33,6 +33,9 @@
         "unit": {
           "type": "string",
           "description": "Unit for the axis"
+        },
+        "orientation": {
+          "$ref": "axis_orientation.schema"
         }
       },
       "required": [
