@@ -40,6 +40,6 @@
     "schema": {
       "id": "schemas/image.schema"
     },
-    "valid": false
+    "valid": true
   }
 }
