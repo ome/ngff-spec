@@ -265,9 +265,55 @@ where each object describes a dimension (axis) and:
 - MAY contain the field `longName`.
   The value MUST be a string,
   and can provide a longer name or description of an axis and its properties.
+- MAY contain an "orientation" field, itself containing a "type" and a
+  "value". Currently, "type" may only be "anatomical", and "value" may
+  only be one from the list given in [list of possible anatomical
+  orientation values](orientation-values). A specific orientation value or
+  its inverse MUST NOT appear more than once in a given coordinate system.
 
 The values in the `name` fields MUST be unique within the same coordinate system.
 The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
+
+```{note}
+:label: orientation-values
+
+When a spatial axis is aligned with a specific orientation, this can be
+indicated with the "orientation" field, which must have "type"
+"anatomical" (with further types to be added to the specification or as
+extensions in the future), and one of the values detailed below:
+
+**Common to both bipeds and quadrupeds:**
+- `left-to-right`
+- `right-to-left`
+- `proximal-to-distal`
+- `distal-to-proximal`
+
+**Primarily for bipeds (humans):**
+- `anterior-to-posterior` (front-to-back)
+- `posterior-to-anterior` (back-to-front)
+- `inferior-to-superior` (feet-to-head)
+- `superior-to-inferior` (head-to-feet)
+- `dorsal-to-palmar` (back of hand to palm)
+- `palmar-to-dorsal` (palm to back of hand)
+- `dorsal-to-plantar` (top of foot to sole)
+- `plantar-to-dorsal` (sole to top of foot)
+
+**Primarily for quadrupeds:**
+- `rostral-to-caudal` (nose/beak-to-tail, especially for nervous system)
+- `caudal-to-rostral` (tail-to-nose/beak, especially for nervous system)
+- `cranial-to-caudal` (head-to-tail)
+- `caudal-to-cranial` (tail-to-head)
+- `dorsal-to-ventral` (back/top-to-belly/bottom)
+- `ventral-to-dorsal` (belly/bottom-to-back/top)
+
+**For layered and polarized tissues (subject-local):**
+- `superficial-to-deep` (outer surface to inner depth, e.g. skin, gut, cortex)
+- `deep-to-superficial` (inner depth to outer surface)
+- `apical-to-basal` (apical to basal surface, e.g. epithelial layers, polarized cells)
+- `basal-to-apical` (basal to apical surface)
+- `apex-to-base` (tip to broad base, e.g. heart, lungs)
+- `base-to-apex` (broad base to tip)
+```
 
 Arrays are inherently discrete (see Array coordinate systems, below)
 but are often used to store discrete samples of a continuous variable.
