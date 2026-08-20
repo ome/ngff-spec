@@ -125,9 +125,7 @@
         "channels": [
           {
             "active": true,
-            "coefficient": 1.0,
             "color": "00FF00",
-            "family": "linear",
             "inverted": false,
             "label": "FITC",
             "window": {
@@ -139,9 +137,7 @@
           },
           {
             "active": true,
-            "coefficient": 1.0,
             "color": "FF0000",
-            "family": "linear",
             "inverted": false,
             "label": "RD-TR-PE",
             "window": {
