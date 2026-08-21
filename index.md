@@ -83,8 +83,7 @@ Note that the number of dimensions is variable and that axis names are arbitrary
     │   │                     # by the "multiscales" metadata, but is often a sequence starting at 0.
     │   │                     # All arrays must have the same datatype and number of dimensions.
     │   │
-    │   ├── zarr.json         # All image arrays must be up to 5-dimensional
-    │   │                     # with the axis of type time before type channel, before spatial axes.
+    │   ├── zarr.json
     │   │
     │   └─ ...                # Chunks are stored conforming to the Zarr array specification and
     │                         # metadata as specified in the array's `zarr.json`.
