@@ -1339,22 +1339,22 @@ Each object provides the following fields:
 : The `coordinateSystems` field is a JSON array containing [coordinate system metadata](#coordinate-systems-md)
   The following conditions apply to all coordinate systems inside multiscales metadata:
 
-0. The length of the axis names MUST match the number of axes of the array.
-1. *If* a dataset contains exactly 2 spatial dimensions, those dimensions
+1. The length of the axis names MUST match the number of axes of the array.
+2. *If* a dataset contains exactly 2 spatial dimensions, those dimensions
    SHOULD be named 'y' and 'x', except where rule 4 applies.
-2. *If* a dataset contains exactly 3 spatial dimensions, those dimensions
+3. *If* a dataset contains exactly 3 spatial dimensions, those dimensions
    SHOULD be named 'z', 'y', and 'x', except where rule 4 applies.
-3. *If* a dataset contains exactly 1 time dimension, it should be named 't'.
-4. When image data axes map straightforwardly to axes with common names in
+4. *If* a dataset contains exactly 1 time dimension, it should be named 't'.
+5. When image data axes map straightforwardly to axes with common names in
    the relevant field of practice, those axes SHOULD be named according to
    such conventions. For example, spatial frequency axes resulting from a
    Fourier transformation of 'z', 'y', and 'x' SHOULD be named 'w', 'v', and
    'u', respectively. Similarly, a temporal frequency axis resulting from
    a Fourier transformation of the 't' axis SHOULD be named 'w' or 'ω'.
-5. Axis names MUST NOT be repeated within a dataset, and SHOULD NOT be
+6. Axis names MUST NOT be repeated within a dataset, and SHOULD NOT be
    different only by upper/lower-case. For example, the same dataset SHOULD
    NOT have both an 'X' and an 'x' axis.
-6. The order of the axes MUST match their ordering within the data if
+7. The order of the axes MUST match their ordering within the data if
    applicable. For example, if the axes are ordered as "DZYX", where 'D' is a
    field of displacement vectors, then the vectors must be ordered as "ZYX"
    within the array.
