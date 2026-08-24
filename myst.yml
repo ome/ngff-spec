@@ -97,7 +97,7 @@ project:
     - file: index.md
     - file: examples/index.md
       children:
-        - pattern: examples/**/*.md
+        - pattern: examples/_build/**/*.md
     - file: schemas/index.md
       children:
         - pattern: schemas/*.md
