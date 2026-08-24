@@ -238,21 +238,19 @@
                 },
                 "required": [
                   "start",
-                  "min",
-                  "end",
-                  "max"
+                  "end"
                 ]
               },
               "label": {
-                "type": "string"
-              },
-              "family": {
                 "type": "string"
               },
               "color": {
                 "type": "string"
               },
               "active": {
+                "type": "boolean"
+              },
+              "inverted": {
                 "type": "boolean"
               }
             }

@@ -8,22 +8,72 @@ Test with
 """
 
 from __future__ import annotations
-from concurrent.futures import Future, ThreadPoolExecutor
-import os
-import subprocess as sp
-from argparse import ArgumentParser
-from pathlib import Path
-import sys
-import re
+
 import json
-from dataclasses import dataclass
-from typing import Any, Iterable, Literal, Self
 import logging
+import os
+import re
+import subprocess as sp
+import sys
+from argparse import ArgumentParser
+from collections.abc import Iterable
+from concurrent.futures import Future, ThreadPoolExecutor
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Literal, Self
 
 logger = logging.getLogger("ome_zarr_conformance")
 
 here = Path(__file__).resolve().parent.parent
 tests_dir = here / "tests"
+
+Status = Literal["pass", "fail", "error"]
+
+
+def color(s: str, num: int, is_bright=False, is_background=False) -> str:
+    match (is_bright, is_background):
+        case (False, False):
+            pref = "3"
+        case (False, True):
+            pref = "4"
+        case (True, False):
+            pref = "9"
+        case (True, True):
+            pref = "10"
+    return f"\x1b[{pref}{num}m{s}\x1b[0m"
+
+
+class Colorer:
+    def __init__(self) -> None:
+        self.is_term = sys.stdout.isatty()
+
+    def _colour(self, s: str, num: int, is_bright=False, is_background=False) -> str:
+        if not self.is_term:
+            return s
+        return color(s, num, is_bright, is_background)
+
+    def r(self, s: str) -> str:
+        return self._colour(s, 1)
+
+    def g(self, s: str) -> str:
+        return self._colour(s, 2)
+
+    def y(self, s: str) -> str:
+        return self._colour(s, 3)
+
+    def m(self, s: str) -> str:
+        return self._colour(s, 5)
+
+    def status(self, s: Status) -> str:
+        match s:
+            case "pass":
+                return self.g(s)
+            case "fail":
+                return self.r(s)
+            case "error":
+                return self.m(s)
+            case other:
+                raise ValueError(f"Unknown status '{other}'")
 
 
 @dataclass
@@ -39,7 +89,7 @@ class CommandOutput:
 @dataclass
 class TestResult:
     test_name: str
-    status: Literal["pass", "fail", "error"]
+    status: Status
     message: str | None
     stderr: str
     return_code: int
@@ -48,14 +98,12 @@ class TestResult:
 
 @dataclass
 class Conformance:
-    strict: bool
     valid: bool
     description: bool | None
 
     @classmethod
     def from_jso(cls, jso: dict[str, Any]) -> Self:
         return cls(
-            strict=jso.get("strict", False),
             valid=jso.get("valid", True),
             description=jso.get("description"),
         )
@@ -80,25 +128,21 @@ class Requested:
         self,
         exclude_patterns: list[re.Pattern] | None = None,
         include_patterns: list[re.Pattern] | None = None,
-        exclude_strict=False,
         exclude_invalid=False,
     ) -> None:
         self.exclude_patterns = exclude_patterns or []
         self.include_patterns = include_patterns or []
 
-        if exclude_strict:
-            self.exclude_patterns.append(re.compile(r"^strict/"))
         if exclude_invalid:
             self.exclude_patterns.append(re.compile(r"^\w+/invalid/"))
 
     def include(self, name: str) -> bool:
         if self.exclude_patterns and any(p.search(name) for p in self.exclude_patterns):
             return False
-        if self.include_patterns and not any(
-            p.search(name) for p in self.include_patterns
-        ):
-            return False
-        return True
+
+        if not self.include_patterns:
+            return True
+        return any(p.search(name) for p in self.include_patterns)
 
 
 def test_path_to_name(fpath: Path, root: Path) -> str:
@@ -110,7 +154,9 @@ def run_test(dingus_cmd: list[str], fpath: Path, test_name: str) -> TestResult:
     test_logger = logger.getChild(test_name)
 
     strictness, validity, *_ = test_name.split("/")
-    if strictness not in ("strict", "spec"):
+    # previously there were "strict" tests which treated schema SHOULDs as MUSTs;
+    # these have since been removed
+    if strictness != "spec":
         raise RuntimeError(f"cannot determine strictness from name: {test_name}")
 
     if validity == "invalid":
@@ -124,6 +170,7 @@ def run_test(dingus_cmd: list[str], fpath: Path, test_name: str) -> TestResult:
         dingus_cmd + [os.fspath(fpath)],
         text=True,
         capture_output=True,
+        check=False,
     )
 
     if res.returncode:
@@ -205,7 +252,7 @@ def main(raw_args=None):
         "--exclude-strict",
         "-S",
         action="store_true",
-        help="exclude strict tests",
+        help="DEPRECATED: exclude strict tests",
     )
     parser.add_argument(
         "--exclude-invalid",
@@ -241,7 +288,12 @@ def main(raw_args=None):
         3: logging.DEBUG,
     }.get(args.verbose, logging.DEBUG)
     logging.basicConfig(level=lvl)
-    logging.debug("Got args: %s", args)
+    logger.debug("Got args: %s", args)
+
+    if args.exclude_strict:
+        logger.warning(
+            "Strict test cases are deprecated; -S/--exclude-strict argument is implicit and will soon be removed."
+        )
 
     if dingus_args is None:
         print(
@@ -267,27 +319,31 @@ def main(raw_args=None):
     req = Requested(
         exclude_patterns=args.exclude_pattern,
         include_patterns=args.include_pattern,
-        exclude_strict=bool(args.exclude_strict),
         exclude_invalid=bool(args.exclude_invalid),
     )
 
     test_paths = ((test_path_to_name(p, dpath), p) for p in dpath.rglob(rglob))
     cases = dict(sorted((n, p) for n, p in test_paths if req.include(n)))
 
+    c = Colorer()
+
     for res in run_all_tests(
         dingus_args,
         cases,
     ):
-        row = [
-            res.test_name,
-            res.status,
-        ]
         if res.status == "pass":
             passes += 1
         elif res.status == "fail":
             failures += 1
         elif res.status == "error":
             errors += 1
+
+        row = [
+            res.test_name,
+            c.status(res.status),
+        ]
+        if res.message:
+            row.append(" ".join(res.message.split()))
 
         print("\t".join(row))
 

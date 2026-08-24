@@ -1,12 +1,17 @@
 {
   "ome": {
-    "version": "0.6rc0",
+    "version": "0.6.dev3",
     "multiscales": [
       {
         "coordinateSystems": [
           {
-            "name": "intrinsic",
+            "name": "physical",
             "axes": [
+              {
+                "name": "z",
+                "type": "space",
+                "unit": "micrometer"
+              },
               {
                 "name": "y",
                 "type": "space",
@@ -27,11 +32,12 @@
               {
                 "scale": [
                   1,
+                  1,
                   1
                 ],
-                "type": "scale",
-                "input": {"path": "s0"},
-                "output": {"name": "intrinsic"}
+                "input": "s0",
+                "output": "physical",
+                "type": "scale"
               }
             ]
           }
@@ -41,14 +47,33 @@
     "omero": {
       "channels": [
         {
+          "label": "Channel:0",
+          "color": "ff0000",
           "active": true,
-          "color": 255,
-          "label": "1234",
+          "inverted": false,
           "window": {
-            "end": 1765.0,
-            "max": 2555.0,
-            "min": 5.0,
-            "start": 0.0
+            "min": 0,
+            "max": 255
+          }
+        },
+        {
+          "label": "Channel:1",
+          "color": "00ff00",
+          "active": true,
+          "inverted": true,
+          "window": {
+            "min": 0,
+            "max": 255
+          }
+        },
+        {
+          "label": "Channel:2",
+          "color": "0000ff",
+          "active": true,
+          "inverted": false,
+          "window": {
+            "min": 0,
+            "max": 255
           }
         }
       ]

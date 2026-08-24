@@ -429,7 +429,7 @@ The following transformations are supported:
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
-The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details). 
+The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details).
 
 The `input` and `output` fields are objects structured as follows:
 
@@ -471,7 +471,7 @@ Depending on which, different constraints apply to the transformations, as descr
   - Both `input` and `output` MUST specify a coordinate system `name`.
   - `path` is required when referencing a coordinate system in a multiscale image subgroup;
     it MAY be omitted or null when referencing a coordinate system defined in the scene's own `coordinateSystems`.
-  
+
 
 In any context, the values given for `name` and `path` provide an unambiguous reference to a named coordinate system.
 If the `path` field is null or omitted, this is to be interpreted as referring to a named coordinate system in the same `zarr.json` file.
@@ -1107,7 +1107,7 @@ An exact reproducibility of pixel values for images transformed and resampled by
 
 The multiscale group at `path` MUST satisfy:
   - **Dimensionality**: If the input coordinate system has `N` axes, the multiscale image at location `path` MUST have `N+1` dimensions.
-  - **Vector dimension length**: 
+  - **Vector dimension length**:
     - For `coordinates` transformations, the length of the array along the `coordinate` dimension (last axis) MUST equal `M`,
       the number of axes in the output coordinate system.
     - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
@@ -1407,7 +1407,11 @@ In this example, a multiscales group containing labels is located at `labels/lab
 :::{dropdown} Example: Complete multiscales metadata
 
 A complete example of json-file for a 5D (TCZYX) multiscales with 3 resolution levels could look like this:
+<<<<<<< HEAD
 ```{literalinclude} examples/_build/multiscales_strict/multiscales_example.json
+=======
+```{literalinclude} examples/multiscales/multiscales_example.json
+>>>>>>> rm-strict2
 :language: json
 ```
 :::
@@ -1430,17 +1434,16 @@ if not datasets:
 ### "omero" metadata (transitional)
 (omero-md)=
 
-[=Transitional=] information specific to the channels of an image and how to render it can be found under the `omero` key in the group-level metadata:
+Information specific to the channels of an image and how to render it
+can be found under the `omero` key in the group-level metadata (i.e., under `"ome" > "omero"`):
 
 ```json
-"id": 1,                              # ID in OMERO
-"name": "example.tif",                # Name as shown in the UI
-"channels": [                         # Array matching the c dimension size
+"id": 1,                              // ID in OMERO
+"name": "example.tif",                // Name as shown in the UI
+"channels": [                         // Array matching the c dimension size
     {
         "active": true,
-        "coefficient": 1,
         "color": "0000FF",
-        "family": "linear",
         "inverted": false,
         "label": "LaminB1",
         "window": {
@@ -1452,25 +1455,30 @@ if not datasets:
     }
 ],
 "rdefs": {
-    "defaultT": 0,                    # First timepoint to show the user
-    "defaultZ": 118,                  # First Z section to show the user
-    "model": "color"                  # "color" or "greyscale"
+    "defaultT": 0,                    // First timepoint to show the user
+    "defaultZ": 118,                  // First Z section to show the user
+    "model": "color"                  // "color" or "greyscale"
 }
 ```
 
-See the [OMERO WebGateway documentation](https://omero.readthedocs.io/en/stable/developers/Web/WebGateway.html#imgdata)
-for more information.
-
 The `omero` metadata is optional, but if present it MUST contain the field `channels`,
 which is an array of objects describing the channels of the image.
-Each object in `channels` MUST contain the field `color`,
-which is a string of 6 hexadecimal digits specifying the color of the channel in RGB format.
-Each object in `channels` MUST contain the field `window`,
-which is a object describing the windowing of the channel.
-The field `window` MUST contain the fields `min` and `max`,
-which are the minimum and maximum values of the window, respectively.
-It MUST also contain the fields `start` and `end`,
-which are the start and end values of the window, respectively.
+The `channels` array length SHOULD correspond to the size of the respective channels axis, if present.
+Each object in `channels` is optional and MAY contain the following fields:
+
+- `color` (string) String of 6 hexadecimal digits specifying the color of the channel in RGB format.
+- `label` (string) Channel name.
+- `active` (boolean) Indicates whether the channel should be displayed.
+- `window` (dictionary) Values describing the windowing of the channel.
+  If provided, `start` and `end` values MUST be specified.
+  All values can be floating-point numbers, but will likely be integers for integer pixel types.
+  - `min` (float) Default setting for lower bound for values of `start` field.
+    MAY be used by viewers as the lower range of channel sliders.
+  - `max` (float) Default setting for upper bound for values of `end` field.
+    MAY be used by viewers as the upper range of channel sliders.
+  - `start` (float) Start of the rendering window.
+  - `end` (float) End of the rendering window.
+- `inverted` (boolean) If true, the rendering of darkest to brightest pixels should be inverted.
 
 ### "labels" metadata
 (labels-md)=
@@ -1562,7 +1570,11 @@ In the `zarr.json` under the image.zarr group, an explicit `identity` transform 
 the coordinate system named `"physical"` in the multiscales metadata of the original image is the same as
 the coordinate system named `"physical"` in the multiscales metadata of the label image:
 
+<<<<<<< HEAD
 ```{literalinclude} examples/_build/multiscales_strict/multiscale_reference_to_label.json
+=======
+```{literalinclude} examples/multiscales/multiscale_reference_to_label.json
+>>>>>>> rm-strict2
 :language: json
 ```
 
@@ -1586,7 +1598,11 @@ a coordinate system named `"physical"` serves as the "[intrinsic](#spec:hint:mul
 The `image-label` field contains information about the source image and display colors for the label image,
 i.e., a label image in which 0s and 1s represent intercellular and cellular space, respectively:
 
+<<<<<<< HEAD
 ```{literalinclude} examples/_build/label_strict/colors_properties.json
+=======
+```{literalinclude} examples/label/colors_properties.json
+>>>>>>> rm-strict2
 :language: json
 ```
 
@@ -1665,14 +1681,22 @@ The `rowIndex`, `columnIndex`, and `path` MUST all refer to the same row/column 
 For example the following JSON object defines a plate with two acquisitions and 6 wells (2 rows and 3 columns),
 containing up to 2 fields of view per acquisition.
 
+<<<<<<< HEAD
 ```{literalinclude} examples/_build/plate_strict/plate_6wells.json
+=======
+```{literalinclude} examples/plate/plate_6wells.json
+>>>>>>> rm-strict2
 :language: json
 ```
 
 The following JSON object defines a sparse plate with one acquisition and 2 wells in a 96 well plate,
 containing one field of view per acquisition.
 
+<<<<<<< HEAD
 ```{literalinclude} examples/_build/plate_strict/plate_2wells.json
+=======
+```{literalinclude} examples/plate/plate_2wells.json
+>>>>>>> rm-strict2
 :language: json
 ```
 :::
@@ -1701,14 +1725,22 @@ For example the following JSON object defines a well with four fields of view.
 The first two fields of view were part of the first acquisition
 while the last two fields of view were part of the second acquisition.
 
+<<<<<<< HEAD
 ```{literalinclude} examples/_build/well_strict/well_4fields.json
+=======
+```{literalinclude} examples/well/well_4fields.json
+>>>>>>> rm-strict2
 :language: json
 ```
 
 The following JSON object defines a well with two fields of view in a plate with four acquisitions.
 The first field is part of the first acquisition, and the second field is part of the last acquisition.
 
+<<<<<<< HEAD
 ```{literalinclude} examples/_build/well_strict/well_2fields.json
+=======
+```{literalinclude} examples/well/well_2fields.json
+>>>>>>> rm-strict2
 :language: json
 ```
 :::
@@ -1866,7 +1898,7 @@ If they do so, it is RECOMMENDED that the scene's first entry under the `coordin
 If no coordinate system is defined therein, but only in the respective linked multiscale groups,
 viewers may want to expose a choice for the user to select a coordinate system for display when opening the dataset for the first time.
 
- 
+
 
 ```
 
