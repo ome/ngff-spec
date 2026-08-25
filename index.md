@@ -17,11 +17,6 @@ authors: " "
 
 ## Abstract
 
-```{warning}
-This is a development version of the specification. It includes RFC-3 and RFC-4
-which have not yet been accepted.
-```
-
 This document contains next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.
 All specifications are submitted to the <https://image.sc> community for review.
 
