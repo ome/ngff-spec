@@ -3,7 +3,7 @@
   "node_type": "group",
   "attributes": {
     "ome": {
-      "version": "0.6rc0",
+      "version": "0.9.dev1",
       "multiscales": [
         {
           "coordinateSystems": [
@@ -11,12 +11,28 @@
               "name": "intrinsic",
               "axes": [
                 {
+                  "name": "angle",
+                  "type": "custom"
+                },
+                {
                   "name": "t",
                   "type": "time"
                 },
                 {
                   "name": "c",
                   "type": "channel"
+                },
+                {
+                  "name": "z",
+                  "type": "space"
+                },
+                {
+                  "name": "y",
+                  "type": "space"
+                },
+                {
+                  "name": "x",
+                  "type": "space"
                 }
               ]
             }
@@ -27,6 +43,10 @@
               "coordinateTransformations": [
                 {
                   "scale": [
+                    1,
+                    1,
+                    1,
+                    1,
                     1,
                     1
                   ],
@@ -42,9 +62,9 @@
     },
     "_conformance": {
       "schema": {
-        "id": "schemas/image.schema"
+        "id": "age.schema"
       },
-      "valid": false
+      "valid": true
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6rc02",
+    "version": "0.9.dev1",
     "multiscales": [
       {
         "coordinateSystems": [
@@ -8,8 +8,16 @@
             "name": "intrinsic",
             "axes": [
               {
-                "name": "X",
-                "type": "space"
+                "name": "angle",
+                "type": "custom"
+              },
+              {
+                "name": "t",
+                "type": "time"
+              },
+              {
+                "name": "c",
+                "type": "channel"
               },
               {
                 "name": "z",
@@ -35,6 +43,8 @@
                   1,
                   1,
                   1,
+                  1,
+                  1,
                   1
                 ],
                 "type": "scale",
@@ -51,6 +61,6 @@
     "schema": {
       "id": "schemas/image.schema"
     },
-    "valid": false
+    "valid": true
   }
 }

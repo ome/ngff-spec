@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6rc0",
+    "version": "0.9.dev1",
     "multiscales": [
       {
         "coordinateSystems": [
@@ -8,12 +8,20 @@
             "name": "intrinsic",
             "axes": [
               {
-                "name": "t",
-                "type": "time"
+                "name": "X",
+                "type": "space"
               },
               {
-                "name": "c",
-                "type": "channel"
+                "name": "z",
+                "type": "space"
+              },
+              {
+                "name": "y",
+                "type": "space"
+              },
+              {
+                "name": "x",
+                "type": "space"
               }
             ]
           }
@@ -25,11 +33,14 @@
               {
                 "scale": [
                   1,
+                  1,
+                  1,
                   1
                 ],
                 "type": "scale",
                 "input": {"path": "s0"},
-                "output": {"name": "intrinsic"}              }
+                "output": {"name": "intrinsic"}
+              }
             ]
           }
         ]
@@ -40,6 +51,6 @@
     "schema": {
       "id": "schemas/image.schema"
     },
-    "valid": false
+    "valid": true
   }
 }

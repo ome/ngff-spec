@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6rc0",
+    "version": "0.9.dev1",
     "multiscales": [
       {
         "coordinateSystems": [
@@ -9,11 +9,6 @@
             "axes": [
               {
                 "name": "y",
-                "type": "invalid",
-                "unit": "micrometer"
-              },
-              {
-                "name": "x",
                 "type": "space",
                 "unit": "micrometer"
               }
@@ -43,6 +38,6 @@
     "schema": {
       "id": "schemas/image.schema"
     },
-    "valid": false
+    "valid": true
   }
 }

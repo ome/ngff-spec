@@ -1,41 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/0.6rc0/schemas/axes.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.9.dev1/schemas/axes.schema",
   "title": "Axes",
   "description": "OME-Zarr Axes.",
   "type": "array",
   "uniqueItems": true,
   "minItems": 1,
-  "maxItems": 5,
   "items": {
     "$ref": "#/$defs/axis"
   },
-  "$comment": "Ensure that there exist at most three space axes",
-  "oneOf": [
-      {
-        "contains": {
-          "type": "object",
-          "properties": {
-            "type": { "const": "space" }
-          },
-          "required": ["type"]
-        },
-        "minContains": 2,
-        "maxContains": 3
-      },
-      {
-        "contains": {
-          "type": "object",
-          "properties": {
-            "type": { "const": "array" }
-          },
-          "required": ["type"]
-        },
-        "minContains": 2
-      }
-    ],
-  "minContains": 2,
-  "maxContains": 3,
   "$defs": {
     "axis": {
       "type": "object",
@@ -60,6 +33,9 @@
         "unit": {
           "type": "string",
           "description": "Unit for the axis"
+        },
+        "orientation": {
+          "$ref": "axis_orientation.schema"
         }
       },
       "required": [
