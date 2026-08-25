@@ -13,7 +13,7 @@ attrs_dir = here / "attributes"
 
 schema_store = {}
 version = None
-for schema_path in schema_dir.glob("*.schema*"):
+for schema_path in schema_dir.glob("*.schema"):
     schema = json.loads(schema_path.read_text())
     schema_store[schema["$id"]] = schema
     if schema_path.stem == "_version":
@@ -30,7 +30,18 @@ STRICT_SCHEMA = schema_store[
 
 case_fnames = sorted(attrs_dir.rglob("*.json"))
 
-xfails = set()
+xfails = {
+    # don't know how to express these restrictions in jsonschema
+    'spec/invalid/image/duplicate_orientation',
+    'spec/invalid/image/non_space_orientation',
+    # axes are too high/too low for the defined coordinate systems,
+    # but not too high/low in absolute terms, so they now should not
+    # validate but not through jsonschema
+    'spec/invalid/transforms/bad_projectAxis_insert_too_high_dim',
+    'spec/invalid/transforms/bad_projectAxis_insert_too_many',
+    'spec/invalid/transforms/bad_projectAxis_remove_too_high_dim',
+    'spec/invalid/transforms/bad_projectAxis_remove_too_many',
+}
 
 
 def fname_to_id(fpath: Path) -> str:

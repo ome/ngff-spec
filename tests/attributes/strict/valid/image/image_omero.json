@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.6rc0",
+    "version": "0.9.dev1",
     "multiscales": [
       {
         "coordinateSystems": [
@@ -151,7 +151,7 @@
         "defaultZ": 2,
         "model": "color"
       },
-      "version": "0.6rc0"
+      "version": "0.9.dev1"
     }
   },
   "_conformance": {

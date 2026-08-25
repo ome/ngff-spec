@@ -3,7 +3,7 @@
   "node_type": "group",
   "attributes": {
     "ome": {
-      "version": "0.6rc0",
+      "version": "0.9.dev1",
       "multiscales": [
         {
           "coordinateSystems": [
@@ -11,16 +11,26 @@
               "name": "intrinsic",
               "axes": [
                 {
-                  "name": "t",
-                  "type": "time"
+                  "name": "angle",
+                  "type": "custom"
                 },
                 {
-                  "name": "c",
-                  "type": "channel"
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer",
+                  "orientation": {
+                    "type": "anatomical",
+                    "value": "superior-to-inferior"
+                  }
                 },
                 {
                   "name": "x",
-                  "type": "space"
+                  "type": "space",
+                  "unit": "micrometer",
+                  "orientation": {
+                    "type": "anatomical",
+                    "value": "left-to-right"
+                  }
                 }
               ]
             }
@@ -35,9 +45,9 @@
                     1,
                     1
                   ],
-                  "type": "scale",
                   "input": "0",
-                  "output": "intrinsic"
+                  "output": "intrinsic",
+                  "type": "scale"
                 }
               ]
             }
@@ -48,8 +58,7 @@
     "_conformance": {
       "schema": {
         "id": "schemas/image.schema"
-      },
-      "valid": false
+      }
     }
   }
 }

@@ -3,7 +3,7 @@
   "node_type": "group",
   "attributes": {
     "ome": {
-      "version": "0.6rc0",
+      "version": "0.9.dev1",
       "multiscales": [
         {
           "coordinateSystems": [
@@ -11,14 +11,20 @@
               "name": "intrinsic",
               "axes": [
                 {
+                  "name": "X",
+                  "type": "space"
+                },
+                {
+                  "name": "z",
+                  "type": "space"
+                },
+                {
                   "name": "y",
-                  "type": "invalid",
-                  "unit": "micrometer"
+                  "type": "space"
                 },
                 {
                   "name": "x",
-                  "type": "space",
-                  "unit": "micrometer"
+                  "type": "space"
                 }
               ]
             }
@@ -29,6 +35,8 @@
               "coordinateTransformations": [
                 {
                   "scale": [
+                    1,
+                    1,
                     1,
                     1
                   ],
