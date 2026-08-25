@@ -19,6 +19,9 @@ testing = [
     "pytest",  # https://docs.pytest.org/en/latest/contents.html
 ]
 
+[dependency-groups]
+dev = ["rust-just"]
+
 [tool.codespell]
 ignore-regex = '\bComparin\b'
 skip = ".git,.codespellrc,references.bib,.venv,.tox,*.css,_build"
