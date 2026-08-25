@@ -41,6 +41,12 @@ To generate the "production" output in the `./_build/` directory, use
 just build
 ```
 
+To see all available recipes, use
+
+```bash
+just
+```
+
 ## First contribution
 
 If you haven't contributed to the spec before,
