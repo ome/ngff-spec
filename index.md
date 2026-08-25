@@ -17,12 +17,6 @@ authors: " "
 
 ## Abstract
 
-```{warning}
-This is the release candidate for version 0.6rc0 of the ngff-specification.
-Upon release of 0.6, this warning will be removed and the version number in the document updated.
-
-```
-
 This document contains next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.
 All specifications are submitted to the <https://image.sc> community for review.
 
