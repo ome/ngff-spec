@@ -234,7 +234,7 @@ refer to different physical entities and therefore should not be analyzed jointl
 Tasks that require images, annotations, regions of interest, etc.,
 SHOULD ensure that they are in the same coordinate system (same name and location within the Zarr hierarchy, with identical axes)
 or can be transformed to the same coordinate system before doing analysis.
-See the [example below](spec:example:coordinate_transformation_scale).
+See the [example below](#spec:example:coordinate_transformation_scale).
 
 #### "axes" metadata
 (axes-md)=
@@ -1556,7 +1556,7 @@ In the `zarr.json` under the image.zarr group, an explicit `identity` transform 
 the coordinate system named `"physical"` in the multiscales metadata of the original image is the same as
 the coordinate system named `"physical"` in the multiscales metadata of the label image:
 
-```{literalinclude} examples/multiscales_strict/multiscale_reference_to_label.json
+```{literalinclude} examples/multiscales_strict/multiscales_reference_to_label.json
 :language: json
 ```
 
