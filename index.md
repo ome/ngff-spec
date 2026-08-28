@@ -423,7 +423,7 @@ The following transformations are supported:
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
 | [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
-The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details). 
+The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details).
 
 The `input` and `output` fields are objects structured as follows:
 
@@ -465,7 +465,7 @@ Depending on which, different constraints apply to the transformations, as descr
   - Both `input` and `output` MUST specify a coordinate system `name`.
   - `path` is required when referencing a coordinate system in a multiscale image subgroup;
     it MAY be omitted or null when referencing a coordinate system defined in the scene's own `coordinateSystems`.
-  
+
 
 In any context, the values given for `name` and `path` provide an unambiguous reference to a named coordinate system.
 If the `path` field is null or omitted, this is to be interpreted as referring to a named coordinate system in the same `zarr.json` file.
@@ -970,7 +970,7 @@ The matrix MUST be stored as a 2D array either as json or in a Zarr array.
 `rotation` transformations are invertible.
 
 **path**
-: The path to an array containing the affine parameters.
+: The path to an array containing the rotation parameters.
 The array at this path MUST be 2D whose shape MUST be `N x N`.
 
 **rotation**
@@ -1101,7 +1101,7 @@ An exact reproducibility of pixel values for images transformed and resampled by
 
 The multiscale group at `path` MUST satisfy:
   - **Dimensionality**: If the input coordinate system has `N` axes, the multiscale image at location `path` MUST have `N+1` dimensions.
-  - **Vector dimension length**: 
+  - **Vector dimension length**:
     - For `coordinates` transformations, the length of the array along the `coordinate` dimension (last axis) MUST equal `M`,
       the number of axes in the output coordinate system.
     - For `displacements` transformations, the length of the array along the `displacement` dimension (last axis) MUST equal `N`,
@@ -1276,8 +1276,8 @@ It is stored in a multiple resolution representation.
 `multiscales` contains an array of objects where each entry describes a multiscale image.
 Each object provides the following fields:
 
-| | Field | Type | Required | Description |
-| --- | --- | --- | --- | --- |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
 | `coordinateSystems` | JSON array of objects | yes | [Coordinate system metadata](#coordinate-systems-md) for the multiscale image. |
 | `datasets` | JSON array of objects | yes | Metadata about arrays storing the individual resolution levels. |
 | `coordinateTransformations` | JSON array of objects | no | Metadata about transformations that are applied to all resolution levels in the same manner. |
@@ -1460,7 +1460,7 @@ which is an array of objects describing the channels of the image.
 Each object in `channels` MUST contain the field `color`,
 which is a string of 6 hexadecimal digits specifying the color of the channel in RGB format.
 Each object in `channels` MUST contain the field `window`,
-which is a object describing the windowing of the channel.
+which is an object describing the windowing of the channel.
 The field `window` MUST contain the fields `min` and `max`,
 which are the minimum and maximum values of the window, respectively.
 It MUST also contain the fields `start` and `end`,
@@ -1860,7 +1860,7 @@ If they do so, it is RECOMMENDED that the scene's first entry under the `coordin
 If no coordinate system is defined therein, but only in the respective linked multiscale groups,
 viewers may want to expose a choice for the user to select a coordinate system for display when opening the dataset for the first time.
 
- 
+
 
 ```
 
