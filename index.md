@@ -238,7 +238,7 @@ refer to different physical entities and therefore should not be analyzed jointl
 Tasks that require images, annotations, regions of interest, etc.,
 SHOULD ensure that they are in the same coordinate system (same name and location within the Zarr hierarchy, with identical axes)
 or can be transformed to the same coordinate system before doing analysis.
-See the [example below](spec:example:coordinate_transformation).
+See the [example below](#spec:example:coordinate_transformation_scale).
 
 #### "axes" metadata
 (axes-md)=
@@ -267,14 +267,14 @@ where each object describes a dimension (axis) and:
 - MAY contain an "orientation" field, itself containing a "type" and a
   "value". Currently, "type" may only be "anatomical", and "value" may
   only be one from the list given in [list of possible anatomical
-  orientation values](orientation-values). A specific orientation value or
+  orientation values](spec:orientation-values). A specific orientation value or
   its inverse MUST NOT appear more than once in a given coordinate system.
 
 The values in the `name` fields MUST be unique within the same coordinate system.
 The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 ```{note}
-:label: orientation-values
+(spec:orientation-values)=
 
 When a spatial axis is aligned with a specific orientation, this can be
 indicated with the "orientation" field, which must have "type"
@@ -1620,7 +1620,7 @@ In the `zarr.json` under the image.zarr group, an explicit `identity` transform 
 the coordinate system named `"physical"` in the multiscales metadata of the original image is the same as
 the coordinate system named `"physical"` in the multiscales metadata of the label image:
 
-```{literalinclude} examples/multiscales_strict/multiscale_reference_to_label.json
+```{literalinclude} examples/multiscales_strict/multiscales_reference_to_label.json
 :language: json
 ```
 
