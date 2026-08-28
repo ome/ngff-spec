@@ -111,6 +111,9 @@ project:
     - name: Benedikt T. Best
       github: btbest
       orcid: 0000-0001-6965-1117
+    - name: Valentin Boussot
+      github: vboussot
+      orcid: 0009-0003-2465-5458
 
     # C
     - name: Tommaso Comparin
