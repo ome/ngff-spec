@@ -4,6 +4,7 @@ import glob
 from pathlib import Path
 import jsonc as json
 import logging
+from _version import __version__
 
 # Suppress warnings from json-schema-for-humans about unresolvable URLs
 logging.getLogger().setLevel(logging.ERROR)
@@ -12,11 +13,31 @@ logging.getLogger().setLevel(logging.ERROR)
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
+def update_version_in_json():
+    """Update the version in the JSON examples."""
+
+    examples_dir='examples'
+    json_files = glob.glob(os.path.join(examples_dir, '**', '*.json'), recursive=True)
+    for json_file in json_files:
+        with open(json_file, 'r') as f:
+            content = f.read()
+        # version is marked as "{{ VERSION }}" in the examples,
+        # so we can replace it with the actual version
+        content = content.replace('{{ VERSION }}', __version__)
+
+        # store updated content to a different directory
+        # to avoid overwriting the original examples
+
+        new_file_path = json_file.replace("_static", "_build")
+        os.makedirs(os.path.dirname(new_file_path), exist_ok=True)
+        with open(new_file_path, 'w') as f:
+            f.write(content)
+
 def build_json_examples():
     """Build markdown files from json examples."""
     # glob recursively to find all json files
-    input_directory = 'examples'
-    output_directory = 'examples'
+    input_directory = 'examples/_build'
+    output_directory = 'examples/_build'
     os.makedirs(output_directory, exist_ok=True)
 
     # iterate over all folders in the examples directory
@@ -87,14 +108,11 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
 """
 
     for schema_file in schema_files:
-        if 'strict' in schema_file:
-            continue  # skip strict schemas
-
         print(f'Processing {schema_file}...')
         output_path_md = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".md")
         output_path_html = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".html")
         os.makedirs(os.path.dirname(output_path_md), exist_ok=True)
-        os.makedirs(os.path.dirname(output_path_html), exist_ok=True)        
+        os.makedirs(os.path.dirname(output_path_html), exist_ok=True)
 
         # Generate the documentation
         try:
@@ -198,6 +216,7 @@ def render_authors_md():
         f.write(markdown_authors)
 
 
+update_version_in_json()
 build_json_examples()
 build_json_schemas()
 build_footer()

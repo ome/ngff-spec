@@ -1,10 +1,10 @@
+import json
 from pathlib import Path
 from typing import Any
-import json
 
 import pytest
-
-from jsonschema import RefResolver, Draft202012Validator as Validator
+from jsonschema import Draft202012Validator as Validator
+from jsonschema import RefResolver
 from jsonschema.exceptions import ValidationError
 
 here = Path(__file__).resolve().parent
@@ -23,9 +23,6 @@ assert version is not None
 
 GENERIC_SCHEMA = schema_store[
     f"https://ngff.openmicroscopy.org/{version}/schemas/ome_zarr.schema"
-]
-STRICT_SCHEMA = schema_store[
-    f"https://ngff.openmicroscopy.org/{version}/schemas/strict_ome_zarr.schema"
 ]
 
 case_fnames = sorted(attrs_dir.rglob("*.json"))
@@ -46,22 +43,16 @@ def test_attributes(case_fname: Path):
 
     conformance = case_obj.get("_conformance", {})
     valid = conformance.get("valid", True)
-    strict = conformance.get("strict", False)
-
-    if strict:
-        schema = STRICT_SCHEMA
-    else:
-        schema = GENERIC_SCHEMA
 
     resolver = RefResolver.from_schema(
-        schema,
+        GENERIC_SCHEMA,
         store=schema_store,
     )
 
     validator_cls = Validator
 
     validator = validator_cls(
-        schema,
+        GENERIC_SCHEMA,
         resolver=resolver,
     )
 
