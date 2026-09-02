@@ -30,8 +30,12 @@
                   1
                 ],
                 "type": "scale",
-                "input": {"path": "s0"},
-                "output": {"path": "intrinsic"}
+                "input": {
+                  "path": "s0"
+                },
+                "output": {
+                  "path": "intrinsic"
+                }
               }
             ]
           }

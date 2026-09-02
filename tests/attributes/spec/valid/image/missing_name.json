@@ -13,8 +13,12 @@
                   1,
                   1
                 ],
-                "input": {"path": "path/to/0"},
-                "output": {"name": "intrinsic"}
+                "input": {
+                  "path": "path/to/0"
+                },
+                "output": {
+                  "name": "intrinsic"
+                }
               }
             ]
           }

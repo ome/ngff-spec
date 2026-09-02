@@ -1,60 +1,60 @@
 {
-    "ome": {
-      "version": "0.9.dev2",
-      "scene": {
-        "coordinateSystems": [
-          {
-            "name": "one",
-            "axes": [
+  "ome": {
+    "version": "0.9.dev2",
+    "scene": {
+      "coordinateSystems": [
+        {
+          "name": "one",
+          "axes": [
             {
-                "type": "space",
-                "name": "x",
-                "unit": "micrometer",
-                "discrete": false
+              "type": "space",
+              "name": "x",
+              "unit": "micrometer",
+              "discrete": false
             },
             {
-                "type": "space",
-                "name": "y",
-                "unit": "micrometer",
-                "discrete": false
+              "type": "space",
+              "name": "y",
+              "unit": "micrometer",
+              "discrete": false
             }
-            ]
-          },
-          {
-            "name": "two",
-            "axes": [
+          ]
+        },
+        {
+          "name": "two",
+          "axes": [
             {
-                "type": "space",
-                "name": "x",
-                "unit": "micrometer",
-                "discrete": false
+              "type": "space",
+              "name": "x",
+              "unit": "micrometer",
+              "discrete": false
             },
             {
-                "type": "space",
-                "name": "y",
-                "unit": "micrometer",
-                "discrete": false
+              "type": "space",
+              "name": "y",
+              "unit": "micrometer",
+              "discrete": false
             }
-            ]
+          ]
+        }
+      ],
+      "coordinateTransformations": [
+        {
+          "type": "bijection",
+          "input": "one",
+          "output": "two",
+          "forward": {
+            "type": "scale"
           }
-        ],
-        "coordinateTransformations": [
-          {
-            "type": "bijection",
-            "input": "one",
-            "output": "two",
-            "forward": {
-              "type": "scale"
-            }
-          }
-        ]
-      }
-    },
-    "_conformance": {
-      "schema": {
-      "id": "schemas/scene.schema"
-      },
-      "description": "Tests for the scene JSON schema: ",
-      "valid": false
+        }
+      ]
     }
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/scene.schema"
+    },
+    "description": "Tests for the scene JSON schema: ",
+    "valid": false
+  }
 }

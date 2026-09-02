@@ -29,8 +29,12 @@
             "coordinateTransformations": [
               {
                 "type": "identity",
-                "output": {"name": "physical"},
-                "input": {"path": "array"},
+                "output": {
+                  "name": "physical"
+                },
+                "input": {
+                  "path": "array"
+                },
                 "name": "transform-name"
               }
             ]
@@ -41,7 +45,7 @@
   },
   "_conformance": {
     "schema": {
-    "id": "schemas/image.schema"
+      "id": "schemas/image.schema"
     },
     "description": "Tests for the image JSON schema: identity transformation"
   }

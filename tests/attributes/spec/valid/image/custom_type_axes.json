@@ -34,8 +34,12 @@
                   1,
                   1
                 ],
-                "input": {"path": "0"},
-                "output": {"name": "intrinsic"},
+                "input": {
+                  "path": "0"
+                },
+                "output": {
+                  "name": "intrinsic"
+                },
                 "type": "scale"
               }
             ]

@@ -1,119 +1,143 @@
 {
-	"ome": {
-		"version": "0.9.dev2",
-		"multiscales": [
-			{
-				"name": "multiscales",
-				"coordinateSystems": [
-					{
-						"name": "physical",
-						"axes": [
-							{
-								"type": "space",
-								"name": "z",
-								"unit": "micrometer",
-								"discrete": false
-							},
-							{
-								"type": "space",
-								"name": "y",
-								"unit": "micrometer",
-								"discrete": false
-							},
-							{
-								"type": "space",
-								"name": "x",
-								"unit": "micrometer",
-								"discrete": false
-							}
-						]
-					},
-					{
-						"name": "output",
-						"axes": [
-							{
-								"type": "space",
-								"name": "z",
-								"unit": "micrometer",
-								"discrete": false
-							},
-							{
-								"type": "space",
-								"name": "y",
-								"unit": "micrometer",
-								"discrete": false
-							},
-							{
-								"type": "space",
-								"name": "x",
-								"unit": "micrometer",
-								"discrete": false
-							}
-						]
-					}
-				],
-				"datasets": [
-					{
-						"path": "array",
-						"coordinateTransformations": [
-							{
-								"type": "sequence",
-								"input": {"path": "array"},
-								"output": {"name": "physical"},
-								"transformations": [
-									{
-										"type": "scale",
-										"scale": [1, 1, 1]
-									},
-									{
-										"type": "translation",
-										"translation": [
-											30,
-											20,
-											10
-										]
-									}
-								],
-								"name": "transform-name"
-							}
-						]
-					}
-				],
-				"coordinateTransformations": [
-					{
-						"type": "sequence",
-						"input": {"name": "physical"},
-						"output": {"name": "output"},
-						"transformations": [
-							{
-								"type": "rotation",
-								"path": "rotation_params_path"
-							},
-							{
-								"type": "translation",
-								"translation": [5, 10, 15]
-							},
-							{
-								"type": "affine",
-								"path": "affine_params_path"
-							},
-							{
-								"type": "scale",
-								"scale": [2, 2, 2]
-							},
-							{
-								"type": "mapAxis",
-								"mapAxis": [2, 1, 0]
-							}
-						]
-					}
-				]
-			}
-		]
+  "ome": {
+    "version": "0.9.dev2",
+    "multiscales": [
+      {
+        "name": "multiscales",
+        "coordinateSystems": [
+          {
+            "name": "physical",
+            "axes": [
+              {
+                "type": "space",
+                "name": "z",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
+                "name": "y",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
+                "name": "x",
+                "unit": "micrometer",
+                "discrete": false
+              }
+            ]
+          },
+          {
+            "name": "output",
+            "axes": [
+              {
+                "type": "space",
+                "name": "z",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
+                "name": "y",
+                "unit": "micrometer",
+                "discrete": false
+              },
+              {
+                "type": "space",
+                "name": "x",
+                "unit": "micrometer",
+                "discrete": false
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "array",
+            "coordinateTransformations": [
+              {
+                "type": "sequence",
+                "input": {
+                  "path": "array"
+                },
+                "output": {
+                  "name": "physical"
+                },
+                "transformations": [
+                  {
+                    "type": "scale",
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "type": "translation",
+                    "translation": [
+                      30,
+                      20,
+                      10
+                    ]
+                  }
+                ],
+                "name": "transform-name"
+              }
+            ]
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "type": "sequence",
+            "input": {
+              "name": "physical"
+            },
+            "output": {
+              "name": "output"
+            },
+            "transformations": [
+              {
+                "type": "rotation",
+                "path": "rotation_params_path"
+              },
+              {
+                "type": "translation",
+                "translation": [
+                  5,
+                  10,
+                  15
+                ]
+              },
+              {
+                "type": "affine",
+                "path": "affine_params_path"
+              },
+              {
+                "type": "scale",
+                "scale": [
+                  2,
+                  2,
+                  2
+                ]
+              },
+              {
+                "type": "mapAxis",
+                "mapAxis": [
+                  2,
+                  1,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
-	"_conformance": {
-		"schema": {
-					"id": "schemas/image.schema"
-		}
-	}
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    }
+  }
 }
