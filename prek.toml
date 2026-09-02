@@ -1,0 +1,25 @@
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace" },
+  { id = "check-yaml" },
+  { id = "end-of-file-fixer" },
+  # examples JSON files are actually JSONC and so would fail this hook
+  { id = "check-json", exclude = { glob = "examples/**/*.json" } },
+  # skip JSONC as above
+  { id = "pretty-format-json", exclude = { glob = "examples/**/*.json" }, args = [
+    "--no-sort-keys",
+    "--autofix",
+  ] },
+  { id = "mixed-line-ending", fix = "lf" },
+]
+
+[[repos]]
+repo = "https://github.com/editorconfig-checker/editorconfig-checker.python"
+rev = "3.11.1"
+hooks = [{ id = "editorconfig-checker" }]
+
+[[repos]]
+repo = "https://github.com/codespell-project/codespell"
+rev = "v2.4.3"
+hooks = [{ id = "codespell" }]
