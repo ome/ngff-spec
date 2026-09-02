@@ -1,9 +1,10 @@
 # %%
-import os
 import glob
-from pathlib import Path
-import jsonc as json
 import logging
+import os
+from pathlib import Path
+
+import jsonc as json
 
 # Suppress warnings from json-schema-for-humans about unresolvable URLs
 logging.getLogger().setLevel(logging.ERROR)
