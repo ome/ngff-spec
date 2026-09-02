@@ -262,14 +262,14 @@ where each object describes a dimension (axis) and:
 - MAY contain an "orientation" field, itself containing a "type" and a
   "value". Currently, "type" may only be "anatomical", and "value" may
   only be one from the list given in [list of possible anatomical
-  orientation values](orientation-values). A specific orientation value or
+  orientation values](spec:orientation-values). A specific orientation value or
   its inverse MUST NOT appear more than once in a given coordinate system.
 
 The values in the `name` fields MUST be unique within the same coordinate system.
 The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 ```{note}
-:label: orientation-values
+(spec:orientation-values)=
 
 When a spatial axis is aligned with a specific orientation, this can be
 indicated with the "orientation" field, which must have "type"
