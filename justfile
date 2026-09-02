@@ -35,3 +35,16 @@ pre-commit-install:
 # Run pre-commit lints on all files.
 pre-commit:
     uv run prek run --all-files
+
+clean:
+    rm -rf \
+        _build \
+        footer.md \
+        _authors.md \
+        examples/*.md \
+        examples/**/*.md \
+        schemas/*.md \
+        schemas/**/*.md \
+        schemas/**/*.html \
+        schemas/**/*.css \
+        schemas/**/*.js
