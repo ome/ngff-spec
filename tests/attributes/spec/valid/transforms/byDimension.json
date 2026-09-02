@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.9.dev1",
+    "version": "0.9.dev2",
     "multiscales": [
       {
         "name": "multiscales",
@@ -72,7 +72,7 @@
                 },
                 "outputAxes": [1],
                 "inputAxes": [1]
-                
+
               }
             ],
             "name": "transform-name"

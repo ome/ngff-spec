@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/0.9.dev1/schemas/axis_orientation.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.9.dev2/schemas/axis_orientation.schema",
   "title": "Axis Orientation",
   "description": "Controlled vocabulary for orientation of each spatial axis according to subject or subject-global reference.",
   "type": "object",

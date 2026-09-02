@@ -3,7 +3,7 @@
   "node_type": "group",
   "attributes": {
     "ome": {
-      "version": "0.9.dev1",
+      "version": "0.9.dev2",
       "multiscales": [
         {
           "name": "example",
@@ -51,7 +51,7 @@
                       "type": "translation",
                       "translation": [0, 0, 0.25, 0.25, 0.25]
                     }
-                  ]                  
+                  ]
                 }
               ]
             },
