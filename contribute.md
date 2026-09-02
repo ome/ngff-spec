@@ -13,10 +13,15 @@ Major changes should follow the RFC process as it was laid out in [RFC1](https:/
 ## Building the documentation
 
 Build and inspect changes to the documentation before submitting a PR.
-To do so, you first need to install the necessary dependencies:
+
+This project uses [`uv`](https://docs.astral.sh/uv) to manage its required (python) tooling,
+and [`just`](https://github.com/casey/just) to run common development tasks.
+
+[Install `uv`](https://docs.astral.sh/uv/#installation),
+then set up an environment with the correct python version and development dependencies with
 
 ```bash
-pip install .
+uv sync
 ```
 
 This document uses [jupyter-book](https://jupyterbook.org) to generate the pages
@@ -25,11 +30,22 @@ After installing these via the dependencies,
 navigate into the repository on your machine and build the book using the following command:
 
 ```bash
-python pre_build.py
-jupyter book start
+just serve
 ```
 
 This will build the book and start a local server to inspect the changes in your browser.
+
+To generate the "production" output in the `./_build/` directory, use
+
+```bash
+just build
+```
+
+To see all available recipes, use
+
+```bash
+just
+```
 
 ## First contribution
 
@@ -51,7 +67,7 @@ make sure to rebuild the `CITATION.cff` file in the root of this repository.
 To do so, run the following command:
 
 ```bash
-jupyter book build --cff
+just cff
 ```
 
 Make sure the updated `CITATION.cff` file is included in your PR.

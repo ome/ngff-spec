@@ -15,12 +15,17 @@ dependencies = [
 
 [project.optional-dependencies]
 testing = [
-    "tox",
+    "codespell",
     "pytest",  # https://docs.pytest.org/en/latest/contents.html
 ]
 
+[dependency-groups]
+dev = ["rust-just"]
+
 [tool.codespell]
 ignore-regex = '\bComparin\b'
+skip = ".git,.codespellrc,references.bib,.venv,.tox,*.css,_build"
+ignore-words-list = "commend,Fuchsia"
 
 [tool.hatch.version]
 path = "_version.py"
