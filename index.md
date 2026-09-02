@@ -1456,7 +1456,7 @@ In this example, a multiscales group containing labels is located at `labels/lab
 :::{dropdown} Example: Complete multiscales metadata
 
 A complete example of json-file for a 5D (TCZYX) multiscales with 3 resolution levels could look like this:
-```{literalinclude} examples/multiscales_strict/multiscales_example.json
+```{literalinclude} examples/multiscales/multiscales_example.json
 :language: json
 ```
 :::
@@ -1615,7 +1615,7 @@ In the `zarr.json` under the image.zarr group, an explicit `identity` transform 
 the coordinate system named `"physical"` in the multiscales metadata of the original image is the same as
 the coordinate system named `"physical"` in the multiscales metadata of the label image:
 
-```{literalinclude} examples/multiscales_strict/multiscale_reference_to_label.json
+```{literalinclude} examples/multiscales/multiscale_reference_to_label.json
 :language: json
 ```
 
@@ -1639,7 +1639,7 @@ a coordinate system named `"physical"` serves as the "[intrinsic](#spec:hint:mul
 The `image-label` field contains information about the source image and display colors for the label image,
 i.e., a label image in which 0s and 1s represent intercellular and cellular space, respectively:
 
-```{literalinclude} examples/label_strict/colors_properties.json
+```{literalinclude} examples/label/colors_properties.json
 :language: json
 ```
 
@@ -1718,14 +1718,14 @@ The `rowIndex`, `columnIndex`, and `path` MUST all refer to the same row/column 
 For example the following JSON object defines a plate with two acquisitions and 6 wells (2 rows and 3 columns),
 containing up to 2 fields of view per acquisition.
 
-```{literalinclude} examples/plate_strict/plate_6wells.json
+```{literalinclude} examples/plate/plate_6wells.json
 :language: json
 ```
 
 The following JSON object defines a sparse plate with one acquisition and 2 wells in a 96 well plate,
 containing one field of view per acquisition.
 
-```{literalinclude} examples/plate_strict/plate_2wells.json
+```{literalinclude} examples/plate/plate_2wells.json
 :language: json
 ```
 :::
@@ -1754,14 +1754,14 @@ For example the following JSON object defines a well with four fields of view.
 The first two fields of view were part of the first acquisition
 while the last two fields of view were part of the second acquisition.
 
-```{literalinclude} examples/well_strict/well_4fields.json
+```{literalinclude} examples/well/well_4fields.json
 :language: json
 ```
 
 The following JSON object defines a well with two fields of view in a plate with four acquisitions.
 The first field is part of the first acquisition, and the second field is part of the last acquisition.
 
-```{literalinclude} examples/well_strict/well_2fields.json
+```{literalinclude} examples/well/well_2fields.json
 :language: json
 ```
 :::

@@ -8,17 +8,19 @@ Test with
 """
 
 from __future__ import annotations
-from concurrent.futures import Future, ThreadPoolExecutor
-import os
-import subprocess as sp
-from argparse import ArgumentParser
-from pathlib import Path
-import sys
-import re
+
 import json
-from dataclasses import dataclass
-from typing import Any, Iterable, Literal, Self
 import logging
+import os
+import re
+import subprocess as sp
+import sys
+from argparse import ArgumentParser
+from collections.abc import Iterable
+from concurrent.futures import Future, ThreadPoolExecutor
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Literal, Self
 
 logger = logging.getLogger("ome_zarr_conformance")
 
@@ -80,14 +82,11 @@ class Requested:
         self,
         exclude_patterns: list[re.Pattern] | None = None,
         include_patterns: list[re.Pattern] | None = None,
-        exclude_strict=False,
         exclude_invalid=False,
     ) -> None:
         self.exclude_patterns = exclude_patterns or []
         self.include_patterns = include_patterns or []
 
-        if exclude_strict:
-            self.exclude_patterns.append(re.compile(r"^strict/"))
         if exclude_invalid:
             self.exclude_patterns.append(re.compile(r"^\w+/invalid/"))
 
@@ -202,12 +201,6 @@ def main(raw_args=None):
         help="regular expression pattern for test names to exclude; can be given multiple times",
     )
     parser.add_argument(
-        "--exclude-strict",
-        "-S",
-        action="store_true",
-        help="exclude strict tests",
-    )
-    parser.add_argument(
         "--exclude-invalid",
         "-I",
         action="store_true",
@@ -241,7 +234,7 @@ def main(raw_args=None):
         3: logging.DEBUG,
     }.get(args.verbose, logging.DEBUG)
     logging.basicConfig(level=lvl)
-    logging.debug("Got args: %s", args)
+    logger.debug("Got args: %s", args)
 
     if dingus_args is None:
         print(
@@ -267,7 +260,6 @@ def main(raw_args=None):
     req = Requested(
         exclude_patterns=args.exclude_pattern,
         include_patterns=args.include_pattern,
-        exclude_strict=bool(args.exclude_strict),
         exclude_invalid=bool(args.exclude_invalid),
     )
 

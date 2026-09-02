@@ -8,6 +8,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## Unreleased
+
+### Removed
+
+- [ome/ngff-spec#138](https://github.com/ome/ngff-spec/issues/138) Strict schemas and test cases
+
 ## 0.9.dev1 - 2026-08-20
 
 ### Added
@@ -30,6 +36,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - New `projectAxis` transformation to add or drop dimensions explicitly.
 
 ### Changed
+
 - BREAKING CHANGE: Unified `input` and `output` fields in all transformation metadata to be an object of `{"name": string, "path": string}` instead of allowing both string and object forms.
   This change was made to ensure consistency across all transformations and to simplify the specification.
 - BREAKING CHANGE: Replaced `arrayCoordinateSystems` with explanation of how to properly express dimensionless transforms.
