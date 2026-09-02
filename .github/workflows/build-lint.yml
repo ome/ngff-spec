@@ -2,17 +2,8 @@ name: "Build and Lint Site"
 
 on:
   workflow_dispatch:
+  push:
   pull_request:
-    branches: ["main"]
-    paths:
-      - "images/**"
-      - "**/*.md"
-      - "examples/**/*.json"
-      - "schemas/*.schema*"
-      - "pyproject.toml"
-      - "readthedocs.yaml"
-      - "_version.py"
-      - "pre_build.py"
 
 concurrency:
   group: build-lint-${{ github.ref }}
