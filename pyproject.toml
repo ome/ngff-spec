@@ -20,7 +20,13 @@ testing = [
 ]
 
 [dependency-groups]
-dev = ["rust-just"]
+test = ["pytest"]
+lint = ["codespell", "prek"]
+dev = [
+  "rust-just",
+  { include-group = "test" },
+  { include-group = "lint" }
+]
 
 [tool.codespell]
 ignore-regex = '\bComparin\b'
