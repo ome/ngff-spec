@@ -94,7 +94,7 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
         output_path_md = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".md")
         output_path_html = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".html")
         os.makedirs(os.path.dirname(output_path_md), exist_ok=True)
-        os.makedirs(os.path.dirname(output_path_html), exist_ok=True)        
+        os.makedirs(os.path.dirname(output_path_html), exist_ok=True)
 
         # Generate the documentation
         try:

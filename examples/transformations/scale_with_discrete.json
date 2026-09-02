@@ -17,7 +17,7 @@
       ]
     }
   ],
-  "coordinateTransformations": [ 
+  "coordinateTransformations": [
     {
       "type": "scale",
       "scale": [1, 3.12, 2],
