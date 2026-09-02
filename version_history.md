@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
+### Added
+
+- Pre-commit hook configuration for code quality
+
 ### Removed
 
 - [ome/ngff-spec#138](https://github.com/ome/ngff-spec/issues/138) Strict schemas and test cases

@@ -47,6 +47,16 @@ To see all available recipes, use
 just
 ```
 
+## Code quality
+
+To maximise consistency and minimise non-meaningful git churn,
+pre-commit hooks are used to lint and format some types of contribution.
+This is enforced on CI.
+
+When you clone the repository, install the hooks with `just pre-commit-install`.
+These will run whenever you make a commit;
+you can run them manually with `just pre-commit`.
+
 ## First contribution
 
 If you haven't contributed to the spec before,
