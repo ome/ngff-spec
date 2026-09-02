@@ -10,4 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v9.0.0
-      - run: uv run --extra testing pytest -v
+      - uses: extractions/setup-just@v4
+      - run: just test
+
+  pre-commit:
+    name: Pre-commit
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v9.0.0
+      - uses: extractions/setup-just@v4
+      - run: just pre-commit
