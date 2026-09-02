@@ -5,6 +5,7 @@
   "description": "OME-Zarr version.",
   "type": "string",
   "enum": [
+    "0.9",
     "0.9.dev1"
   ]
 }

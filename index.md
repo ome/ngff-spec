@@ -17,11 +17,6 @@ authors: " "
 
 ## Abstract
 
-```{warning}
-This is a development version of the specification. It includes RFC-3 and RFC-4
-which have not yet been accepted.
-```
-
 This document contains next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.
 All specifications are submitted to the <https://image.sc> community for review.
 
@@ -1020,7 +1015,7 @@ The matrix MUST be stored as a 2D array either as json or in a Zarr array.
 `rotation` transformations are invertible.
 
 **path**
-: The path to an array containing the affine parameters.
+: The path to an array containing the rotation parameters.
 The array at this path MUST be 2D whose shape MUST be `N x N`.
 
 **rotation**
@@ -1326,8 +1321,8 @@ resolutions.
 `multiscales` contains an array of objects where each entry describes a multiscale image.
 Each object provides the following fields:
 
-| | Field | Type | Required | Description |
-| --- | --- | --- | --- | --- |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
 | `coordinateSystems` | JSON array of objects | yes | [Coordinate system metadata](#coordinate-systems-md) for the multiscale image. |
 | `datasets` | JSON array of objects | yes | Metadata about arrays storing the individual resolution levels. |
 | `coordinateTransformations` | JSON array of objects | no | Metadata about transformations that are applied to all resolution levels in the same manner. |

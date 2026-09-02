@@ -107,7 +107,7 @@
               21.58
             ],
             "type": "translation",
-            "input": {"name": "intrinsic"},
+            "input": {"name": "physical"},
             "output": {"name": "world"}
           }
         ],
