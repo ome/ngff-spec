@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Pre-commit hook configuration for code quality
+- Internal link validation on CI
 
 ### Removed
 
