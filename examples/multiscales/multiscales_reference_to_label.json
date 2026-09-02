@@ -33,7 +33,7 @@
             "input": {"path": "labels/cell_segmentation","name": "physical"},
             "output": {"name": "physical"}
           }
-         ]
+        ]
       }
     ]
   }
