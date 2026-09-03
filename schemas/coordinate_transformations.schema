@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/0.9.dev1/schemas/coordinate_transformations.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.9.dev2/schemas/coordinate_transformations.schema",
   "title": "Coordinate Transformations",
   "description": "OME-Zarr Coordinate transforms.",
   "type": "array",
@@ -365,14 +365,14 @@
                 "items": {
                   "type": "number"
                 },
-                "description": "Names of the input axes for this transformation."
+                "description": "Indices of the input axes for this transformation."
               },
               "outputAxes": {
                 "type": "array",
                 "items": {
                   "type": "number"
                 },
-                "description": "Names of the output axes for this transformation."
+                "description": "Indices of the output axes for this transformation."
               }
             },
             "required": [

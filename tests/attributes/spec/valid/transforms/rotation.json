@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.9.dev1",
+    "version": "0.9.dev2",
     "multiscales": [
       {
         "name": "multiscales",
@@ -46,23 +46,40 @@
             "coordinateTransformations": [
               {
                 "type": "scale",
-                "output": {"name": "physical"},
-                "input": {"path": "array"},
-                "scale": [1, 1],
+                "output": {
+                  "name": "physical"
+                },
+                "input": {
+                  "path": "array"
+                },
+                "scale": [
+                  1,
+                  1
+                ],
                 "name": "array to physical"
               }
             ]
           }
         ],
-        "coordinateTransformations":[
+        "coordinateTransformations": [
           {
             "name": "rotation",
-            "input": {"name": "physical"},
-            "output": {"name": "rotated"},
+            "input": {
+              "name": "physical"
+            },
+            "output": {
+              "name": "rotated"
+            },
             "type": "rotation",
             "rotation": [
-              [0, 1],
-              [-1, 0]
+              [
+                0,
+                1
+              ],
+              [
+                -1,
+                0
+              ]
             ]
           }
         ]
@@ -71,7 +88,7 @@
   },
   "_conformance": {
     "schema": {
-    "id": "schemas/image.schema"
+      "id": "schemas/image.schema"
     },
     "description": "Tests for the image JSON schema: "
   }

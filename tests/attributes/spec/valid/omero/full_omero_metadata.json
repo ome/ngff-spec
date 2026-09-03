@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.9.dev1",
+    "version": "0.9.dev2",
     "multiscales": [
       {
         "coordinateSystems": [
@@ -35,8 +35,12 @@
                   1,
                   1
                 ],
-                "input": {"path": "s0"},
-                "output": {"name": "physical"},
+                "input": {
+                  "path": "s0"
+                },
+                "output": {
+                  "name": "physical"
+                },
                 "type": "scale"
               }
             ]

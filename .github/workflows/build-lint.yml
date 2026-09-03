@@ -1,0 +1,27 @@
+name: "Build and Lint Site"
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+concurrency:
+  group: build-lint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v9.0.0
+      - uses: extractions/setup-just@v4
+      - run: just build
+      # - name: Validate all links, enforce alt text
+      #   uses: athackst/htmlproofer-action@main
+      #   with:
+      #     directory: _build/html
+      #     disable_external: true
+      - name: Ensure no unexpected encoded HTML in output
+        run: |
+          ! fgrep -R 'lt;blockquote' _build/html

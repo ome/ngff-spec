@@ -1,56 +1,60 @@
 {
-	"ome": {
-		"version": "0.9.dev1",
-		"multiscales": [
-			{
-				"name": "multiscales",
-				"coordinateSystems": [
-					{
-						"name": "physical",
-						"axes": [
-							{
-								"type": "space",
-								"name": "y",
-								"unit": "micrometer",
-								"discrete": false,
+  "ome": {
+    "version": "0.9.dev2",
+    "multiscales": [
+      {
+        "name": "multiscales",
+        "coordinateSystems": [
+          {
+            "name": "physical",
+            "axes": [
+              {
+                "type": "space",
+                "name": "y",
+                "unit": "micrometer",
+                "discrete": false,
                 "orientation": {
                   "type": "anatomical",
                   "value": "top-to-bottom"
                 }
-							},
-							{
-								"type": "space",
-								"name": "x",
-								"unit": "micrometer",
-								"discrete": false,
+              },
+              {
+                "type": "space",
+                "name": "x",
+                "unit": "micrometer",
+                "discrete": false,
                 "orientation": {
                   "type": "anatomical",
                   "value": "empty-to-full"
                 }
-							}
-						]
-					}
-				],
-				"datasets": [
-					{
-						"path": "array",
-						"coordinateTransformations": [
-							{
-								"type": "identity",
-								"output": {"name": "physical"},
-								"input": {"path": "array"},
-								"name": "transform-name"
-							}
-						]
-					}
-				]
-			}
-		]
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "path": "array",
+            "coordinateTransformations": [
+              {
+                "type": "identity",
+                "output": {
+                  "name": "physical"
+                },
+                "input": {
+                  "path": "array"
+                },
+                "name": "transform-name"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
-	"_conformance": {
-		"schema": {
-					"id": "schemas/image.schema"
-		},
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    },
     "valid": false
-	}
+  }
 }

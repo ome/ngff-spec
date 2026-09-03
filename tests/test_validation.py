@@ -1,30 +1,25 @@
-import json
 import glob
+import json
 import os
-
 from dataclasses import dataclass
-from typing import List
+from pathlib import Path
 
 import pytest
-
-from jsonschema import RefResolver, Draft202012Validator as Validator
+from jsonschema import Draft202012Validator as Validator
+from jsonschema import RefResolver
 from jsonschema.exceptions import ValidationError
-from pathlib import Path
 
 os.chdir(Path(__file__).parent.parent)
 
 schema_store = {}
 for schema_filename in glob.glob("schemas/*"):
-    if schema_filename.endswith('.schema'):
+    if schema_filename.endswith(".schema"):
         with open(schema_filename) as f:
             schema = json.load(f)
             schema_store[schema["$id"]] = schema
 
 GENERIC_SCHEMA = schema_store[
-    "https://ngff.openmicroscopy.org/0.9.dev1/schemas/ome_zarr.schema"
-]
-GENERIC_STRICT_SCHEMA = schema_store[
-    "https://ngff.openmicroscopy.org/0.9.dev1/schemas/strict_ome_zarr.schema"
+    "https://ngff.openmicroscopy.org/0.9.dev2/schemas/ome_zarr.schema"
 ]
 
 
@@ -65,8 +60,8 @@ def pytest_generate_tests(metafunc):
     if "suite" not in metafunc.fixturenames:
         return
 
-    suites: List[Suite] = []
-    ids: List[str] = []
+    suites: list[Suite] = []
+    ids: list[str] = []
 
     # Validation
     for filename in glob.glob("tests/*.json"):
@@ -127,8 +122,8 @@ def test_example_configs():
         if has_examples and not has_config:
             missing.append(subdir[0])
     if missing:
-        raise Exception(f"Directories missing configs: {missing}")
+        raise FileNotFoundError(f"Directories missing configs: {missing}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main([__file__])

@@ -4,8 +4,8 @@ short_title: OME-Zarr
 authors: " "
 ---
 
-# Version 0.9.dev1
-(ngff-spec:spec:0.9.dev1)=
+# Version 0.9.dev2
+(ngff-spec:spec:0.9.dev2)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
@@ -17,17 +17,12 @@ authors: " "
 
 ## Abstract
 
-```{warning}
-This is a development version of the specification. It includes RFC-3 and RFC-4
-which have not yet been accepted.
-```
-
 This document contains next-generation file format (NGFF) specifications for storing bioimaging data in the cloud.
 All specifications are submitted to the <https://image.sc> community for review.
 
 ## Status of This Document
 
-The working title version of this specification is 0.9.dev1.
+The working title version of this specification is 0.9.dev2.
 Migration scripts will be provided between numbered versions.
 Data written with these latest changes will not necessarily be supported.
 
@@ -186,14 +181,14 @@ The OME-Zarr Metadata is stored in the various `zarr.json` files throughout the 
 The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 
 The group `attributes` MUST contain a key `ome`. The value of the `ome` key MUST be a JSON
-object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](#ngff-spec:spec:0.9.dev1).
+object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](#ngff-spec:spec:0.9.dev2).
 
 ```jsonc
 {
   // ...
   "attributes": {
     "ome": {
-      "version": "0.9.dev1",
+      "version": "0.9.dev2",
       // ...
     }
   }
@@ -238,7 +233,7 @@ refer to different physical entities and therefore should not be analyzed jointl
 Tasks that require images, annotations, regions of interest, etc.,
 SHOULD ensure that they are in the same coordinate system (same name and location within the Zarr hierarchy, with identical axes)
 or can be transformed to the same coordinate system before doing analysis.
-See the [example below](spec:example:coordinate_transformation).
+See the [example below](#spec:example:coordinate_transformation_scale).
 
 #### "axes" metadata
 (axes-md)=
@@ -267,14 +262,14 @@ where each object describes a dimension (axis) and:
 - MAY contain an "orientation" field, itself containing a "type" and a
   "value". Currently, "type" may only be "anatomical", and "value" may
   only be one from the list given in [list of possible anatomical
-  orientation values](orientation-values). A specific orientation value or
+  orientation values](spec:orientation-values). A specific orientation value or
   its inverse MUST NOT appear more than once in a given coordinate system.
 
 The values in the `name` fields MUST be unique within the same coordinate system.
 The length of "axes" MUST be equal to the number of dimensions of the arrays that contain the image data.
 
 ```{note}
-:label: orientation-values
+(spec:orientation-values)=
 
 When a spatial axis is aligned with a specific orientation, this can be
 indicated with the "orientation" field, which must have "type"
@@ -1020,7 +1015,7 @@ The matrix MUST be stored as a 2D array either as json or in a Zarr array.
 `rotation` transformations are invertible.
 
 **path**
-: The path to an array containing the affine parameters.
+: The path to an array containing the rotation parameters.
 The array at this path MUST be 2D whose shape MUST be `N x N`.
 
 **rotation**
@@ -1326,8 +1321,8 @@ resolutions.
 `multiscales` contains an array of objects where each entry describes a multiscale image.
 Each object provides the following fields:
 
-| | Field | Type | Required | Description |
-| --- | --- | --- | --- | --- |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
 | `coordinateSystems` | JSON array of objects | yes | [Coordinate system metadata](#coordinate-systems-md) for the multiscale image. |
 | `datasets` | JSON array of objects | yes | Metadata about arrays storing the individual resolution levels. |
 | `coordinateTransformations` | JSON array of objects | no | Metadata about transformations that are applied to all resolution levels in the same manner. |
@@ -1461,7 +1456,7 @@ In this example, a multiscales group containing labels is located at `labels/lab
 :::{dropdown} Example: Complete multiscales metadata
 
 A complete example of json-file for a 5D (TCZYX) multiscales with 3 resolution levels could look like this:
-```{literalinclude} examples/multiscales_strict/multiscales_example.json
+```{literalinclude} examples/multiscales/multiscales_example.json
 :language: json
 ```
 :::
@@ -1620,7 +1615,7 @@ In the `zarr.json` under the image.zarr group, an explicit `identity` transform 
 the coordinate system named `"physical"` in the multiscales metadata of the original image is the same as
 the coordinate system named `"physical"` in the multiscales metadata of the label image:
 
-```{literalinclude} examples/multiscales_strict/multiscale_reference_to_label.json
+```{literalinclude} examples/multiscales/multiscales_reference_to_label.json
 :language: json
 ```
 
@@ -1630,7 +1625,7 @@ The `zarr.json` under the `labels` group contains a JSON object with the key `la
 {
   "attributes": {
     "ome": {
-      "version": "0.9.dev1",
+      "version": "0.9.dev2",
       "labels": [
         "cell_segmentation"
       ]
@@ -1644,7 +1639,7 @@ a coordinate system named `"physical"` serves as the "[intrinsic](#spec:hint:mul
 The `image-label` field contains information about the source image and display colors for the label image,
 i.e., a label image in which 0s and 1s represent intercellular and cellular space, respectively:
 
-```{literalinclude} examples/label_strict/colors_properties.json
+```{literalinclude} examples/label/colors_properties.json
 :language: json
 ```
 
@@ -1723,14 +1718,14 @@ The `rowIndex`, `columnIndex`, and `path` MUST all refer to the same row/column 
 For example the following JSON object defines a plate with two acquisitions and 6 wells (2 rows and 3 columns),
 containing up to 2 fields of view per acquisition.
 
-```{literalinclude} examples/plate_strict/plate_6wells.json
+```{literalinclude} examples/plate/plate_6wells.json
 :language: json
 ```
 
 The following JSON object defines a sparse plate with one acquisition and 2 wells in a 96 well plate,
 containing one field of view per acquisition.
 
-```{literalinclude} examples/plate_strict/plate_2wells.json
+```{literalinclude} examples/plate/plate_2wells.json
 :language: json
 ```
 :::
@@ -1759,14 +1754,14 @@ For example the following JSON object defines a well with four fields of view.
 The first two fields of view were part of the first acquisition
 while the last two fields of view were part of the second acquisition.
 
-```{literalinclude} examples/well_strict/well_4fields.json
+```{literalinclude} examples/well/well_4fields.json
 :language: json
 ```
 
 The following JSON object defines a well with two fields of view in a plate with four acquisitions.
 The first field is part of the first acquisition, and the second field is part of the last acquisition.
 
-```{literalinclude} examples/well_strict/well_2fields.json
+```{literalinclude} examples/well/well_2fields.json
 :language: json
 ```
 :::
