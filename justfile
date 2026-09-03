@@ -8,6 +8,10 @@ _prebuild:
 build: _prebuild
     uv run jupyter book build --html --ci
 
+# Open the built document in the web browser. Project must be explicitly built first.
+view:
+    uv run python -m webbrowser "file://{{ justfile_directory() }}/_build/html/index.html"
+
 # Build the book and start a local server to view it.
 serve: _prebuild
     uv run jupyter book start
