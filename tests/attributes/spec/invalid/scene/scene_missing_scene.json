@@ -1,6 +1,6 @@
 {
     "ome": {
-        "version": "0.6rc0",
+        "version": "0.6",
         "coordinateSystems": [
             {
                 "name": "world",

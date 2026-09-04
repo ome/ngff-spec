@@ -4,8 +4,8 @@ short_title: OME-Zarr
 authors: " "
 ---
 
-# Version 0.6rc0
-(ngff-spec:spec:0.6rc0)=
+# Version 0.6
+(ngff-spec:spec:0.6)=
 
 **Feedback:** [Forum](https://forum.image.sc/tag/ome-ngff), [Github](https://github.com/ome/ngff/issues)
 
@@ -22,7 +22,7 @@ All specifications are submitted to the <https://image.sc> community for review.
 
 ## Status of This Document
 
-The working title version of this specification is 0.6rc0.
+The working title version of this specification is 0.6.
 Migration scripts will be provided between numbered versions.
 Data written with these latest changes (an "editor's draft") will not necessarily be supported.
 
@@ -182,14 +182,14 @@ The OME-Zarr Metadata is stored in the various `zarr.json` files throughout the 
 The OME-Zarr Metadata version MUST be consistent within a hierarchy.
 
 The group `attributes` MUST contain a key `ome`. The value of the `ome` key MUST be a JSON
-object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](#ngff-spec:spec:0.6rc0).
+object that MUST contain a `version` key, the value of which MUST be a string specifying the version of the OME-Zarr specification defined by [this document](#ngff-spec:spec:0.6).
 
 ```jsonc
 {
   // ...
   "attributes": {
     "ome": {
-      "version": "0.6rc0",
+      "version": "0.6",
       // ...
     }
   }
@@ -1566,7 +1566,7 @@ The `zarr.json` under the `labels` group contains a JSON object with the key `la
 {
   "attributes": {
     "ome": {
-      "version": "0.6rc0",
+      "version": "0.6",
       "labels": [
         "cell_segmentation"
       ]
