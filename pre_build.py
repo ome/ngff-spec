@@ -4,6 +4,7 @@ import glob
 from pathlib import Path
 import jsonc as json
 import logging
+from _version import __version__
 
 # Suppress warnings from json-schema-for-humans about unresolvable URLs
 logging.getLogger().setLevel(logging.ERROR)
@@ -46,7 +47,7 @@ This document contains JSON examples for {example} metadata layouts.
         for json_file in json_files:
             print(f'Processing {json_file}...')
 
-            crossref = f"examples:{example}:{Path(json_file).stem}"
+            crossref = f"{__version__}-examples-{example}-{Path(json_file).stem}"
             index_md += f"- [{Path(json_file).stem}](#{crossref})\n"
 
             json_file_name = Path(json_file).stem
@@ -113,7 +114,7 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
             # insert mySt cross-reference at top of markdown files
             with open(output_path_md, 'r', encoding='utf-8') as md_file:
                 md_content = md_file.read()
-            crossref = f"schemas:{Path(schema_file).stem}"
+            crossref = f"{__version__}-schemas-{Path(schema_file).stem}"
             md_content = f"""---
 author: ""
 ---
