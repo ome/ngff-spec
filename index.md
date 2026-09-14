@@ -22,10 +22,6 @@ All specifications are submitted to the <https://image.sc> community for review.
 
 ## Status of This Document
 
-The working title version of this specification is 0.6.
-Migration scripts will be provided between numbered versions.
-Data written with these latest changes (an "editor's draft") will not necessarily be supported.
-
 The conventions and specifications defined in this document
 are designed to enable next-generation file formats to represent
 the same bioimaging data that can be represented in [OME-TIFF](http://www.openmicroscopy.org/ome-files/) and beyond.
