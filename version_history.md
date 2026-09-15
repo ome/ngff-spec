@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
+## 0.9.dev2 - TBC
+
 ### Removed
 
 - [ome/ngff-spec#138](https://github.com/ome/ngff-spec/issues/138) Strict schemas and test cases
