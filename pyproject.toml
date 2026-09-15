@@ -13,14 +13,8 @@ dependencies = [
     "tomli",
 ]
 
-[project.optional-dependencies]
-testing = [
-    "codespell",
-    "pytest",  # https://docs.pytest.org/en/latest/contents.html
-]
-
 [dependency-groups]
-test = ["pytest"]
+test = ["pytest", "jsonschema"]
 lint = ["codespell", "prek"]
 dev = [
   "rust-just",
