@@ -19,7 +19,7 @@
           "description": "Name of coordinate system. Must be unique among all coordinate systems."
         },
         "axes": {
-          "$ref": "axes.schema"
+          "$ref": "https://ngff.openmicroscopy.org/0.9.dev2/schemas/axes.schema"
         }
       },
       "required": [
