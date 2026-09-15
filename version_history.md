@@ -28,14 +28,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - [ome/ngff-spec#87](https://github.com/ome/ngff-spec/pull/87): some
   "omero" fields become optional.
 
-## 0.6rc0 - 2026-07-01
+## 0.6 - 2026-09-14
 
 ### Added
 
 - [RFC5](https://ngff.openmicroscopy.org/rfc/5/index.html) adopted: Transformations, coordinate systems and `scene` metadata.
 - Added `projectAxis` transform to add or drop dimensions at specified indices of the coordinate vector.
 - Added suggestion on which coordinate system to use for display in the spec document.
-- New `projectAxis` transformation to add or drop dimensions explicitly.
 
 ### Changed
 
@@ -54,7 +53,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Removed `version` field from `multiscales` metadata in the image schema (`schemas/image.schema`) since it is already required at `ome > version`
 - Removed `version` field from `plate`, `well` and `labels` metadata in the spec document since it is already required at `ome > version`.
-
 ## [0.6.dev4] - 2026-04-22
 
 ### Changed
