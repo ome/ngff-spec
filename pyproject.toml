@@ -24,8 +24,9 @@ dev = [
 
 [tool.codespell]
 ignore-regex = '\bComparin\b'
-skip = ".git,.codespellrc,references.bib,.venv,.tox,*.css,_build"
+skip = ".git,references.bib,.venv,.tox,*.css,_build"
 ignore-words-list = "commend,Fuchsia"
+check-hidden = true
 
 [tool.hatch.version]
 path = "_version.py"
