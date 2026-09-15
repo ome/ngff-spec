@@ -75,7 +75,7 @@ def pytest_generate_tests(metafunc):
             suites.append(Suite(schema, test["data"], test["valid"]))
 
     # Examples
-    for config_filename in glob.glob("../examples/*/.config.json"):
+    for config_filename in glob.glob("examples/*/.config.json"):
         with open(config_filename) as o:
             data = json.load(o)
         schema_path = data["schema"]

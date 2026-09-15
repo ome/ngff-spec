@@ -171,7 +171,7 @@ def main(raw_args=None):
         description=(
             "Feed sample Zarr data into a dingus CLI for validation. "
             "After the arguments shown, add a -- followed by the dingus CLI call; "
-            "e.g., `ome_zarr_conformance attributes --exclude-strict -- path/to/my/dingus -cli +args`. "
+            "e.g., `ome_zarr_conformance attributes -- path/to/my/dingus -cli +args`. "
             "The path to the attributes file or root of the zarr container will be appended to the dingus call."
         )
     )
