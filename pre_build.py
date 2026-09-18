@@ -1,9 +1,12 @@
 # %%
-import os
 import glob
-from pathlib import Path
-import jsonc as json
 import logging
+import os
+from pathlib import Path
+
+import jsonc as json
+
+from _version import __version__
 
 # Suppress warnings from json-schema-for-humans about unresolvable URLs
 logging.getLogger().setLevel(logging.ERROR)
@@ -46,7 +49,7 @@ This document contains JSON examples for {example} metadata layouts.
         for json_file in json_files:
             print(f'Processing {json_file}...')
 
-            crossref = f"examples:{example}:{Path(json_file).stem}"
+            crossref = f"{__version__}-examples-{example}-{Path(json_file).stem}"
             index_md += f"- [{Path(json_file).stem}](#{crossref})\n"
 
             json_file_name = Path(json_file).stem
@@ -94,7 +97,7 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
         output_path_md = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".md")
         output_path_html = os.path.join(output_directory, f"{Path(schema_file).stem}" + ".html")
         os.makedirs(os.path.dirname(output_path_md), exist_ok=True)
-        os.makedirs(os.path.dirname(output_path_html), exist_ok=True)        
+        os.makedirs(os.path.dirname(output_path_html), exist_ok=True)
 
         # Generate the documentation
         try:
@@ -113,7 +116,7 @@ Find below links to auto-generated markdown pages or interactive HTML pages for 
             # insert mySt cross-reference at top of markdown files
             with open(output_path_md, 'r', encoding='utf-8') as md_file:
                 md_content = md_file.read()
-            crossref = f"schemas:{Path(schema_file).stem}"
+            crossref = f"{__version__}-schemas-{Path(schema_file).stem}"
             md_content = f"""---
 author: ""
 ---

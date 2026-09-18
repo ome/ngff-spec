@@ -1,12 +1,22 @@
 ---
 author: ""
 ---
+
 # Version History
+
 (ngff-spec:history)=
 
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+## Unreleased
+
+## 0.9.dev2 - TBC
+
+### Removed
+
+- [ome/ngff-spec#138](https://github.com/ome/ngff-spec/issues/138) Strict schemas and test cases
 
 ## 0.9.dev1 - 2026-08-20
 
@@ -20,16 +30,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - [ome/ngff-spec#87](https://github.com/ome/ngff-spec/pull/87): some
   "omero" fields become optional.
 
-## 0.6rc0 - 2026-07-01
+## 0.6 - 2026-09-14
 
 ### Added
 
 - [RFC5](https://ngff.openmicroscopy.org/rfc/5/index.html) adopted: Transformations, coordinate systems and `scene` metadata.
 - Added `projectAxis` transform to add or drop dimensions at specified indices of the coordinate vector.
 - Added suggestion on which coordinate system to use for display in the spec document.
-- New `projectAxis` transformation to add or drop dimensions explicitly.
 
 ### Changed
+
 - BREAKING CHANGE: Unified `input` and `output` fields in all transformation metadata to be an object of `{"name": string, "path": string}` instead of allowing both string and object forms.
   This change was made to ensure consistency across all transformations and to simplify the specification.
 - BREAKING CHANGE: Replaced `arrayCoordinateSystems` with explanation of how to properly express dimensionless transforms.
@@ -45,7 +55,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Removed `version` field from `multiscales` metadata in the image schema (`schemas/image.schema`) since it is already required at `ome > version`
 - Removed `version` field from `plate`, `well` and `labels` metadata in the spec document since it is already required at `ome > version`.
-
 ## [0.6.dev4] - 2026-04-22
 
 ### Changed

@@ -9,7 +9,7 @@
       "axes": [{"name": "z", "type": "space"}, {"name": "y", "type": "space"}, {"name": "x", "type": "space"}]
     }
   ],
-  "coordinateTransformations": [ 
+  "coordinateTransformations": [
     {
       "type": "affine",
       "affine": [[1, 0, 0], [2, 3, 4], [5, 6, 7]],

@@ -1,6 +1,6 @@
 {
   "ome": {
-    "version": "0.9.dev1",
+    "version": "0.9.dev2",
     "multiscales": [
       {
         "name": "multiscales",
@@ -44,8 +44,12 @@
             "coordinateTransformations": [
               {
                 "type": "identity",
-                "output": {"name": "array_coordinates"},
-                "input": {"path": "s0"},
+                "output": {
+                  "name": "array_coordinates"
+                },
+                "input": {
+                  "path": "s0"
+                },
                 "name": "transform-name"
               }
             ]
@@ -54,25 +58,40 @@
         "coordinateTransformations": [
           {
             "type": "byDimension",
-            "input": {"name": "array_coordinates"},
-            "output": {"name": "physical"},
+            "input": {
+              "name": "array_coordinates"
+            },
+            "output": {
+              "name": "physical"
+            },
             "transformations": [
               {
                 "transformation": {
                   "type": "scale",
-                  "scale": [2]
+                  "scale": [
+                    2
+                  ]
                 },
-                "outputAxes": [0],
-                "inputAxes": [0]
+                "outputAxes": [
+                  0
+                ],
+                "inputAxes": [
+                  0
+                ]
               },
               {
                 "transformation": {
                   "type": "translation",
-                  "translation": [-10]
+                  "translation": [
+                    -10
+                  ]
                 },
-                "outputAxes": [1],
-                "inputAxes": [1]
-                
+                "outputAxes": [
+                  1
+                ],
+                "inputAxes": [
+                  1
+                ]
               }
             ],
             "name": "transform-name"
@@ -83,7 +102,7 @@
   },
   "_conformance": {
     "schema": {
-    "id": "schemas/image.schema"
+      "id": "schemas/image.schema"
     },
     "description": "Tests for the image JSON schema: byDimension transformation"
   }

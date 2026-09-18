@@ -17,7 +17,7 @@
       ]
     }
   ],
-  "coordinateTransformations" : [ 
+  "coordinateTransformations" : [
     {
       "type": "affine",
       "affine": [

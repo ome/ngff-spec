@@ -8,13 +8,13 @@ build:
     post_install:
       - pip install uv
       - UV_PROJECT_ENVIRONMENT=$READTHEDOCS_VIRTUALENV_PATH uv sync --link-mode=copy
-      
+
     pre_build:
       # Run the script that autogenerates content before building the docs
       - "uv run python pre_build.py"
 
     build:
-      html: 
+      html:
         - jupyter book build --html --ci
         - mkdir -p $READTHEDOCS_OUTPUT
         - mv ./_build/html $READTHEDOCS_OUTPUT
