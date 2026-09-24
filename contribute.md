@@ -13,10 +13,15 @@ Major changes should follow the RFC process as it was laid out in [RFC1](https:/
 ## Building the documentation
 
 Build and inspect changes to the documentation before submitting a PR.
-To do so, you first need to install the necessary dependencies:
+
+This project uses [`uv`](https://docs.astral.sh/uv) to manage its required (python) tooling,
+and [`just`](https://github.com/casey/just) to run common development tasks.
+
+[Install `uv`](https://docs.astral.sh/uv/#installation),
+then set up an environment with the correct python version and development dependencies with
 
 ```bash
-pip install .
+uv sync
 ```
 
 This document uses [jupyter-book](https://jupyterbook.org) to generate the pages
@@ -25,11 +30,32 @@ After installing these via the dependencies,
 navigate into the repository on your machine and build the book using the following command:
 
 ```bash
-python pre_build.py
-jupyter book start
+just serve
 ```
 
 This will build the book and start a local server to inspect the changes in your browser.
+
+To generate the "production" output in the `./_build/` directory, use
+
+```bash
+just build
+```
+
+To see all available recipes, use
+
+```bash
+just
+```
+
+## Code quality
+
+To maximise consistency and minimise non-meaningful git churn,
+pre-commit hooks are used to lint and format some types of contribution.
+This is enforced on CI.
+
+When you clone the repository, install the hooks with `just pre-commit-install`.
+These will run whenever you make a commit;
+you can run them manually with `just pre-commit`.
 
 ## First contribution
 
@@ -51,7 +77,7 @@ make sure to rebuild the `CITATION.cff` file in the root of this repository.
 To do so, run the following command:
 
 ```bash
-jupyter book build --cff
+just cff
 ```
 
 Make sure the updated `CITATION.cff` file is included in your PR.
@@ -70,19 +96,35 @@ MyST allows a number of ways to reference and cross-reference inside this text
 and across several of the pages in this repo.
 For an overview of supported referencing syntax,
 see the [MyST doc pages](https://mystmd.org/guide/cross-references).
-It is recommended to use the following syntax in this document for consistency:
+It is recommended to use the following syntax for references:
 
 ```markdown
-anchor: (your-reference-name)=
-reference: [This is a reference](#your-reference-name)
+[This is the visible text](#your-reference-name)
+```
+
+Use `(your-reference)=` on the line before an element like a section header to set the target for that element.
+
+```markdown
+(version0.9:some-section)=
+## Some section
+
+(version0.9:some-note)=
+:::{note}
+
+The content of a note.
+:::
+
+## Another section
+
+See the [note](#some-note) in the [previous section](#some-section).
 ```
 
 For cross-referencing in the spec document,
 make sure to prepend the reference anchor with `versionX` like so:
 
 ```markdown
-## Some header
 (version0.9:some-header)=
+## Some header
 ```
 
 Otherwise, the same anchors may not be possible to resolve
@@ -112,7 +154,7 @@ This is a citation {cite:t}`citation_key`.
 
 where `citation_key` is the key of the bibtex entry in the `references.bib` file.
 
-#### Json examples
+#### JSON examples
 
 We suggest using [dropdowns](https://mystmd.org/guide/dropdowns-cards-and-tabs) for example code and other highlighting.
 For examples, please use the following syntax to wrap your examples:

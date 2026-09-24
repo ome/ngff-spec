@@ -1,33 +1,33 @@
 {
-    "ome": {
-        "version": "0.9.dev1",
-        "scene": {
-            "coordinateSystems": [
+  "ome": {
+    "version": "0.9.dev2",
+    "scene": {
+      "coordinateSystems": [
+        {
+          "name": "world",
+          "axes": [
             {
-                "name": "world",
-                "axes": [
-                {
-                    "type": "space",
-                    "name": "x",
-                    "unit": "micrometer",
-                    "discrete": false
-                },
-                {
-                    "type": "space",
-                    "name": "y",
-                    "unit": "micrometer",
-                    "discrete": false
-                }
-                ]
+              "type": "space",
+              "name": "x",
+              "unit": "micrometer",
+              "discrete": false
+            },
+            {
+              "type": "space",
+              "name": "y",
+              "unit": "micrometer",
+              "discrete": false
             }
-            ]
+          ]
         }
-    },
-    "_conformance": {
-        "schema": {
-        "id": "schemas/scene.schema"
-        },
-        "description": "Tests for the scene JSON schema: ",
-        "valid": false
+      ]
     }
+  },
+  "_conformance": {
+    "schema": {
+      "id": "schemas/scene.schema"
+    },
+    "description": "Tests for the scene JSON schema: ",
+    "valid": false
+  }
 }

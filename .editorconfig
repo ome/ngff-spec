@@ -6,10 +6,13 @@ insert_final_newline = true
 charset = utf-8
 trim_trailing_whitespace = true
 
-[*.{py,md,ini}]
+[*.md]
+indent_style = space
+
+[*.{py,ini}]
 indent_style = space
 indent_size = 4
 
-[*.{json,yaml,yml,cff}]
+[*.{json,yaml,yml,cff,toml,schema}]
 indent_style = space
 indent_size = 2

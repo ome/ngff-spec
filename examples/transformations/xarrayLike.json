@@ -3,7 +3,7 @@
     { "name": "in", "axes": [ {"name": "i", "type": "space"}, {"name": "j", "type": "space"} ]},
     { "name": "out", "axes": [ {"name": "x", "type": "space"}, {"name": "y", "type": "space"} ]}
   ],
-  "coordinateTransformations": [ 
+  "coordinateTransformations": [
     {
       "type": "byDimension",
       "input": {"name": "in"},

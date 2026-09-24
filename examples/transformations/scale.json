@@ -9,7 +9,7 @@
       "axes": [{"name": "y", "type": "space"}, {"name": "x", "type": "space"}]
     }
   ],
-  "coordinateTransformations": [ 
+  "coordinateTransformations": [
     {
       "type": "scale",
       "scale": [2, 3.12],

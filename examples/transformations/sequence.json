@@ -9,7 +9,7 @@
       "axes": [ {"name": "y", "type": "space"}, {"name": "x", "type": "space"} ]
     }
   ],
-  "coordinateTransformations": [ 
+  "coordinateTransformations": [
     {
       "type": "sequence",
       "input": {"name": "in"},

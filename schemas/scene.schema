@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ngff.openmicroscopy.org/0.9.dev1/schemas/scene.schema",
+  "$id": "https://ngff.openmicroscopy.org/0.9.dev2/schemas/scene.schema",
   "title": "Scene",
   "description": "Scene metadata combining coordinate systems and coordinate transformations to define spatial relationships",
   "type": "object",
@@ -9,12 +9,12 @@
       "type": "object",
       "properties": {
         "version": {
-          "$ref": "https://ngff.openmicroscopy.org/0.9.dev1/schemas/_version.schema"
+          "$ref": "https://ngff.openmicroscopy.org/0.9.dev2/schemas/_version.schema"
         },
         "scene":{
           "properties": {
             "coordinateSystems": {
-                "$ref": "coordinate_systems.schema",
+                "$ref": "https://ngff.openmicroscopy.org/0.9.dev2/schemas/coordinate_systems.schema",
                 "description": "Coordinate systems to combine with transforms to define spatial relationships"
             },
             "coordinateTransformations": {
@@ -24,7 +24,7 @@
               "items": {
                 "allOf": [
                   {
-                    "$ref": "coordinate_transformations.schema#/$defs/coordinateTransformation",
+                    "$ref": "https://ngff.openmicroscopy.org/0.9.dev2/schemas/coordinate_transformations.schema#/$defs/coordinateTransformation",
                     "description": "Parameters of any possible transform"
                   },
                   {
