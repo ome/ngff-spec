@@ -7,7 +7,7 @@ requires-python = ">=3.10"
 dependencies = [
     "json-schema-for-humans",
     "json_with_comments",
-    "jupyter-book==2.0.0b3",
+    "jupyter-book>=2.0.0",
     "jsonschema_markdown",
     "mystmd==1.6.3",
     "tomli",
