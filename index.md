@@ -417,7 +417,7 @@ The following transformations are supported:
 | [`displacements`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Displacement field transformation located at `path`. |
 | [`coordinates`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Coordinate field transformation located at `path`. |
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
-| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
+| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[integer]`, <br> and `"outputAxes": List[integer]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details).
 
