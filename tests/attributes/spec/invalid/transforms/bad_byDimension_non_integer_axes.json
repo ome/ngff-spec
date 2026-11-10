@@ -72,7 +72,6 @@
                 },
                 "outputAxes": [1],
                 "inputAxes": [1]
-                
               }
             ],
             "name": "transform-name"
@@ -85,7 +84,7 @@
     "schema": {
     "id": "schemas/image.schema"
     },
-    "description": "byDimension axis indices must be non-negative integers (non-integer axis index)",
+    "description": "Tests for the image JSON schema: byDimension inputAxes/outputAxes must be integers",
     "valid": false
   }
 }
