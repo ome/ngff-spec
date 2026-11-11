@@ -163,3 +163,13 @@ Before creating a release, please make sure to go through the following items to
 - [ ] Update the specification number in the spec text. The [spec text](./index.md) mentions its own version number in several places. Please make sure to update those to the new version.
 - [ ] Make sure all tests are passing. Run the test suite to make sure that all tests are passing before creating a release.
 - [ ] Update the version history. Add a new entry to the [version history](#ngff-spec:history) file with the new version number and date, and a summary of the changes made in this release.
+
+To release a new version, minimally, the repository needs to be *tagged* with the new version number.
+This triggers the schemas under the `schemas/` directory to be released through the ngff website under
+`https://ngff.openmicroscopy.org/<version>/schemas/<schema_name>.schema.json` upon the next page build.
+
+Similarly, all changes to the contents of the specification itself are released via the NGFF website
+through the git submodule mechanism. The tracked submodules are listed in the [gitmodules file
+in the NGFF repository](https://github.com/ome/ngff/blob/main/.gitmodules).
+Any change in the tracked branches of the [ngff-spec repository](https://github.com/ome/ngff-spec) will be reflected in the NGFF website upon the next page build.
+Commit changes to the tracked branches will then be picked up by periodic dependabot updates to the NGFF repository's main branch.
