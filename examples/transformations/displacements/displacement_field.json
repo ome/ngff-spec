@@ -20,7 +20,7 @@
             "coordinateTransformations": [
               {
                 "type": "scale",
-                "scale": [2.0, 2.0],
+                "scale": [1.0, 2.0, 2.0],
                 "input" : {"path": "s0"},
                 "output" : {"name": "physical"}
               }
