@@ -455,7 +455,8 @@ Depending on which, different constraints apply to the transformations, as descr
 - **Inside `multiscales > coordinateTransformations`**: Additional transformations for single multiscale images MAY be stored here.
   - One of `input` or `output` MUST reference the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system by `name` (`path` MAY be omitted or null).
   - The other MUST reference a named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or in a child [labels](#labels-md) group (by `name` and `path`).
-  - When referencing a child labels group, the transformation MUST be [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
+  - When referencing a child labels group, the transformation MUST be [`identity`](#identity-md), [`scale`](#scale-md), [`translation`](#translation-md),
+    or a [`sequence`](#sequence-md) of a `scale` and a `translation` transformation.
 
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more multiscales can be expressed here.
   - Both `input` and `output` MUST specify a coordinate system `name`.
@@ -1360,7 +1361,8 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
   - The other of `input` or `output` MUST reference either:
     - A named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or
     - A named coordinate system in a child [labels](#labels-md) group (by `name` and `path`).
-  - When referencing a coordinate system in a child labels group, the transformation MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
+  - When referencing a coordinate system in a child labels group, the transformation MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), [`translation`](#translation-md),
+    or a [`sequence`](#sequence-md) of a `scale` and a `translation` transformation.
 
 :::{dropdown} Example: Additional coordinate transformation
 
@@ -1479,8 +1481,8 @@ The following requirements for the parent image group apply:
 - The image group MAY contain an additional coordinate transformation
   that links its "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system to the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system of each label image in the `labels` group.
   If no such transformation is provided, the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system of the image group is usually understood to be the same as the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system of each label image in the `labels` group.
-- This transformation, if specified, MUST be one of [`identity`](#identity-md), ['scale'](#scale-md), a ['translation'](#translation-md)
-  or a ['sequence'](#sequence-md) of a scale and a translation transformation.
+- This transformation, if specified, MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), [`translation`](#translation-md),
+  or a [`sequence`](#sequence-md) of a `scale` and a `translation` transformation.
 
 The `labels` group is not itself an image; it contains images.
 The pixels of the label images MUST be integer data types,
