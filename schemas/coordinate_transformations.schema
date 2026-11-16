@@ -370,14 +370,16 @@
               "inputAxes": {
                 "type": "array",
                 "items": {
-                  "type": "number"
+                  "type": "integer",
+                  "minimum": 0
                 },
                 "description": "Indices of the input axes for this transformation."
               },
               "outputAxes": {
                 "type": "array",
                 "items": {
-                  "type": "number"
+                  "type": "integer",
+                  "minimum": 0
                 },
                 "description": "Indices of the output axes for this transformation."
               }
