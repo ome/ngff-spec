@@ -254,7 +254,7 @@ See the [example below](#spec:example:coordinate_transformation_scale).
 | key | requirement | type | description |
 | --- | ----------- | ---- | ----------- |
 | `name` | MUST | string, non-empty | Used to identify the axis. |
-| `type` | MUST | string | See below for axis types. |
+| `type` | SHOULD | string | See below for axis types. |
 | `discrete` | MAY | boolean, default `false` | Whether this axis should not be interpolated. |
 | `unit` | SHOULD | string | See below for unit types. |
 | `longName` | MAY | string | Description of an axis and its properties. |
