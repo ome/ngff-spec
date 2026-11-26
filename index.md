@@ -409,15 +409,15 @@ The following transformations are supported:
 | [`identity`](#identity-md) | | The identity transformation is the do-nothing transformation and is typically not explicitly defined. |
 | [`mapAxis`](#mapaxis-md) | `"mapAxis":List[number]` | an axis permutation as a transpose array of integer indices that refer to the ordering of the axes in the respective coordinate system. |
 | [`projectAxis`](#projectAxis-md) | `"droppedInputs":List[number]`<br>`"createdOutputs":List[number]` | Map coordinates from an input coordinate system to an output coordinate system with a different dimensionality. |
-| [`translation`](#translation-md) | <br>`"translation":List[number]` | Translation vector, stored either as an array of numbers (`"translation"`) or as a Zarr array at a location in this container (`path`). |
-| [`scale`](#scale-md) | <br>`"scale":List[number]` | Scale vector, stored either as an array of numbers (`scale`) or as a Zarr array at a location in this container (`path`). |
+| [`translation`](#translation-md) | `"translation":List[number]` | Translation vector, stored as an array of numbers (`translation`). |
+| [`scale`](#scale-md) | `"scale":List[number]` | Scale vector, stored as an array of numbers (`scale`). |
 | [`affine`](#affine-md) | one of:<br>`"affine":List[List[number]]`,<br>`"path":str` | 2D affine transformation matrix stored either with JSON (`affine`) or as a Zarr array at a location in this container (`path`). |
 | [`rotation`](#rotation-md) | one of:<br>`"rotation":List[List[number]]`,<br>`"path":str` | 2D rotation transformation matrix stored as an array stored either with json (`rotation`) or as a Zarr array at a location in this container (`path`).|
 | [`sequence`](#sequence-md) | `"transformations":List[Transformation]` | sequence of transformations. Applying the sequence applies the composition of all transforms in the list, in order. |
 | [`displacements`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Displacement field transformation located at `path`. |
 | [`coordinates`](#coordinates-displacements-md) | `"path":str` <br> `"interpolation":str` | Coordinate field transformation located at `path`. |
 | [`bijection`](#bijection-md) | `"forward":Transformation`<br>`"inverse":Transformation` | An invertible transformation providing an explicit forward transformation and its inverse. |
-| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[number]`, <br> and `"outputAxes": List[number]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
+| [`byDimension`](#bydimension-md) | `"transformations":List[Transformation]`.<br>Transformations in the array MUST have<br>`"inputAxes": List[integer]`, <br> and `"outputAxes": List[integer]` | A high dimensional transformation using lower dimensional transformations on subsets of dimensions. |
 
 The parameter values (e.g., `scale` for a [scale transformation](#scale-md)) MUST be compatible with input and output space dimensionality (see details).
 
@@ -455,7 +455,8 @@ Depending on which, different constraints apply to the transformations, as descr
 - **Inside `multiscales > coordinateTransformations`**: Additional transformations for single multiscale images MAY be stored here.
   - One of `input` or `output` MUST reference the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system by `name` (`path` MAY be omitted or null).
   - The other MUST reference a named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or in a child [labels](#labels-md) group (by `name` and `path`).
-  - When referencing a child labels group, the transformation MUST be [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
+  - When referencing a child labels group, the transformation MUST be [`identity`](#identity-md), [`scale`](#scale-md), [`translation`](#translation-md),
+    or a [`sequence`](#sequence-md) of a `scale` and a `translation` transformation.
 
 - **Inside `scene > coordinateTransformations`**: Transformations between two or more multiscales can be expressed here.
   - Both `input` and `output` MUST specify a coordinate system `name`.
@@ -1360,7 +1361,8 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
   - The other of `input` or `output` MUST reference either:
     - A named coordinate system in the same multiscales group (by `name`, `path` MAY be omitted or null), or
     - A named coordinate system in a child [labels](#labels-md) group (by `name` and `path`).
-  - When referencing a coordinate system in a child labels group, the transformation MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), or [`translation`](#translation-md).
+  - When referencing a coordinate system in a child labels group, the transformation MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), [`translation`](#translation-md),
+    or a [`sequence`](#sequence-md) of a `scale` and a `translation` transformation.
 
 :::{dropdown} Example: Additional coordinate transformation
 
@@ -1479,8 +1481,8 @@ The following requirements for the parent image group apply:
 - The image group MAY contain an additional coordinate transformation
   that links its "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system to the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system of each label image in the `labels` group.
   If no such transformation is provided, the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system of the image group is usually understood to be the same as the "[intrinsic](#spec:hint:multiscales-intrinsic-coordinate-system)" coordinate system of each label image in the `labels` group.
-- This transformation, if specified, MUST be one of [`identity`](#identity-md), ['scale'](#scale-md), a ['translation'](#translation-md)
-  or a ['sequence'](#sequence-md) of a scale and a translation transformation.
+- This transformation, if specified, MUST be one of [`identity`](#identity-md), [`scale`](#scale-md), [`translation`](#translation-md),
+  or a [`sequence`](#sequence-md) of a `scale` and a `translation` transformation.
 
 The `labels` group is not itself an image; it contains images.
 The pixels of the label images MUST be integer data types,
