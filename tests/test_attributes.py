@@ -70,3 +70,23 @@ def test_attributes(case_fname: Path):
     else:
         with pytest.raises(ValidationError):
             validator.validate(case_obj)
+
+
+@pytest.mark.parametrize("schema", [GENERIC_SCHEMA, STRICT_SCHEMA], ids=["generic", "strict"])
+@pytest.mark.parametrize("channel_index", [0, 1])
+@pytest.mark.parametrize("missing_fields", [(), ("color",), ("window",), ("color", "window")])
+def test_omero_channel_required_fields(schema, channel_index, missing_fields):
+    case_path = attrs_dir / "strict/valid/image/image_omero.json"
+    case_obj = json.loads(case_path.read_text())
+    channel = case_obj["ome"]["omero"]["channels"][channel_index]
+    for field in missing_fields:
+        del channel[field]
+
+    resolver = RefResolver.from_schema(schema, store=schema_store)
+    validator = Validator(schema, resolver=resolver)
+
+    if missing_fields:
+        with pytest.raises(ValidationError):
+            validator.validate(case_obj)
+    else:
+        validator.validate(case_obj)
