@@ -255,7 +255,11 @@
               "active": {
                 "type": "boolean"
               }
-            }
+            },
+            "required": [
+              "window",
+              "color"
+            ]
           }
         }
       },
