@@ -1522,7 +1522,7 @@ Each object provides the following fields:
 | key | requirement | type | description |
 | --- | ----------- | ---- | ----------- |
 | `path` | MUST | string | Path to the Zarr array containing image data for this scale level. |
-| `coordinateTransformations` | MUST | [CoordinateTransformation](#object-coordinatetransformation) | Transformation from the image voxel indices to a known coordinate system. |
+| `coordinateTransformations` | MUST | 1-length array of [CoordinateTransformation](#object-coordinatetransformation) | Transformation from the image voxel indices to the multiscale's intrinsic coordinate system. |
 
 :::
 
@@ -1590,8 +1590,9 @@ is the coordinate system that is referenced by all multiscale coordinate transfo
 
   The transformation MUST be one of the following:
 
-  * A single scale or identity transformation
-  * A sequence transformation containing one scale and one translation transformation.
+  * An Identity transformation
+  * A Scale transformation
+  * A Sequence transformation containing one Scale followed by one Translation
 
   ```{note}
   These transformations are expected to consistently align the datasets across all scales in the intrinsic coordinate system.
